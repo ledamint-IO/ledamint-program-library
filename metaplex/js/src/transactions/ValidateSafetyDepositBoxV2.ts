@@ -15,7 +15,7 @@ import {
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { MetaplexProgram } from '../MetaplexProgram';
 import { SafetyDepositConfigData } from '../mpl-metaplex';
 

@@ -7,11 +7,11 @@ use mpl_nft_packs::{
     state::{PackDistributionType, ProvingProcess},
 };
 use num_traits::FromPrimitive;
-use solana_program::{
+use safecoin_program::{
     clock::Clock, instruction::InstructionError, program_pack::Pack, system_instruction,
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::Keypair,
     signer::Signer,
     transaction::{Transaction, TransactionError},
@@ -104,7 +104,7 @@ async fn success() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -239,7 +239,7 @@ async fn success_two_cards() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -389,7 +389,7 @@ async fn fail_request_without_clean_up() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -532,7 +532,7 @@ async fn fail_request_after_end_date() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -680,7 +680,7 @@ async fn fail_request_with_invalid_voucher() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],

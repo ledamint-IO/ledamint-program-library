@@ -1,6 +1,6 @@
 import BN from 'bn.js';
 import test from 'tape';
-import { assertConfirmedTransaction, defaultSendOptions } from '@metaplex-foundation/amman';
+import { assertConfirmedTransaction, defaultSendOptions } from '@j0nnyboi/amman';
 import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
 import { TokenAccount } from '@metaplex-foundation/mpl-core';
 

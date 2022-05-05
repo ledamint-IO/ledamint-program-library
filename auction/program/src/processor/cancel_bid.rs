@@ -10,7 +10,7 @@ use crate::{
     utils::{
         assert_derivation, assert_initialized, assert_owned_by, assert_signer,
         assert_token_program_matches_package, close_token_account, create_or_allocate_account_raw,
-        spl_token_transfer, TokenTransferParams,
+        safe_token_transfer, TokenTransferParams,
     },
     BIDDER_POT_TOKEN, EXTENDED, PREFIX,
 };
@@ -19,7 +19,7 @@ use super::AuctionState;
 
 use {
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         msg,
@@ -30,7 +30,7 @@ use {
         system_instruction,
         sysvar::{clock::Clock, Sysvar},
     },
-    spl_token::state::Account,
+    safe_token::state::Account,
 };
 
 #[repr(C)]
@@ -77,13 +77,13 @@ fn parse_accounts<'a, 'b: 'a>(
     assert_owned_by(accounts.auction, program_id)?;
     assert_owned_by(accounts.auction_extended, program_id)?;
     assert_owned_by(accounts.bidder_meta, program_id)?;
-    assert_owned_by(accounts.mint, &spl_token::id())?;
+    assert_owned_by(accounts.mint, &safe_token::id())?;
     assert_owned_by(accounts.bidder_pot, program_id)?;
-    assert_owned_by(accounts.bidder_pot_token, &spl_token::id())?;
+    assert_owned_by(accounts.bidder_pot_token, &safe_token::id())?;
     assert_signer(accounts.bidder)?;
     assert_token_program_matches_package(accounts.token_program)?;
 
-    if *accounts.token_program.key != spl_token::id() {
+    if *accounts.token_program.key != safe_token::id() {
         return Err(AuctionError::InvalidTokenProgram.into());
     }
 
@@ -201,7 +201,7 @@ pub fn cancel_bid(
 
     // Transfer SPL bid balance back to the user.
     let account: Account = Account::unpack_from_slice(&accounts.bidder_pot_token.data.borrow())?;
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: accounts.bidder_pot_token.clone(),
         destination: accounts.bidder_token.clone(),
         authority: accounts.auction.clone(),

@@ -5,7 +5,7 @@ use crate::{error, utils};
 use anchor_lang::{InstructionData, ToAccountMetas};
 use mpl_fixed_price_sale::utils::find_treasury_owner_address;
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_sdk::{
     instruction::Instruction, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
     system_program, transaction::Transaction,
 };

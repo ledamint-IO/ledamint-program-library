@@ -3,7 +3,7 @@
 #![cfg(all(target_arch = "bpf", not(feature = "no-entrypoint")))]
 
 use crate::{error::MetadataError, processor};
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint, entrypoint::ProgramResult,
     program_error::PrintProgramError, pubkey::Pubkey,
 };

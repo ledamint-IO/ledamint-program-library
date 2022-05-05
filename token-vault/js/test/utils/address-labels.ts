@@ -1,4 +1,4 @@
-import { AddressLabels } from '@metaplex-foundation/amman';
+import { AddressLabels } from '@j0nnyboi/amman';
 import { VAULT_PROGRAM_ADDRESS } from '../../src/mpl-token-vault';
 import { logDebug } from './log';
 

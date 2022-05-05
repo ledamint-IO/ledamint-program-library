@@ -1,10 +1,10 @@
 #![cfg(feature = "test-bpf")]
-pub mod utils;
+mod utils;
 
 use mpl_token_metadata::{error::MetadataError, id, instruction, state::Key};
 use num_traits::FromPrimitive;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     instruction::InstructionError,
     signature::{Keypair, Signer},
     transaction::{Transaction, TransactionError},
@@ -213,7 +213,7 @@ mod create_master_edition {
 
         let test_master_edition = MasterEditionV2::new(&Metadata {
             mint: fake_mint,
-            pubkey: test_metadata.pubkey,
+            pubkey: test_metadata.pubkey.clone(),
             token: fake_account,
         });
 
@@ -367,7 +367,7 @@ mod create_master_edition {
 
         let test_master_edition = MasterEditionV2::new(&Metadata {
             mint: fake_mint,
-            pubkey: test_metadata.pubkey,
+            pubkey: test_metadata.pubkey.clone(),
             token: fake_account,
         });
 

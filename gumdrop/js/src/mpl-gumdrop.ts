@@ -1,2 +1,1 @@
-export * from './errors';
-export * from './generated';
+export const GUMDROP = 'Will expose SDK here';

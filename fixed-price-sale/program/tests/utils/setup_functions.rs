@@ -9,8 +9,8 @@ use mpl_fixed_price_sale::{
     accounts as mpl_fixed_price_sale_accounts, instruction as mpl_fixed_price_sale_instruction,
     utils::{find_treasury_owner_address, find_vault_owner_address},
 };
-use solana_program_test::ProgramTestContext;
-use solana_sdk::{
+use safecoin_program_test::ProgramTestContext;
+use safecoin_sdk::{
     instruction::Instruction,
     signature::Keypair,
     signer::Signer,
@@ -183,7 +183,7 @@ pub async fn setup_selling_resource(
         owner: vault_owner,
         resource_token: resource_token.pubkey(),
         rent: sysvar::rent::id(),
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
     }
     .to_account_metas(None);

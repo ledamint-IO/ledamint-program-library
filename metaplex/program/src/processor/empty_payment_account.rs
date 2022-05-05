@@ -1,4 +1,4 @@
-use solana_program::msg;
+use safecoin_program::msg;
 
 use crate::{
     error::MetaplexError,
@@ -9,14 +9,14 @@ use crate::{
     },
     utils::{
         assert_derivation, assert_initialized, assert_is_ata, assert_owned_by, assert_rent_exempt,
-        assert_safety_deposit_config_valid, create_or_allocate_account_raw, spl_token_transfer,
+        assert_safety_deposit_config_valid, create_or_allocate_account_raw, safe_token_transfer,
     },
 };
 use borsh::BorshSerialize;
 use mpl_auction::processor::AuctionData;
 use mpl_token_metadata::state::{MasterEditionV1, Metadata};
 use mpl_token_vault::state::SafetyDepositBox;
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_error::ProgramError,
@@ -25,7 +25,7 @@ use solana_program::{
     rent::Rent,
     sysvar::Sysvar,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 fn assert_destination_ownership_validity(
     auction_manager: &Box<dyn AuctionManager>,
@@ -275,7 +275,7 @@ pub fn process_empty_payment_account(
     assert_owned_by(destination_info, token_program_info.key)?;
     assert_owned_by(accept_payment_info, token_program_info.key)?;
     assert_owned_by(metadata_info, &store.token_metadata_program)?;
-    if *master_edition_info.key != solana_program::system_program::id() {
+    if *master_edition_info.key != safecoin_program::system_program::id() {
         assert_owned_by(master_edition_info, &store.token_metadata_program)?;
     }
     assert_owned_by(safety_deposit_info, &store.token_vault_program)?;
@@ -437,7 +437,7 @@ pub fn process_empty_payment_account(
 
         let authority_seeds = &[PREFIX.as_bytes(), auction_key.as_ref(), &[bump_seed]];
 
-        spl_token_transfer(
+        safe_token_transfer(
             accept_payment_info.clone(),
             destination_info.clone(),
             final_amount,

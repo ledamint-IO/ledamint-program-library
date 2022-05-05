@@ -2,8 +2,8 @@ import test from 'tape';
 import { SetStore } from '../src/transactions';
 import { Store } from '../src/accounts/Store';
 import { connectionURL } from './utils';
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
-import { airdrop, PayerTransactionHandler } from '@metaplex-foundation/amman';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
+import { airdrop, PayerTransactionHandler } from '@j0nnyboi/amman';
 
 test('set-store', async (t) => {
   const payer = Keypair.generate();

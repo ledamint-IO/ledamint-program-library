@@ -17,7 +17,7 @@ use mpl_token_metadata::{
     state::{MasterEditionV2, Metadata, EDITION, PREFIX},
     utils::{assert_derivation, assert_initialized},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     msg,
@@ -26,7 +26,7 @@ use solana_program::{
     pubkey::Pubkey,
     sysvar::{rent::Rent, Sysvar},
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 /// Process AddCardToPack instruction
 pub fn add_card_to_pack(
@@ -180,7 +180,7 @@ pub fn add_card_to_pack(
     )?;
 
     // Transfer from source to token account
-    spl_token_transfer(
+    safe_token_transfer(
         source_info.clone(),
         token_account_info.clone(),
         authority_info.clone(),

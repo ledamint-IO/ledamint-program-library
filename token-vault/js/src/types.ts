@@ -1,5 +1,5 @@
-import { Keypair, PublicKey, Signer, TransactionInstruction } from '@solana/web3.js';
-import { bignum as beetBignum } from '@metaplex-foundation/beet';
+import { Keypair, PublicKey, Signer, TransactionInstruction } from '@safecoin/web3.js';
+import { bignum as beetBignum } from '@j0nnyboi/beet';
 
 export type InstructionsWithAccounts<T extends Record<string, PublicKey | Keypair>> = [
   TransactionInstruction[],
@@ -8,8 +8,8 @@ export type InstructionsWithAccounts<T extends Record<string, PublicKey | Keypai
 ];
 
 // TODO(thlorenz): ideally we would not need this nor the related casts
-// spl-token is overly specific when limiting the type to `bigint` as from a JS
+// safe-token is overly specific when limiting the type to `bigint` as from a JS
 // perspective `number`s work too.
 // At a minimum beet.bignum should be the below, but the casts can only be fixed by
-// adapting spl-token types.
+// adapting safe-token types.
 export type bignum = beetBignum | bigint;

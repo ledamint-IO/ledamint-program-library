@@ -8,13 +8,13 @@ import {
   initVault,
   killStuckProcess,
 } from './utils';
-import { Transaction } from '@solana/web3.js';
+import { Transaction } from '@safecoin/web3.js';
 import {
   airdrop,
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import {
   createSetAuthorityInstruction,
   SetAuthorityInstructionAccounts,

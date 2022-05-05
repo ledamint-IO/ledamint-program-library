@@ -2,7 +2,7 @@
 
 use super::*;
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     borsh::try_from_slice_unchecked,
     msg,
     program_error::ProgramError,

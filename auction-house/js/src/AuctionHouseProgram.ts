@@ -1,5 +1,5 @@
 import { config, Program } from '@metaplex-foundation/mpl-core';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 import * as errors from './generated/errors';
 import * as instructions from './generated/instructions';
 import * as accounts from './generated/accounts';

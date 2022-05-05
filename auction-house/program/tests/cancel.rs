@@ -2,21 +2,21 @@
 pub mod utils;
 use anchor_lang::{prelude::*, AccountDeserialize, InstructionData, ToAccountMetas};
 
-use anchor_client::solana_sdk::sysvar;
+use anchor_client::safecoin_sdk::sysvar;
 use mpl_auction_house::{
     pda::{find_bid_receipt_address, find_listing_receipt_address},
     receipt::{BidReceipt, ListingReceipt},
 };
 use mpl_testing_utils::{solana::airdrop, utils::Metadata};
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     instruction::Instruction,
     signature::{Keypair, Signer},
     transaction::Transaction,
 };
 
 use spl_associated_token_account::get_associated_token_address;
-use spl_token;
+use safe_token;
 
 use crate::utils::setup_functions::buy;
 use utils::setup_functions::{
@@ -66,7 +66,7 @@ async fn cancel_listing() {
         token_account: token,
         authority: ah.authority,
         trade_state: acc.seller_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -85,7 +85,7 @@ async fn cancel_listing() {
 
     let accounts = mpl_auction_house::accounts::CancelListingReceipt {
         receipt: listing_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);
@@ -176,7 +176,7 @@ async fn cancel_bid() {
         token_account: acc.token_account,
         authority: ah.authority,
         trade_state: acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -195,7 +195,7 @@ async fn cancel_bid() {
 
     let accounts = mpl_auction_house::accounts::CancelBidReceipt {
         receipt: bid_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);

@@ -3,9 +3,9 @@ use mpl_token_metadata::{
     id, instruction,
     state::{Collection, Creator, Data, DataV2, Uses, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
+use safecoin_program::borsh::try_from_slice_unchecked;
 
-use solana_sdk::{
+use safecoin_sdk::{
     pubkey::Pubkey, signature::Signer, signer::keypair::Keypair, transaction::Transaction,
     transport,
 };
@@ -72,11 +72,11 @@ impl Metadata {
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_metadata_accounts(
                 id(),
-                self.pubkey,
+                self.pubkey.clone(),
                 self.mint.pubkey(),
-                context.payer.pubkey(),
-                context.payer.pubkey(),
-                context.payer.pubkey(),
+                context.payer.pubkey().clone(),
+                context.payer.pubkey().clone(),
+                context.payer.pubkey().clone(),
                 name,
                 symbol,
                 uri,
@@ -90,7 +90,7 @@ impl Metadata {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn create_v2(
@@ -106,13 +106,7 @@ impl Metadata {
         collection: Option<Collection>,
         uses: Option<Uses>,
     ) -> transport::Result<()> {
-        create_mint(
-            context,
-            &self.mint,
-            &context.payer.pubkey(),
-            freeze_authority,
-        )
-        .await?;
+        create_mint(context, &self.mint, &context.payer.pubkey(), freeze_authority).await?;
         create_token_account(
             context,
             &self.token,
@@ -133,11 +127,11 @@ impl Metadata {
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_metadata_accounts_v2(
                 id(),
-                self.pubkey,
+                self.pubkey.clone(),
                 self.mint.pubkey(),
-                context.payer.pubkey(),
-                context.payer.pubkey(),
-                context.payer.pubkey(),
+                context.payer.pubkey().clone(),
+                context.payer.pubkey().clone(),
+                context.payer.pubkey().clone(),
                 name,
                 symbol,
                 uri,
@@ -153,7 +147,7 @@ impl Metadata {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn update_primary_sale_happened_via_token(
@@ -172,7 +166,7 @@ impl Metadata {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn update(
@@ -188,7 +182,7 @@ impl Metadata {
             &[instruction::update_metadata_accounts(
                 id(),
                 self.pubkey,
-                context.payer.pubkey(),
+                context.payer.pubkey().clone(),
                 None,
                 Some(Data {
                     name,
@@ -204,7 +198,7 @@ impl Metadata {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn update_v2(
@@ -223,7 +217,7 @@ impl Metadata {
             &[instruction::update_metadata_accounts_v2(
                 id(),
                 self.pubkey,
-                context.payer.pubkey(),
+                context.payer.pubkey().clone(),
                 None,
                 Some(DataV2 {
                     name,
@@ -231,8 +225,8 @@ impl Metadata {
                     uri,
                     creators,
                     seller_fee_basis_points,
-                    collection,
-                    uses,
+                    collection: collection,
+                    uses: uses,
                 }),
                 None,
                 Some(is_mutable),
@@ -242,7 +236,7 @@ impl Metadata {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn verify_collection(
@@ -259,18 +253,18 @@ impl Metadata {
                 id(),
                 self.pubkey,
                 collection_authority.pubkey(),
-                context.payer.pubkey(),
+                context.payer.pubkey().clone(),
                 collection_mint,
                 collection,
                 collection_master_edition_account,
                 collection_authority_record,
             )],
             Some(&context.payer.pubkey()),
-            &[&context.payer, collection_authority],
+            &[&context.payer, &collection_authority],
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn set_and_verify_collection(
@@ -288,7 +282,7 @@ impl Metadata {
                 id(),
                 self.pubkey,
                 collection_authority.pubkey(),
-                context.payer.pubkey(),
+                context.payer.pubkey().clone(),
                 nft_update_authority,
                 collection_mint,
                 collection,
@@ -296,10 +290,10 @@ impl Metadata {
                 collection_authority_record,
             )],
             Some(&context.payer.pubkey()),
-            &[&context.payer, collection_authority],
+            &[&context.payer, &collection_authority],
             context.last_blockhash,
         );
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn unverify_collection(
@@ -322,16 +316,10 @@ impl Metadata {
                 collection_authority_record,
             )],
             Some(&context.payer.pubkey()),
-            &[&context.payer, collection_authority],
+            &[&context.payer, &collection_authority],
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
-    }
-}
-
-impl Default for Metadata {
-    fn default() -> Self {
-        Self::new()
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 }

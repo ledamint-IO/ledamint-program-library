@@ -9,7 +9,7 @@ use crate::{
 use borsh::BorshSerialize;
 use mpl_auction::processor::AuctionData;
 use mpl_token_vault::state::SafetyDepositBox;
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -68,7 +68,7 @@ pub fn process_set_auction_cache<'a>(
         return Err(MetaplexError::InvalidSafetyDepositBox.into());
     }
 
-    if system_info.key != &solana_program::system_program::id() {
+    if system_info.key != &safecoin_program::system_program::id() {
         return Err(MetaplexError::InvalidSystemProgram.into());
     }
 

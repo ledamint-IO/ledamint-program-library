@@ -15,7 +15,7 @@ import {
   Borsh,
 } from '@metaplex-foundation/mpl-core';
 import { MetaplexProgram, MetaplexKey } from '../MetaplexProgram';
-import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
+import { AccountInfo, Connection, PublicKey } from '@safecoin/web3.js';
 import bs58 from 'bs58';
 import { WhitelistedCreator } from './WhitelistedCreator';
 import { AuctionManager } from './AuctionManager';

@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as splToken from '@safecoin/safe-token';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 import {
   CreateMasterEditionArgs,
   createMasterEditionArgsBeet,
@@ -44,7 +44,7 @@ const CreateMasterEditionStruct = new beet.FixableBeetArgsStruct<
  * @property [_writable_] mint Metadata mint
  * @property [**signer**] updateAuthority Update authority
  * @property [**signer**] mintAuthority Mint authority on the metadata's mint - THIS WILL TRANSFER AUTHORITY AWAY FROM THIS KEY
- * @property [_writable_, **signer**] payer payer
+ * @property [**signer**] payer payer
  * @property [] metadata Metadata account
  * @category Instructions
  * @category CreateMasterEdition
@@ -104,7 +104,7 @@ export function createCreateMasterEditionInstruction(
     },
     {
       pubkey: payer,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

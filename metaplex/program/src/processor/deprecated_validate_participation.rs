@@ -11,7 +11,7 @@ use crate::{
 use borsh::BorshSerialize;
 use mpl_token_metadata::state::{MasterEditionV1, Metadata};
 use mpl_token_vault::state::{SafetyDepositBox, Vault};
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_option::COption,
@@ -19,7 +19,7 @@ use solana_program::{
     rent::Rent,
     sysvar::Sysvar,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 pub fn process_deprecated_validate_participation(
     program_id: &Pubkey,
@@ -64,7 +64,7 @@ pub fn process_deprecated_validate_participation(
         printing_authorization_token_account_info,
         &store.token_program,
     )?;
-    if *whitelisted_creator_info.key != solana_program::system_program::id() {
+    if *whitelisted_creator_info.key != safecoin_program::system_program::id() {
         if whitelisted_creator_info.data_is_empty() {
             return Err(MetaplexError::Uninitialized.into());
         }

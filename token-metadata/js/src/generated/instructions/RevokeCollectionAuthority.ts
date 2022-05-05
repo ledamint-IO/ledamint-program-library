@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
@@ -20,7 +20,7 @@ const RevokeCollectionAuthorityStruct = new beet.BeetArgsStruct<{
  * Accounts required by the _RevokeCollectionAuthority_ instruction
  *
  * @property [_writable_] collectionAuthorityRecord Collection Authority Record PDA
- * @property [_writable_, **signer**] updateAuthority Update Authority of Collection NFT
+ * @property [**signer**] updateAuthority Update Authority of Collection NFT
  * @property [] metadata Metadata account
  * @property [] mint Mint of Metadata
  * @category Instructions
@@ -61,7 +61,7 @@ export function createRevokeCollectionAuthorityInstruction(
     },
     {
       pubkey: updateAuthority,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

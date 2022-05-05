@@ -20,13 +20,13 @@ pub use metadata::TestMetadata;
 pub use pack_card::TestPackCard;
 pub use pack_set::TestPackSet;
 pub use pack_voucher::TestPackVoucher;
-use solana_program::clock::Clock;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::clock::Clock;
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::Account, program_pack::Pack, pubkey::Pubkey, signature::Signer,
     signer::keypair::Keypair, system_instruction, transaction::Transaction, transport,
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 use std::time;
 pub use user::*;
 pub use vault::TestVault;
@@ -101,7 +101,7 @@ pub async fn mint_tokens(
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            spl_token::instruction::mint_to(&spl_token::id(), mint, account, owner, &[], amount)
+            safe_token::instruction::mint_to(&safe_token::id(), mint, account, owner, &[], amount)
                 .unwrap(),
         ],
         Some(&context.payer.pubkey()),
@@ -125,12 +125,12 @@ pub async fn create_token_account(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &account.pubkey(),
-                rent.minimum_balance(spl_token::state::Account::LEN),
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Account::LEN),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 manager,
@@ -153,8 +153,8 @@ pub async fn transfer_token(
     amount: u64,
 ) -> transport::Result<()> {
     let tx = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::transfer(
-            &spl_token::id(),
+        &[safe_token::instruction::transfer(
+            &safe_token::id(),
             source,
             destination,
             &authority.pubkey(),
@@ -206,12 +206,12 @@ pub async fn create_mint(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &mint.pubkey(),
-                rent.minimum_balance(spl_token::state::Mint::LEN),
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Mint::LEN),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 manager,
                 freeze_authority,

@@ -16,7 +16,7 @@ use mpl_token_metadata::{
     instruction::mint_edition_from_master_edition_via_vault_proxy,
     utils::get_supply_off_master_edition,
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program::invoke_signed,

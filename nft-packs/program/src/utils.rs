@@ -2,7 +2,7 @@
 
 use crate::state::ProvingProcess;
 use borsh::BorshSerialize;
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo,
     clock::Clock,
     entrypoint::ProgramResult,
@@ -68,8 +68,8 @@ pub fn spl_initialize_account<'a>(
     authority: AccountInfo<'a>,
     rent: AccountInfo<'a>,
 ) -> ProgramResult {
-    let ix = spl_token::instruction::initialize_account(
-        &spl_token::id(),
+    let ix = safe_token::instruction::initialize_account(
+        &safe_token::id(),
         account.key,
         mint.key,
         authority.key,
@@ -85,8 +85,8 @@ pub fn spl_initialize_mint<'a>(
     rent: AccountInfo<'a>,
     decimals: u8,
 ) -> ProgramResult {
-    let ix = spl_token::instruction::initialize_mint(
-        &spl_token::id(),
+    let ix = safe_token::instruction::initialize_mint(
+        &safe_token::id(),
         mint.key,
         mint_authority.key,
         None,
@@ -97,15 +97,15 @@ pub fn spl_initialize_mint<'a>(
 }
 
 /// SPL transfer instruction.
-pub fn spl_token_transfer<'a>(
+pub fn safe_token_transfer<'a>(
     source: AccountInfo<'a>,
     destination: AccountInfo<'a>,
     authority: AccountInfo<'a>,
     amount: u64,
     signers_seeds: &[&[&[u8]]],
 ) -> Result<(), ProgramError> {
-    let ix = spl_token::instruction::transfer(
-        &spl_token::id(),
+    let ix = safe_token::instruction::transfer(
+        &safe_token::id(),
         source.key,
         destination.key,
         authority.key,
@@ -138,7 +138,7 @@ pub fn create_account<'a, S: Pack>(
 
 /// Function wrap mpl_token_metadata -> mint_new_edition_from_master_edition_via_token call.
 #[allow(clippy::too_many_arguments)]
-pub fn spl_token_metadata_mint_new_edition_from_master_edition_via_token<'a>(
+pub fn safe_token_metadata_mint_new_edition_from_master_edition_via_token<'a>(
     new_metadata_account: &AccountInfo<'a>,
     new_edition_account: &AccountInfo<'a>,
     new_mint_account: &AccountInfo<'a>,
@@ -203,8 +203,8 @@ pub fn burn_tokens<'a>(
     authority: AccountInfo<'a>,
     amount: u64,
 ) -> ProgramResult {
-    let ix = spl_token::instruction::burn(
-        &spl_token::id(),
+    let ix = safe_token::instruction::burn(
+        &safe_token::id(),
         account.key,
         mint.key,
         authority.key,
@@ -221,8 +221,8 @@ pub fn close_token_account<'a>(
     destination: AccountInfo<'a>,
     owner: AccountInfo<'a>,
 ) -> ProgramResult {
-    let ix = spl_token::instruction::close_account(
-        &spl_token::id(),
+    let ix = safe_token::instruction::close_account(
+        &safe_token::id(),
         account.key,
         destination.key,
         owner.key,

@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 import { config, Program } from '@metaplex-foundation/mpl-core';
 
 export class AuctionProgram extends Program {

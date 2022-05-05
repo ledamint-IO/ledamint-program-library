@@ -1,5 +1,5 @@
 use crate::{error::ErrorCode, state::MarketState, utils::*, ClaimResource};
-use anchor_lang::{prelude::*, solana_program::program_pack::Pack, System};
+use anchor_lang::{prelude::*, safecoin_program::program_pack::Pack, System};
 use anchor_spl::token;
 
 impl<'info> ClaimResource<'info> {
@@ -30,7 +30,7 @@ impl<'info> ClaimResource<'info> {
         let treasury_holder_amount = if is_native {
             treasury_holder.lamports()
         } else {
-            let token_account = spl_token::state::Account::unpack(&treasury_holder.data.borrow())?;
+            let token_account = safe_token::state::Account::unpack(&treasury_holder.data.borrow())?;
             if token_account.owner != market.treasury_owner {
                 return Err(ErrorCode::DerivedKeyInvalid.into());
             }

@@ -1,13 +1,13 @@
 #![allow(unused)]
 
-use anchor_client::solana_sdk::{
+use anchor_client::safecoin_sdk::{
     pubkey::Pubkey,
     signer::{keypair::Keypair, Signer},
 };
 use mpl_token_metadata::state::Collection;
-use solana_program::{clock::Clock, system_instruction};
-use solana_program_test::*;
-use solana_sdk::{program_pack::Pack, transaction::Transaction};
+use safecoin_program::{clock::Clock, system_instruction};
+use safecoin_program_test::*;
+use safecoin_sdk::{program_pack::Pack, transaction::Transaction};
 use std::convert::TryFrom;
 
 pub async fn mint_to(
@@ -18,8 +18,8 @@ pub async fn mint_to(
     amount: u64,
 ) {
     let tx = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::mint_to(
-            &spl_token::id(),
+        &[safe_token::instruction::mint_to(
+            &safe_token::id(),
             mint,
             to,
             &owner.pubkey(),
@@ -48,12 +48,12 @@ pub async fn create_token_account(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &account.pubkey(),
-                rent.minimum_balance(spl_token::state::Account::LEN),
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Account::LEN),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 manager,
@@ -81,12 +81,12 @@ pub async fn create_mint(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &mint.pubkey(),
-                rent.minimum_balance(spl_token::state::Mint::LEN),
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Mint::LEN),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 authority,
                 None,

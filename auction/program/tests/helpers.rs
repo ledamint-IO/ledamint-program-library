@@ -5,9 +5,9 @@ use mpl_auction::{
         PlaceBidArgs, PriceFloor, StartAuctionArgs, WinnerLimit,
     },
 };
-use solana_program::{hash::Hash, program_pack::Pack, pubkey::Pubkey, system_instruction};
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::{hash::Hash, program_pack::Pack, pubkey::Pubkey, system_instruction};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::Account,
     signature::{Keypair, Signer},
     transaction::Transaction,
@@ -37,7 +37,7 @@ pub async fn create_mint(
     recent_blockhash: &Hash,
 ) -> Result<(Keypair, Keypair), TransportError> {
     let rent = banks_client.get_rent().await.unwrap();
-    let mint_rent = rent.minimum_balance(spl_token::state::Mint::LEN);
+    let mint_rent = rent.minimum_balance(safe_token::state::Mint::LEN);
     let pool_mint = Keypair::new();
     let manager = Keypair::new();
     let mut transaction = Transaction::new_with_payer(
@@ -46,11 +46,11 @@ pub async fn create_mint(
                 &payer.pubkey(),
                 &pool_mint.pubkey(),
                 mint_rent,
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &pool_mint.pubkey(),
                 &manager.pubkey(),
                 None,
@@ -74,7 +74,7 @@ pub async fn create_token_account(
     manager: &Pubkey,
 ) -> Result<(), TransportError> {
     let rent = banks_client.get_rent().await.unwrap();
-    let account_rent = rent.minimum_balance(spl_token::state::Account::LEN);
+    let account_rent = rent.minimum_balance(safe_token::state::Account::LEN);
 
     let mut transaction = Transaction::new_with_payer(
         &[
@@ -82,11 +82,11 @@ pub async fn create_token_account(
                 &payer.pubkey(),
                 &account.pubkey(),
                 account_rent,
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 pool_mint,
                 manager,
@@ -110,8 +110,8 @@ pub async fn mint_tokens(
     amount: u64,
 ) -> Result<(), TransportError> {
     let transaction = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::mint_to(
-            &spl_token::id(),
+        &[safe_token::instruction::mint_to(
+            &safe_token::id(),
             mint,
             account,
             &mint_authority.pubkey(),
@@ -133,15 +133,15 @@ pub async fn get_token_balance(banks_client: &mut BanksClient, token: &Pubkey) -
         return 0;
     }
     let token_account = account.unwrap();
-    let account_info: spl_token::state::Account =
-        spl_token::state::Account::unpack_from_slice(token_account.data.as_slice()).unwrap();
+    let account_info: safe_token::state::Account =
+        safe_token::state::Account::unpack_from_slice(token_account.data.as_slice()).unwrap();
     account_info.amount
 }
 
 pub async fn get_token_supply(banks_client: &mut BanksClient, mint: &Pubkey) -> u64 {
     let mint_account = banks_client.get_account(*mint).await.unwrap().unwrap();
     let account_info =
-        spl_token::state::Mint::unpack_from_slice(mint_account.data.as_slice()).unwrap();
+        safe_token::state::Mint::unpack_from_slice(mint_account.data.as_slice()).unwrap();
     account_info.supply
 }
 
@@ -331,8 +331,8 @@ pub async fn approve(
     amount: u64,
 ) -> Result<(), TransportError> {
     let transaction = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::approve(
-            &spl_token::id(),
+        &[safe_token::instruction::approve(
+            &safe_token::id(),
             &spl_wallet.pubkey(),
             transfer_authority,
             &payer.pubkey(),

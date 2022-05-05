@@ -16,7 +16,7 @@ import {
 import BN from 'bn.js';
 import { AuctionProgram } from '../AuctionProgram';
 import { Buffer } from 'buffer';
-import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 
 type Args = {
   totalUncancelledBids: BN;

@@ -5,11 +5,10 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@solana/web3.js';
-import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
-import { Key, keyBeet } from '../types/Key';
-import { VaultState, vaultStateBeet } from '../types/VaultState';
+import * as definedTypes from '../types';
+import * as web3 from '@safecoin/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 
 /**
  * Arguments used to create {@link Vault}
@@ -17,7 +16,7 @@ import { VaultState, vaultStateBeet } from '../types/VaultState';
  * @category generated
  */
 export type VaultArgs = {
-  key: Key;
+  key: definedTypes.Key;
   tokenProgram: web3.PublicKey;
   fractionMint: web3.PublicKey;
   authority: web3.PublicKey;
@@ -26,7 +25,7 @@ export type VaultArgs = {
   allowFurtherShareCreation: boolean;
   pricingLookupAddress: web3.PublicKey;
   tokenTypeCount: number;
-  state: VaultState;
+  state: definedTypes.VaultState;
   lockedPricePerShare: beet.bignum;
   extraByte: number;
 };
@@ -39,7 +38,7 @@ export type VaultArgs = {
  */
 export class Vault implements VaultArgs {
   private constructor(
-    readonly key: Key,
+    readonly key: definedTypes.Key,
     readonly tokenProgram: web3.PublicKey,
     readonly fractionMint: web3.PublicKey,
     readonly authority: web3.PublicKey,
@@ -48,7 +47,7 @@ export class Vault implements VaultArgs {
     readonly allowFurtherShareCreation: boolean,
     readonly pricingLookupAddress: web3.PublicKey,
     readonly tokenTypeCount: number,
-    readonly state: VaultState,
+    readonly state: definedTypes.VaultState,
     readonly lockedPricePerShare: beet.bignum,
     readonly extraByte: number,
   ) {}
@@ -149,7 +148,7 @@ export class Vault implements VaultArgs {
    */
   pretty() {
     return {
-      key: 'Key.' + Key[this.key],
+      key: 'Key.' + definedTypes.Key[this.key],
       tokenProgram: this.tokenProgram.toBase58(),
       fractionMint: this.fractionMint.toBase58(),
       authority: this.authority.toBase58(),
@@ -158,7 +157,7 @@ export class Vault implements VaultArgs {
       allowFurtherShareCreation: this.allowFurtherShareCreation,
       pricingLookupAddress: this.pricingLookupAddress.toBase58(),
       tokenTypeCount: this.tokenTypeCount,
-      state: 'VaultState.' + VaultState[this.state],
+      state: 'VaultState.' + definedTypes.VaultState[this.state],
       lockedPricePerShare: this.lockedPricePerShare,
       extraByte: this.extraByte,
     };
@@ -171,7 +170,7 @@ export class Vault implements VaultArgs {
  */
 export const vaultBeet = new beet.BeetStruct<Vault, VaultArgs>(
   [
-    ['key', keyBeet],
+    ['key', definedTypes.keyBeet],
     ['tokenProgram', beetSolana.publicKey],
     ['fractionMint', beetSolana.publicKey],
     ['authority', beetSolana.publicKey],
@@ -180,7 +179,7 @@ export const vaultBeet = new beet.BeetStruct<Vault, VaultArgs>(
     ['allowFurtherShareCreation', beet.bool],
     ['pricingLookupAddress', beetSolana.publicKey],
     ['tokenTypeCount', beet.u8],
-    ['state', vaultStateBeet],
+    ['state', definedTypes.vaultStateBeet],
     ['lockedPricePerShare', beet.u64],
     ['extraByte', beet.u8],
   ],

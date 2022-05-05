@@ -4,7 +4,7 @@ use {
         state::{Key, Vault},
     },
     borsh::BorshDeserialize,
-    solana_program::{
+    safecoin_program::{
         account_info::AccountInfo,
         borsh::try_from_slice_unchecked,
         entrypoint::ProgramResult,
@@ -69,7 +69,7 @@ pub fn assert_vault_authority_correct(
 }
 
 pub fn assert_token_program_matches_package(token_program_info: &AccountInfo) -> ProgramResult {
-    if *token_program_info.key != spl_token::id() {
+    if *token_program_info.key != safe_token::id() {
         return Err(VaultError::InvalidTokenProgram.into());
     }
 
@@ -77,7 +77,7 @@ pub fn assert_token_program_matches_package(token_program_info: &AccountInfo) ->
 }
 
 /// Create account almost from scratch, lifted from
-/// https://github.com/solana-labs/solana-program-library/blob/7d4873c61721aca25464d42cc5ef651a7923ca79/associated-token-account/program/src/processor.rs#L51-L98
+/// https://github.com/solana-labs/safecoin-program-library/blob/7d4873c61721aca25464d42cc5ef651a7923ca79/associated-token-account/program/src/processor.rs#L51-L98
 #[inline(always)]
 pub fn create_or_allocate_account_raw<'a>(
     program_id: Pubkey,
@@ -124,9 +124,9 @@ pub fn create_or_allocate_account_raw<'a>(
     Ok(())
 }
 
-/// Issue a spl_token `Transfer` instruction.
+/// Issue a safe_token `Transfer` instruction.
 #[inline(always)]
-pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
     let TokenTransferParams {
         source,
         destination,
@@ -136,7 +136,7 @@ pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult 
         authority_signer_seeds,
     } = params;
     let result = invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             source.key,
             destination.key,
@@ -150,8 +150,8 @@ pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult 
     result.map_err(|_| VaultError::TokenTransferFailed.into())
 }
 
-/// Issue a spl_token `MintTo` instruction.
-pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
+/// Issue a safe_token `MintTo` instruction.
+pub fn safe_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
     let TokenMintToParams {
         mint,
         destination,
@@ -161,7 +161,7 @@ pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
         authority_signer_seeds,
     } = params;
     let result = invoke_signed(
-        &spl_token::instruction::mint_to(
+        &safe_token::instruction::mint_to(
             token_program.key,
             mint.key,
             destination.key,
@@ -175,9 +175,9 @@ pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
     result.map_err(|_| VaultError::TokenMintToFailed.into())
 }
 
-/// Issue a spl_token `Burn` instruction.
+/// Issue a safe_token `Burn` instruction.
 #[inline(always)]
-pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
     let TokenBurnParams {
         mint,
         source,
@@ -187,7 +187,7 @@ pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
         authority_signer_seeds,
     } = params;
     let result = invoke_signed(
-        &spl_token::instruction::burn(
+        &safe_token::instruction::burn(
             token_program.key,
             source.key,
             mint.key,

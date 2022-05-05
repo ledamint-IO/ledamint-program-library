@@ -1,5 +1,5 @@
-import { PayerTransactionHandler } from '@metaplex-foundation/amman';
-import { Connection, Keypair, PublicKey, TransactionInstruction } from '@solana/web3.js';
+import { PayerTransactionHandler } from '@j0nnyboi/amman';
+import { Connection, Keypair, PublicKey, TransactionInstruction } from '@safecoin/web3.js';
 
 import {
   Creator,

@@ -5,8 +5,8 @@ use {
     show::send_show,
     solana_clap_utils::input_validators::{is_url, is_valid_pubkey, is_valid_signer},
     solana_client::rpc_client::RpcClient,
-    solana_program::{account_info::AccountInfo, pubkey::Pubkey},
-    solana_sdk::{account::Account, signature::read_keypair_file},
+    safecoin_program::{account_info::AccountInfo, pubkey::Pubkey},
+    safecoin_sdk::{account::Account, signature::read_keypair_file},
 };
 pub fn make_account_with_data<'a>(
     key: &'a Pubkey,

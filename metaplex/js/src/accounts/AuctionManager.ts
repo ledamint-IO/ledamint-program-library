@@ -6,7 +6,7 @@
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
 import { strict as assert } from 'assert';
-import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
+import { AccountInfo, Connection, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import bs58 from 'bs58';
 import { BidRedemptionTicket, WINNER_INDEX_OFFSETS } from './BidRedemptionTicket';

@@ -1,5 +1,5 @@
-import { airdrop } from '@metaplex-foundation/amman';
-import { Connection, Keypair } from '@solana/web3.js';
+import { airdrop } from '@j0nnyboi/amman';
+import { Connection, Keypair } from '@safecoin/web3.js';
 
 // -----------------
 // Helpers not relevant to the examples

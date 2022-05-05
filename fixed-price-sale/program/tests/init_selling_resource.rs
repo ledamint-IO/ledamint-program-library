@@ -12,15 +12,15 @@ mod init_selling_resource {
             setup_functions::setup_store,
         },
     };
-    use anchor_client::solana_sdk::{signature::Keypair, signer::Signer, system_program};
+    use anchor_client::safecoin_sdk::{signature::Keypair, signer::Signer, system_program};
     use anchor_lang::{AccountDeserialize, InstructionData, ToAccountMetas};
     use mpl_fixed_price_sale::{
         accounts as mpl_fixed_price_sale_accounts, instruction as mpl_fixed_price_sale_instruction,
         state::{SellingResource, SellingResourceState},
     };
-    use solana_program::{instruction::Instruction, sysvar};
-    use solana_program_test::*;
-    use solana_sdk::{transaction::Transaction, transport::TransportError};
+    use safecoin_program::{instruction::Instruction, sysvar};
+    use safecoin_program_test::*;
+    use safecoin_sdk::{transaction::Transaction, transport::TransportError};
 
     #[tokio::test]
     async fn success() {
@@ -103,7 +103,7 @@ mod init_selling_resource {
             owner: vault_owner,
             resource_token: resource_token.pubkey(),
             rent: sysvar::rent::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -237,7 +237,7 @@ mod init_selling_resource {
             owner: vault_owner,
             resource_token: resource_token.pubkey(),
             rent: sysvar::rent::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -361,7 +361,7 @@ mod init_selling_resource {
             owner: vault_owner,
             resource_token: resource_token.pubkey(),
             rent: sysvar::rent::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);

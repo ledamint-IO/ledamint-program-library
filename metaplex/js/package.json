@@ -46,11 +46,11 @@
     "@metaplex-foundation/mpl-core": "^0.0.5",
     "@metaplex-foundation/mpl-token-metadata": "^0.0.2",
     "@metaplex-foundation/mpl-token-vault": "^0.0.2",
-    "@solana/spl-token": "^0.2.0",
-    "@solana/web3.js": "^1.35.1"
+    "@safecoin/safe-token": "^0.2.0",
+    "@safecoin/web3.js": "^1.29.4"
   },
   "devDependencies": {
-    "@metaplex-foundation/amman": "^0.1.0",
+    "@j0nnyboi/amman": "^0.1.0",
     "esbuild": "^0.14.14",
     "esbuild-runner": "^2.2.1",
     "eslint": "^8.3.0",

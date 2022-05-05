@@ -11,14 +11,14 @@ import {
   spokSameBignum,
   verifyTokenBalance,
 } from './utils';
-import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, Transaction } from '@safecoin/web3.js';
 import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
   PayerTransactionHandler,
   TokenBalances,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import {
   activateVault,
   addTokenToInactiveVault,

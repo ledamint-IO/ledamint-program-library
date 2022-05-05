@@ -6,7 +6,7 @@ import {
   Signer,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { VAULT_PREFIX, VAULT_PROGRAM_ID } from '../common/consts';
 import {
   mintTokens,
@@ -48,7 +48,7 @@ export class SafetyDepositSetup {
     readonly tokenAccount: PublicKey,
     /** The token's mint */
     readonly tokenMint: PublicKey,
-    /** Points to the spl-token account that contains the tokens */
+    /** Points to the safe-token account that contains the tokens */
     readonly store: PublicKey,
     /**
      * The account address at which the program will store a pointer to the

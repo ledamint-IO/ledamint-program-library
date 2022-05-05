@@ -12,13 +12,13 @@ use mpl_token_metadata::{
     deprecated_instruction::deprecated_mint_printing_tokens_via_token, state::MasterEditionV1,
 };
 use mpl_token_vault::state::SafetyDepositBox;
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program::invoke_signed,
     pubkey::Pubkey,
 };
-use spl_token::{instruction::close_account, state::Account};
+use safe_token::{instruction::close_account, state::Account};
 
 fn mint_printing_tokens<'a: 'b, 'b>(
     program: &AccountInfo<'a>,

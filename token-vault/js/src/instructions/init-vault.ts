@@ -3,7 +3,7 @@ import {
   AuthorityType,
   createSetAuthorityInstruction,
   MintLayout,
-} from '@solana/spl-token';
+} from '@safecoin/safe-token';
 import {
   Connection,
   Keypair,
@@ -11,7 +11,7 @@ import {
   Signer,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { VAULT_PROGRAM_ID } from '../common/consts';
 import { createMint, createTokenAccount, pdaForVault } from '../common/helpers';
 import {

@@ -4,7 +4,7 @@ use super::{get_account_state, UiTransactionInfo};
 use crate::error;
 use anchor_lang::{InstructionData, ToAccountMetas};
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_sdk::{
     instruction::Instruction, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
     system_program, sysvar::clock, transaction::Transaction,
 };
@@ -62,7 +62,7 @@ pub fn claim_resource(
         vault: selling_resource_state.vault,
         token_metadata_program: mpl_token_metadata::id(),
         clock: clock::id(),
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
     }
     .to_account_metas(None);

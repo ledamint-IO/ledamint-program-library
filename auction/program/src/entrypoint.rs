@@ -2,7 +2,7 @@
 
 use {
     crate::{errors::AuctionError, processor},
-    solana_program::{
+    safecoin_program::{
         account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg,
         program_error::PrintProgramError, pubkey::Pubkey,
     },

@@ -1,4 +1,4 @@
-import { bignum } from '@metaplex-foundation/beet';
+import { bignum } from '@j0nnyboi/beet';
 import {
   AddSharesToTreasuryInstructionAccounts,
   createAddSharesToTreasuryInstruction,

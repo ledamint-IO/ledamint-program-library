@@ -9,17 +9,17 @@ use {
         utils::{
             assert_derivation, assert_initialized, assert_is_ata, assert_owned_by,
             common_redeem_checks, common_redeem_finish, get_amount_from_token_account,
-            spl_token_transfer, CommonRedeemCheckArgs, CommonRedeemFinishArgs, CommonRedeemReturn,
+            safe_token_transfer, CommonRedeemCheckArgs, CommonRedeemFinishArgs, CommonRedeemReturn,
         },
     },
     mpl_auction::processor::{AuctionData, AuctionDataExtended, BidderMetadata},
     mpl_token_metadata::utils::get_supply_off_master_edition,
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,
     },
-    spl_token::state::Account,
+    safe_token::state::Account,
 };
 
 struct LegacyAccounts<'a> {
@@ -213,7 +213,7 @@ fn charge_for_participation<'a>(
     if price > 0 {
         auction_manager.add_to_collected_payment(safety_deposit_config_info, price)?;
 
-        spl_token_transfer(
+        safe_token_transfer(
             bidder_token_account_info.clone(),
             accept_payment_info.clone(),
             price,
@@ -357,7 +357,7 @@ pub fn process_redeem_participation_bid<'a>(
             let mint_seeds = &[PREFIX.as_bytes(), auction_key.as_ref(), &[bump_seed]];
 
             legacy_validation(token_program_info, &auction_manager, &accounts)?;
-            spl_token_transfer(
+            safe_token_transfer(
                 accounts.participation_printing_holding_account_info.clone(),
                 destination_info.clone(),
                 1,

@@ -5,13 +5,13 @@ use mpl_token_metadata::{
     instruction::{self, CreateMasterEditionArgs, MetadataInstruction},
     state::{EDITION, PREFIX},
 };
-use solana_program::{
+use safecoin_program::{
     borsh::try_from_slice_unchecked,
     instruction::{AccountMeta, Instruction},
     sysvar,
 };
 
-use solana_sdk::{
+use safecoin_sdk::{
     pubkey::Pubkey,
     signature::{Keypair, Signer},
     transaction::Transaction,
@@ -41,7 +41,7 @@ impl MasterEditionV2 {
         MasterEditionV2 {
             pubkey,
             metadata_pubkey: metadata.pubkey,
-            mint_pubkey,
+            mint_pubkey: mint_pubkey,
         }
     }
 
@@ -78,7 +78,7 @@ impl MasterEditionV2 {
                 AccountMeta::new_readonly(context.payer.pubkey(), true),
                 AccountMeta::new_readonly(self.metadata_pubkey, false),
                 AccountMeta::new_readonly(fake_token_program.pubkey(), false),
-                AccountMeta::new_readonly(solana_program::system_program::id(), false),
+                AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
                 AccountMeta::new_readonly(sysvar::rent::id(), false),
             ],
             data: MetadataInstruction::CreateMasterEdition(CreateMasterEditionArgs { max_supply })
@@ -93,7 +93,7 @@ impl MasterEditionV2 {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn create(
@@ -117,7 +117,7 @@ impl MasterEditionV2 {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 
     pub async fn create_v3(
@@ -141,6 +141,6 @@ impl MasterEditionV2 {
             context.last_blockhash,
         );
 
-        context.banks_client.process_transaction(tx).await
+        Ok(context.banks_client.process_transaction(tx).await?)
     }
 }

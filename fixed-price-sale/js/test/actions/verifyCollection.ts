@@ -1,16 +1,16 @@
-import { Connection, Keypair, Transaction } from '@solana/web3.js';
+import { Connection, Keypair, Transaction } from '@safecoin/web3.js';
 import {
   defaultSendOptions,
   TransactionHandler,
   assertConfirmedTransaction,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import {
   VerifyCollectionInstructionAccounts,
   createVerifyCollectionInstruction,
 } from '@metaplex-foundation/mpl-token-metadata';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore createMintToInstruction export actually exist but isn't setup correctly
-import { createMintToInstruction } from '@solana/spl-token';
+import { createMintToInstruction } from '@safecoin/safe-token';
 import { strict as assert } from 'assert';
 import { createAndSignTransaction } from '../utils';
 

@@ -1,5 +1,5 @@
-import { Connection, Keypair, Transaction, SYSVAR_CLOCK_PUBKEY } from '@solana/web3.js';
-import { PayerTransactionHandler } from '@metaplex-foundation/amman';
+import { Connection, Keypair, Transaction, SYSVAR_CLOCK_PUBKEY } from '@safecoin/web3.js';
+import { PayerTransactionHandler } from '@j0nnyboi/amman';
 import { createAndSignTransaction } from '../utils';
 import { createCloseMarketInstruction } from '../../src/generated/instructions';
 

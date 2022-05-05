@@ -1,4 +1,4 @@
-import { AccountInfo } from '@solana/web3.js';
+import { AccountInfo } from '@safecoin/web3.js';
 import { strict as assert } from 'assert';
 import BN from 'bn.js';
 import bs58 from 'bs58';

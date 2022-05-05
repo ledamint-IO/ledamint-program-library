@@ -12,9 +12,9 @@ use mpl_auction::{
 };
 use mpl_testing_utils::assert_custom_error;
 use num_traits::FromPrimitive;
-use solana_program::{borsh::try_from_slice_unchecked, instruction::InstructionError};
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::{borsh::try_from_slice_unchecked, instruction::InstructionError};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::Account,
     hash::Hash,
     instruction::{AccountMeta, Instruction},

@@ -1,7 +1,7 @@
 use crate::{AuctionHouse, ErrorCode, PREFIX};
 use anchor_lang::{
     prelude::*,
-    solana_program::{
+    safecoin_program::{
         program::invoke_signed,
         program_memory::sol_memcmp,
         program_option::COption,
@@ -14,10 +14,10 @@ use anchor_spl::token::{Mint, Token, TokenAccount};
 use arrayref::array_ref;
 use metaplex_token_metadata::state::Metadata;
 use spl_associated_token_account::get_associated_token_address;
-use spl_token::{instruction::initialize_account2, state::Account as SplAccount};
+use safe_token::{instruction::initialize_account2, state::Account as SplAccount};
 use std::{convert::TryInto, slice::Iter};
 pub fn assert_is_ata(ata: &AccountInfo, wallet: &Pubkey, mint: &Pubkey) -> Result<SplAccount> {
-    assert_owned_by(ata, &spl_token::id())?;
+    assert_owned_by(ata, &safe_token::id())?;
     let ata_account: SplAccount = assert_initialized(ata)?;
     assert_keys_equal(ata_account.owner, *wallet)?;
     assert_keys_equal(ata_account.mint, *mint)?;
@@ -143,7 +143,7 @@ pub fn assert_valid_delegation(
             msg!("ATAs match")
         }
         Err(_) => {
-            if mint.key() != spl_token::native_mint::id() {
+            if mint.key() != safe_token::native_mint::id() {
                 return err!(ErrorCode::ExpectedSolAccount);
             }
 
@@ -224,7 +224,7 @@ pub fn pay_auction_house_fees<'a>(
         .ok_or(ErrorCode::NumericalOverflow)? as u64;
     if !is_native {
         invoke_signed(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &escrow_payment_account.key,
                 &auction_house_treasury.key,
@@ -277,7 +277,7 @@ pub fn create_program_token_account_if_not_present<'a>(
             &rent.to_account_info(),
             &system_program,
             &fee_payer,
-            spl_token::state::Account::LEN,
+            safe_token::state::Account::LEN,
             fee_seeds,
             signer_seeds,
         )?;
@@ -368,7 +368,7 @@ pub fn pay_creator_fees<'a>(
                     )?;
                     if creator_fee > 0 {
                         invoke_signed(
-                            &spl_token::instruction::transfer(
+                            &safe_token::instruction::transfer(
                                 token_program.key,
                                 &escrow_payment_account.key,
                                 current_creator_token_account_info.key,
@@ -434,7 +434,7 @@ pub fn get_delegate_from_token_account(token_account_info: &AccountInfo) -> Resu
 }
 
 /// Create account almost from scratch, lifted from
-/// <https://github.com/solana-labs/solana-program-library/blob/7d4873c61721aca25464d42cc5ef651a7923ca79/associated-token-account/program/src/processor.rs#L51-L98>
+/// <https://github.com/solana-labs/safecoin-program-library/blob/7d4873c61721aca25464d42cc5ef651a7923ca79/associated-token-account/program/src/processor.rs#L51-L98>
 #[inline(always)]
 pub fn create_or_allocate_account_raw<'a>(
     program_id: Pubkey,
@@ -550,7 +550,12 @@ pub fn assert_valid_trade_state<'a>(
             &token_size_bytes,
         ],
     );
-
+    msg!(
+        "{:?}, {:?}, {:?}",
+        canonical_public_bump,
+        canonical_bump,
+        ts_bump
+    );
     match (canonical_public_bump, canonical_bump) {
         (Ok(public), Err(_)) if public == ts_bump => Ok(public),
         (Err(_), Ok(bump)) if bump == ts_bump => Ok(bump),
@@ -558,30 +563,11 @@ pub fn assert_valid_trade_state<'a>(
     }
 }
 
-pub fn rent_checked_sub(escrow_account: AccountInfo, diff: u64) -> Result<u64> {
-    let rent_minimum: u64 = (Rent::get()?).minimum_balance(escrow_account.data_len());
-    let account_lamports: u64 = escrow_account
-        .lamports()
-        .checked_sub(diff)
-        .ok_or(ErrorCode::NumericalOverflow)?;
-
-    if account_lamports < rent_minimum {
-        Ok(escrow_account.lamports() - rent_minimum)
-    } else {
-        Ok(diff)
+pub fn assert_escrow_rent_exempt(escrow_account: AccountInfo) -> Result<()>{
+    if escrow_account.lamports() < (Rent::get()?).minimum_balance(escrow_account.data_len()) {
+        return err!(ErrorCode::EscrowUnderRentExemption);
     }
-}
-
-pub fn rent_checked_add(escrow_account: AccountInfo, diff: u64) -> Result<u64> {
-    let rent_minimum: u64 = (Rent::get()?).minimum_balance(escrow_account.data_len());
-    let account_lamports: u64 = escrow_account
-        .lamports()
-        .checked_add(diff)
-        .ok_or(ErrorCode::NumericalOverflow)?;
-
-    if account_lamports < rent_minimum {
-        Ok(rent_minimum - account_lamports)
-    } else {
-        Ok(diff)
+    else {
+        Ok(())
     }
 }

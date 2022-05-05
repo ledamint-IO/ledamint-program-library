@@ -9,12 +9,12 @@ import {
   killStuckProcess,
   spokSamePubkey,
 } from './utils';
-import { Transaction, TransactionInstruction } from '@solana/web3.js';
+import { Transaction, TransactionInstruction } from '@safecoin/web3.js';
 import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import {
   addTokenToInactiveVault,
   Key,

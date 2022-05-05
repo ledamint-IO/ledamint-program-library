@@ -15,7 +15,7 @@ import {
   StringPublicKey,
 } from '@metaplex-foundation/mpl-core';
 import { AuctionProgram } from '../AuctionProgram';
-import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import { Buffer } from 'buffer';
 
 type Args = {

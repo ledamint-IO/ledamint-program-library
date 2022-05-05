@@ -19,7 +19,7 @@ use {
     set_store::{process_set_store, process_set_store_v2},
     set_store_index::process_set_store_index,
     set_whitelisted_creator::process_set_whitelisted_creator,
-    solana_program::{account_info::AccountInfo, entrypoint::ProgramResult, msg, pubkey::Pubkey},
+    safecoin_program::{account_info::AccountInfo, entrypoint::ProgramResult, msg, pubkey::Pubkey},
     start_auction::process_start_auction,
     validate_safety_deposit_box_v2::process_validate_safety_deposit_box_v2,
     withdraw_master_edition::process_withdraw_master_edition,

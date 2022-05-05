@@ -11,7 +11,7 @@ import {
   SYSVAR_CLOCK_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';
 import { ParamsWithStore } from './vault';

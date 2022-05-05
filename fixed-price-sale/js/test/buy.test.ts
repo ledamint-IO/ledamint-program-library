@@ -4,7 +4,7 @@ import {
   assertConfirmedTransaction,
   assertError,
   defaultSendOptions,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
 
 import { findTradeHistoryAddress } from '../src/utils';

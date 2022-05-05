@@ -6,7 +6,7 @@
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
 import { Borsh, StringPublicKey, Transaction } from '@metaplex-foundation/mpl-core';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
   SystemProgram,
@@ -14,7 +14,7 @@ import {
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { AuctionProgram } from '../AuctionProgram';
 
 export class CancelBidArgs extends Borsh.Data<{ resource: StringPublicKey }> {

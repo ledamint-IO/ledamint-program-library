@@ -1,11 +1,13 @@
 #![cfg(feature = "test-bpf")]
-pub mod utils;
+mod utils;
+
+
 
 use mpl_token_metadata::error::MetadataError;
 
 use num_traits::FromPrimitive;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     instruction::InstructionError,
     signature::{Keypair, Signer},
     transaction::{Transaction, TransactionError},
@@ -13,6 +15,10 @@ use solana_sdk::{
 };
 use utils::*;
 mod freeze_delegated {
+
+    
+    
+    
 
     use super::*;
     #[tokio::test]
@@ -46,15 +52,7 @@ mod freeze_delegated {
             .await
             .unwrap();
 
-        let approve_ix = spl_token::instruction::approve(
-            &spl_token::id(),
-            &test_metadata.token.pubkey(),
-            &delegate.pubkey(),
-            &context.payer.pubkey(),
-            &[],
-            1,
-        )
-        .unwrap();
+        let approve_ix = safe_token::instruction::approve(&safe_token::id(), &test_metadata.token.pubkey(), &delegate.pubkey(), &context.payer.pubkey(), &[], 1).unwrap();
         let approve_tx = Transaction::new_signed_with_payer(
             &[approve_ix],
             Some(&context.payer.pubkey()),
@@ -87,15 +85,7 @@ mod freeze_delegated {
             .unwrap();
 
         // transfer fails because frozen
-        let transfer_ix = spl_token::instruction::transfer(
-            &spl_token::id(),
-            &test_metadata.token.pubkey(),
-            &test_metadata.token.pubkey(),
-            &context.payer.pubkey(),
-            &[],
-            1,
-        )
-        .unwrap();
+        let transfer_ix = safe_token::instruction::transfer(&safe_token::id(), &test_metadata.token.pubkey(), &test_metadata.token.pubkey(), &context.payer.pubkey(), &[], 1).unwrap();
         let transfer_tx = Transaction::new_signed_with_payer(
             &[transfer_ix],
             Some(&context.payer.pubkey()),
@@ -108,9 +98,11 @@ mod freeze_delegated {
             .await
             .unwrap_err();
 
-        assert_custom_error!(err, spl_token::error::TokenError::AccountFrozen);
+        assert_custom_error!(err, safe_token::error::TokenError::AccountFrozen);
     }
 
+
+    
     #[tokio::test]
     async fn freeze_delegated_no_freeze_authority() {
         let mut context = program_test().start_with_context().await;
@@ -135,16 +127,9 @@ mod freeze_delegated {
             .await
             .unwrap();
 
+
         // delegate token to delegate
-        spl_token::instruction::approve(
-            &spl_token::id(),
-            &test_metadata.token.pubkey(),
-            &delegate.pubkey(),
-            &context.payer.pubkey(),
-            &[],
-            1,
-        )
-        .unwrap();
+        safe_token::instruction::approve(&safe_token::id(), &test_metadata.token.pubkey(), &delegate.pubkey(), &context.payer.pubkey(), &[], 1).unwrap();
 
         // delegate freezes token
         let freeze_ix = mpl_token_metadata::instruction::freeze_delegated_account(
@@ -170,6 +155,7 @@ mod freeze_delegated {
         assert_custom_error!(err, MetadataError::InvalidFreezeAuthority);
     }
 
+    
     #[tokio::test]
     async fn freeze_delegated_token_not_delegated() {
         let mut context = program_test().start_with_context().await;
@@ -226,6 +212,8 @@ mod freeze_delegated {
         assert_custom_error!(err, MetadataError::InvalidDelegate);
     }
 
+
+    
     #[tokio::test]
     async fn freeze_delegated_token_try_thaw() {
         let mut context = program_test().start_with_context().await;
@@ -258,15 +246,7 @@ mod freeze_delegated {
             .unwrap();
 
         // delegate token to delegate
-        spl_token::instruction::approve(
-            &spl_token::id(),
-            &test_metadata.token.pubkey(),
-            &delegate.pubkey(),
-            &context.payer.pubkey(),
-            &[],
-            1,
-        )
-        .unwrap();
+        safe_token::instruction::approve(&safe_token::id(), &test_metadata.token.pubkey(), &delegate.pubkey(), &context.payer.pubkey(), &[], 1).unwrap();
 
         // delegate freezes token
         let freeze_ix = mpl_token_metadata::instruction::freeze_delegated_account(

@@ -18,9 +18,9 @@ mod claim_resource {
             find_treasury_owner_address, find_vault_owner_address,
         },
     };
-    use solana_program::clock::Clock;
-    use solana_program_test::*;
-    use solana_sdk::{
+    use safecoin_program::clock::Clock;
+    use safecoin_program_test::*;
+    use safecoin_sdk::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
         signature::Keypair,
@@ -307,7 +307,7 @@ mod claim_resource {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -394,7 +394,7 @@ mod claim_resource {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             associated_token_program: spl_associated_token_account::id(),
             system_program: system_program::id(),
         }
@@ -442,7 +442,7 @@ mod claim_resource {
             owner,
             destination: claim_token.pubkey(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             token_metadata_program: mpl_token_metadata::id(),
             system_program: system_program::id(),
         }
@@ -711,7 +711,7 @@ mod claim_resource {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -793,7 +793,7 @@ mod claim_resource {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             associated_token_program: spl_associated_token_account::id(),
             system_program: system_program::id(),
         }
@@ -841,7 +841,7 @@ mod claim_resource {
             owner,
             destination: claim_token.pubkey(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             token_metadata_program: mpl_token_metadata::id(),
             system_program: system_program::id(),
         }
@@ -1141,7 +1141,7 @@ mod claim_resource {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1224,7 +1224,7 @@ mod claim_resource {
             owner,
             destination: claim_token.pubkey(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             token_metadata_program: mpl_token_metadata::id(),
             system_program: system_program::id(),
         }

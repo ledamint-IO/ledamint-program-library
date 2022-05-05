@@ -10,7 +10,7 @@ use {
         utils::create_or_allocate_account_raw,
     },
     borsh::BorshSerialize,
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

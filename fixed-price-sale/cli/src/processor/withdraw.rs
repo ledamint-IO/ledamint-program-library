@@ -4,7 +4,7 @@ use super::{get_account_state, UiTransactionInfo};
 use crate::error;
 use anchor_lang::{prelude::AccountMeta, InstructionData, ToAccountMetas};
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_sdk::{
     instruction::Instruction,
     pubkey::Pubkey,
     signature::Signer,
@@ -102,7 +102,7 @@ pub fn withdraw(
             clock: clock::id(),
             rent: rent::id(),
             associated_token_program: spl_associated_token_account::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);

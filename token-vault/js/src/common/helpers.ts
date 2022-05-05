@@ -8,7 +8,7 @@ import {
   getAssociatedTokenAddress,
   MintLayout,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@safecoin/safe-token';
 import {
   Connection,
   Keypair,
@@ -16,7 +16,7 @@ import {
   Signer,
   SystemProgram,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { bignum, InstructionsWithAccounts } from '../types';
 import { VAULT_PREFIX, VAULT_PROGRAM_ID } from './consts';
 

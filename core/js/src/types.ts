@@ -1,4 +1,4 @@
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@safecoin/web3.js';
 
 export type StringPublicKey = string;
 export type AnyPublicKey = StringPublicKey | PublicKey;

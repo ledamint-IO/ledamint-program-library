@@ -1,4 +1,4 @@
-import { Connection, Keypair, PublicKey, SystemProgram } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, SystemProgram } from '@safecoin/web3.js';
 import {
   createUpdateExternalPriceAccountInstruction,
   ExternalPriceAccount,

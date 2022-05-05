@@ -13,7 +13,7 @@ import {
   Borsh,
   Account,
 } from '@metaplex-foundation/mpl-core';
-import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import { Buffer } from 'buffer';
 import { MetaplexKey, MetaplexProgram } from '../MetaplexProgram';
 

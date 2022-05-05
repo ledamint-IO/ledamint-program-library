@@ -1,9 +1,9 @@
 import { Test } from 'tape';
-import { bignum, COption } from '@metaplex-foundation/beet';
-import { PublicKey } from '@solana/web3.js';
+import { bignum, COption } from '@j0nnyboi/beet';
+import { PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import spok, { Specification, Specifications } from 'spok';
-import { TokenBalances } from '@metaplex-foundation/amman';
+import { TokenBalances } from '@j0nnyboi/amman';
 import { addressLabels } from './address-labels';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

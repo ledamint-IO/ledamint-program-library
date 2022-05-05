@@ -12,13 +12,13 @@ import {
   spokSamePubkey,
   verifyTokenBalance,
 } from './utils';
-import { Signer, Transaction } from '@solana/web3.js';
+import { Signer, Transaction } from '@safecoin/web3.js';
 import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
   TokenBalances,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import { mintSharesToTreasury } from '../src/instructions/mint-shares-to-treasury';
 import {
   MintFractionalSharesInstructionAccounts,
@@ -26,7 +26,7 @@ import {
   VaultShouldBeActiveError,
 } from '../src/mpl-token-vault';
 import spok, { Specifications } from 'spok';
-import { bignum } from '@metaplex-foundation/beet';
+import { bignum } from '@j0nnyboi/beet';
 import BN from 'bn.js';
 import { cusper } from '../src/errors';
 

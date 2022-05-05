@@ -15,8 +15,8 @@ mod close_market {
         state::{Market, MarketState},
         utils::find_treasury_owner_address,
     };
-    use solana_program_test::*;
-    use solana_sdk::{
+    use safecoin_program_test::*;
+    use safecoin_sdk::{
         instruction::Instruction,
         signature::Keypair,
         signer::Signer,

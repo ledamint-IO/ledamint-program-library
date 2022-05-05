@@ -17,14 +17,14 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = {version="~0.22", features=["init-if-needed"]}
-anchor-spl = {version="~0.22"}
-spl-token = "~3.2.0"
-mpl-token-metadata = { features = [ "no-entrypoint" ], version="~1.1.0" }
+anchor-lang = {path = "../../../anchor/lang", features=["init-if-needed"]}
+anchor-spl = {path = "../../../anchor/spl"}
+safe-token = {path = "../../../safecoin-program-library/token/program"}
+mpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
 
 [dev-dependencies]
-anchor-client = "~0.22"
-solana-program-test = "~1.9.5"
-solana-program = "~1.9.5"
-solana-sdk = "~1.9.5"
-spl-associated-token-account = "~1.0.3"
+anchor-client = {path = "../../../anchor/client"}
+safecoin-program-test = "~1.8.12"
+safecoin-program = {path = "../../../Safecoin/sdk/program"}
+safecoin-sdk = "~1.8.12"
+safe-associated-token-account = {path = "../../../safecoin-program-library/associated-token-account/program"}

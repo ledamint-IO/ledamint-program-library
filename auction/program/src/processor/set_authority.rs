@@ -9,7 +9,7 @@ use crate::{
 
 use {
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         msg,

@@ -10,7 +10,7 @@ import {
   assertConfirmedTransaction,
   assertError,
   defaultSendOptions,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import { killStuckProcess, logDebug, sleep } from './utils';
 import { closeMarket } from './transactions';
 import { CreateMarketInstructionArgs, Market } from '../src';

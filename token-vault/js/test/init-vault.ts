@@ -5,8 +5,8 @@ import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
-} from '@metaplex-foundation/amman';
-import { Transaction } from '@solana/web3.js';
+} from '@j0nnyboi/amman';
+import { Transaction } from '@safecoin/web3.js';
 import { initVault } from '../src/instructions/init-vault';
 import { AlreadyInitializedError } from '../src/generated';
 import { cusper } from '../src/errors';

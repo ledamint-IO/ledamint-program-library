@@ -3,7 +3,7 @@ import {
   createWithdrawTokenFromSafetyDepositBoxInstruction,
   WithdrawTokenFromSafetyDepositBoxInstructionAccounts,
 } from '../generated';
-import { bignum } from '@metaplex-foundation/beet';
+import { bignum } from '@j0nnyboi/beet';
 import { setupDestinationTokenAccount } from '../common';
 
 /**

@@ -9,7 +9,7 @@ use crate::{
 };
 use borsh::{BorshDeserialize, BorshSerialize};
 use mpl_token_metadata::state::{MasterEdition, MasterEditionV2};
-use solana_program::{
+use safecoin_program::{
     borsh::try_from_slice_unchecked,
     msg,
     program_error::ProgramError,

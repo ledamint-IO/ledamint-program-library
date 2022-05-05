@@ -7,12 +7,12 @@ use mpl_testing_utils::{
     assert_error,
     solana::{airdrop, create_associated_token_account, create_mint},
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     instruction::InstructionError, signature::Keypair, signer::Signer,
     transaction::TransactionError, transport::TransportError,
 };
-use spl_token;
+use safe_token;
 use std::assert_eq;
 use utils::setup_functions;
 #[tokio::test]
@@ -28,7 +28,7 @@ async fn init_native_success() {
         .unwrap();
     let twd_key = payer_wallet.pubkey();
     let fwd_key = payer_wallet.pubkey();
-    let t_mint_key = spl_token::native_mint::id();
+    let t_mint_key = safe_token::native_mint::id();
     let tdw_ata = twd_key;
     let seller_fee_basis_points: u16 = 100;
     let authority = Keypair::new();
@@ -111,7 +111,7 @@ async fn init_native_success_reinitialize_fail() {
         .unwrap();
     let twd_key = payer_wallet.pubkey();
     let fwd_key = payer_wallet.pubkey();
-    let t_mint_key = spl_token::native_mint::id();
+    let t_mint_key = safe_token::native_mint::id();
     let tdw_ata = twd_key;
     let seller_fee_basis_points: u16 = 100;
     let authority = Keypair::new();
@@ -285,7 +285,7 @@ async fn init_mint_failure() {
         .unwrap();
     let twd_key = payer_wallet.pubkey();
     let fwd_key = payer_wallet.pubkey();
-    let t_mint_key = spl_token::native_mint::id();
+    let t_mint_key = safe_token::native_mint::id();
     let tdw_ata = create_associated_token_account(&mut context, &payer_wallet, &t_mint_key)
         .await
         .unwrap();

@@ -3,8 +3,8 @@ import {
   assertConfirmedTransaction,
   defaultSendOptions,
   PayerTransactionHandler,
-} from '@metaplex-foundation/amman';
-import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
+} from '@j0nnyboi/amman';
+import { Connection, Keypair, PublicKey, Transaction } from '@safecoin/web3.js';
 
 import { createTokenAccount } from '../transactions';
 import { createAndSignTransaction, logDebug } from '../utils';

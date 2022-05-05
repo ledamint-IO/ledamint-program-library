@@ -5,24 +5,23 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
  * @category VerifyCollection
  * @category generated
  */
-const VerifyCollectionStruct = new beet.BeetArgsStruct<{ instructionDiscriminator: number }>(
-  [['instructionDiscriminator', beet.u8]],
-  'VerifyCollectionInstructionArgs',
-);
+const VerifyCollectionStruct = new beet.BeetArgsStruct<{
+  instructionDiscriminator: number;
+}>([['instructionDiscriminator', beet.u8]], 'VerifyCollectionInstructionArgs');
 /**
  * Accounts required by the _VerifyCollection_ instruction
  *
  * @property [_writable_] metadata Metadata account
- * @property [_writable_, **signer**] collectionAuthority Collection Update authority
- * @property [_writable_, **signer**] payer payer
+ * @property [**signer**] collectionAuthority Collection Update authority
+ * @property [**signer**] payer payer
  * @property [] collectionMint Mint of the Collection
  * @property [] collection Metadata Account of the Collection
  * @property [] collectionMasterEditionAccount MasterEdition2 Account of the Collection Token
@@ -71,12 +70,12 @@ export function createVerifyCollectionInstruction(accounts: VerifyCollectionInst
     },
     {
       pubkey: collectionAuthority,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {
       pubkey: payer,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

@@ -18,12 +18,12 @@ use mpl_token_metadata::{
     utils::assert_update_authority_is_correct,
 };
 use mpl_token_vault::state::{SafetyDepositBox, Vault};
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
 };
-use spl_token::state::{Account, Mint};
+use safe_token::state::{Account, Mint};
 pub fn make_safety_deposit_config<'a>(
     program_id: &Pubkey,
     auction_manager_info: &AccountInfo<'a>,
@@ -124,7 +124,7 @@ pub fn assert_common_checks(args: CommonCheckArgs) -> ProgramResult {
         return Err(MetaplexError::AlreadyInitialized.into());
     }
 
-    if *whitelisted_creator_info.key != solana_program::system_program::id() {
+    if *whitelisted_creator_info.key != safecoin_program::system_program::id() {
         if whitelisted_creator_info.data_is_empty() {
             return Err(MetaplexError::Uninitialized.into());
         }

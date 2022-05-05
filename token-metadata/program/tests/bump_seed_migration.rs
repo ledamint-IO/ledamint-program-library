@@ -1,5 +1,7 @@
 #![cfg(feature = "test-bpf")]
-pub mod utils;
+mod utils;
+
+
 
 use mpl_token_metadata::state::{UseMethod, Uses};
 use mpl_token_metadata::{
@@ -7,19 +9,23 @@ use mpl_token_metadata::{
     utils::puffed_out_string,
 };
 
-use borsh::BorshSerialize;
+use safecoin_program_test::*;
+use safecoin_sdk::{
+    signature::{Keypair, Signer},
+};
+use utils::*;
+use borsh::{BorshSerialize};
+use mpl_token_metadata::state::{UseAuthorityRecord};
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_sdk::account::{Account, AccountSharedData};
+use safecoin_sdk::transaction::Transaction;
 use mpl_token_metadata::pda::{find_program_as_burner_account, find_use_authority_account};
 use mpl_token_metadata::state::Key as MetadataKey;
-use mpl_token_metadata::state::UseAuthorityRecord;
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program_test::*;
-use solana_sdk::account::WritableAccount;
-use solana_sdk::account::{Account, AccountSharedData};
-use solana_sdk::signature::{Keypair, Signer};
-use solana_sdk::transaction::Transaction;
-use utils::*;
+use safecoin_sdk::account::{ReadableAccount, WritableAccount};
 mod bump_seed_migration {
-
+    
+    
+    
     use super::*;
 
     #[tokio::test]
@@ -53,34 +59,30 @@ mod bump_seed_migration {
             .await
             .unwrap();
         let use_authority_account = Keypair::new();
-        let (record, record_bump) = find_use_authority_account(
-            &test_metadata.mint.pubkey(),
-            &use_authority_account.pubkey(),
-        );
+        let (record, record_bump) =
+            find_use_authority_account(&test_metadata.mint.pubkey(), &use_authority_account.pubkey());
         let use_record_struct = UseAuthorityRecord {
             key: MetadataKey::UseAuthorityRecord,
             allowed_uses: 10,
-            bump: 0,
+            bump: 0
         };
         let mut account = Account {
             lamports: 1113600,
             data: vec![],
             owner: mpl_token_metadata::id(),
             executable: false,
-            rent_epoch: 1,
+            rent_epoch: 1
         };
         let data_mut = account.data_mut();
         use_record_struct.serialize(data_mut).unwrap();
-        data_mut.append(&mut vec![0, 0, 0, 0, 0, 0, 0, 0]);
+        data_mut.append(&mut vec![0,0,0,0,0,0,0,0]);
         let shared_data = &AccountSharedData::from(account);
         context.set_account(&record, shared_data);
-        airdrop(&mut context, &use_authority_account.pubkey(), 1113600)
-            .await
-            .unwrap();
+        airdrop(&mut context, &use_authority_account.pubkey(), 1113600).await.unwrap();
         let (burner, _) = find_program_as_burner_account();
         let utilize_with_use_authority = mpl_token_metadata::instruction::utilize(
             mpl_token_metadata::id(),
-            test_metadata.pubkey,
+            test_metadata.pubkey.clone(),
             test_metadata.token.pubkey(),
             test_metadata.mint.pubkey(),
             Some(record),
@@ -98,13 +100,8 @@ mod bump_seed_migration {
         );
 
         context.banks_client.process_transaction(tx).await.unwrap();
-        let account_after = context
-            .banks_client
-            .get_account(record)
-            .await
-            .unwrap()
-            .unwrap();
-        let uar: UseAuthorityRecord = try_from_slice_unchecked(&account_after.data).unwrap();
+        let account_after = context.banks_client.get_account(record).await.unwrap().unwrap();
+        let uar : UseAuthorityRecord = try_from_slice_unchecked(&account_after.data).unwrap();
         assert_eq!(uar.bump, record_bump);
     }
 }

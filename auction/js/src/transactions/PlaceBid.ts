@@ -14,10 +14,10 @@ import {
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { AuctionProgram } from '../AuctionProgram';
 import BN from 'bn.js';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 
 export class PlaceBidArgs extends Borsh.Data<{ resource: StringPublicKey; amount: BN }> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

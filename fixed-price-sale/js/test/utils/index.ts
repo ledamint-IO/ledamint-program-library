@@ -1,7 +1,7 @@
 import debug from 'debug';
 import test from 'tape';
-import { clusterApiUrl } from '@solana/web3.js';
-import { LOCALHOST } from '@metaplex-foundation/amman';
+import { clusterApiUrl } from '@safecoin/web3.js';
+import { LOCALHOST } from '@j0nnyboi/amman';
 
 export { sleep } from './sleep';
 export { createAndSignTransaction } from './createAndSignTransaction';

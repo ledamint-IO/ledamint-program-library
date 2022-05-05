@@ -9,14 +9,14 @@ import { strict as assert } from 'assert';
 import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
 import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
 import { ParamsWithStore, VaultProgram } from './vault';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { MetaplexProgram } from '../MetaplexProgram';
 

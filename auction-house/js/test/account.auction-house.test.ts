@@ -1,4 +1,4 @@
-import { AccountInfo, Keypair, PublicKey } from '@solana/web3.js';
+import { AccountInfo, Keypair, PublicKey } from '@safecoin/web3.js';
 import { AuctionHouse, AuctionHouseArgs } from 'src/generated';
 import test from 'tape';
 import spok from 'spok';

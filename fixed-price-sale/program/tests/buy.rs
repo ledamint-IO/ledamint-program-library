@@ -24,9 +24,9 @@ mod buy {
             find_trade_history_address, find_treasury_owner_address, find_vault_owner_address,
         },
     };
-    use solana_program::{clock::Clock, instruction::AccountMeta};
-    use solana_program_test::*;
-    use solana_sdk::{
+    use safecoin_program::{clock::Clock, instruction::AccountMeta};
+    use safecoin_program_test::*;
+    use safecoin_sdk::{
         instruction::{Instruction, InstructionError},
         program_pack::Pack,
         pubkey::Pubkey,
@@ -275,7 +275,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -353,7 +353,7 @@ mod buy {
 
         let market_keypair = Keypair::new();
 
-        let treasury_mint = anchor_lang::solana_program::system_program::id();
+        let treasury_mint = anchor_lang::safecoin_program::system_program::id();
 
         let (treasury_owner, treasyry_owner_bump) =
             find_treasury_owner_address(&treasury_mint, &selling_resource_keypair.pubkey());
@@ -532,7 +532,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -819,7 +819,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1096,7 +1096,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1396,7 +1396,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1696,7 +1696,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1971,7 +1971,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -2258,7 +2258,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -2372,7 +2372,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -2435,7 +2435,7 @@ mod buy {
 
         let market_keypair = Keypair::new();
 
-        let treasury_mint = anchor_lang::solana_program::system_program::id();
+        let treasury_mint = anchor_lang::safecoin_program::system_program::id();
 
         let (treasury_owner, treasyry_owner_bump) =
             find_treasury_owner_address(&treasury_mint, &selling_resource_keypair.pubkey());
@@ -2637,7 +2637,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -2715,7 +2715,7 @@ mod buy {
             .unwrap()
             .data;
         let deserialized_token_acc_data =
-            spl_token::state::Account::unpack_from_slice(user_collection_token_acc_data.as_ref())
+            safe_token::state::Account::unpack_from_slice(user_collection_token_acc_data.as_ref())
                 .unwrap();
 
         assert_eq!(deserialized_token_acc_data.amount, 0);
@@ -2747,7 +2747,7 @@ mod buy {
 
         let market_keypair = Keypair::new();
 
-        let treasury_mint = anchor_lang::solana_program::system_program::id();
+        let treasury_mint = anchor_lang::safecoin_program::system_program::id();
 
         let (treasury_owner, treasyry_owner_bump) =
             find_treasury_owner_address(&treasury_mint, &selling_resource_keypair.pubkey());
@@ -2949,7 +2949,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -3027,7 +3027,7 @@ mod buy {
             .unwrap()
             .data;
         let deserialized_token_acc_data =
-            spl_token::state::Account::unpack_from_slice(user_collection_token_acc_data.as_ref())
+            safe_token::state::Account::unpack_from_slice(user_collection_token_acc_data.as_ref())
                 .unwrap();
 
         assert_eq!(deserialized_token_acc_data.amount, 1);
@@ -3059,7 +3059,7 @@ mod buy {
 
         let market_keypair = Keypair::new();
 
-        let treasury_mint = anchor_lang::solana_program::system_program::id();
+        let treasury_mint = anchor_lang::safecoin_program::system_program::id();
 
         let (treasury_owner, treasyry_owner_bump) =
             find_treasury_owner_address(&treasury_mint, &selling_resource_keypair.pubkey());
@@ -3261,7 +3261,7 @@ mod buy {
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
             token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);

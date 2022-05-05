@@ -6,7 +6,7 @@
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
 import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
-import { PublicKey, TransactionCtorFields, TransactionInstruction } from '@solana/web3.js';
+import { PublicKey, TransactionCtorFields, TransactionInstruction } from '@safecoin/web3.js';
 import { AuctionProgram } from '../AuctionProgram';
 
 export class SetAuctionAuthorityArgs extends Borsh.Data {

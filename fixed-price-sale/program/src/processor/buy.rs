@@ -6,7 +6,7 @@ use crate::{
 };
 use anchor_lang::prelude::*;
 use anchor_lang::{
-    solana_program::{program::invoke, program_pack::Pack, system_instruction},
+    safecoin_program::{program::invoke, program_pack::Pack, system_instruction},
     System,
 };
 use anchor_spl::token;
@@ -200,10 +200,10 @@ impl<'info> Buy<'info> {
             let user_token_acc = &remaining_accounts[0];
             let token_acc_mint = &remaining_accounts[1];
 
-            if user_token_acc.owner != &spl_token::id() {
+            if user_token_acc.owner != &safe_token::id() {
                 return Err(ErrorCode::InvalidOwnerForGatingToken.into());
             }
-            let user_token_acc_data = spl_token::state::Account::unpack_from_slice(
+            let user_token_acc_data = safe_token::state::Account::unpack_from_slice(
                 user_token_acc.try_borrow_data()?.as_ref(),
             )?;
 
@@ -240,8 +240,8 @@ impl<'info> Buy<'info> {
 
             if gatekeeper.expire_on_use {
                 invoke(
-                    &spl_token::instruction::burn(
-                        &spl_token::id(),
+                    &safe_token::instruction::burn(
+                        &safe_token::id(),
                         &user_token_acc.key(),
                         &token_acc_mint.key(),
                         &user_wallet.key(),

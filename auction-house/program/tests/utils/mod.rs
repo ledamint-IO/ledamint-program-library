@@ -8,7 +8,7 @@ pub mod setup_functions;
 
 // use anchor_client::{
 //     solana_client::{client_error::ClientError, rpc_client::RpcClient},
-//     solana_sdk::{
+//     safecoin_sdk::{
 //         program_pack::Pack, pubkey::Pubkey, signature::Keypair, signer::Signer, system_instruction,
 //         system_program, sysvar, transaction::Transaction,
 //     },
@@ -16,15 +16,15 @@ pub mod setup_functions;
 // };
 // use constants::{AUCTION_HOUSE, FEE_PAYER, SIGNER, TREASURY};
 
-// use solana_program_test::*;
+// use safecoin_program_test::*;
 
-// /// Return `spl_token` token account.
+// /// Return `safe_token` token account.
 // pub fn get_token_account(
 //     connection: &RpcClient,
 //     token_account: &Pubkey,
-// ) -> Result<spl_token::state::Account, ClientError> {
+// ) -> Result<safe_token::state::Account, ClientError> {
 //     let data = connection.get_account_data(token_account)?;
-//     Ok(spl_token::state::Account::unpack(&data).unwrap())
+//     Ok(safe_token::state::Account::unpack(&data).unwrap())
 // }
 
 // /// Perform native lamports transfer.
@@ -187,8 +187,8 @@ pub mod setup_functions;
 //     let (recent_blockhash, _) = connection.get_recent_blockhash()?;
 
 //     let tx = Transaction::new_signed_with_payer(
-//         &[spl_token::instruction::mint_to(
-//             &spl_token::id(),
+//         &[safe_token::instruction::mint_to(
+//             &safe_token::id(),
 //             mint,
 //             to,
 //             &wallet.pubkey(),
@@ -216,8 +216,8 @@ pub mod setup_functions;
 //     // let (recent_blockhash, _) = connection.get_recent_blockhash()?;
 //     let recent_blockhash = context.last_blockhash;
 //     let tx = Transaction::new_signed_with_payer(
-//         &[spl_token::instruction::mint_to(
-//             &spl_token::id(),
+//         &[safe_token::instruction::mint_to(
+//             &safe_token::id(),
 //             mint,
 //             to,
 //             &wallet.pubkey(),
@@ -265,7 +265,7 @@ pub mod setup_functions;
 //             auction_house,
 //             auction_house_fee_account,
 //             auction_house_treasury,
-//             token_program: spl_token::id(),
+//             token_program: safe_token::id(),
 //             ata_program: spl_associated_token_account::id(),
 //             rent: sysvar::rent::id(),
 //             system_program: system_program::id(),
@@ -305,13 +305,13 @@ pub mod setup_functions;
 //             system_instruction::create_account(
 //                 &wallet.pubkey(),
 //                 &token_account.pubkey(),
-//                 spl_token::state::Account::LEN as u64,
+//                 safe_token::state::Account::LEN as u64,
 //                 connection
-//                     .get_minimum_balance_for_rent_exemption(spl_token::state::Account::LEN)?,
-//                 &spl_token::id(),
+//                     .get_minimum_balance_for_rent_exemption(safe_token::state::Account::LEN)?,
+//                 &safe_token::id(),
 //             ),
-//             spl_token::instruction::initialize_account(
-//                 &spl_token::id(),
+//             safe_token::instruction::initialize_account(
+//                 &safe_token::id(),
 //                 &token_account.pubkey(),
 //                 token_mint,
 //                 owner,

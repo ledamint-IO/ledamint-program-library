@@ -13,11 +13,11 @@ use mpl_metaplex::{
         MAX_INDEXED_ELEMENTS, MAX_STORE_INDEXER_SIZE, MAX_STORE_SIZE, PREFIX,
     },
 };
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, decode_error::DecodeError, program_error::ProgramError,
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::Account,
     bs58,
     instruction::{AccountMeta, Instruction},

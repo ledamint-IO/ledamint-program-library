@@ -4,9 +4,9 @@ use mpl_nft_packs::{
     error::NFTPacksError, instruction::InitPackSetArgs, state::PackDistributionType,
 };
 use num_traits::FromPrimitive;
-use solana_program::{clock::Clock, instruction::InstructionError};
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::{clock::Clock, instruction::InstructionError};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::Keypair, signer::Signer, transaction::TransactionError, transport::TransportError,
 };
 use utils::*;

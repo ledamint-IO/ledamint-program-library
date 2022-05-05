@@ -7,7 +7,7 @@ use crate::{
     find_proving_process_program_address, state::PackDistributionType,
 };
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
     system_program, sysvar,
@@ -121,7 +121,7 @@ pub enum NFTPacksInstruction {
     /// - read                          store
     /// - read                          rent
     /// - read                          system_program
-    /// - read                          spl_token program
+    /// - read                          safe_token program
     ///
     /// Parameters:
     /// - max_supply	Option<u32>
@@ -146,7 +146,7 @@ pub enum NFTPacksInstruction {
     /// - read                          store
     /// - read                          rent
     /// - read                          system_program
-    /// - read                          spl_token program
+    /// - read                          safe_token program
     AddVoucherToPack,
 
     /// Activate
@@ -198,7 +198,7 @@ pub enum NFTPacksInstruction {
     /// - read              edition_acc
     /// - read              rent program
     /// - read              mpl_token_metadata program
-    /// - read              spl_token program
+    /// - read              safe_token program
     /// - read              system program
     ///
     /// Parameters:
@@ -239,7 +239,7 @@ pub enum NFTPacksInstruction {
     /// - write            token_account
     /// - read             program_authority
     /// - read             rent
-    /// - read             spl_token program
+    /// - read             safe_token program
     DeletePackCard,
 
     /// DeletePackVoucher
@@ -365,7 +365,7 @@ pub fn add_card_to_pack(
         AccountMeta::new_readonly(*store, false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
         AccountMeta::new_readonly(system_program::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
     ];
 
     Instruction::new_with_borsh(
@@ -401,7 +401,7 @@ pub fn add_voucher_to_pack(
         AccountMeta::new_readonly(*store, false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
         AccountMeta::new_readonly(system_program::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
     ];
 
     Instruction::new_with_borsh(
@@ -496,7 +496,7 @@ pub fn claim_pack(
         AccountMeta::new(edition_mark_pda, false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
         AccountMeta::new_readonly(mpl_token_metadata::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
         AccountMeta::new_readonly(system_program::id(), false),
     ];
 
@@ -564,7 +564,7 @@ pub fn delete_pack_card(
         AccountMeta::new(*token_account, false),
         AccountMeta::new_readonly(program_authority, false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
     ];
 
     Instruction::new_with_borsh(*program_id, &NFTPacksInstruction::DeletePackCard, accounts)
@@ -638,7 +638,7 @@ pub fn request_card_for_redeem(
         AccountMeta::new_readonly(sysvar::slot_hashes::id(), false),
         AccountMeta::new_readonly(sysvar::clock::id(), false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
         AccountMeta::new_readonly(system_program::id(), false),
     ];
     if let Some(user_token_account) = user_token_acc {

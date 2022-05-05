@@ -8,7 +8,7 @@ use mpl_auction::{
     instruction::{end_auction_instruction, EndAuctionArgs},
     processor::{AuctionData, AuctionDataExtended, BidState},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program::invoke_signed,

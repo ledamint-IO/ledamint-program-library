@@ -1,7 +1,7 @@
 #![cfg(test)]
 
 mod puff_out_test {
-    use solana_program::pubkey::Pubkey;
+    use safecoin_program::pubkey::Pubkey;
 
     use crate::{
         state::{Data, Key, Metadata},
@@ -21,7 +21,7 @@ mod puff_out_test {
             ),
         ];
         for (s, size, puffed_out) in cases {
-            let result = puffed_out_string(s, *size);
+            let result = puffed_out_string(&s.to_string(), *size);
             assert_eq!(result, puffed_out.to_string(), "s: {:?}, size: {}", s, size,);
         }
     }

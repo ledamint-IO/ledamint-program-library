@@ -1,6 +1,6 @@
 import { StringPublicKey, TokenAccount } from '@metaplex-foundation/mpl-core';
 import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@safecoin/web3.js';
 import { PROGRAM_ID } from '../generated';
 import { strict as assert } from 'assert';
 

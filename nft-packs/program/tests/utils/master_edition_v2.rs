@@ -5,14 +5,14 @@ use mpl_token_metadata::{
     instruction::{self, CreateMasterEditionArgs, MetadataInstruction},
     state::{EDITION, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program::{
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     sysvar,
 };
-use solana_program_test::*;
-use solana_sdk::signature::Keypair;
-use solana_sdk::{pubkey::Pubkey, signature::Signer, transaction::Transaction, transport};
+use safecoin_program_test::*;
+use safecoin_sdk::signature::Keypair;
+use safecoin_sdk::{pubkey::Pubkey, signature::Signer, transaction::Transaction, transport};
 
 #[derive(Debug)]
 pub struct TestMasterEditionV2 {
@@ -74,7 +74,7 @@ impl TestMasterEditionV2 {
                 AccountMeta::new_readonly(context.payer.pubkey(), true),
                 AccountMeta::new_readonly(self.metadata_pubkey, false),
                 AccountMeta::new_readonly(fake_token_program.pubkey(), false),
-                AccountMeta::new_readonly(solana_program::system_program::id(), false),
+                AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
                 AccountMeta::new_readonly(sysvar::rent::id(), false),
             ],
             data: MetadataInstruction::CreateMasterEdition(CreateMasterEditionArgs { max_supply })

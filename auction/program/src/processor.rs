@@ -1,7 +1,7 @@
 use crate::errors::AuctionError;
 use arrayref::array_ref;
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, borsh::try_from_slice_unchecked, clock::UnixTimestamp,
     entrypoint::ProgramResult, hash::Hash, msg, program_error::ProgramError, pubkey::Pubkey,
 };

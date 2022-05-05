@@ -38,9 +38,9 @@
   "author": "Metaplex Maintainers <contact@metaplex.com>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@metaplex-foundation/beet": "^0.1.0",
-    "@metaplex-foundation/beet-solana": "^0.1.1",
-    "@solana/web3.js": "^1.35.1"
+    "@j0nnyboi/beet": "^0.1.1",
+    "@j0nnyboi/beet-safecoin": "^0.1.1",
+    "@safecoin/web3.js": "^1.29.4"
   },
   "devDependencies": {
     "@metaplex-foundation/solita": "^0.2.0",

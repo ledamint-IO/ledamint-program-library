@@ -1,5 +1,5 @@
-import { Connection, Keypair } from '@solana/web3.js';
-import { airdrop, PayerTransactionHandler } from '@metaplex-foundation/amman';
+import { Connection, Keypair } from '@safecoin/web3.js';
+import { airdrop, PayerTransactionHandler } from '@j0nnyboi/amman';
 
 import { connectionURL } from '../utils';
 

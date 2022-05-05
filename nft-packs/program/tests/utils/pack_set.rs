@@ -3,14 +3,14 @@ use mpl_nft_packs::{
     instruction::{self, EditPackSetArgs},
     state::PackSet,
 };
-use solana_program::{
+use safecoin_program::{
     instruction::AccountMeta, program_pack::Pack, pubkey::Pubkey, system_instruction,
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::Signer, signer::keypair::Keypair, transaction::Transaction, transport,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 #[derive(Debug)]
 pub struct TestPackSet {
@@ -98,7 +98,7 @@ impl TestPackSet {
                     &test_pack_card.token_account.pubkey(),
                     rent.minimum_balance(Account::LEN),
                     Account::LEN as u64,
-                    &spl_token::id(),
+                    &safe_token::id(),
                 ),
                 instruction::add_card_to_pack(
                     &mpl_nft_packs::id(),
@@ -302,7 +302,7 @@ impl TestPackSet {
                     &test_pack_voucher.token_account.pubkey(),
                     rent.minimum_balance(Account::LEN),
                     Account::LEN as u64,
-                    &spl_token::id(),
+                    &safe_token::id(),
                 ),
                 instruction::add_voucher_to_pack(
                     &mpl_nft_packs::id(),
@@ -429,11 +429,11 @@ impl TestPackSet {
         .unwrap();
 
         let mint_key = new_mint.pubkey();
-        let spl_token_metadata_key = mpl_token_metadata::id();
+        let safe_token_metadata_key = mpl_token_metadata::id();
 
         let metadata_seeds = &[
             mpl_token_metadata::state::PREFIX.as_bytes(),
-            spl_token_metadata_key.as_ref(),
+            safe_token_metadata_key.as_ref(),
             mint_key.as_ref(),
         ];
         let (new_metadata_pubkey, _) =
@@ -441,7 +441,7 @@ impl TestPackSet {
 
         let master_edition_seeds = &[
             mpl_token_metadata::state::PREFIX.as_bytes(),
-            spl_token_metadata_key.as_ref(),
+            safe_token_metadata_key.as_ref(),
             mint_key.as_ref(),
             mpl_token_metadata::state::EDITION.as_bytes(),
         ];

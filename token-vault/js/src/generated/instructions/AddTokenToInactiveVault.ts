@@ -5,10 +5,10 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
-import { AmountArgs, amountArgsBeet } from '../types/AmountArgs';
+import * as splToken from '@safecoin/safe-token';
+import * as definedTypes from '../types';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
@@ -16,7 +16,7 @@ import { AmountArgs, amountArgsBeet } from '../types/AmountArgs';
  * @category generated
  */
 export type AddTokenToInactiveVaultInstructionArgs = {
-  amountArgs: AmountArgs;
+  amountArgs: definedTypes.AmountArgs;
 };
 /**
  * @category Instructions
@@ -30,7 +30,7 @@ const AddTokenToInactiveVaultStruct = new beet.BeetArgsStruct<
 >(
   [
     ['instructionDiscriminator', beet.u8],
-    ['amountArgs', amountArgsBeet],
+    ['amountArgs', definedTypes.amountArgsBeet],
   ],
   'AddTokenToInactiveVaultInstructionArgs',
 );

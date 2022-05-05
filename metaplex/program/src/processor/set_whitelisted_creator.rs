@@ -6,7 +6,7 @@ use {
         },
     },
     borsh::BorshSerialize,
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,

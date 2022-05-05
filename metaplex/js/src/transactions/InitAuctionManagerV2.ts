@@ -13,7 +13,7 @@ import {
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { MetaplexProgram } from '../MetaplexProgram';
 import { strict as assert } from 'assert';

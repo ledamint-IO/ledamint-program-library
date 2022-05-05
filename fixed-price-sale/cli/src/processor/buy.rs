@@ -5,7 +5,7 @@ use crate::{error, utils};
 use anchor_lang::{InstructionData, ToAccountMetas};
 use mpl_fixed_price_sale::utils::{find_trade_history_address, find_vault_owner_address};
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_sdk::{
     instruction::Instruction,
     pubkey::Pubkey,
     signature::Signer,
@@ -145,7 +145,7 @@ pub fn buy(
         clock: clock::id(),
         rent: rent::id(),
         token_metadata_program: mpl_token_metadata::id(),
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
     }
     .to_account_metas(None);

@@ -13,7 +13,7 @@ use {
     mpl_token_metadata::{
         deprecated_instruction::deprecated_set_reservation_list, state::Reservation,
     },
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         program::invoke_signed,

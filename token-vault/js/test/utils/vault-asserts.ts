@@ -1,9 +1,9 @@
 import { Test } from 'tape';
-import { Connection } from '@solana/web3.js';
+import { Connection } from '@safecoin/web3.js';
 import spok from 'spok';
 import { InitVaultInstructionAccounts, Key, Vault, VaultState } from '../../src/generated';
 import { spokSameBignum, spokSamePubkey } from './asserts';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 
 export async function assertInactiveVault(
   t: Test,

@@ -3,7 +3,7 @@ use crate::{
     state::Reservation,
 };
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
     sysvar,
@@ -57,8 +57,8 @@ pub fn deprecated_create_master_edition(
         AccountMeta::new_readonly(mint_authority, true),
         AccountMeta::new_readonly(metadata, false),
         AccountMeta::new_readonly(payer, false),
-        AccountMeta::new_readonly(spl_token::id(), false),
-        AccountMeta::new_readonly(solana_program::system_program::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
+        AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
     ];
 
@@ -106,8 +106,8 @@ pub fn deprecated_mint_new_edition_from_master_edition_via_printing_token(
         AccountMeta::new(payer, true),
         AccountMeta::new_readonly(master_update_authority, true),
         AccountMeta::new_readonly(master_metadata, false),
-        AccountMeta::new_readonly(spl_token::id(), false),
-        AccountMeta::new_readonly(solana_program::system_program::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
+        AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
     ];
 
@@ -174,7 +174,7 @@ pub fn deprecated_create_reservation_list(
             AccountMeta::new_readonly(master_edition, false),
             AccountMeta::new_readonly(resource, false),
             AccountMeta::new_readonly(metadata, false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
         data: MetadataInstruction::DeprecatedCreateReservationList
@@ -206,7 +206,7 @@ pub fn deprecated_mint_printing_tokens_via_token(
             AccountMeta::new_readonly(burn_authority, true),
             AccountMeta::new_readonly(metadata, false),
             AccountMeta::new_readonly(master_edition, false),
-            AccountMeta::new_readonly(spl_token::id(), false),
+            AccountMeta::new_readonly(safe_token::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
         data: MetadataInstruction::DeprecatedMintPrintingTokensViaToken(
@@ -236,7 +236,7 @@ pub fn deprecated_mint_printing_tokens(
             AccountMeta::new_readonly(update_authority, true),
             AccountMeta::new_readonly(metadata, false),
             AccountMeta::new_readonly(master_edition, false),
-            AccountMeta::new_readonly(spl_token::id(), false),
+            AccountMeta::new_readonly(safe_token::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ],
         data: MetadataInstruction::DeprecatedMintPrintingTokens(MintPrintingTokensViaTokenArgs {

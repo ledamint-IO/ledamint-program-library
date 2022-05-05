@@ -1,6 +1,6 @@
 use crate::{EXTENDED, PREFIX};
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
     sysvar,
@@ -122,7 +122,7 @@ pub fn create_auction_instruction(
             AccountMeta::new(auction_pubkey, false),
             AccountMeta::new(auction_extended_pubkey, false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
         ],
         data: AuctionInstruction::CreateAuction(args)
             .try_to_vec()
@@ -158,7 +158,7 @@ pub fn create_auction_instruction_v2(
             AccountMeta::new(auction_pubkey, false),
             AccountMeta::new(auction_extended_pubkey, false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
         ],
         data: AuctionInstruction::CreateAuctionV2(args)
             .try_to_vec()
@@ -272,8 +272,8 @@ pub fn place_bid_instruction(
             AccountMeta::new_readonly(payer, true),
             AccountMeta::new_readonly(sysvar::clock::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
-            AccountMeta::new_readonly(spl_token::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
+            AccountMeta::new_readonly(safe_token::id(), false),
         ],
         data: AuctionInstruction::PlaceBid(args).try_to_vec().unwrap(),
     }
@@ -336,8 +336,8 @@ pub fn cancel_bid_instruction(
             AccountMeta::new(token_mint_pubkey, false),
             AccountMeta::new_readonly(sysvar::clock::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
-            AccountMeta::new_readonly(spl_token::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
+            AccountMeta::new_readonly(safe_token::id(), false),
         ],
         data: AuctionInstruction::CancelBid(args).try_to_vec().unwrap(),
     }
@@ -403,7 +403,7 @@ pub fn claim_bid_instruction(
         AccountMeta::new_readonly(bidder_pubkey, false),
         AccountMeta::new_readonly(token_mint_pubkey, false),
         AccountMeta::new_readonly(sysvar::clock::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
     ];
 
     if let Some(auction_extended) = auction_extended_pubkey {

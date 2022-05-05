@@ -11,7 +11,7 @@
 //! are not winning bids from the state.
 
 use borsh::try_to_vec_with_schema;
-use solana_program::system_program;
+use safecoin_program::system_program;
 
 use crate::{
     errors::AuctionError,
@@ -21,7 +21,7 @@ use crate::{
     utils::{
         assert_derivation, assert_initialized, assert_owned_by, assert_signer,
         assert_token_program_matches_package, assert_uninitialized, create_or_allocate_account_raw,
-        spl_token_create_account, spl_token_transfer, TokenCreateAccount, TokenTransferParams,
+        safe_token_create_account, safe_token_transfer, TokenCreateAccount, TokenTransferParams,
     },
     BIDDER_POT_TOKEN, EXTENDED, PREFIX,
 };
@@ -30,7 +30,7 @@ use super::BIDDER_METADATA_LEN;
 
 use {
     borsh::{BorshDeserialize, BorshSerialize},
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         msg,
@@ -44,7 +44,7 @@ use {
         system_instruction::create_account,
         sysvar::{clock::Clock, Sysvar},
     },
-    spl_token::state::Account,
+    safe_token::state::Account,
     std::mem,
 };
 
@@ -99,7 +99,7 @@ fn parse_accounts<'a, 'b: 'a>(
 
     assert_owned_by(accounts.auction, program_id)?;
     assert_owned_by(accounts.auction_extended, program_id)?;
-    assert_owned_by(accounts.bidder_token, &spl_token::id())?;
+    assert_owned_by(accounts.bidder_token, &safe_token::id())?;
 
     if !accounts.bidder_pot.data_is_empty() {
         assert_owned_by(accounts.bidder_pot, program_id)?;
@@ -108,13 +108,13 @@ fn parse_accounts<'a, 'b: 'a>(
         assert_owned_by(accounts.bidder_meta, program_id)?;
     }
 
-    assert_owned_by(accounts.mint, &spl_token::id())?;
+    assert_owned_by(accounts.mint, &safe_token::id())?;
     assert_signer(accounts.bidder)?;
     assert_signer(accounts.payer)?;
     assert_signer(accounts.transfer_authority)?;
     assert_token_program_matches_package(accounts.token_program)?;
 
-    if *accounts.token_program.key != spl_token::id() {
+    if *accounts.token_program.key != safe_token::id() {
         return Err(AuctionError::InvalidTokenProgram.into());
     }
 
@@ -255,7 +255,7 @@ pub fn place_bid<'r, 'b: 'r>(
             &[bidder_token_account_bump],
         ];
 
-        spl_token_create_account(TokenCreateAccount {
+        safe_token_create_account(TokenCreateAccount {
             payer: accounts.payer.clone(),
             authority: accounts.auction.clone(),
             authority_seeds: bidder_token_account_seeds,
@@ -314,7 +314,7 @@ pub fn place_bid<'r, 'b: 'r>(
     }
 
     // Transfer amount of SPL token to bid account.
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: accounts.bidder_token.clone(),
         destination: accounts.bidder_pot_token.clone(),
         authority: accounts.transfer_authority.clone(),

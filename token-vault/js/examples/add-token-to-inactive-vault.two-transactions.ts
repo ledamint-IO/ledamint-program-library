@@ -11,8 +11,8 @@ import {
   PublicKey,
   sendAndConfirmTransaction,
   Transaction,
-} from '@solana/web3.js';
-import { AddressLabels, LOCALHOST } from '@metaplex-foundation/amman';
+} from '@safecoin/web3.js';
+import { AddressLabels, LOCALHOST } from '@j0nnyboi/amman';
 import { strict as assert } from 'assert';
 
 import { addressLabels } from '../test/utils';

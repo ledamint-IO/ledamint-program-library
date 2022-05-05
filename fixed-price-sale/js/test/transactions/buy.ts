@@ -4,7 +4,7 @@ import {
   Transaction,
   SYSVAR_CLOCK_PUBKEY,
   AccountMeta,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { PROGRAM_ID } from '@metaplex-foundation/mpl-token-metadata';
 
 import { createBuyInstruction } from '../../src/generated/instructions';

@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as splToken from '@safecoin/safe-token';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 import {
   ApproveUseAuthorityArgs,
   approveUseAuthorityArgsBeet,
@@ -41,8 +41,8 @@ const ApproveUseAuthorityStruct = new beet.BeetArgsStruct<
  * Accounts required by the _ApproveUseAuthority_ instruction
  *
  * @property [_writable_] useAuthorityRecord Use Authority Record PDA
- * @property [_writable_, **signer**] owner Owner
- * @property [_writable_, **signer**] payer Payer
+ * @property [**signer**] owner Owner
+ * @property [**signer**] payer Payer
  * @property [] user A Use Authority
  * @property [_writable_] ownerTokenAccount Owned Token Account Of Mint
  * @property [] metadata Metadata account
@@ -94,12 +94,12 @@ export function createApproveUseAuthorityInstruction(
     },
     {
       pubkey: owner,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {
       pubkey: payer,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

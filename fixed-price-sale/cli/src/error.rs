@@ -1,7 +1,7 @@
 //! Module provide application defined errors.
 
 use solana_client::client_error::ClientError;
-use solana_sdk::{program_error::ProgramError, pubkey::ParsePubkeyError};
+use safecoin_sdk::{program_error::ProgramError, pubkey::ParsePubkeyError};
 use std::io;
 use thiserror::Error;
 

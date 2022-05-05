@@ -7,7 +7,7 @@ use crate::{
     ErrorCode,
 };
 use anchor_lang::{prelude::*, AnchorDeserialize, AnchorSerialize};
-use solana_program::{sysvar, sysvar::instructions::get_instruction_relative};
+use safecoin_program::{sysvar, sysvar::instructions::get_instruction_relative};
 
 pub const BID_RECEIPT_SIZE: usize = 8 + //key
 32 + // trade_state

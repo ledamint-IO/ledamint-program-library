@@ -5,9 +5,9 @@
 
 // Make sure to have a local validator running to try this as is, i.e. via `yarn amman:start`
 
-import { Connection, Keypair, sendAndConfirmTransaction, Transaction } from '@solana/web3.js';
-import { LOCALHOST } from '@metaplex-foundation/amman';
-import { AddressLabels } from '@metaplex-foundation/amman';
+import { Connection, Keypair, sendAndConfirmTransaction, Transaction } from '@safecoin/web3.js';
+import { LOCALHOST } from '@j0nnyboi/amman';
+import { AddressLabels } from '@j0nnyboi/amman';
 
 // These help us identify public keys, make sure to run with
 // `DEBUG=vault:* ts-node ./examples/...` to log them

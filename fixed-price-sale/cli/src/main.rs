@@ -7,7 +7,7 @@ use chrono::prelude::*;
 use clap::Parser;
 use cli_args::{CliArgs, Commands};
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_sdk::{
     pubkey::Pubkey,
     signer::{keypair::read_keypair_file, Signer},
     transaction::Transaction,
@@ -81,7 +81,7 @@ fn main() -> Result<(), error::Error> {
                 println!("Market::mutable - {}", market.mutable);
                 println!(
                     "Market::price - {}",
-                    spl_token::amount_to_ui_amount(market.price, decimals)
+                    safe_token::amount_to_ui_amount(market.price, decimals)
                 );
                 println!(
                     "Market::pieces_in_one_wallet - {}",
@@ -202,7 +202,7 @@ fn main() -> Result<(), error::Error> {
                 let mint = if let Some(mint) = mint {
                     mint
                 } else {
-                    spl_token::native_mint::id()
+                    safe_token::native_mint::id()
                 };
 
                 let start_date = if let Some(start_date) = start_date {
@@ -283,7 +283,7 @@ fn main() -> Result<(), error::Error> {
                     &name,
                     &description,
                     mutable,
-                    spl_token::ui_amount_to_amount(price, decimals),
+                    safe_token::ui_amount_to_amount(price, decimals),
                     pieces_in_one_wallet,
                     start_date,
                     end_date,

@@ -5,18 +5,17 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
  * @category SetAuthority
  * @category generated
  */
-const SetAuthorityStruct = new beet.BeetArgsStruct<{ instructionDiscriminator: number }>(
-  [['instructionDiscriminator', beet.u8]],
-  'SetAuthorityInstructionArgs',
-);
+const SetAuthorityStruct = new beet.BeetArgsStruct<{
+  instructionDiscriminator: number;
+}>([['instructionDiscriminator', beet.u8]], 'SetAuthorityInstructionArgs');
 /**
  * Accounts required by the _SetAuthority_ instruction
  *

@@ -3,7 +3,7 @@
 use crate::{id, ErrorCode};
 use anchor_lang::{
     prelude::*,
-    solana_program::{program::invoke_signed, system_instruction},
+    safecoin_program::{program::invoke_signed, system_instruction},
 };
 
 pub const NAME_MAX_LEN: usize = 40; // max len of a string buffer in bytes

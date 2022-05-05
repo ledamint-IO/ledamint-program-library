@@ -1,5 +1,5 @@
 use borsh::BorshSerialize;
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     msg,
@@ -44,7 +44,7 @@ pub fn process_set_store_index<'a>(
     assert_owned_by(store_info, program_id)?;
     assert_owned_by(auction_cache_info, program_id)?;
 
-    if system_info.key != &solana_program::system_program::id() {
+    if system_info.key != &safecoin_program::system_program::id() {
         return Err(MetaplexError::InvalidSystemProgram.into());
     }
 

@@ -12,7 +12,7 @@ use borsh::{BorshDeserialize, BorshSerialize};
 use mpl_auction::processor::AuctionData;
 use mpl_token_metadata::state::Metadata;
 use mpl_token_vault::state::SafetyDepositBox;
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, msg, program_error::ProgramError,
     pubkey::Pubkey,
 };

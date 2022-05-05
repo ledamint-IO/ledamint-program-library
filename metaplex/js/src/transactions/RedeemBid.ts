@@ -6,14 +6,14 @@
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
 import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
 import { VaultProgram, ParamsWithStore } from './vault';
 import { MetaplexProgram } from '../MetaplexProgram';

@@ -10,7 +10,7 @@ pub mod utils;
 use crate::{bid::*, constants::*, receipt::*, utils::*};
 use anchor_lang::{
     prelude::*,
-    solana_program::{
+    safecoin_program::{
         program::{invoke, invoke_signed},
         system_instruction,
     },
@@ -20,9 +20,9 @@ use anchor_spl::{
     associated_token::AssociatedToken,
     token::{Mint, Token, TokenAccount},
 };
-use solana_program::program_memory::sol_memset;
-use spl_token::instruction::{approve, revoke};
-anchor_lang::declare_id!("hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk");
+use safecoin_program::program_memory::sol_memset;
+use safe_token::instruction::{approve, revoke};
+anchor_lang::declare_id!("Co8pmAyxUyCwep4zhnPWzkL6fwvPPHU59r1t5eM6gXjZ");
 
 #[program]
 pub mod auction_house {
@@ -75,7 +75,7 @@ pub mod auction_house {
         let token_program = &ctx.accounts.token_program;
         let system_program = &ctx.accounts.system_program;
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
         let auction_house_seeds = [
             PREFIX.as_bytes(),
             auction_house.creator.as_ref(),
@@ -92,7 +92,7 @@ pub mod auction_house {
         ];
         if !is_native {
             invoke_signed(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     token_program.key,
                     &auction_house_treasury.key(),
                     &treasury_withdrawal_destination.key(),
@@ -146,7 +146,7 @@ pub mod auction_house {
         let system_program = &ctx.accounts.system_program;
         let ata_program = &ctx.accounts.ata_program;
         let rent = &ctx.accounts.rent;
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         if let Some(sfbp) = seller_fee_basis_points {
             if sfbp > 10000 {
@@ -239,7 +239,7 @@ pub mod auction_house {
         auction_house.treasury_withdrawal_destination = treasury_withdrawal_destination.key();
         auction_house.fee_withdrawal_destination = fee_withdrawal_destination.key();
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         let ah_key = auction_house.key();
 
@@ -348,7 +348,7 @@ pub mod auction_house {
             &seeds,
         )?;
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         if !is_native {
             if receipt_account.data_is_empty() {
@@ -378,7 +378,7 @@ pub mod auction_house {
 
             assert_is_ata(receipt_account, &wallet.key(), &treasury_mint.key())?;
             invoke_signed(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     token_program.key,
                     &escrow_payment_account.key(),
                     &receipt_account.key(),
@@ -396,13 +396,11 @@ pub mod auction_house {
             )?;
         } else {
             assert_keys_equal(receipt_account.key(), wallet.key())?;
-            let checked_amount =
-                rent_checked_sub(escrow_payment_account.to_account_info(), amount)?;
             invoke_signed(
                 &system_instruction::transfer(
                     &escrow_payment_account.key(),
                     &receipt_account.key(),
-                    checked_amount,
+                    amount,
                 ),
                 &[
                     escrow_payment_account.to_account_info(),
@@ -411,6 +409,9 @@ pub mod auction_house {
                 ],
                 &[&escrow_signer_seeds],
             )?;
+
+            // Verify that escrow is still rent exempt.
+            assert_escrow_rent_exempt(escrow_payment_account.to_account_info())?;
         }
 
         Ok(())
@@ -458,7 +459,7 @@ pub mod auction_house {
             &seeds,
         )?;
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         create_program_token_account_if_not_present(
             escrow_payment_account,
@@ -476,7 +477,7 @@ pub mod auction_house {
         if !is_native {
             assert_is_ata(payment_account, &wallet.key(), &treasury_mint.key())?;
             invoke(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     token_program.key,
                     &payment_account.key(),
                     &escrow_payment_account.key(),
@@ -493,15 +494,11 @@ pub mod auction_house {
             )?;
         } else {
             assert_keys_equal(payment_account.key(), wallet.key())?;
-            // Reach rental exemption and then
-            let checked_amount = rent_checked_add(escrow_payment_account.to_account_info(), 0)?
-                .checked_add(amount)
-                .ok_or(ErrorCode::NumericalOverflow)?;
             invoke(
                 &system_instruction::transfer(
                     &payment_account.key(),
                     &escrow_payment_account.key(),
-                    checked_amount,
+                    amount,
                 ),
                 &[
                     escrow_payment_account.to_account_info(),
@@ -509,6 +506,9 @@ pub mod auction_house {
                     system_program.to_account_info(),
                 ],
             )?;
+
+            // Verify enough exists in the escrow account to keep it rent exempt.
+            assert_escrow_rent_exempt(escrow_payment_account.to_account_info())?;
         }
 
         Ok(())
@@ -632,7 +632,7 @@ pub mod auction_house {
         let buyer_receipt_clone = buyer_receipt_token_account.to_account_info();
         let token_account_clone = token_account.to_account_info();
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         if buyer_price == 0 && !authority_clone.is_signer && !seller.is_signer {
             return Err(ErrorCode::CannotMatchFreeSalesWithoutAuctionHouseOrSellerSignoff.into());
@@ -698,34 +698,6 @@ pub mod auction_house {
                 token_account_mint.as_ref(),
             ],
         )?;
-
-        // For native purchases, verify that the amount in escrow is sufficient to actually purchase the token.
-        // This is intended to cover the migration from pre-rent-exemption checked accounts to rent-exemption checked accounts.
-        // The fee payer makes up the shortfall up to the amount of rent for an empty account.
-        if is_native {
-            let diff = rent_checked_sub(escrow_payment_account.to_account_info(), buyer_price)?;
-            if diff != buyer_price {
-                // Return the shortfall amount (if greater than 0 but less than rent), but don't exceed the minimum rent the account should need.
-                let shortfall = std::cmp::min(
-                    diff.checked_sub(buyer_price)
-                        .ok_or(ErrorCode::NumericalOverflow)?,
-                    rent.minimum_balance(escrow_payment_account.data_len()),
-                );
-                invoke_signed(
-                    &system_instruction::transfer(
-                        &fee_payer.key,
-                        &escrow_payment_account.key,
-                        shortfall,
-                    ),
-                    &[
-                        fee_payer.to_account_info(),
-                        escrow_payment_account.to_account_info(),
-                        system_program.to_account_info(),
-                    ],
-                    &[&fee_payer_seeds],
-                )?;
-            }
-        }
 
         if metadata.data_is_empty() {
             return Err(ErrorCode::MetadataDoesntExist.into());
@@ -814,7 +786,7 @@ pub mod auction_house {
             }
 
             invoke_signed(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     token_program.key,
                     &escrow_payment_account.key(),
                     &seller_payment_receipt_account.key(),
@@ -845,6 +817,10 @@ pub mod auction_house {
                 ],
                 &[&escrow_signer_seeds],
             )?;
+
+            // The buy instruction should handle accounting for minimum rent exemption for the
+            // escrow account, but double check here just in case.
+            assert_escrow_rent_exempt(escrow_payment_account.to_account_info())?;
         }
 
         if buyer_receipt_token_account.data_is_empty() {
@@ -859,13 +835,6 @@ pub mod auction_house {
                 rent.to_account_info(),
                 &fee_payer_seeds,
             )?;
-        } else {
-            let data = buyer_receipt_token_account.try_borrow_data()?;
-            let token_account =
-                TokenAccount::try_deserialize(&mut data.as_ref())?;
-            if &token_account.owner != buyer.key {
-                return Err(ErrorCode::IncorrectOwner.into())
-            }
         }
 
         let buyer_rec_acct = assert_is_ata(&buyer_receipt_clone, &buyer.key(), &token_mint.key())?;
@@ -882,7 +851,7 @@ pub mod auction_house {
         ];
 
         invoke_signed(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &token_account.key(),
                 &buyer_receipt_token_account.key(),

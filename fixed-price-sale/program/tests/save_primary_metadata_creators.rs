@@ -9,15 +9,15 @@ mod save_primary_metadata_creators {
             setup_functions::setup_store,
         },
     };
-    use anchor_client::solana_sdk::{signature::Keypair, signer::Signer, system_program};
+    use anchor_client::safecoin_sdk::{signature::Keypair, signer::Signer, system_program};
     use anchor_lang::{AccountDeserialize, InstructionData, ToAccountMetas};
     use mpl_fixed_price_sale::{
         accounts as mpl_fixed_price_sale_accounts, instruction as mpl_fixed_price_sale_instruction,
         state::PrimaryMetadataCreators,
     };
-    use solana_program::instruction::Instruction;
-    use solana_program_test::*;
-    use solana_sdk::{transaction::Transaction, transport::TransportError};
+    use safecoin_program::instruction::Instruction;
+    use safecoin_program_test::*;
+    use safecoin_sdk::{transaction::Transaction, transport::TransportError};
 
     #[tokio::test]
     async fn success() {

@@ -8,12 +8,12 @@ use crate::{
     utils::{
         assert_initialized, assert_owned_by, assert_rent_exempt, assert_token_matching,
         assert_token_program_matches_package, assert_vault_authority_correct,
-        create_or_allocate_account_raw, spl_token_burn, spl_token_mint_to, spl_token_transfer,
+        create_or_allocate_account_raw, safe_token_burn, safe_token_mint_to, safe_token_transfer,
         TokenBurnParams, TokenMintToParams, TokenTransferParams,
     },
 };
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     msg,
@@ -22,7 +22,7 @@ use solana_program::{
     rent::Rent,
     sysvar::Sysvar,
 };
-use spl_token::state::{Account, Mint};
+use safe_token::state::{Account, Mint};
 
 pub fn process_instruction(
     program_id: &Pubkey,
@@ -197,7 +197,7 @@ pub fn process_add_fractional_shares_to_treasury(
         &[bump_seed],
     ];
 
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: source_info.clone(),
         destination: fraction_treasury_info.clone(),
         amount: number_of_shares,
@@ -272,7 +272,7 @@ pub fn process_withdraw_fractional_shares_from_treasury(
         return Err(VaultError::InvalidAuthority.into());
     }
 
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: fraction_treasury_info.clone(),
         destination: destination_info.clone(),
         amount: number_of_shares,
@@ -341,7 +341,7 @@ pub fn process_mint_fractional_shares(
         return Err(VaultError::InvalidAuthority.into());
     }
 
-    spl_token_mint_to(TokenMintToParams {
+    safe_token_mint_to(TokenMintToParams {
         mint: fraction_mint_info.clone(),
         destination: fraction_treasury_info.clone(),
         amount: number_of_shares,
@@ -438,7 +438,7 @@ pub fn process_withdraw_token_from_safety_deposit_box(
         return Err(VaultError::InvalidAuthority.into());
     }
 
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: store_info.clone(),
         destination: destination_info.clone(),
         amount,
@@ -549,7 +549,7 @@ pub fn process_redeem_shares(program_id: &Pubkey, accounts: &[AccountInfo]) -> P
         &[bump_seed],
     ];
 
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: redeem_treasury_info.clone(),
         destination: destination_info.clone(),
         amount: we_owe_you,
@@ -558,7 +558,7 @@ pub fn process_redeem_shares(program_id: &Pubkey, accounts: &[AccountInfo]) -> P
         token_program: token_program_info.clone(),
     })?;
 
-    spl_token_burn(TokenBurnParams {
+    safe_token_burn(TokenBurnParams {
         mint: fraction_mint_info.clone(),
         amount: outstanding_shares.amount,
         authority: burn_authority_info.clone(),
@@ -701,7 +701,7 @@ pub fn process_combine_vault(program_id: &Pubkey, accounts: &[AccountInfo]) -> P
         return Err(VaultError::InvalidAuthority.into());
     }
 
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: your_payment_info.clone(),
         destination: redeem_treasury_info.clone(),
         amount: what_you_owe,
@@ -710,7 +710,7 @@ pub fn process_combine_vault(program_id: &Pubkey, accounts: &[AccountInfo]) -> P
         token_program: token_program_info.clone(),
     })?;
 
-    spl_token_burn(TokenBurnParams {
+    safe_token_burn(TokenBurnParams {
         mint: fraction_mint_info.clone(),
         amount: your_outstanding_shares.amount,
         authority: transfer_authority_info.clone(),
@@ -719,7 +719,7 @@ pub fn process_combine_vault(program_id: &Pubkey, accounts: &[AccountInfo]) -> P
         source: your_outstanding_shares_info.clone(),
     })?;
 
-    spl_token_burn(TokenBurnParams {
+    safe_token_burn(TokenBurnParams {
         mint: fraction_mint_info.clone(),
         amount: fraction_treasury.amount,
         authority: fraction_burn_authority_info.clone(),
@@ -780,7 +780,7 @@ pub fn process_activate_vault(
         &[bump_seed],
     ];
 
-    spl_token_mint_to(TokenMintToParams {
+    safe_token_mint_to(TokenMintToParams {
         mint: fraction_mint_info.clone(),
         destination: fraction_treasury_info.clone(),
         amount: number_of_shares,
@@ -907,7 +907,7 @@ pub fn process_add_token_to_inactivated_vault(
 
     vault.serialize(&mut *vault_info.data.borrow_mut())?;
 
-    spl_token_transfer(TokenTransferParams {
+    safe_token_transfer(TokenTransferParams {
         source: token_account_info.clone(),
         destination: store_info.clone(),
         amount,
@@ -968,20 +968,20 @@ pub fn process_init_vault(
     let (authority, _) = Pubkey::find_program_address(seeds, program_id);
 
     match fraction_mint.mint_authority {
-        solana_program::program_option::COption::None => {
+        safecoin_program::program_option::COption::None => {
             return Err(VaultError::VaultAuthorityNotProgram.into());
         }
-        solana_program::program_option::COption::Some(val) => {
+        safecoin_program::program_option::COption::Some(val) => {
             if val != authority {
                 return Err(VaultError::VaultAuthorityNotProgram.into());
             }
         }
     }
     match fraction_mint.freeze_authority {
-        solana_program::program_option::COption::None => {
+        safecoin_program::program_option::COption::None => {
             return Err(VaultError::VaultAuthorityNotProgram.into());
         }
-        solana_program::program_option::COption::Some(val) => {
+        safecoin_program::program_option::COption::Some(val) => {
             if val != authority {
                 return Err(VaultError::VaultAuthorityNotProgram.into());
             }

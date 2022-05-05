@@ -2,8 +2,8 @@ import BN from 'bn.js';
 import test from 'tape';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore createInitializeMintInstruction export actually exist but isn't setup correctly
-import { getAssociatedTokenAddress } from '@solana/spl-token';
-import { assertConfirmedTransaction, defaultSendOptions } from '@metaplex-foundation/amman';
+import { getAssociatedTokenAddress } from '@safecoin/safe-token';
+import { assertConfirmedTransaction, defaultSendOptions } from '@j0nnyboi/amman';
 import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
 import { findPayoutTicketAddress, findTradeHistoryAddress } from '../src/utils';
 import { closeMarket, createBuyTransaction, createWithdrawTransaction } from './transactions';

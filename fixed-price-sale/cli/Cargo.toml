@@ -8,13 +8,13 @@ edition = "2021"
 [dependencies]
 thiserror = "1.0.30"
 clap = { version = "3.0.5", features = [ "derive" ] }
-solana-sdk = "1.9.5"
-solana-client = "1.9.5"
+safecoin-sdk = "1.9.5"
+safecoin-client = "1.9.5"
 mpl-fixed-price-sale = { path = "../program", features = [ "no-entrypoint" ] }
-mpl-token-metadata = { features = [ "no-entrypoint" ], version="~1.1.0" }
+mpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
 borsh = "0.9.1"
-spl-token = { version = "3.2.0", features = [ "no-entrypoint" ] }
-anchor-lang = "0.22.1"
+safe-token = { version = "3.2.0", features = [ "no-entrypoint" ] }
+anchor-lang = {path = "../../../anchor/lang"}
 chrono = "0.4.19"
-spl-associated-token-account = "1.0.3"
+safe-associated-token-account = {path = "../../../safecoin-program-library/associated-token-account/program"}
 serde_json = "1.0.79"

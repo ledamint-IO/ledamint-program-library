@@ -1,8 +1,8 @@
-use solana_program::program_pack::IsInitialized;
+use safecoin_program::program_pack::IsInitialized;
 
 use {
     crate::errors::AuctionError,
-    solana_program::{
+    safecoin_program::{
         account_info::AccountInfo,
         entrypoint::ProgramResult,
         msg,
@@ -37,7 +37,7 @@ pub fn assert_uninitialized<T: Pack + IsInitialized>(account_info: &AccountInfo)
 }
 
 pub fn assert_token_program_matches_package(token_program_info: &AccountInfo) -> ProgramResult {
-    if *token_program_info.key != spl_token::id() {
+    if *token_program_info.key != safe_token::id() {
         return Err(AuctionError::InvalidTokenProgram.into());
     }
 
@@ -149,7 +149,7 @@ pub struct TokenTransferParams<'a: 'b, 'b> {
 }
 
 #[inline(always)]
-pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
     let TokenTransferParams {
         source,
         destination,
@@ -160,7 +160,7 @@ pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult 
     } = params;
 
     let result = invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             source.key,
             destination.key,
@@ -181,8 +181,8 @@ pub fn close_token_account<'a>(
     owner: AccountInfo<'a>,
     signer_seeds: &[&[u8]],
 ) -> ProgramResult {
-    let ix = spl_token::instruction::close_account(
-        &spl_token::id(),
+    let ix = safe_token::instruction::close_account(
+        &safe_token::id(),
         account.key,
         destination.key,
         owner.key,
@@ -213,7 +213,7 @@ pub struct TokenCreateAccount<'a: 'b, 'b> {
 
 /// Create a new SPL token account.
 #[inline(always)]
-pub fn spl_token_create_account<'a>(params: TokenCreateAccount<'_, '_>) -> ProgramResult {
+pub fn safe_token_create_account<'a>(params: TokenCreateAccount<'_, '_>) -> ProgramResult {
     let TokenCreateAccount {
         payer,
         mint,
@@ -232,13 +232,13 @@ pub fn spl_token_create_account<'a>(params: TokenCreateAccount<'_, '_>) -> Progr
         &rent,
         &system_program,
         &payer,
-        spl_token::state::Account::LEN,
+        safe_token::state::Account::LEN,
         authority_seeds,
     )?;
     msg!("Created account {}", acct);
     invoke_signed(
-        &spl_token::instruction::initialize_account(
-            &spl_token::id(),
+        &safe_token::instruction::initialize_account(
+            &safe_token::id(),
             acct,
             mint.key,
             authority.key,

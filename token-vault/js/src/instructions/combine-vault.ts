@@ -1,8 +1,8 @@
-import { Connection, Keypair, PublicKey, Signer, TransactionInstruction } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey, Signer, TransactionInstruction } from '@safecoin/web3.js';
 import { createTokenAccount, getTokenRentExempt, pdaForVault } from '../common/helpers';
 import { CombineVaultInstructionAccounts, createCombineVaultInstruction } from '../generated';
 import { strict as assert } from 'assert';
-import { createApproveInstruction } from '@solana/spl-token';
+import { createApproveInstruction } from '@safecoin/safe-token';
 
 export type CombineVaultAccounts = Omit<CombineVaultInstructionAccounts, 'fractionBurnAuthority'>;
 

@@ -1,5 +1,5 @@
-use solana_client::rpc_request::TokenAccountsFilter;
-use solana_sdk::account::ReadableAccount;
+use safecoin_client::rpc_request::TokenAccountsFilter;
+use safecoin_sdk::account::ReadableAccount;
 
 use {
     clap::{crate_description, crate_name, crate_version, App, Arg, ArgMatches, SubCommand},
@@ -14,28 +14,28 @@ use {
             EDITION, MAX_NAME_LENGTH, MAX_SYMBOL_LENGTH, MAX_URI_LENGTH, PREFIX,
         },
     },
-    solana_clap_utils::{
+    safecoin_clap_utils::{
         input_parsers::pubkey_of,
         input_validators::{is_url, is_valid_pubkey, is_valid_signer},
     },
-    solana_client::rpc_client::RpcClient,
-    solana_program::{
+    safecoin_client::rpc_client::RpcClient,
+    safecoin_program::{
         account_info::AccountInfo, borsh::try_from_slice_unchecked, program_pack::Pack,
     },
-    solana_sdk::{
+    safecoin_sdk::{
         pubkey::Pubkey,
         signature::{read_keypair_file, Keypair, Signer},
         system_instruction::create_account,
         transaction::Transaction,
     },
-    spl_token::{
+    safe_token::{
         instruction::{initialize_account, initialize_mint, mint_to},
         state::{Account, Mint},
     },
     std::str::FromStr,
 };
 
-const TOKEN_PROGRAM_PUBKEY: &str = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA";
+const TOKEN_PROGRAM_PUBKEY: &str = "ToKLx75MGim1d1jRusuVX8xvdvvbSDESVaNXpRA9PHN";
 fn puff_unpuffed_metadata(_app_matches: &ArgMatches, payer: Keypair, client: RpcClient) {
     let metadata_accounts = client
         .get_program_accounts(&mpl_token_metadata::id())
@@ -88,7 +88,7 @@ fn puff_unpuffed_metadata(_app_matches: &ArgMatches, payer: Keypair, client: Rpc
         }
     }
 
-    if !instructions.is_empty() {
+    if instructions.len() > 0 {
         let mut transaction = Transaction::new_with_payer(&instructions, Some(&payer.pubkey()));
         let recent_blockhash = client.get_latest_blockhash().unwrap();
         transaction.sign(&[&payer], recent_blockhash);
@@ -98,10 +98,11 @@ fn puff_unpuffed_metadata(_app_matches: &ArgMatches, payer: Keypair, client: Rpc
 
 fn mint_coins(app_matches: &ArgMatches, payer: Keypair, client: RpcClient) {
     let token_key = Pubkey::from_str(TOKEN_PROGRAM_PUBKEY).unwrap();
-    let amount = app_matches
-        .value_of("amount")
-        .map(|val| val.parse::<u64>().unwrap())
-        .unwrap();
+    let amount = match app_matches.value_of("amount") {
+        Some(val) => Some(val.parse::<u64>().unwrap()),
+        None => None,
+    }
+    .unwrap();
     let mint_key = pubkey_of(app_matches, "mint").unwrap();
     let mut instructions = vec![];
 
@@ -176,7 +177,7 @@ fn show(app_matches: &ArgMatches, _payer: Keypair, client: RpcClient) {
     let printing_mint_key = pubkey_of(app_matches, "mint").unwrap();
     let master_metadata_seeds = &[
         PREFIX.as_bytes(),
-        program_key.as_ref(),
+        &program_key.as_ref(),
         printing_mint_key.as_ref(),
     ];
     let (master_metadata_key, _) =
@@ -190,8 +191,8 @@ fn show(app_matches: &ArgMatches, _payer: Keypair, client: RpcClient) {
 
     let master_edition_seeds = &[
         PREFIX.as_bytes(),
-        program_key.as_ref(),
-        master_metadata.mint.as_ref(),
+        &program_key.as_ref(),
+        &master_metadata.mint.as_ref(),
         EDITION.as_bytes(),
     ];
     let (master_edition_key, _) = Pubkey::find_program_address(master_edition_seeds, &program_key);
@@ -263,20 +264,20 @@ fn mint_edition_via_token_call(
     let new_mint_pub = new_mint_key.pubkey();
     let metadata_seeds = &[
         PREFIX.as_bytes(),
-        program_key.as_ref(),
-        new_mint_pub.as_ref(),
+        &program_key.as_ref(),
+        &new_mint_pub.as_ref(),
     ];
     let (metadata_key, _) = Pubkey::find_program_address(metadata_seeds, &program_key);
 
     let edition_seeds = &[
         PREFIX.as_bytes(),
-        program_key.as_ref(),
-        new_mint_pub.as_ref(),
+        &program_key.as_ref(),
+        &new_mint_pub.as_ref(),
         EDITION.as_bytes(),
     ];
     let (edition_key, _) = Pubkey::find_program_address(edition_seeds, &program_key);
 
-    let master_metadata_seeds = &[PREFIX.as_bytes(), program_key.as_ref(), mint_key.as_ref()];
+    let master_metadata_seeds = &[PREFIX.as_bytes(), &program_key.as_ref(), mint_key.as_ref()];
     let (master_metadata_key, _) =
         Pubkey::find_program_address(master_metadata_seeds, &program_key);
 
@@ -286,8 +287,8 @@ fn mint_edition_via_token_call(
 
     let master_edition_seeds = &[
         PREFIX.as_bytes(),
-        program_key.as_ref(),
-        master_metadata.mint.as_ref(),
+        &program_key.as_ref(),
+        &master_metadata.mint.as_ref(),
         EDITION.as_bytes(),
     ];
     let (master_edition_key, _) = Pubkey::find_program_address(master_edition_seeds, &program_key);
@@ -388,7 +389,7 @@ fn master_edition_call(
     let token_key = Pubkey::from_str(TOKEN_PROGRAM_PUBKEY).unwrap();
 
     let mint_key = pubkey_of(app_matches, "mint").unwrap();
-    let metadata_seeds = &[PREFIX.as_bytes(), program_key.as_ref(), mint_key.as_ref()];
+    let metadata_seeds = &[PREFIX.as_bytes(), &program_key.as_ref(), mint_key.as_ref()];
     let (metadata_key, _) = Pubkey::find_program_address(metadata_seeds, &program_key);
 
     let metadata_account = client.get_account(&metadata_key).unwrap();
@@ -396,15 +397,16 @@ fn master_edition_call(
 
     let master_edition_seeds = &[
         PREFIX.as_bytes(),
-        program_key.as_ref(),
-        metadata.mint.as_ref(),
+        &program_key.as_ref(),
+        &metadata.mint.as_ref(),
         EDITION.as_bytes(),
     ];
     let (master_edition_key, _) = Pubkey::find_program_address(master_edition_seeds, &program_key);
 
-    let max_supply = app_matches
-        .value_of("max_supply")
-        .map(|val| val.parse::<u64>().unwrap());
+    let max_supply = match app_matches.value_of("max_supply") {
+        Some(val) => Some(val.parse::<u64>().unwrap()),
+        None => None,
+    };
 
     let added_token_account = Keypair::new();
 
@@ -479,12 +481,18 @@ fn update_metadata_account_call(
     .unwrap();
     let program_key = mpl_token_metadata::id();
     let mint_key = pubkey_of(app_matches, "mint").unwrap();
-    let metadata_seeds = &[PREFIX.as_bytes(), program_key.as_ref(), mint_key.as_ref()];
+    let metadata_seeds = &[PREFIX.as_bytes(), &program_key.as_ref(), mint_key.as_ref()];
     let (metadata_key, _) = Pubkey::find_program_address(metadata_seeds, &program_key);
 
-    let uri = app_matches.value_of("uri").map(|val| val.to_owned());
+    let uri = match app_matches.value_of("uri") {
+        Some(val) => Some(val.to_owned()),
+        None => None,
+    };
 
-    let name = app_matches.value_of("name").map(|val| val.to_owned());
+    let name = match app_matches.value_of("name") {
+        Some(val) => Some(val.to_owned()),
+        None => None,
+    };
 
     let new_update_authority = pubkey_of(app_matches, "new_update_authority");
 
@@ -543,7 +551,7 @@ fn create_metadata_account_call(
         Some(_val) => pubkey_of(app_matches, "mint").unwrap(),
         None => new_mint.pubkey(),
     };
-    let metadata_seeds = &[PREFIX.as_bytes(), program_key.as_ref(), mint_key.as_ref()];
+    let metadata_seeds = &[PREFIX.as_bytes(), &program_key.as_ref(), mint_key.as_ref()];
     let (metadata_key, _) = Pubkey::find_program_address(metadata_seeds, &program_key);
 
     let mut new_mint_instructions = vec![
@@ -575,7 +583,7 @@ fn create_metadata_account_call(
         let mint_account = client
             .get_account(&mint_key)
             .expect("Could not find mint account.");
-        let mint = spl_token::state::Mint::unpack(mint_account.data())
+        let mint = safe_token::state::Mint::unpack(mint_account.data())
             .expect("Failed to deserialize Mint account.");
         mint.mint_authority.expect("Mint has no mint authority.")
     };
@@ -846,7 +854,7 @@ fn main() {
     let client = RpcClient::new(
         app_matches
             .value_of("json_rpc_url")
-            .unwrap_or("https://api.devnet.solana.com")
+            .unwrap_or(&"https://api.devnet.solana.com".to_owned())
             .to_owned(),
     );
 

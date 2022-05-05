@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
@@ -21,8 +21,8 @@ const ApproveCollectionAuthorityStruct = new beet.BeetArgsStruct<{
  *
  * @property [_writable_] collectionAuthorityRecord Collection Authority Record PDA
  * @property [] newCollectionAuthority A Collection Authority
- * @property [_writable_, **signer**] updateAuthority Update Authority of Collection NFT
- * @property [_writable_, **signer**] payer Payer
+ * @property [**signer**] updateAuthority Update Authority of Collection NFT
+ * @property [**signer**] payer Payer
  * @property [] metadata Collection Metadata account
  * @property [] mint Mint of Collection Metadata
  * @category Instructions
@@ -77,12 +77,12 @@ export function createApproveCollectionAuthorityInstruction(
     },
     {
       pubkey: updateAuthority,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {
       pubkey: payer,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

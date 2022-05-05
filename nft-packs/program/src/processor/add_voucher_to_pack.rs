@@ -13,7 +13,7 @@ use mpl_token_metadata::{
     state::{MasterEdition, MasterEditionV2, Metadata, EDITION, PREFIX},
     utils::{assert_derivation, assert_initialized},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     msg,
@@ -21,7 +21,7 @@ use solana_program::{
     pubkey::Pubkey,
     sysvar::{rent::Rent, Sysvar},
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 /// Process AddVoucherToPack instruction
 pub fn add_voucher_to_pack(program_id: &Pubkey, accounts: &[AccountInfo]) -> ProgramResult {

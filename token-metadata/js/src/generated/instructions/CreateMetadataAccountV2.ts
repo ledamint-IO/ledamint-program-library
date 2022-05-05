@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 import {
   CreateMetadataAccountArgsV2,
   createMetadataAccountArgsV2Beet,
@@ -42,7 +42,7 @@ const CreateMetadataAccountV2Struct = new beet.FixableBeetArgsStruct<
  * @property [_writable_] metadata Metadata key (pda of ['metadata', program id, mint id])
  * @property [] mint Mint of token asset
  * @property [**signer**] mintAuthority Mint authority
- * @property [_writable_, **signer**] payer payer
+ * @property [**signer**] payer payer
  * @property [] updateAuthority update authority info
  * @category Instructions
  * @category CreateMetadataAccountV2
@@ -96,7 +96,7 @@ export function createCreateMetadataAccountV2Instruction(
     },
     {
       pubkey: payer,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

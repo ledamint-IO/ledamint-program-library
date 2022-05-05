@@ -1,5 +1,5 @@
 #![cfg(feature = "test-bpf")]
-pub mod utils;
+mod utils;
 
 use mpl_token_metadata::{
     error::MetadataError,
@@ -8,8 +8,8 @@ use mpl_token_metadata::{
     utils::puffed_out_string,
 };
 use num_traits::FromPrimitive;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     instruction::InstructionError,
     signature::{Keypair, Signer},
     transaction::{Transaction, TransactionError},
@@ -50,8 +50,8 @@ mod update_primary_sale_happened_via_token {
         assert_eq!(metadata.data.seller_fee_basis_points, 10);
         assert_eq!(metadata.data.creators, None);
 
-        assert!(metadata.primary_sale_happened);
-        assert!(!metadata.is_mutable,);
+        assert_eq!(metadata.primary_sale_happened, true);
+        assert_eq!(metadata.is_mutable, false);
         assert_eq!(metadata.mint, test_metadata.mint.pubkey());
         assert_eq!(metadata.update_authority, context.payer.pubkey());
         assert_eq!(metadata.key, Key::MetadataV1);

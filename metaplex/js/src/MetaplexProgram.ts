@@ -1,5 +1,5 @@
 import { config, Program } from '@metaplex-foundation/mpl-core';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 
 export enum MetaplexKey {
   Uninitialized = 0,

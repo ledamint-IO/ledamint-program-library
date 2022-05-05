@@ -11,14 +11,14 @@ use crate::{
 use borsh::BorshSerialize;
 use mpl_auction::processor::{AuctionData, AuctionState};
 use mpl_token_vault::state::{Vault, VaultState};
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_error::ProgramError,
     program_option::COption,
     pubkey::Pubkey,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 pub fn assert_common_checks(
     program_id: &Pubkey,

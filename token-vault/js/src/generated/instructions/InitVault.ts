@@ -5,10 +5,10 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
-import { InitVaultArgs, initVaultArgsBeet } from '../types/InitVaultArgs';
+import * as splToken from '@safecoin/safe-token';
+import * as definedTypes from '../types';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
@@ -16,7 +16,7 @@ import { InitVaultArgs, initVaultArgsBeet } from '../types/InitVaultArgs';
  * @category generated
  */
 export type InitVaultInstructionArgs = {
-  initVaultArgs: InitVaultArgs;
+  initVaultArgs: definedTypes.InitVaultArgs;
 };
 /**
  * @category Instructions
@@ -30,7 +30,7 @@ const InitVaultStruct = new beet.BeetArgsStruct<
 >(
   [
     ['instructionDiscriminator', beet.u8],
-    ['initVaultArgs', initVaultArgsBeet],
+    ['initVaultArgs', definedTypes.initVaultArgsBeet],
   ],
   'InitVaultInstructionArgs',
 );

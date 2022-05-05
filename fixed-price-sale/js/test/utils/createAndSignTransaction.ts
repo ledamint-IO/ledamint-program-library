@@ -1,4 +1,4 @@
-import { Connection, Keypair, Signer, Transaction, TransactionInstruction } from '@solana/web3.js';
+import { Connection, Keypair, Signer, Transaction, TransactionInstruction } from '@safecoin/web3.js';
 
 export async function createAndSignTransaction(
   connection: Connection,

@@ -10,7 +10,7 @@ import {
   logDebug,
   verifyTokenBalance,
 } from './utils';
-import { Signer, Transaction } from '@solana/web3.js';
+import { Signer, Transaction } from '@safecoin/web3.js';
 import {
   combineVault,
   CombineVaultSetup,
@@ -23,7 +23,7 @@ import {
   assertError,
   assertTransactionSummary,
   TokenBalances,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import { cusper } from '../src/errors';
 
 killStuckProcess();

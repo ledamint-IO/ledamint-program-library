@@ -7,7 +7,7 @@ use {
     mpl_auction::processor::AuctionData,
     mpl_token_metadata::state::Metadata,
     mpl_token_vault::state::SafetyDepositBox,
-    solana_program::{
+    safecoin_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,
         pubkey::Pubkey,
     },

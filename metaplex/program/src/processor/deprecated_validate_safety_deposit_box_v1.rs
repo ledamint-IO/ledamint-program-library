@@ -13,12 +13,12 @@ use crate::{
 use borsh::BorshSerialize;
 use mpl_token_metadata::state::Metadata;
 use mpl_token_vault::state::{SafetyDepositBox, Vault};
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 pub fn make_safety_deposit_validation<'a>(
     program_id: &Pubkey,
     auction_manager_info: &AccountInfo<'a>,

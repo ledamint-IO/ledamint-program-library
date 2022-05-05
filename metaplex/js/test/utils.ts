@@ -1,8 +1,8 @@
 import path from 'path';
-import { Keypair, PublicKey, TransactionCtorFields } from '@solana/web3.js';
+import { Keypair, PublicKey, TransactionCtorFields } from '@safecoin/web3.js';
 import { tmpdir } from 'os';
 import { readFileSync } from 'fs';
-import { LOCALHOST } from '@metaplex-foundation/amman';
+import { LOCALHOST } from '@j0nnyboi/amman';
 
 export const connectionURL = LOCALHOST;
 

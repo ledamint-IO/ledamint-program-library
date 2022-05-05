@@ -1,5 +1,5 @@
-import { bignum } from '@metaplex-foundation/beet';
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { bignum } from '@j0nnyboi/beet';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
 import { setupDestinationTokenAccount } from '../common';
 import { pdaForVault } from '../common/helpers';
 import {

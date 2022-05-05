@@ -9,13 +9,13 @@ import {
   logDebug,
   verifyTokenBalance,
 } from './utils';
-import { Transaction } from '@solana/web3.js';
+import { Transaction } from '@safecoin/web3.js';
 import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
   TokenBalances,
-} from '@metaplex-foundation/amman';
+} from '@j0nnyboi/amman';
 import {
   activateVault,
   ActivateVaultAccounts,

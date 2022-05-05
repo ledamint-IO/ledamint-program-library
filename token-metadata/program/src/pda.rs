@@ -1,4 +1,4 @@
-use solana_program::pubkey::Pubkey;
+use safecoin_program::pubkey::Pubkey;
 
 use crate::state::{BURN, COLLECTION_AUTHORITY, EDITION, PREFIX, USER};
 

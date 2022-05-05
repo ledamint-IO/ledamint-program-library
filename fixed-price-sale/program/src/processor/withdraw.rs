@@ -5,7 +5,7 @@ use crate::{
     utils::*,
     Withdraw,
 };
-use anchor_lang::{prelude::*, solana_program::borsh::try_from_slice_unchecked};
+use anchor_lang::{prelude::*, safecoin_program::borsh::try_from_slice_unchecked};
 use anchor_spl::{
     associated_token::{self, get_associated_token_address},
     token,
@@ -162,11 +162,11 @@ impl<'info> Withdraw<'info> {
                 signer_seeds[0],
             )?;
         } else {
-            if *treasury_mint.owner != spl_token::id() {
+            if *treasury_mint.owner != safe_token::id() {
                 return Err(ProgramError::InvalidArgument.into());
             }
 
-            if *treasury_holder.owner != spl_token::id() {
+            if *treasury_holder.owner != safe_token::id() {
                 return Err(ProgramError::InvalidArgument.into());
             }
 

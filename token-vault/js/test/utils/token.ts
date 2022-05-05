@@ -4,10 +4,10 @@
 // -----------------
 // TODO(thlorenz): remove and use released ones once we can
 
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { Commitment, Connection, PublicKey } from '@solana/web3.js';
-import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
+import { Commitment, Connection, PublicKey } from '@safecoin/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 import { strict as assert } from 'assert';
 
 // TokenLayout isn't exposed in the current lib, so we need to implement all of the below

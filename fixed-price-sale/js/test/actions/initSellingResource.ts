@@ -3,8 +3,8 @@ import {
   assertConfirmedTransaction,
   defaultSendOptions,
   PayerTransactionHandler,
-} from '@metaplex-foundation/amman';
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+} from '@j0nnyboi/amman';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
 import { Creator } from '@metaplex-foundation/mpl-token-metadata';
 
 import { findVaultOwnerAddress } from '../../src/utils';

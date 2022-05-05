@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as splToken from '@safecoin/safe-token';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 import {
   MintNewEditionFromMasterEditionViaTokenArgs,
   mintNewEditionFromMasterEditionViaTokenArgsBeet,
@@ -49,7 +49,7 @@ const MintNewEditionFromMasterEditionViaTokenStruct = new beet.BeetArgsStruct<
  * @property [_writable_] newMint Mint of new token - THIS WILL TRANSFER AUTHORITY AWAY FROM THIS KEY
  * @property [_writable_] editionMarkPda Edition pda to mark creation - will be checked for pre-existence. (pda of ['metadata', program id, master metadata mint id, 'edition', edition_number]) where edition_number is NOT the edition number you pass in args but actually edition_number = floor(edition/EDITION_MARKER_BIT_SIZE).
  * @property [**signer**] newMintAuthority Mint authority of new mint
- * @property [_writable_, **signer**] payer payer
+ * @property [**signer**] payer payer
  * @property [**signer**] tokenAccountOwner owner of token account containing master token (#8)
  * @property [] tokenAccount token account containing token from master metadata mint
  * @property [] newMetadataUpdateAuthority Update authority info for new metadata
@@ -139,7 +139,7 @@ export function createMintNewEditionFromMasterEditionViaTokenInstruction(
     },
     {
       pubkey: payer,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

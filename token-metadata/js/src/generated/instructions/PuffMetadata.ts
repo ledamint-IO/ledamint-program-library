@@ -5,18 +5,17 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
  * @category PuffMetadata
  * @category generated
  */
-const PuffMetadataStruct = new beet.BeetArgsStruct<{ instructionDiscriminator: number }>(
-  [['instructionDiscriminator', beet.u8]],
-  'PuffMetadataInstructionArgs',
-);
+const PuffMetadataStruct = new beet.BeetArgsStruct<{
+  instructionDiscriminator: number;
+}>([['instructionDiscriminator', beet.u8]], 'PuffMetadataInstructionArgs');
 /**
  * Accounts required by the _PuffMetadata_ instruction
  *

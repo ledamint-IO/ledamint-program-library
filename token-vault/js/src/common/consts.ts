@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 import { PROGRAM_ADDRESS, PROGRAM_ID } from '../generated';
 
 const WRAPPED_SOL_MINT = new PublicKey('So11111111111111111111111111111111111111112');

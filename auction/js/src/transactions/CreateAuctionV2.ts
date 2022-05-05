@@ -12,7 +12,7 @@ import {
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { AuctionProgram } from '../AuctionProgram';
 import { PriceFloor } from '../accounts/Auction';

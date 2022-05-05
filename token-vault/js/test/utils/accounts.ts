@@ -1,4 +1,4 @@
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection, PublicKey } from '@safecoin/web3.js';
 import { Vault } from '../../src/generated';
 import { strict as assert } from 'assert';
 

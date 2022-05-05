@@ -1,5 +1,5 @@
 use mpl_token_metadata::state::{EDITION, PREFIX};
-use solana_sdk::pubkey::Pubkey;
+use safecoin_sdk::pubkey::Pubkey;
 
 #[derive(Debug)]
 pub struct TestEdition {

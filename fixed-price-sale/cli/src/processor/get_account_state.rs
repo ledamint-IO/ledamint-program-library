@@ -3,7 +3,7 @@
 use crate::error;
 use borsh::BorshDeserialize;
 use solana_client::rpc_client::RpcClient;
-use solana_sdk::{borsh::try_from_slice_unchecked, pubkey::Pubkey};
+use safecoin_sdk::{borsh::try_from_slice_unchecked, pubkey::Pubkey};
 
 pub fn get_account_state<T>(client: &RpcClient, account: &Pubkey) -> Result<T, error::Error>
 where

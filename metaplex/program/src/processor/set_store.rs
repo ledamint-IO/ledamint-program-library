@@ -9,7 +9,7 @@ use {
         },
     },
     borsh::BorshSerialize,
-    solana_program::{
+    safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,
         pubkey::Pubkey,
@@ -66,21 +66,21 @@ pub fn set_store_logic<'a>(
     store.key = Key::StoreV1;
     store.public = public;
     // Keys can only be set once, once set from all 0s, they are immutable.
-    if store.token_program == solana_program::system_program::id() {
+    if store.token_program == safecoin_program::system_program::id() {
         store.token_program = *token_program_info.key;
     }
 
-    if store.token_program != spl_token::id() {
+    if store.token_program != safe_token::id() {
         return Err(MetaplexError::InvalidTokenProgram.into());
     }
 
-    if store.token_vault_program == solana_program::system_program::id() {
+    if store.token_vault_program == safecoin_program::system_program::id() {
         store.token_vault_program = *token_vault_program_info.key;
     }
-    if store.token_metadata_program == solana_program::system_program::id() {
+    if store.token_metadata_program == safecoin_program::system_program::id() {
         store.token_metadata_program = *token_metadata_program_info.key;
     }
-    if store.auction_program == solana_program::system_program::id() {
+    if store.auction_program == safecoin_program::system_program::id() {
         store.auction_program = *auction_program_info.key;
     }
     store.serialize(&mut *store_info.data.borrow_mut())?;

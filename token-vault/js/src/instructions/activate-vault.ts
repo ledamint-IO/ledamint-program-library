@@ -1,5 +1,5 @@
-import { bignum } from '@metaplex-foundation/beet';
-import { PublicKey } from '@solana/web3.js';
+import { bignum } from '@j0nnyboi/beet';
+import { PublicKey } from '@safecoin/web3.js';
 import { pdaForVault } from '../common/helpers';
 import { ActivateVaultInstructionAccounts, createActivateVaultInstruction } from '../generated';
 import type { Optional } from 'utility-types';

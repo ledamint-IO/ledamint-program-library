@@ -5,24 +5,23 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as splToken from '@safecoin/safe-token';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
  * @category RevokeUseAuthority
  * @category generated
  */
-const RevokeUseAuthorityStruct = new beet.BeetArgsStruct<{ instructionDiscriminator: number }>(
-  [['instructionDiscriminator', beet.u8]],
-  'RevokeUseAuthorityInstructionArgs',
-);
+const RevokeUseAuthorityStruct = new beet.BeetArgsStruct<{
+  instructionDiscriminator: number;
+}>([['instructionDiscriminator', beet.u8]], 'RevokeUseAuthorityInstructionArgs');
 /**
  * Accounts required by the _RevokeUseAuthority_ instruction
  *
  * @property [_writable_] useAuthorityRecord Use Authority Record PDA
- * @property [_writable_, **signer**] owner Owner
+ * @property [**signer**] owner Owner
  * @property [] user A Use Authority
  * @property [_writable_] ownerTokenAccount Owned Token Account Of Mint
  * @property [] mint Mint of Metadata
@@ -67,7 +66,7 @@ export function createRevokeUseAuthorityInstruction(
     },
     {
       pubkey: owner,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

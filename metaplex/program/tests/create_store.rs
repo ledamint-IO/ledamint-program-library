@@ -3,9 +3,9 @@ use mpl_metaplex::error::MetaplexError;
 use mpl_metaplex::state::{Key, Store, StoreConfig, CONFIG, PREFIX};
 use mpl_metaplex::{id, instruction};
 use num_traits::FromPrimitive;
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program::pubkey::Pubkey;
-use solana_program_test::*;
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_program::pubkey::Pubkey;
+use safecoin_program_test::*;
 use solana_sdk::signature::Signer;
 use solana_sdk::{
     instruction::InstructionError,

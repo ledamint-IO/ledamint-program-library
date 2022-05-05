@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as splToken from '@safecoin/safe-token';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 import { UtilizeArgs, utilizeArgsBeet } from '../types/UtilizeArgs';
 
 /**
@@ -40,7 +40,7 @@ const UtilizeStruct = new beet.BeetArgsStruct<
  * @property [_writable_] metadata Metadata account
  * @property [_writable_] tokenAccount Token Account Of NFT
  * @property [_writable_] mint Mint of the Metadata
- * @property [_writable_, **signer**] useAuthority A Use Authority / Can be the current Owner of the NFT
+ * @property [**signer**] useAuthority A Use Authority / Can be the current Owner of the NFT
  * @property [] owner Owner
  * @property [_writable_] useAuthorityRecord (optional) Use Authority Record PDA If present the program Assumes a delegated use authority
  * @property [] burner (optional) Program As Signer (Burner)
@@ -99,7 +99,7 @@ export function createUtilizeInstruction(
     },
     {
       pubkey: useAuthority,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

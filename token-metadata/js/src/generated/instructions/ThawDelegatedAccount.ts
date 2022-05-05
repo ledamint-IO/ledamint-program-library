@@ -5,23 +5,22 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@solana/spl-token';
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as splToken from '@safecoin/safe-token';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
  * @category ThawDelegatedAccount
  * @category generated
  */
-const ThawDelegatedAccountStruct = new beet.BeetArgsStruct<{ instructionDiscriminator: number }>(
-  [['instructionDiscriminator', beet.u8]],
-  'ThawDelegatedAccountInstructionArgs',
-);
+const ThawDelegatedAccountStruct = new beet.BeetArgsStruct<{
+  instructionDiscriminator: number;
+}>([['instructionDiscriminator', beet.u8]], 'ThawDelegatedAccountInstructionArgs');
 /**
  * Accounts required by the _ThawDelegatedAccount_ instruction
  *
- * @property [_writable_, **signer**] delegate Delegate
+ * @property [**signer**] delegate Delegate
  * @property [_writable_] tokenAccount Token account to thaw
  * @property [] edition Edition
  * @property [] mint Token mint
@@ -58,7 +57,7 @@ export function createThawDelegatedAccountInstruction(
   const keys: web3.AccountMeta[] = [
     {
       pubkey: delegate,
-      isWritable: true,
+      isWritable: false,
       isSigner: true,
     },
     {

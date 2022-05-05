@@ -1,13 +1,10 @@
 use anchor_lang::prelude::{Signer, Sysvar};
-use solana_program::program::invoke;
-use solana_program::system_instruction;
 
 use {
     crate::{CandyMachine, ErrorCode},
     anchor_lang::{
         prelude::{Account, AccountInfo, Clock, ProgramError, ProgramResult, Pubkey},
-        solana_program::{
-            msg,
+        safecoin_program::{
             program::invoke_signed,
             program_pack::{IsInitialized, Pack},
         },
@@ -74,28 +71,8 @@ pub struct TokenTransferParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn punish_bots<'a>(
-    err: ErrorCode,
-    bot_account: AccountInfo<'a>,
-    payment_account: AccountInfo<'a>,
-    system_program: AccountInfo<'a>,
-    fee: u64,
-) -> Result<(), ProgramError> {
-    msg!(
-        "{}, Candy Machine Botting is taxed at {:?} lamports",
-        err.to_string(),
-        fee
-    );
-    let final_fee = fee.min(bot_account.lamports());
-    invoke(
-        &system_instruction::transfer(&bot_account.key, &payment_account.key, final_fee),
-        &[bot_account, payment_account, system_program],
-    )?;
-    Ok(())
-}
-
 #[inline(always)]
-pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
     let TokenTransferParams {
         source,
         destination,
@@ -111,7 +88,7 @@ pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult 
     }
 
     let result = invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             source.key,
             destination.key,
@@ -130,9 +107,9 @@ pub fn assert_is_ata<'a>(
     ata: &AccountInfo,
     wallet: &Pubkey,
     mint: &Pubkey,
-) -> core::result::Result<spl_token::state::Account, ProgramError> {
-    assert_owned_by(ata, &spl_token::id())?;
-    let ata_account: spl_token::state::Account = assert_initialized(ata)?;
+) -> core::result::Result<safe_token::state::Account, ProgramError> {
+    assert_owned_by(ata, &safe_token::id())?;
+    let ata_account: safe_token::state::Account = assert_initialized(ata)?;
     assert_keys_equal(ata_account.owner, *wallet)?;
     assert_keys_equal(ata_account.mint, *mint)?;
     assert_keys_equal(get_associated_token_address(wallet, mint), *ata.key)?;
@@ -167,7 +144,7 @@ pub struct TokenBurnParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
     let TokenBurnParams {
         mint,
         source,
@@ -181,7 +158,7 @@ pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
         seeds.push(seed);
     }
     let result = invoke_signed(
-        &spl_token::instruction::burn(
+        &safe_token::instruction::burn(
             token_program.key,
             source.key,
             mint.key,

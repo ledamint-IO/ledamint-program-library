@@ -9,7 +9,7 @@ use mpl_auction::{
         claim_bid::ClaimBidArgs, AuctionData, AuctionDataExtended, AuctionState, BidderPot,
     },
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program::invoke_signed,
@@ -91,10 +91,10 @@ pub fn process_claim_bid(program_id: &Pubkey, accounts: &[AccountInfo]) -> Progr
 
     assert_owned_by(auction_info, &store.auction_program)?;
     assert_owned_by(auction_manager_info, program_id)?;
-    assert_owned_by(accept_payment_info, &spl_token::id())?;
-    assert_owned_by(bidder_pot_token_info, &spl_token::id())?;
+    assert_owned_by(accept_payment_info, &safe_token::id())?;
+    assert_owned_by(bidder_pot_token_info, &safe_token::id())?;
     assert_owned_by(bidder_pot_info, &store.auction_program)?;
-    assert_owned_by(token_mint_info, &spl_token::id())?;
+    assert_owned_by(token_mint_info, &safe_token::id())?;
     assert_owned_by(vault_info, &store.token_vault_program)?;
     assert_owned_by(store_info, program_id)?;
     if let Some(auction_extended) = auction_extended_info {

@@ -10,7 +10,7 @@ use crate::{
 };
 use arrayref::{array_mut_ref, array_ref, array_refs, mut_array_refs};
 use borsh::{BorshDeserialize, BorshSerialize};
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo,
     borsh::try_from_slice_unchecked,
     entrypoint::ProgramResult,
@@ -23,7 +23,7 @@ use solana_program::{
     system_instruction,
     sysvar::{rent::Rent, Sysvar},
 };
-use spl_token::{
+use safe_token::{
     instruction::{set_authority, AuthorityType},
     state::{Account, Mint},
 };
@@ -65,8 +65,8 @@ pub fn assert_data_valid(
                 let mut total: u8 = 0;
                 for i in 0..creators.len() {
                     let creator = &creators[i];
-                    for iter in creators.iter().skip(i + 1) {
-                        if iter.address == creator.address {
+                    for j in (i + 1)..creators.len() {
+                        if creators[j].address == creator.address {
                             return Err(MetadataError::DuplicateCreatorAddress.into());
                         }
                     }
@@ -110,8 +110,10 @@ pub fn assert_data_valid(
                                     }
                                 }
                             }
-                        } else if creator.verified {
-                            return Err(MetadataError::CannotVerifyAnotherCreator.into());
+                        } else {
+                            if creator.verified {
+                                return Err(MetadataError::CannotVerifyAnotherCreator.into());
+                            }
                         }
                     }
                 }
@@ -141,7 +143,7 @@ pub fn assert_initialized<T: Pack + IsInitialized>(
 }
 
 /// Create account almost from scratch, lifted from
-/// https://github.com/solana-labs/solana-program-library/tree/master/associated-token-account/program/src/processor.rs#L51-L98
+/// https://github.com/solana-labs/safecoin-program-library/tree/master/associated-token-account/program/src/processor.rs#L51-L98
 #[inline(always)]
 pub fn create_or_allocate_account_raw<'a>(
     program_id: Pubkey,
@@ -161,7 +163,7 @@ pub fn create_or_allocate_account_raw<'a>(
     if required_lamports > 0 {
         msg!("Transfer {} lamports to the new account", required_lamports);
         invoke(
-            &system_instruction::transfer(payer_info.key, new_account_info.key, required_lamports),
+            &system_instruction::transfer(&payer_info.key, new_account_info.key, required_lamports),
             &[
                 payer_info.clone(),
                 new_account_info.clone(),
@@ -176,14 +178,14 @@ pub fn create_or_allocate_account_raw<'a>(
     invoke_signed(
         &system_instruction::allocate(new_account_info.key, size.try_into().unwrap()),
         accounts,
-        &[signer_seeds],
+        &[&signer_seeds],
     )?;
 
     msg!("Assign the account to the owning program");
     invoke_signed(
         &system_instruction::assign(new_account_info.key, &program_id),
         accounts,
-        &[signer_seeds],
+        &[&signer_seeds],
     )?;
 
     Ok(())
@@ -230,7 +232,7 @@ pub fn get_mint_authority(account_info: &AccountInfo) -> Result<COption<Pubkey>,
     let data = account_info.try_borrow_data().unwrap();
     let authority_bytes = array_ref![data, 0, 36];
 
-    unpack_coption_key(authority_bytes)
+    Ok(unpack_coption_key(&authority_bytes)?)
 }
 
 pub fn get_mint_freeze_authority(
@@ -239,7 +241,7 @@ pub fn get_mint_freeze_authority(
     let data = account_info.try_borrow_data().unwrap();
     let authority_bytes = array_ref![data, 36 + 8 + 1 + 1, 36];
 
-    unpack_coption_key(authority_bytes)
+    Ok(unpack_coption_key(&authority_bytes)?)
 }
 
 /// cheap method to just get supply off a mint without unpacking whole object
@@ -326,7 +328,7 @@ pub fn transfer_mint_authority<'a>(
             Some(edition_key),
             AuthorityType::MintTokens,
             mint_authority_info.key,
-            &[mint_authority_info.key],
+            &[&mint_authority_info.key],
         )
         .unwrap(),
         accounts,
@@ -339,10 +341,10 @@ pub fn transfer_mint_authority<'a>(
             &set_authority(
                 token_program_info.key,
                 mint_info.key,
-                Some(edition_key),
+                Some(&edition_key),
                 AuthorityType::FreezeAccount,
                 mint_authority_info.key,
-                &[mint_authority_info.key],
+                &[&mint_authority_info.key],
             )
             .unwrap(),
             accounts,
@@ -373,7 +375,7 @@ pub fn assert_edition_valid(
     let edition_seeds = &[
         PREFIX.as_bytes(),
         program_id.as_ref(),
-        mint.as_ref(),
+        &mint.as_ref(),
         EDITION.as_bytes(),
     ];
     let (edition_key, _) = Pubkey::find_program_address(edition_seeds, program_id);
@@ -414,7 +416,7 @@ pub fn extract_edition_number_from_deprecated_reservation_list(
                 break;
             }
 
-            if reservation.address == solana_program::system_program::id() {
+            if reservation.address == safecoin_program::system_program::id() {
                 // This is an anchor point in the array...it means we reset our math to
                 // this offset because we may be missing information in between this point and
                 // the points before it.
@@ -430,10 +432,12 @@ pub fn extract_edition_number_from_deprecated_reservation_list(
             Some(val) => Ok(supply_snapshot
                 .checked_add(val)
                 .ok_or(MetadataError::NumericalOverflowError)?),
-            None => Err(MetadataError::AddressNotInReservation.into()),
+            None => {
+                return Err(MetadataError::AddressNotInReservation.into());
+            }
         }
     } else {
-        Err(MetadataError::ReservationNotSet.into())
+        return Err(MetadataError::ReservationNotSet.into());
     }
 }
 
@@ -517,7 +521,8 @@ pub fn calculate_supply_change<'a>(
         let edition_data = &mut master_edition_account_info.data.borrow_mut();
         let output = array_mut_ref![edition_data, 0, MAX_MASTER_EDITION_LEN];
 
-        let (_key, supply, _the_rest) = mut_array_refs![output, 1, 8, 273];
+        let (_key, supply, _the_rest) =
+            mut_array_refs![output, 1, 8, MAX_MASTER_EDITION_LEN - 8 - 1];
         *supply = new_supply.to_le_bytes();
     }
 
@@ -559,7 +564,7 @@ pub fn mint_limited_edition<'a>(
     let edition_seeds = &[
         PREFIX.as_bytes(),
         program_id.as_ref(),
-        mint_info.key.as_ref(),
+        &mint_info.key.as_ref(),
         EDITION.as_bytes(),
     ];
     let (edition_key, bump_seed) = Pubkey::find_program_address(edition_seeds, program_id);
@@ -599,7 +604,7 @@ pub fn mint_limited_edition<'a>(
     // create the metadata the normal way...
 
     process_create_metadata_accounts_logic(
-        program_id,
+        &program_id,
         CreateMetadataAccountsLogicArgs {
             metadata_account_info: new_metadata_account_info,
             mint_info,
@@ -618,7 +623,7 @@ pub fn mint_limited_edition<'a>(
     let edition_authority_seeds = &[
         PREFIX.as_bytes(),
         program_id.as_ref(),
-        mint_info.key.as_ref(),
+        &mint_info.key.as_ref(),
         EDITION.as_bytes(),
         &[bump_seed],
     ];
@@ -662,7 +667,7 @@ pub fn mint_limited_edition<'a>(
     Ok(())
 }
 
-pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
     let TokenBurnParams {
         mint,
         source,
@@ -676,7 +681,7 @@ pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
         seeds.push(seed);
     }
     let result = invoke_signed(
-        &spl_token::instruction::burn(
+        &safe_token::instruction::burn(
             token_program.key,
             source.key,
             mint.key,
@@ -706,7 +711,7 @@ pub struct TokenBurnParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
     let TokenMintToParams {
         mint,
         destination,
@@ -720,7 +725,7 @@ pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
         seeds.push(seed);
     }
     let result = invoke_signed(
-        &spl_token::instruction::mint_to(
+        &safe_token::instruction::mint_to(
             token_program.key,
             mint.key,
             destination.key,
@@ -755,7 +760,7 @@ pub fn assert_derivation(
     account: &AccountInfo,
     path: &[&[u8]],
 ) -> Result<u8, ProgramError> {
-    let (key, bump) = Pubkey::find_program_address(path, program_id);
+    let (key, bump) = Pubkey::find_program_address(&path, program_id);
     if key != *account.key {
         return Err(MetadataError::DerivedKeyInvalid.into());
     }
@@ -779,7 +784,7 @@ pub fn assert_owned_by(account: &AccountInfo, owner: &Pubkey) -> ProgramResult {
 }
 
 pub fn assert_token_program_matches_package(token_program_info: &AccountInfo) -> ProgramResult {
-    if *token_program_info.key != spl_token::id() {
+    if *token_program_info.key != safe_token::id() {
         return Err(MetadataError::InvalidTokenProgram.into());
     }
 
@@ -861,7 +866,7 @@ pub fn process_create_metadata_accounts_logic(
             }
         },
     )?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     let metadata_seeds = &[
         PREFIX.as_bytes(),
@@ -951,24 +956,24 @@ pub fn puff_out_data_fields(metadata: &mut Metadata) {
 
 /// Pads the string to the desired size with `0u8`s.
 /// NOTE: it is assumed that the string's size is never larger than the given size.
-pub fn puffed_out_string(s: &str, size: usize) -> String {
+pub fn puffed_out_string(s: &String, size: usize) -> String {
     let mut array_of_zeroes = vec![];
     let puff_amount = size - s.len();
     while array_of_zeroes.len() < puff_amount {
         array_of_zeroes.push(0u8);
     }
-    s.to_owned() + std::str::from_utf8(&array_of_zeroes).unwrap()
+    s.clone() + std::str::from_utf8(&array_of_zeroes).unwrap()
 }
 
 /// Pads the string to the desired size with `0u8`s.
 /// NOTE: it is assumed that the string's size is never larger than the given size.
-pub fn zero_account(s: &str, size: usize) -> String {
+pub fn zero_account(s: &String, size: usize) -> String {
     let mut array_of_zeroes = vec![];
     let puff_amount = size - s.len();
     while array_of_zeroes.len() < puff_amount {
         array_of_zeroes.push(0u8);
     }
-    s.to_owned() + std::str::from_utf8(&array_of_zeroes).unwrap()
+    s.clone() + std::str::from_utf8(&array_of_zeroes).unwrap()
 }
 
 pub struct MintNewEditionFromMasterEditionViaTokenLogicArgs<'a> {
@@ -1012,8 +1017,8 @@ pub fn process_mint_new_edition_from_master_edition_via_token_logic<'a>(
     } = accounts;
 
     assert_token_program_matches_package(token_program_account_info)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
     assert_owned_by(master_edition_account_info, program_id)?;
     assert_owned_by(master_metadata_account_info, program_id)?;
 
@@ -1116,11 +1121,11 @@ pub fn assert_currently_holding(
     token_account_info: &AccountInfo,
 ) -> ProgramResult {
     assert_owned_by(metadata_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     let token_account: Account = assert_initialized(token_account_info)?;
 
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
 
     if token_account.owner != *owner_info.key {
         return Err(MetadataError::InvalidOwner.into());
@@ -1162,11 +1167,11 @@ pub fn assert_delegated_tokens(
     mint_info: &AccountInfo,
     token_account_info: &AccountInfo,
 ) -> ProgramResult {
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     let token_account: Account = assert_initialized(token_account_info)?;
 
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
 
     if token_account.mint != *mint_info.key {
         return Err(MetadataError::MintMismatch.into());

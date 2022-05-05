@@ -1,8 +1,8 @@
 import test from 'tape';
 
 import { addressLabels, init, killStuckProcess } from './utils';
-import { Transaction } from '@solana/web3.js';
-import { assertConfirmedTransaction, assertTransactionSummary } from '@metaplex-foundation/amman';
+import { Transaction } from '@safecoin/web3.js';
+import { assertConfirmedTransaction, assertTransactionSummary } from '@j0nnyboi/amman';
 import { AddSharesToTreasuryInstructionAccounts, QUOTE_MINT, Vault } from '../src/mpl-token-vault';
 import {
   addSharesToTreasury,
