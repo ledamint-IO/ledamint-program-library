@@ -1,8 +1,8 @@
 {
-  "name": "@metaplex-foundation/mpl-token-metadata",
+  "name": "@leda-mint-io/lpl-token-metadata",
   "version": "2.1.0",
   "contractVersion": "1.2.5",
-  "description": "MPL Token Metadata JavaScript API.",
+  "description": "LPL Token Metadata JavaScript API.",
   "main": "dist/mpl-token-metadata.js",
   "types": "dist/mpl-token-metadata.d.ts",
   "scripts": {
@@ -34,15 +34,15 @@
     "solana",
     "blockchain"
   ],
-  "homepage": "https://metaplex.com",
-  "repository": "https://github.com/metaplex-foundation/metaplex-program-library.git",
+  "homepage": "https://ledamint.io",
+  "repository": "https://github.com/ledamint-IO/ledamint-program-library.git",
   "author": "Metaplex Maintainers <contact@metaplex.com>",
   "license": "MIT",
   "dependencies": {
     "@j0nnyboi/beet": "^0.1.1",
     "@j0nnyboi/beet-safecoin": "^0.1.1",
     "@metaplex-foundation/cusper": "^0.0.2",
-    "@safecoin/safe-token": "^0.2.0",
+    "@safecoin/safe-token": "^0.1.7-b",
     "@safecoin/web3.js": "^1.29.4",
     "bn.js": "^5.2.0",
     "debug": "^4.3.3"

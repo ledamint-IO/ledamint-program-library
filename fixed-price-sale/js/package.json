@@ -41,9 +41,9 @@
     "@j0nnyboi/beet": "^0.1.1",
     "@j0nnyboi/beet-safecoin": "^0.1.1",
     "@metaplex-foundation/mpl-core": "^0.0.5",
-    "@solana/buffer-layout": "^4.0.0",
-    "@safecoin/safe-token": "^0.2.0",
-    "@safecoin/web3.js": "^1.37.0"
+    "@safecoin/safe-token": "^0.1.7-b",
+    "@safecoin/web3.js": "^1.29.4",
+    "@solana/buffer-layout": "^4.0.0"
   },
   "devDependencies": {
     "@j0nnyboi/amman": "^0.1.0",

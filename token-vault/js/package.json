@@ -51,7 +51,7 @@
     "@j0nnyboi/beet-safecoin": "^0.1.1",
     "@metaplex-foundation/cusper": "^0.0.2",
     "@metaplex-foundation/mpl-core": "^0.0.5",
-    "@safecoin/safe-token": "^0.2.0",
+    "@safecoin/safe-token": "^0.1.7-b",
     "@safecoin/web3.js": "^1.29.4",
     "debug": "^4.3.3",
     "utility-types": "^3.10.0"

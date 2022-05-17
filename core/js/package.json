@@ -1,7 +1,7 @@
 {
-  "name": "@metaplex-foundation/mpl-core",
+  "name": "@leda-mint-io/lpl-core",
   "version": "0.6.1",
-  "description": "MPL Core Tooling.",
+  "description": "LPL Core Tooling.",
   "main": "dist/src/mpl-core.js",
   "types": "dist/src/mpl-core.d.ts",
   "scripts": {
@@ -29,11 +29,12 @@
   "keywords": [
     "nft",
     "metaplex",
-    "solana",
+    "ledamint",
+    "safecoin",
     "blockchain"
   ],
-  "homepage": "https://metaplex.com",
-  "repository": "https://github.com/metaplex-foundation/metaplex-program-library.git",
+  "homepage": "https://ledamint.io",
+  "repository": "https://github.com/ledamint-IO/ledamint-program-library.git",
   "author": "Metaplex Maintainers <contact@metaplex.com>",
   "license": "MIT",
   "dependencies": {
