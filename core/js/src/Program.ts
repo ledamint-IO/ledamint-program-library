@@ -4,7 +4,7 @@ import {
   GetProgramAccountsConfig,
   Commitment,
   AccountInfo,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { Account } from './accounts';
 import { Buffer } from 'buffer';
 import { ConnnectionWithRpcRequest } from './types';

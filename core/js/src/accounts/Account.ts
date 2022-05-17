@@ -1,4 +1,4 @@
-import { AccountInfo, Commitment, PublicKey, Connection } from '@solana/web3.js';
+import { AccountInfo, Commitment, PublicKey, Connection } from '@safecoin/web3.js';
 import { AnyPublicKey, ConnnectionWithRpcRequest } from '../types';
 import { Buffer } from 'buffer';
 import { ERROR_ACCOUNT_NOT_FOUND } from '../errors';

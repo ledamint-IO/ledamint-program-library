@@ -1,4 +1,4 @@
-import { Transaction as SolanaTransaction, TransactionCtorFields } from '@solana/web3.js';
+import { Transaction as SolanaTransaction, TransactionCtorFields } from '@safecoin/web3.js';
 
 export class Transaction extends SolanaTransaction {
   constructor(options?: TransactionCtorFields) {
