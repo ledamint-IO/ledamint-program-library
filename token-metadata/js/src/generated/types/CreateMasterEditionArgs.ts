@@ -5,7 +5,7 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
+import * as beet from '@j0nnyboi/beet';
 export type CreateMasterEditionArgs = {
   maxSupply: beet.COption<beet.bignum>;
 };

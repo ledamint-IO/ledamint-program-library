@@ -5,7 +5,7 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
+import * as beet from '@j0nnyboi/beet';
 import { DataV2, dataV2Beet } from './DataV2';
 export type CreateMetadataAccountArgsV2 = {
   data: DataV2;

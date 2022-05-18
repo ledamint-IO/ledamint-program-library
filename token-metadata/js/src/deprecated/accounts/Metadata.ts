@@ -7,9 +7,9 @@ import {
   AnyPublicKey,
   StringPublicKey,
   TokenAccount,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { strict as assert } from 'assert';
-import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
+import { AccountInfo, Connection, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import bs58 from 'bs58';
 import { Buffer } from 'buffer';
