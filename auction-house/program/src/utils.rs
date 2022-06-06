@@ -13,7 +13,7 @@ use anchor_lang::{
 use anchor_spl::token::{Mint, Token, TokenAccount};
 use arrayref::array_ref;
 use metaplex_token_metadata::state::Metadata;
-use spl_associated_token_account::get_associated_token_address;
+use safe_associated_token_account::get_associated_token_address;
 use safe_token::{instruction::initialize_account2, state::Account as SplAccount};
 use std::{convert::TryInto, slice::Iter};
 pub fn assert_is_ata(ata: &AccountInfo, wallet: &Pubkey, mint: &Pubkey) -> Result<SplAccount> {
@@ -46,7 +46,7 @@ pub fn make_ata<'a>(
     }
 
     invoke_signed(
-        &spl_associated_token_account::create_associated_token_account(
+        &safe_associated_token_account::create_associated_token_account(
             &fee_payer.key,
             &wallet.key,
             &mint.key,

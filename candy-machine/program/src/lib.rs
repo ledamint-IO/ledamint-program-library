@@ -90,8 +90,8 @@ pub mod candy_machine {
                 return Err(ErrorCode::GatewayTokenMissing.into());
             }
             let gateway_token_info = &ctx.remaining_accounts[remaining_accounts_counter];
-            let gateway_token = ::solana_gateway::borsh::try_from_slice_incomplete::<
-                ::solana_gateway::state::GatewayToken,
+            let gateway_token = ::safecoin_gateway::borsh::try_from_slice_incomplete::<
+                ::safecoin_gateway::state::GatewayToken,
             >(*gateway_token_info.data.borrow())?;
             // stores the expire_time before the verification, since the verification
             // will update the expire_time of the token and we won't be able to
@@ -112,7 +112,7 @@ pub mod candy_machine {
                 }
                 let network_expire_feature = &ctx.remaining_accounts[remaining_accounts_counter];
                 remaining_accounts_counter += 1;
-                ::solana_gateway::Gateway::verify_and_expire_token(
+                ::safecoin_gateway::Gateway::verify_and_expire_token(
                     gateway_app.clone(),
                     gateway_token_info.clone(),
                     payer.deref().clone(),
@@ -120,11 +120,10 @@ pub mod candy_machine {
                     network_expire_feature.clone(),
                 )?;
             } else {
-                ::solana_gateway::Gateway::verify_gateway_token_account_info(
+                ::safecoin_gateway::Gateway::verify_gateway_token_account_info(
                     gateway_token_info,
                     &payer.key(),
                     &gatekeeper.gatekeeper_network,
-                    None,
                 )?;
             }
             // verifies that the gatway token was not created before the candy

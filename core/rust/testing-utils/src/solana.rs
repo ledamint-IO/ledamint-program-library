@@ -63,7 +63,7 @@ pub async fn create_associated_token_account(
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            spl_associated_token_account::create_associated_token_account(
+            safe_associated_token_account::create_associated_token_account(
                 &context.payer.pubkey(),
                 &wallet.pubkey(),
                 token_mint,
@@ -77,7 +77,7 @@ pub async fn create_associated_token_account(
     // connection.send_and_confirm_transaction(&tx)?;
     context.banks_client.process_transaction(tx).await.unwrap();
 
-    Ok(spl_associated_token_account::get_associated_token_address(
+    Ok(safe_associated_token_account::get_associated_token_address(
         &wallet.pubkey(),
         token_mint,
     ))

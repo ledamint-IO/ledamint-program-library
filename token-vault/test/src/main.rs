@@ -13,11 +13,11 @@ use {
             MAX_VAULT_SIZE, PREFIX,
         },
     },
-    solana_clap_utils::{
+    safecoin_clap_utils::{
         input_parsers::pubkey_of,
         input_validators::{is_url, is_valid_pubkey, is_valid_signer},
     },
-    solana_client::rpc_client::RpcClient,
+    safecoin_client::rpc_client::RpcClient,
     safecoin_program::{borsh::try_from_slice_unchecked, program_pack::Pack},
     safecoin_sdk::{
         pubkey::Pubkey,
@@ -1259,7 +1259,7 @@ fn main() {
     let client = RpcClient::new(
         app_matches
             .value_of("json_rpc_url")
-            .unwrap_or(&"https://api.devnet.solana.com".to_owned())
+            .unwrap_or(&"https://api.devnet.safecoin.com".to_owned())
             .to_owned(),
     );
 

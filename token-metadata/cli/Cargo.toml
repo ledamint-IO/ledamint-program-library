@@ -9,13 +9,13 @@ edition = "2021"
 publish = false
 
 [dependencies]
-safecoin-client = "1.8.12"
+safecoin-client = {path = "../../../Safecoin/client"}
 safecoin-program = {path = "../../../Safecoin/sdk/program"}
-safecoin-sdk = "1.8.12"
+safecoin-sdk = {path = "../../../Safecoin/sdk"}
 bincode = "1.3.2"
 borsh = "0.9.1"
 clap = "2.33.0"
-safecoin-clap-utils = "1.8.12"
-safecoin-cli-config = "1.8.12"
+safecoin-clap-utils = {path = "../../../Safecoin/clap-utils"}
+safecoin-cli-config = {path = "../../../Safecoin/cli-config"}
 mpl-token-metadata = { path="../program", features = [ "no-entrypoint" ] }
-safe-token = { version="3.2.0", features = [ "no-entrypoint" ] }
+safe-token = { path = "../../../safecoin-program-library/token/program", features = [ "no-entrypoint" ] }

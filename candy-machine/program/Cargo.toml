@@ -19,11 +19,17 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = {path = "../../../anchor/lang"}
+anchor-lang = {path = "../../../anchor-21/lang"}
 arrayref = "0.3.6"
-safe-token = { features = ["no-entrypoint"],path = "../../../safecoin-program-lib/libraries/safe-token/program" }
+safe-token = { features = ["no-entrypoint"],path = "../../../safecoin-program-library/token/program" }
 mpl-token-metadata = { features = ["no-entrypoint"], path="../../token-metadata/program" }
-safe-associated-token-account = { features = ["no-entrypoint",] ,path = "../../../safecoin-program-lib/libraries/safe-associated-token-account/program"}
-anchor-spl = {path = "../../../anchor/spl"}
+safe-associated-token-account = { features = ["no-entrypoint",] ,path = "../../../safecoin-program-library/associated-token-account/program"}
+anchor-spl = {path = "../../../anchor-21/spl"}
 safecoin-program = {path = "../../../Safecoin/sdk/program"}
-safecoin-gateway = "~1.8.12"
+safecoin-gateway = {path = "../../../identity/on-chain-identity-gateway/safecoin/integration-lib"}
+
+[dev-dependencies]
+safecoin-program-test ={path = "../../../Safecoin/program-test"}
+safecoin-sdk = {path = "../../../Safecoin/sdk"}
+anchor-client = {path = "../../../anchor-21/client"}
+borsh = "~0.9.2"

@@ -9,7 +9,7 @@ use {
             program_pack::{IsInitialized, Pack},
         },
     },
-    spl_associated_token_account::get_associated_token_address,
+    safe_associated_token_account::get_associated_token_address,
 };
 
 pub fn assert_initialized<T: Pack + IsInitialized>(
