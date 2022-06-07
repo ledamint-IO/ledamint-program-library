@@ -26,7 +26,7 @@ mpl-token-metadata = { features = ["no-entrypoint"], path="../../token-metadata/
 safe-associated-token-account = { features = ["no-entrypoint",] ,path = "../../../safecoin-program-library/associated-token-account/program"}
 anchor-spl = {path = "../../../anchor-21/spl"}
 safecoin-program = {path = "../../../Safecoin/sdk/program"}
-safecoin-gateway = {path = "../../../identity/on-chain-identity-gateway/safecoin/integration-lib"}
+safecoin-gateway = {path = "../../../idcom-on-chain-identity-gateway/safecoin/integration-lib"}
 
 [dev-dependencies]
 safecoin-program-test ={path = "../../../Safecoin/program-test"}
