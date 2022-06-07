@@ -17,13 +17,13 @@ cpi = ["no-entrypoint"]
 default = []
 
 [dependencies]
-anchor-lang = {path = "../../../anchor/lang", features=["init-if-needed"]}
-anchor-spl = {path = "../../../anchor/spl"}
+anchor-lang = {path = "../../../anchor-24/lang", features=["init-if-needed"]}
+anchor-spl = {path = "../../../anchor-24/spl"}
 safe-token = {path = "../../../safecoin-program-library/token/program"}
 mpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
 
 [dev-dependencies]
-anchor-client = {path = "../../../anchor/client"}
+anchor-client = {path = "../../../anchor-24/client"}
 safecoin-program-test = {path = "../../../Safecoin/program-test"}
 safecoin-program = {path = "../../../Safecoin/sdk/program"}
 safecoin-sdk = {path = "../../../Safecoin/sdk"}
