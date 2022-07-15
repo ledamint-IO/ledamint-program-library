@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@safecoin/web3.js';
 import { AuthorityScope, authorityScopeBeet } from '../types/AuthorityScope';
 
 /**
@@ -102,7 +102,7 @@ export function createDelegateAuctioneerInstruction(
   ];
 
   const ix = new web3.TransactionInstruction({
-    programId: new web3.PublicKey('hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk'),
+    programId: new web3.PublicKey('Co8pmAyxUyCwep4zhnPWzkL6fwvPPHU59r1t5eM6gXjZ'),
     keys,
     data,
   });

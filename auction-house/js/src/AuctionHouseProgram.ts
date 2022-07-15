@@ -19,9 +19,9 @@ export class AuctionHouseProgram extends Program {
   static readonly errors = errors;
   static readonly accounts = accounts;
 
-  static readonly TOKEN_PROGRAM_ID = new PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA');
+  static readonly TOKEN_PROGRAM_ID = new PublicKey('ToKLx75MGim1d1jRusuVX8xvdvvbSDESVaNXpRA9PHN');
   static readonly SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new PublicKey(
-    'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL',
+    'AToD9iqHSc2fhEP9Jp7UYA6mRjHQ4CTWyzCsw8X3tH7K',
   );
 
   static async findAssociatedTokenAccountAddress(

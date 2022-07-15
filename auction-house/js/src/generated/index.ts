@@ -1,4 +1,4 @@
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 export * from './accounts';
 export * from './errors';
 export * from './instructions';
@@ -10,7 +10,7 @@ export * from './types';
  * @category constants
  * @category generated
  */
-export const PROGRAM_ADDRESS = 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk';
+export const PROGRAM_ADDRESS = 'Co8pmAyxUyCwep4zhnPWzkL6fwvPPHU59r1t5eM6gXjZ';
 
 /**
  * Program public key

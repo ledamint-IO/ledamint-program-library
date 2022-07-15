@@ -2,7 +2,7 @@
 'use strict';
 
 const PROGRAM_NAME = 'auction_house';
-const PROGRAM_ID = 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk';
+const PROGRAM_ID = 'Co8pmAyxUyCwep4zhnPWzkL6fwvPPHU59r1t5eM6gXjZ';
 
 const path = require('path');
 const programDir = path.join(__dirname, '..', '..', 'program');
