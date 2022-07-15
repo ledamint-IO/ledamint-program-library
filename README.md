@@ -1,8 +1,8 @@
-# Metaplex Program Library
+# Ledamint Program Library
 
-Metaplex smart contracts and SDK.
+Ledamint smart contracts and SDK.
 
-## Metaplex Contracts
+## Ledamint Contracts
 
 | Name                                   | Program                                                                       | SDK                                                                           | Integration Test                                                                   |
 | :------------------------------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------  | :--------------------------------------------------------------------------------- |
