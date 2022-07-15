@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@safecoin/safe-token';
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as splToken from '@solana/spl-token';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -41,6 +41,18 @@ const publicBuyStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _publicBuy_ instruction
+ *
+ * @property [**signer**] wallet
+ * @property [_writable_] paymentAccount
+ * @property [] transferAuthority
+ * @property [] treasuryMint
+ * @property [] tokenAccount
+ * @property [] metadata
+ * @property [_writable_] escrowPaymentAccount
+ * @property [] authority
+ * @property [] auctionHouse
+ * @property [_writable_] auctionHouseFeeAccount
+ * @property [_writable_] buyerTradeState
  * @category Instructions
  * @category PublicBuy
  * @category generated

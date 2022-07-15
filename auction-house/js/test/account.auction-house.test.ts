@@ -1,4 +1,4 @@
-import { AccountInfo, Keypair, PublicKey } from '@safecoin/web3.js';
+import { AccountInfo, Keypair, PublicKey } from '@solana/web3.js';
 import { AuctionHouse, AuctionHouseArgs } from 'src/generated';
 import test from 'tape';
 import spok from 'spok';
@@ -29,6 +29,9 @@ test('account auction-house: round trip serilization', async (t) => {
     sellerFeeBasisPoints: 3,
     requiresSignOff: false,
     canChangeSalePrice: true,
+    escrowPaymentBump: 255,
+    hasAuctioneer: false,
+    auctioneerPdaBump: 255,
   };
 
   const expected = AuctionHouse.fromArgs(args);

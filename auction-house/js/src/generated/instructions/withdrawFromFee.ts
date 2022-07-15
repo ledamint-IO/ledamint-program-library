@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -34,6 +34,11 @@ const withdrawFromFeeStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _withdrawFromFee_ instruction
+ *
+ * @property [**signer**] authority
+ * @property [_writable_] feeWithdrawalDestination
+ * @property [_writable_] auctionHouseFeeAccount
+ * @property [_writable_] auctionHouse
  * @category Instructions
  * @category WithdrawFromFee
  * @category generated

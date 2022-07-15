@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@safecoin/safe-token';
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as splToken from '@solana/spl-token';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -45,6 +45,16 @@ const createAuctionHouseStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _createAuctionHouse_ instruction
+ *
+ * @property [] treasuryMint
+ * @property [_writable_, **signer**] payer
+ * @property [] authority
+ * @property [_writable_] feeWithdrawalDestination
+ * @property [_writable_] treasuryWithdrawalDestination
+ * @property [] treasuryWithdrawalDestinationOwner
+ * @property [_writable_] auctionHouse
+ * @property [_writable_] auctionHouseFeeAccount
+ * @property [_writable_] auctionHouseTreasury
  * @category Instructions
  * @category CreateAuctionHouse
  * @category generated
@@ -101,7 +111,7 @@ export function createCreateAuctionHouseInstruction(
     },
     {
       pubkey: payer,
-      isWritable: false,
+      isWritable: true,
       isSigner: true,
     },
     {

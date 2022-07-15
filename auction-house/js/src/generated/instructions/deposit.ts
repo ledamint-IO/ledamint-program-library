@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@safecoin/safe-token';
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as splToken from '@solana/spl-token';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -37,6 +37,15 @@ const depositStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _deposit_ instruction
+ *
+ * @property [**signer**] wallet
+ * @property [_writable_] paymentAccount
+ * @property [] transferAuthority
+ * @property [_writable_] escrowPaymentAccount
+ * @property [] treasuryMint
+ * @property [] authority
+ * @property [] auctionHouse
+ * @property [_writable_] auctionHouseFeeAccount
  * @category Instructions
  * @category Deposit
  * @category generated

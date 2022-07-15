@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@safecoin/web3.js';
-import * as beet from '@j0nnyboi/beet';
-import * as beetSolana from '@j0nnyboi/beet-safecoin';
+import * as web3 from '@solana/web3.js';
+import * as beet from '@metaplex-foundation/beet';
+import * as beetSolana from '@metaplex-foundation/beet-solana';
 
 /**
  * Arguments used to create {@link PurchaseReceipt}
@@ -151,10 +151,40 @@ export class PurchaseReceipt implements PurchaseReceiptArgs {
       seller: this.seller.toBase58(),
       auctionHouse: this.auctionHouse.toBase58(),
       metadata: this.metadata.toBase58(),
-      tokenSize: this.tokenSize,
-      price: this.price,
+      tokenSize: (() => {
+        const x = <{ toNumber: () => number }>this.tokenSize;
+        if (typeof x.toNumber === 'function') {
+          try {
+            return x.toNumber();
+          } catch (_) {
+            return x;
+          }
+        }
+        return x;
+      })(),
+      price: (() => {
+        const x = <{ toNumber: () => number }>this.price;
+        if (typeof x.toNumber === 'function') {
+          try {
+            return x.toNumber();
+          } catch (_) {
+            return x;
+          }
+        }
+        return x;
+      })(),
       bump: this.bump,
-      createdAt: this.createdAt,
+      createdAt: (() => {
+        const x = <{ toNumber: () => number }>this.createdAt;
+        if (typeof x.toNumber === 'function') {
+          try {
+            return x.toNumber();
+          } catch (_) {
+            return x;
+          }
+        }
+        return x;
+      })(),
     };
   }
 }

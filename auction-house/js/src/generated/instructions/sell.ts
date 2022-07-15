@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@safecoin/safe-token';
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as splToken from '@solana/spl-token';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -43,6 +43,16 @@ const sellStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _sell_ instruction
+ *
+ * @property [] wallet
+ * @property [_writable_] tokenAccount
+ * @property [] metadata
+ * @property [] authority
+ * @property [] auctionHouse
+ * @property [_writable_] auctionHouseFeeAccount
+ * @property [_writable_] sellerTradeState
+ * @property [_writable_] freeSellerTradeState
+ * @property [] programAsSigner
  * @category Instructions
  * @category Sell
  * @category generated

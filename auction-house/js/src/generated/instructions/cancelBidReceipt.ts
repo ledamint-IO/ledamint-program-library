@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -21,6 +21,9 @@ const cancelBidReceiptStruct = new beet.BeetArgsStruct<{
 );
 /**
  * Accounts required by the _cancelBidReceipt_ instruction
+ *
+ * @property [_writable_] receipt
+ * @property [] instruction
  * @category Instructions
  * @category CancelBidReceipt
  * @category generated
@@ -36,7 +39,6 @@ const cancelBidReceiptInstructionDiscriminator = [246, 108, 27, 229, 220, 42, 17
  * Creates a _CancelBidReceipt_ instruction.
  *
  * @param accounts that will be accessed while the instruction is processed
- *
  * @category Instructions
  * @category CancelBidReceipt
  * @category generated

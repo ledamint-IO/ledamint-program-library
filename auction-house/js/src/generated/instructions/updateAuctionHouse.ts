@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@safecoin/safe-token';
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as splToken from '@solana/spl-token';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -39,6 +39,15 @@ const updateAuctionHouseStruct = new beet.FixableBeetArgsStruct<
 );
 /**
  * Accounts required by the _updateAuctionHouse_ instruction
+ *
+ * @property [] treasuryMint
+ * @property [**signer**] payer
+ * @property [**signer**] authority
+ * @property [] newAuthority
+ * @property [_writable_] feeWithdrawalDestination
+ * @property [_writable_] treasuryWithdrawalDestination
+ * @property [] treasuryWithdrawalDestinationOwner
+ * @property [_writable_] auctionHouse
  * @category Instructions
  * @category UpdateAuctionHouse
  * @category generated

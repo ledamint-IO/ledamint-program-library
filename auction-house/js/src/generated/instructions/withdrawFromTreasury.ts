@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as splToken from '@safecoin/safe-token';
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as splToken from '@solana/spl-token';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -35,6 +35,12 @@ const withdrawFromTreasuryStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _withdrawFromTreasury_ instruction
+ *
+ * @property [] treasuryMint
+ * @property [**signer**] authority
+ * @property [_writable_] treasuryWithdrawalDestination
+ * @property [_writable_] auctionHouseTreasury
+ * @property [_writable_] auctionHouse
  * @category Instructions
  * @category WithdrawFromTreasury
  * @category generated

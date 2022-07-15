@@ -5,8 +5,8 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as beet from '@j0nnyboi/beet';
-import * as web3 from '@safecoin/web3.js';
+import * as beet from '@metaplex-foundation/beet';
+import * as web3 from '@solana/web3.js';
 
 /**
  * @category Instructions
@@ -34,6 +34,10 @@ const printListingReceiptStruct = new beet.BeetArgsStruct<
 );
 /**
  * Accounts required by the _printListingReceipt_ instruction
+ *
+ * @property [_writable_] receipt
+ * @property [_writable_, **signer**] bookkeeper
+ * @property [] instruction
  * @category Instructions
  * @category PrintListingReceipt
  * @category generated

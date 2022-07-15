@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@safecoin/web3.js';
-import * as beetSolana from '@j0nnyboi/beet-safecoin';
-import * as beet from '@j0nnyboi/beet';
+import * as web3 from '@solana/web3.js';
+import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beet from '@metaplex-foundation/beet';
 
 /**
  * Arguments used to create {@link AuctionHouse}
@@ -28,6 +28,9 @@ export type AuctionHouseArgs = {
   sellerFeeBasisPoints: number;
   requiresSignOff: boolean;
   canChangeSalePrice: boolean;
+  escrowPaymentBump: number;
+  hasAuctioneer: boolean;
+  auctioneerPdaBump: number;
 };
 
 const auctionHouseDiscriminator = [40, 108, 215, 107, 213, 85, 245, 48];
@@ -53,6 +56,9 @@ export class AuctionHouse implements AuctionHouseArgs {
     readonly sellerFeeBasisPoints: number,
     readonly requiresSignOff: boolean,
     readonly canChangeSalePrice: boolean,
+    readonly escrowPaymentBump: number,
+    readonly hasAuctioneer: boolean,
+    readonly auctioneerPdaBump: number,
   ) {}
 
   /**
@@ -73,6 +79,9 @@ export class AuctionHouse implements AuctionHouseArgs {
       args.sellerFeeBasisPoints,
       args.requiresSignOff,
       args.canChangeSalePrice,
+      args.escrowPaymentBump,
+      args.hasAuctioneer,
+      args.auctioneerPdaBump,
     );
   }
 
@@ -171,6 +180,9 @@ export class AuctionHouse implements AuctionHouseArgs {
       sellerFeeBasisPoints: this.sellerFeeBasisPoints,
       requiresSignOff: this.requiresSignOff,
       canChangeSalePrice: this.canChangeSalePrice,
+      escrowPaymentBump: this.escrowPaymentBump,
+      hasAuctioneer: this.hasAuctioneer,
+      auctioneerPdaBump: this.auctioneerPdaBump,
     };
   }
 }
@@ -200,6 +212,9 @@ export const auctionHouseBeet = new beet.BeetStruct<
     ['sellerFeeBasisPoints', beet.u16],
     ['requiresSignOff', beet.bool],
     ['canChangeSalePrice', beet.bool],
+    ['escrowPaymentBump', beet.u8],
+    ['hasAuctioneer', beet.bool],
+    ['auctioneerPdaBump', beet.u8],
   ],
   AuctionHouse.fromArgs,
   'AuctionHouse',
