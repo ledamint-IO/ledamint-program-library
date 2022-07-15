@@ -1,5 +1,5 @@
 {
-  "name": "@metaplex-foundation/mpl-auction-house",
+  "name": "@leda-mint-io/lpl-auction-house",
   "version": "1.1.1",
   "description": "MPL Auction House JavaScript API.",
   "main": "dist/src/mpl-auction-house.js",
@@ -30,8 +30,9 @@
   },
   "keywords": [
     "nft",
+    "ledamint",
+    "safecoin",
     "metaplex",
-    "solana",
     "blockchain"
   ],
   "homepage": "https://metaplex.com",
@@ -41,12 +42,12 @@
   "dependencies": {
     "@j0nnyboi/beet": "^0.1.1",
     "@j0nnyboi/beet-safecoin": "^0.1.1",
-    "@metaplex-foundation/mpl-core": "^0.0.5",
+    "@leda-mint-io/lpl-core": "^0.0.51",
     "@safecoin/web3.js": "^1.29.4",
     "bn.js": "^5.2.0"
   },
   "devDependencies": {
-    "@metaplex-foundation/solita": "^0.2.0",
+    "@araviel/mtf-solita": "^0.2.1",
     "@types/tape": "^4.13.2",
     "eslint": "^8.3.0",
     "prettier": "^2.5.1",
