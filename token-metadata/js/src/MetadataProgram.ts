@@ -1,5 +1,5 @@
-import { PublicKey } from '@solana/web3.js';
-import { Program, config } from '@metaplex-foundation/mpl-core';
+import { PublicKey } from '@safecoin/web3.js';
+import { Program, config } from '@j0nnyboi/mpl-core';
 
 export class MetadataProgram extends Program {
   static readonly PREFIX = 'metadata';

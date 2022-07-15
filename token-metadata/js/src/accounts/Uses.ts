@@ -1,4 +1,4 @@
-import { Borsh } from '@metaplex-foundation/mpl-core';
+import { Borsh } from '@j0nnyboi/mpl-core';
 import { MetadataKey, UseMethod } from '.';
 
 type UsesArgs = { useMethod: UseMethod; total: number; remaining: number };

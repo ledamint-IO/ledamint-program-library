@@ -1,6 +1,6 @@
 import test from 'tape';
 import spok from 'spok';
-import { Connection, Keypair } from '@solana/web3.js';
+import { Connection, Keypair } from '@safecoin/web3.js';
 import {
   DataV2,
   Edition,
@@ -15,8 +15,8 @@ import {
   airdrop,
   assertTransactionSummary,
   PayerTransactionHandler,
-} from '@metaplex-foundation/amman';
-import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+} from '@j0nnyboi/amman';
+import { Token, TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import BN from 'bn.js';
 
 import { logDebug } from './utils';

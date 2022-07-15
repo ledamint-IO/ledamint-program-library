@@ -1,4 +1,4 @@
-import { AddressLabels } from '@metaplex-foundation/amman';
+import { AddressLabels } from '@j0nnyboi/amman';
 import { logDebug } from '.';
 
 const persistLabelsPath = process.env.ADDRESS_LABEL_PATH;

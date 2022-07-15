@@ -1,6 +1,6 @@
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
 import { addLabel, logDebug } from '../utils';
-import { defaultSendOptions, TransactionHandler } from '@metaplex-foundation/amman';
+import { defaultSendOptions, TransactionHandler } from '@j0nnyboi/amman';
 import {
   CreateMetadata,
   CreateMasterEditionV3,
@@ -11,8 +11,8 @@ import {
   MetadataDataData,
 } from '../../src/mpl-token-metadata';
 import BN from 'bn.js';
-import * as spl from '@solana/spl-token';
-import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import * as spl from '@safecoin/safe-token';
+import { Token, TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 // -----------------
 // Create Metadata
 // -----------------

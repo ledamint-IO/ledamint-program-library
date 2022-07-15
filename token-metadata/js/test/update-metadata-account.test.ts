@@ -11,7 +11,7 @@ import {
   NAME,
   SYMBOL,
 } from './utils';
-import { assertError } from '@metaplex-foundation/amman';
+import { assertError } from '@j0nnyboi/amman';
 
 killStuckProcess();
 

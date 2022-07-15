@@ -1,4 +1,4 @@
-import { Borsh, StringPublicKey } from '@metaplex-foundation/mpl-core';
+import { Borsh, StringPublicKey } from '@j0nnyboi/mpl-core';
 import { MetadataKey } from './constants';
 
 type Args = { key: StringPublicKey; verified: boolean };

@@ -1,10 +1,10 @@
 import test from 'tape';
 import spok from 'spok';
 
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
 import { MetadataData, MetadataDataData } from '../../src/mpl-token-metadata';
 import { connectionURL } from './';
-import { airdrop, PayerTransactionHandler } from '@metaplex-foundation/amman';
+import { airdrop, PayerTransactionHandler } from '@j0nnyboi/amman';
 
 import { addLabel } from './address-labels';
 import { mintAndCreateMetadata } from '../actions';

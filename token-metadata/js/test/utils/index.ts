@@ -1,8 +1,8 @@
-import { clusterApiUrl, Connection, Keypair } from '@solana/web3.js';
+import { clusterApiUrl, Connection, Keypair } from '@safecoin/web3.js';
 import { inspect } from 'util';
 import debug from 'debug';
 import test from 'tape';
-import { LOCALHOST, TransactionHandler } from '@metaplex-foundation/amman';
+import { LOCALHOST, TransactionHandler } from '@j0nnyboi/amman';
 import { DataV2 } from '../../src/accounts';
 import { NAME, SELLER_FEE_BASIS_POINTS, SYMBOL, URI } from './metadata';
 import { createMasterEdition } from '../actions';

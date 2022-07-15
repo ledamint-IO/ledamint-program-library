@@ -1,11 +1,11 @@
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@j0nnyboi/mpl-core';
 import {
   PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { MetadataProgram } from '../MetadataProgram';
 
 export class RevokeCollectionAuthorityArgs extends Borsh.Data {

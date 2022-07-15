@@ -7,8 +7,8 @@ import {
   AnyPublicKey,
   StringPublicKey,
   TokenAccount,
-} from '@metaplex-foundation/mpl-core';
-import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
+} from '@j0nnyboi/mpl-core';
+import { AccountInfo, Connection, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import bs58 from 'bs58';
 import { Buffer } from 'buffer';

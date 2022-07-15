@@ -1,7 +1,7 @@
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
-import { PublicKey, TransactionCtorFields, TransactionInstruction } from '@solana/web3.js';
+import { Borsh, Transaction } from '@j0nnyboi/mpl-core';
+import { PublicKey, TransactionCtorFields, TransactionInstruction } from '@safecoin/web3.js';
 import { MetadataProgram } from '../MetadataProgram';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 
 export class FreezeDelegatedAccountArgs extends Borsh.Data {
   static readonly SCHEMA = new Map([...FreezeDelegatedAccountArgs.struct([['instruction', 'u8']])]);

@@ -17,8 +17,8 @@ import {
   logDebug,
   createCollection,
 } from './utils';
-import { airdrop, PayerTransactionHandler } from '@metaplex-foundation/amman';
-import { Connection, Keypair } from '@solana/web3.js';
+import { airdrop, PayerTransactionHandler } from '@j0nnyboi/amman';
+import { Connection, Keypair } from '@safecoin/web3.js';
 import { createMasterEdition } from './actions';
 import { Collection } from '../src/accounts';
 import { SetAndVerifyCollectionCollection } from 'src/transactions';
