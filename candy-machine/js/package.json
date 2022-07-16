@@ -1,8 +1,8 @@
 {
-  "name": "@metaplex-foundation/mpl-candy-machine",
-  "version": "4.2.0",
+  "name": "@leda-mint-io/lpl-candy-machine",
+  "version": "4.2.1",
   "programVersion": "3.1.3",
-  "description": "MPL Candy Machine JavaScript API. This MPL package is for the current generation of candy machine which is 2.0.0",
+  "description": "LPL Candy Machine JavaScript API. This LPL package is for the current generation of candy machine which is 2.0.0",
   "main": "dist/src/mpl-candy-machine.js",
   "types": "dist/src/mpl-candy-machine.d.ts",
   "scripts": {
@@ -34,15 +34,15 @@
     "solana",
     "blockchain"
   ],
-  "homepage": "https://metaplex.com",
+  "homepage": "https://ledamint.io",
   "repository": "https://github.com/metaplex-foundation/metaplex-program-library.git",
   "author": "Metaplex Maintainers <contact@metaplex.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "@j0nnyboi/beet": "^0.1.1",
     "@j0nnyboi/beet-safecoin": "^0.1.1",
+    "@leda-mint-io/lpl-core": "^0.0.51",
     "@metaplex-foundation/cusper": "^0.0.2",
-    "@metaplex-foundation/mpl-core": "^0.6.1",
     "@safecoin/web3.js": "^1.29.4"
   },
   "devDependencies": {

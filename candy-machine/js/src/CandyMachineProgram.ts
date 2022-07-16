@@ -1,4 +1,4 @@
-import { Program } from '@metaplex-foundation/mpl-core';
+import { Program } from '@leda-mint-io/lpl-core';
 import * as errors from './generated/errors';
 import * as instructions from './generated/instructions';
 import * as accounts from './generated/accounts';
