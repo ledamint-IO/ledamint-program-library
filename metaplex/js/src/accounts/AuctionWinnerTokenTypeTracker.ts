@@ -5,7 +5,7 @@ import {
   ERROR_INVALID_OWNER,
   TupleNumericType,
   getBNFromData,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { strict as assert } from 'assert';
 import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';

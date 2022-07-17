@@ -14,10 +14,10 @@ import {
   TransactionCtorFields,
   TransactionInstruction,
 } from '@safecoin/web3.js';
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
 import { ParamsWithStore, VaultProgram } from './vault';
-import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
-import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
+import { MetadataProgram } from '@leda-mint-io/lpl-token-metadata';
+import { AuctionProgram } from '@leda-mint-io/lpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';
 
 export class SetStoreV2Args extends Borsh.Data<{ public: boolean; settingsUri: string | null }> {

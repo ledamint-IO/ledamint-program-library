@@ -1,5 +1,5 @@
 import { PublicKey } from '@safecoin/web3.js';
-import { config, Program } from '@metaplex-foundation/mpl-core';
+import { config, Program } from '@leda-mint-io/lpl-core';
 
 export class AuctionProgram extends Program {
   static readonly PREFIX = 'auction';

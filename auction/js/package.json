@@ -1,7 +1,7 @@
 {
-  "name": "@metaplex-foundation/mpl-auction",
+  "name": "@leda-mint-io/lpl-auction",
   "version": "0.0.2",
-  "description": "MPL Token Metadata JavaScript API.",
+  "description": "LPM Auction JavaScript API.",
   "main": "dist/src/mpl-auction.js",
   "types": "dist/src/mpl-auction.d.ts",
   "scripts": {
@@ -37,7 +37,7 @@
   "author": "Metaplex Maintainers <contact@metaplex.com>",
   "license": "MIT",
   "dependencies": {
-    "@metaplex-foundation/mpl-core": "^0.0.5",
+    "@leda-mint-io/lpl-core": "^0.0.51",
     "@safecoin/safe-token": "^0.1.7-b",
     "@safecoin/web3.js": "^1.29.4"
   },

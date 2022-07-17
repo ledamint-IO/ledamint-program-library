@@ -16,7 +16,7 @@ import {
   Borsh,
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { MetaplexKey, MetaplexProgram } from '../MetaplexProgram';
 import { Buffer } from 'buffer';
 

@@ -13,7 +13,7 @@ import {
   Account,
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { MetaplexProgram, MetaplexKey } from '../MetaplexProgram';
 import { Buffer } from 'buffer';
 import { AccountInfo, PublicKey } from '@safecoin/web3.js';

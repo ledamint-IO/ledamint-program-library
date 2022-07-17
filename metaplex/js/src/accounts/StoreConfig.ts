@@ -12,7 +12,7 @@ import {
   AnyPublicKey,
   Borsh,
   Account,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import { Buffer } from 'buffer';
 import { MetaplexKey, MetaplexProgram } from '../MetaplexProgram';

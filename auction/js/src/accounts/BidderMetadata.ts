@@ -13,7 +13,7 @@ import {
   ERROR_INVALID_OWNER,
   AnyPublicKey,
   StringPublicKey,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { AuctionProgram } from '../AuctionProgram';

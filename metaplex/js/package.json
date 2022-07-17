@@ -1,7 +1,7 @@
 {
-  "name": "@metaplex-foundation/mpl-metaplex",
+  "name": "@leda-mint-io/lpl-ledamint",
   "version": "0.0.5",
-  "description": "MPL Metaplex JavaScript API.",
+  "description": "LPL Ledamint JavaScript API.",
   "main": "dist/src/mpl-metaplex.js",
   "types": "dist/src/mpl-metaplex.d.ts",
   "scripts": {
@@ -42,9 +42,9 @@
   "author": "Metaplex Maintainers <contact@metaplex.com>",
   "license": "MIT",
   "dependencies": {
-    "@metaplex-foundation/mpl-auction": "^0.0.2",
-    "@metaplex-foundation/mpl-core": "^0.0.5",
-    "@metaplex-foundation/mpl-token-metadata": "^0.0.2",
+    "@leda-mint-io/lpl-auction": "^0.0.2",
+    "@leda-mint-io/lpl-core": "^0.0.5",
+    "@leda-mint-io/lpl-token-metadata": "^1.2.52",
     "@metaplex-foundation/mpl-token-vault": "^0.0.2",
     "@safecoin/safe-token": "^0.1.7-b",
     "@safecoin/web3.js": "^1.29.4"

@@ -1,6 +1,6 @@
 {
   "name": "@leda-mint-io/lpl-core",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "LPL Core Tooling.",
   "main": "dist/src/mpl-core.js",
   "types": "dist/src/mpl-core.d.ts",

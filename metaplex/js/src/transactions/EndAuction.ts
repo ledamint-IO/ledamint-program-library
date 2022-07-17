@@ -6,7 +6,7 @@
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
 import BN from 'bn.js';
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
 import {
   PublicKey,
   SYSVAR_CLOCK_PUBKEY,
@@ -14,7 +14,7 @@ import {
   TransactionInstruction,
 } from '@safecoin/web3.js';
 import { ParamsWithStore } from './vault';
-import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
+import { AuctionProgram } from '@leda-mint-io/lpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';
 
 export class EndAuctionArgs extends Borsh.Data<{ reveal: BN[] | null }> {

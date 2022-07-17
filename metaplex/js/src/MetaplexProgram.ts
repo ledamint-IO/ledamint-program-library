@@ -1,4 +1,4 @@
-import { config, Program } from '@metaplex-foundation/mpl-core';
+import { config, Program } from '@leda-mint-io/lpl-core';
 import { PublicKey } from '@safecoin/web3.js';
 
 export enum MetaplexKey {

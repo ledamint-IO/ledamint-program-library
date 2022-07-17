@@ -12,7 +12,7 @@ import {
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
   AnyPublicKey,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import BN from 'bn.js';
 import { AuctionProgram } from '../AuctionProgram';
 import { Buffer } from 'buffer';

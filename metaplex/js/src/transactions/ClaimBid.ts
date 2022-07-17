@@ -5,9 +5,9 @@
  * Given that these parts of the SDK will be re-generated with solita very soon
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
 import { ParamsWithStore } from './vault';
-import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
+import { AuctionProgram } from '@leda-mint-io/lpl-auction';
 import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,

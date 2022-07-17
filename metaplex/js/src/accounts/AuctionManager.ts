@@ -12,7 +12,7 @@ import bs58 from 'bs58';
 import { BidRedemptionTicket, WINNER_INDEX_OFFSETS } from './BidRedemptionTicket';
 import { MetaplexKey, MetaplexProgram } from '../MetaplexProgram';
 import { Buffer } from 'buffer';
-import { Auction } from '@metaplex-foundation/mpl-auction';
+import { Auction } from '@leda-mint-io/lpl-auction';
 import {
   Account,
   AnyPublicKey,
@@ -21,7 +21,7 @@ import {
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
   StringPublicKey,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 
 export enum AuctionManagerStatus {
   Initialized,

@@ -6,7 +6,7 @@
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
 import { strict as assert } from 'assert';
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
 import { ParamsWithStore } from './vault';
 import {
   PublicKey,

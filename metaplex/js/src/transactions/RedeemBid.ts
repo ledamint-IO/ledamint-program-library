@@ -5,7 +5,7 @@
  * Given that these parts of the SDK will be re-generated with solita very soon
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
 import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
@@ -14,7 +14,7 @@ import {
   TransactionCtorFields,
   TransactionInstruction,
 } from '@safecoin/web3.js';
-import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
+import { MetadataProgram } from '@leda-mint-io/lpl-token-metadata';
 import { VaultProgram, ParamsWithStore } from './vault';
 import { MetaplexProgram } from '../MetaplexProgram';
 import { strict as assert } from 'assert';

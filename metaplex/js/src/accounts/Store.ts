@@ -13,7 +13,7 @@ import {
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
   Borsh,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { MetaplexProgram, MetaplexKey } from '../MetaplexProgram';
 import { AccountInfo, Connection, PublicKey } from '@safecoin/web3.js';
 import bs58 from 'bs58';

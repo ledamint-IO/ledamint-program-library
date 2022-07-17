@@ -5,7 +5,7 @@
  * Given that these parts of the SDK will be re-generated with solita very soon
  * that would be a wasted effort and therefore we make an EXCEPTION here.
  */
-import { Borsh, Transaction, StringPublicKey } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction, StringPublicKey } from '@leda-mint-io/lpl-core';
 import {
   PublicKey,
   SystemProgram,
