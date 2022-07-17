@@ -1,4 +1,4 @@
-import { airdrop } from '@j0nnyboi/amman';
+import { airdrop } from '@metaplex-foundation/amman';
 import { Connection, Keypair } from '@safecoin/web3.js';
 
 // -----------------

@@ -12,7 +12,7 @@ import {
   sendAndConfirmTransaction,
   Transaction,
 } from '@safecoin/web3.js';
-import { AddressLabels, LOCALHOST } from '@j0nnyboi/amman';
+import { AddressLabels, LOCALHOST } from '@metaplex-foundation/amman';
 import { strict as assert } from 'assert';
 
 import { addressLabels } from '../test/utils';

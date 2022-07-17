@@ -13,7 +13,7 @@ import {
   verifyTokenBalance,
 } from './utils';
 import { Signer, Transaction } from '@safecoin/web3.js';
-import { assertConfirmedTransaction, assertError, TokenBalances } from '@j0nnyboi/amman';
+import { assertConfirmedTransaction, assertError, TokenBalances } from '@metaplex-foundation/amman';
 import { mintSharesToTreasury } from '../src/instructions/mint-shares-to-treasury';
 import {
   MintFractionalSharesInstructionAccounts,

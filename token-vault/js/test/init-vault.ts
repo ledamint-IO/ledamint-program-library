@@ -5,7 +5,7 @@ import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
-} from '@j0nnyboi/amman';
+} from '@metaplex-foundation/amman';
 import { Transaction } from '@safecoin/web3.js';
 import { initVault } from '../src/instructions/init-vault';
 import { AlreadyInitializedError } from '../src/generated';

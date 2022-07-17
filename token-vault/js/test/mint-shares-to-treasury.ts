@@ -18,7 +18,7 @@ import {
   assertError,
   assertTransactionSummary,
   TokenBalances,
-} from '@j0nnyboi/amman';
+} from '@metaplex-foundation/amman';
 import { mintSharesToTreasury } from '../src/instructions/mint-shares-to-treasury';
 import {
   MintFractionalSharesInstructionAccounts,

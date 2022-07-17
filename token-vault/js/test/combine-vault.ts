@@ -23,7 +23,7 @@ import {
   assertError,
   assertTransactionSummary,
   TokenBalances,
-} from '@j0nnyboi/amman';
+} from '@metaplex-foundation/amman';
 import { cusper } from '../src/errors';
 
 killStuckProcess();

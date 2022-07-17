@@ -14,7 +14,7 @@ import {
   assertConfirmedTransaction,
   assertError,
   assertTransactionSummary,
-} from '@j0nnyboi/amman';
+} from '@metaplex-foundation/amman';
 import {
   createSetAuthorityInstruction,
   SetAuthorityInstructionAccounts,

@@ -3,7 +3,7 @@ import { bignum, COption } from '@j0nnyboi/beet';
 import { PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import spok, { Specification, Specifications } from 'spok';
-import { TokenBalances } from '@j0nnyboi/amman';
+import { TokenBalances } from '@metaplex-foundation/amman';
 import { addressLabels } from './address-labels';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */

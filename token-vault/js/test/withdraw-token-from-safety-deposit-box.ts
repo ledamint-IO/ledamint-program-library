@@ -18,7 +18,7 @@ import {
   assertTransactionSummary,
   PayerTransactionHandler,
   TokenBalances,
-} from '@j0nnyboi/amman';
+} from '@metaplex-foundation/amman';
 import {
   activateVault,
   addTokenToInactiveVault,

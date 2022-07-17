@@ -5,7 +5,7 @@
 // Make sure to have a local validator running to try this as is, i.e. via `yarn amman:start`
 
 import { Connection, Keypair, sendAndConfirmTransaction, Transaction } from '@safecoin/web3.js';
-import { airdrop, LOCALHOST, TokenBalances } from '@j0nnyboi/amman';
+import { airdrop, LOCALHOST, TokenBalances } from '@metaplex-foundation/amman';
 import { strict as assert } from 'assert';
 
 // These help us identify public keys, make sure to run with

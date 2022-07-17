@@ -5,7 +5,7 @@ import {
   assertTransactionSummary,
   LOCALHOST,
   PayerTransactionHandler,
-} from '@j0nnyboi/amman';
+} from '@metaplex-foundation/amman';
 import { Connection, PublicKey, Transaction } from '@safecoin/web3.js';
 import { addressLabels } from '.';
 import {

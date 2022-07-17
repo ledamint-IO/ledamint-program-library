@@ -10,7 +10,7 @@ import {
   spokSamePubkey,
 } from './utils';
 import { Transaction } from '@safecoin/web3.js';
-import { assertConfirmedTransaction, assertTransactionSummary } from '@j0nnyboi/amman';
+import { assertConfirmedTransaction, assertTransactionSummary } from '@metaplex-foundation/amman';
 import { ExternalPriceAccount, Key, QUOTE_MINT } from '../src/mpl-token-vault';
 import { createExternalPriceAccount } from '../src/instructions/create-external-price-account';
 
