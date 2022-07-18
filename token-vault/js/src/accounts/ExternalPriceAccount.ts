@@ -1,4 +1,4 @@
-import { AccountInfo } from '@solana/web3.js';
+import { AccountInfo } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { Buffer } from 'buffer';
 import {
@@ -8,7 +8,7 @@ import {
   Account,
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { VaultKey, VaultProgram } from '../VaultProgram';
 
 type Args = {

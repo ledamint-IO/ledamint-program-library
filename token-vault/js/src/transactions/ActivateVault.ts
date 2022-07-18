@@ -1,10 +1,10 @@
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { PublicKey, TransactionCtorFields, TransactionInstruction } from '@solana/web3.js';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
+import { PublicKey, TransactionCtorFields, TransactionInstruction } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { VaultInstructions } from '../VaultProgram';
 import { NumberOfShareArgs } from '../accounts/Vault';
 import { VaultProgram } from '../VaultProgram';
-import { Transaction } from '@metaplex-foundation/mpl-core';
+import { Transaction } from '@leda-mint-io/lpl-core';
 
 type ActivateVaultParams = {
   vault: PublicKey;

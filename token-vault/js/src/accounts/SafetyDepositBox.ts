@@ -1,4 +1,4 @@
-import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import { VaultKey, VaultProgram } from '../VaultProgram';
 import { Buffer } from 'buffer';
 import {
@@ -8,7 +8,7 @@ import {
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
   StringPublicKey,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 
 type Args = {
   vault: StringPublicKey;

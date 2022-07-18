@@ -1,5 +1,5 @@
-import { config, Program } from '@metaplex-foundation/mpl-core';
-import { PublicKey } from '@solana/web3.js';
+import { config, Program } from '@leda-mint-io/lpl-core';
+import { PublicKey } from '@safecoin/web3.js';
 
 export enum VaultKey {
   Uninitialized = 0,

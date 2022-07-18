@@ -1,11 +1,11 @@
-import { Transaction } from '@metaplex-foundation/mpl-core';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { Transaction } from '@leda-mint-io/lpl-core';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { VaultInstructions } from '../VaultProgram';
 import { NumberOfShareArgs } from '../accounts/Vault';

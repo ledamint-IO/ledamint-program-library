@@ -1,4 +1,4 @@
-import { AccountInfo, Connection, PublicKey } from '@solana/web3.js';
+import { AccountInfo, Connection, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import bs58 from 'bs58';
 import {
@@ -8,7 +8,7 @@ import {
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
   StringPublicKey,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { SafetyDepositBox } from './SafetyDepositBox';
 import { VaultKey, VaultProgram } from '../VaultProgram';
 import { Buffer } from 'buffer';
