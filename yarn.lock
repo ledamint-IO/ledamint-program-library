@@ -90,6 +90,23 @@
   resolved "https://registry.yarnpkg.com/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz#98c23c950a3d9b6c8f0daed06da6c3af06981340"
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
+"@j0nnyboi/mpl-core@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@j0nnyboi/mpl-core/-/mpl-core-0.0.1.tgz#03362f18038b22b56dd265a4ed873c4b5ef5ce02"
+  integrity sha512-Q5KYRaXs9kcl7o3AglkXoLX4HjN69zMg9Eeu0VrH57tb10d7jzr6lKqh/6M47/4P2Nzy0l+aaqAi0rGsnW9GBQ==
+  dependencies:
+    "@safecoin/web3.js" "^1.29.3"
+    bs58 "^4.0.1"
+
+"@leda-mint-io/lpl-auction@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@leda-mint-io/lpl-auction/-/lpl-auction-0.0.2.tgz#ca9b56b305765cefe1d150730a8deb7352e63750"
+  integrity sha512-NFjHcWfggMFyNFqTFdIklKJVMYkclVoBOZA7XDum9BaQmtyj6iGmlDdQ2dNAS0udU7b5uP9XvDVNruIrC5/KEw==
+  dependencies:
+    "@leda-mint-io/lpl-core" "^0.0.51"
+    "@safecoin/safe-token" "^0.1.7-b"
+    "@safecoin/web3.js" "^1.29.4"
+
 "@leda-mint-io/lpl-core@^0.0.51":
   version "0.0.51"
   resolved "https://registry.yarnpkg.com/@leda-mint-io/lpl-core/-/lpl-core-0.0.51.tgz#2e780ae6b14528f157d9e6c6ae7117256df1cebb"
@@ -98,6 +115,15 @@
     "@safecoin/safe-token" "0.1.7-b"
     "@safecoin/web3.js" "^1.29.4"
     bs58 "^4.0.1"
+
+"@leda-mint-io/lpl-token-metadata@^1.2.52":
+  version "1.2.52"
+  resolved "https://registry.yarnpkg.com/@leda-mint-io/lpl-token-metadata/-/lpl-token-metadata-1.2.52.tgz#f79c06a3f3e23ac980a0ca92c2d24bfd0c9ba28f"
+  integrity sha512-MV/1P3yJ/xUpHdAeaPCPFx/EPIyL4ggC+ekNZnZD7tjPaf+xZoBPaS7RP0GxSjxmUK7+CsvJnO3Ripq2kdjGBA==
+  dependencies:
+    "@j0nnyboi/mpl-core" "^0.0.1"
+    "@safecoin/safe-token" "^0.1.7-b"
+    "@safecoin/web3.js" "^1.29.4"
 
 "@lerna/add@4.0.0":
   version "4.0.0"
@@ -778,24 +804,6 @@
     "@solana/web3.js" "^1.31.0"
     bs58 "^4.0.1"
 
-"@metaplex-foundation/mpl-token-metadata@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-token-metadata/-/mpl-token-metadata-0.0.1.tgz#6ee60b13abb4d2c4f690a928f49e308895b53afa"
-  integrity sha512-axGse1UCGXVoB8a0tlCdMJDrrfOKBR3gCAxJ1G/NXodvkNn8TenMgdcYUKFE7hBIULIFBVWR2wdqG27UErgkNw==
-  dependencies:
-    "@metaplex-foundation/mpl-core" "^0.0.1"
-    "@solana/spl-token" "^0.1.8"
-    "@solana/web3.js" "^1.31.0"
-
-"@metaplex-foundation/mpl-token-vault@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-token-vault/-/mpl-token-vault-0.0.1.tgz#d7e852e607f2af63a74a392fa1920f323ac0b715"
-  integrity sha512-l+mCUB2Lm0xY206BeP0x/2JAlGufP2CdhrbA0C0vEwFCvIIU4Pp3ioNrIS1FxWu1VDR3eNTi712rr5LcaWiyPQ==
-  dependencies:
-    "@metaplex-foundation/mpl-core" "^0.0.1"
-    "@solana/spl-token" "^0.1.8"
-    "@solana/web3.js" "^1.31.0"
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -1000,7 +1008,7 @@
     buffer-layout "^1.2.0"
     dotenv "10.0.0"
 
-"@safecoin/web3.js@^1.21.0", "@safecoin/web3.js@^1.29.4":
+"@safecoin/web3.js@^1.21.0", "@safecoin/web3.js@^1.29.3", "@safecoin/web3.js@^1.29.4":
   version "1.29.4"
   resolved "https://registry.yarnpkg.com/@safecoin/web3.js/-/web3.js-1.29.4.tgz#7593735166e5b3eca81fb10d0db38df280b8e003"
   integrity sha512-IPU1EL30feLyDw6qDMjKXP9r70KPQI52n1Sh9R9QXD4EjBRQs0DJm7dVqSGjJiMrqvM4p8I6rGMwljtSPdr5vA==

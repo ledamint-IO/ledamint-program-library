@@ -1,12 +1,12 @@
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
-import { ParamsWithStore } from '@metaplex-foundation/mpl-token-vault';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
+import { ParamsWithStore } from '@leda-mint-io/lpl-token-vault';
 import {
   PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { MetaplexProgram } from '../MetaplexProgram';
 
 export class SetWhitelistedCreatorArgs extends Borsh.Data<{ activated: boolean }> {

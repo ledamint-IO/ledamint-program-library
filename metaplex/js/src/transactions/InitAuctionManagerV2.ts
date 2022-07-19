@@ -1,12 +1,12 @@
-import { Borsh, TupleNumericType, Transaction } from '@metaplex-foundation/mpl-core';
-import { ParamsWithStore } from '@metaplex-foundation/mpl-token-vault';
+import { Borsh, TupleNumericType, Transaction } from '@leda-mint-io/lpl-core';
+import { ParamsWithStore } from '@leda-mint-io/lpl-token-vault';
 import {
   PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import BN from 'bn.js';
 import { MetaplexProgram } from '../MetaplexProgram';
 

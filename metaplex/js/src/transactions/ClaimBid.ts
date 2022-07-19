@@ -1,13 +1,13 @@
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
-import { ParamsWithStore } from '@metaplex-foundation/mpl-token-vault';
-import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
+import { ParamsWithStore } from '@leda-mint-io/lpl-token-vault';
+import { AuctionProgram } from '@leda-mint-io/lpl-auction';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
   SYSVAR_CLOCK_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { MetaplexProgram } from '../MetaplexProgram';
 
 export class ClaimBidArgs extends Borsh.Data {

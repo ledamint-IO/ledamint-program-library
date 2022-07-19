@@ -1,15 +1,15 @@
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import {
   PublicKey,
   SystemProgram,
   SYSVAR_RENT_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
-import { ParamsWithStore, VaultProgram } from '@metaplex-foundation/mpl-token-vault';
-import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
-import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
+} from '@safecoin/web3.js';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
+import { ParamsWithStore, VaultProgram } from '@leda-mint-io/lpl-token-vault';
+import { MetadataProgram } from '@leda-mint-io/lpl-token-metadata';
+import { AuctionProgram } from '@leda-mint-io/lpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';
 
 export class SetStoreV2Args extends Borsh.Data<{ public: boolean; settingsUri: string | null }> {

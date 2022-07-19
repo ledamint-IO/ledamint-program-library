@@ -1,13 +1,13 @@
 import BN from 'bn.js';
-import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
+import { Borsh, Transaction } from '@leda-mint-io/lpl-core';
 import {
   PublicKey,
   SYSVAR_CLOCK_PUBKEY,
   TransactionCtorFields,
   TransactionInstruction,
-} from '@solana/web3.js';
-import { ParamsWithStore } from '@metaplex-foundation/mpl-token-vault';
-import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
+} from '@safecoin/web3.js';
+import { ParamsWithStore } from '@leda-mint-io/lpl-token-vault';
+import { AuctionProgram } from '@leda-mint-io/lpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';
 
 export class EndAuctionArgs extends Borsh.Data<{ reveal: BN[] | null }> {

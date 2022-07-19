@@ -1,4 +1,4 @@
-import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { AccountInfo, PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import {
   AnyPublicKey,
@@ -6,7 +6,7 @@ import {
   Borsh,
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { MetaplexKey, MetaplexProgram } from '../MetaplexProgram';
 import { Buffer } from 'buffer';
 

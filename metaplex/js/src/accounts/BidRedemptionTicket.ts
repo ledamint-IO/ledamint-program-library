@@ -1,4 +1,4 @@
-import { AccountInfo } from '@solana/web3.js';
+import { AccountInfo } from '@safecoin/web3.js';
 import BN from 'bn.js';
 import bs58 from 'bs58';
 import { MetaplexKey, MetaplexProgram } from '../MetaplexProgram';
@@ -9,7 +9,7 @@ import {
   ERROR_DEPRECATED_ACCOUNT_DATA,
   ERROR_INVALID_ACCOUNT_DATA,
   ERROR_INVALID_OWNER,
-} from '@metaplex-foundation/mpl-core';
+} from '@leda-mint-io/lpl-core';
 import { Buffer } from 'buffer';
 
 export interface BidRedemptionTicketV2Data {
