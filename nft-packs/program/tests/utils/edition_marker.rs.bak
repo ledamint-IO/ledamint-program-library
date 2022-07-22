@@ -130,7 +130,7 @@ impl TestEditionMarker {
                     context.payer.pubkey(),
                     self.metadata_pubkey,
                     safe_token::id(),
-                    mpl_token_vault::id(),
+                    lpl_token_vault::id(),
                     self.edition,
                 ),
             ],

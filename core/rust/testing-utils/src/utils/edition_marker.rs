@@ -90,7 +90,7 @@ impl EditionMarker {
         safety_deposit_box: &Pubkey,
         store: &Pubkey,
     ) -> transport::Result<()> {
-        let metaplex_token_vault_id = mpl_token_vault::id();
+        let metaplex_token_vault_id = lpl_token_vault::id();
         let vault_pubkey = vault.keypair.pubkey();
 
         let vault_mint_seeds = &[
@@ -137,7 +137,7 @@ impl EditionMarker {
                     context.payer.pubkey(),
                     self.metadata_pubkey,
                     safe_token::id(),
-                    mpl_token_vault::id(),
+                    lpl_token_vault::id(),
                     self.edition,
                 ),
             ],

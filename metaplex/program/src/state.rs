@@ -6,7 +6,7 @@ use {
     borsh::{BorshDeserialize, BorshSerialize},
     mpl_auction::processor::AuctionData,
     lpl_token_metadata::state::Metadata,
-    mpl_token_vault::state::SafetyDepositBox,
+    lpl_token_vault::state::SafetyDepositBox,
     safecoin_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,
         pubkey::Pubkey,

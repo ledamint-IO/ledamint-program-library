@@ -17,7 +17,7 @@ use lpl_token_metadata::{
     instruction::update_metadata_accounts,
     state::{Metadata, EDITION},
 };
-use mpl_token_vault::{instruction::create_withdraw_tokens_instruction, state::Vault};
+use lpl_token_vault::{instruction::create_withdraw_tokens_instruction, state::Vault};
 use safecoin_program::{
     account_info::AccountInfo,
     borsh::try_from_slice_unchecked,
@@ -102,7 +102,7 @@ pub fn assert_store_safety_vault_manager_match(
         &token_vault_program,
         safety_deposit_info,
         &[
-            mpl_token_vault::state::PREFIX.as_bytes(),
+            lpl_token_vault::state::PREFIX.as_bytes(),
             vault_info.key.as_ref(),
             token_mint_key.as_ref(),
         ],

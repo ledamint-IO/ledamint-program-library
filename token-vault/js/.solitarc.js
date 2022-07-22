@@ -7,7 +7,7 @@ const binaryInstallDir = path.join(__dirname, '.crates');
 
 module.exports = {
   idlGenerator: 'shank',
-  programName: 'mpl_token_vault',
+  programName: 'lpl_token_vault',
   idlDir,
   sdkDir,
   binaryInstallDir,

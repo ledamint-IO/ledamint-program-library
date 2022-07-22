@@ -10,7 +10,7 @@ use crate::{
 };
 use borsh::BorshSerialize;
 use mpl_auction::processor::{AuctionData, AuctionState};
-use mpl_token_vault::state::{Vault, VaultState};
+use lpl_token_vault::state::{Vault, VaultState};
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,

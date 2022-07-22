@@ -8,7 +8,7 @@ use crate::{
 };
 use borsh::BorshSerialize;
 use mpl_auction::processor::AuctionData;
-use mpl_token_vault::state::SafetyDepositBox;
+use lpl_token_vault::state::SafetyDepositBox;
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
@@ -58,7 +58,7 @@ pub fn process_set_auction_cache<'a>(
         &store.token_vault_program,
         safety_deposit_box_info,
         &[
-            mpl_token_vault::state::PREFIX.as_bytes(),
+            lpl_token_vault::state::PREFIX.as_bytes(),
             auction_manager.vault.as_ref(),
             deposit_box.token_mint.as_ref(),
         ],

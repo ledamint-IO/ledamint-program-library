@@ -32,7 +32,7 @@ use crate::{
 };
 use arrayref::array_ref;
 use borsh::{BorshDeserialize, BorshSerialize};
-use mpl_token_vault::{error::VaultError, state::VaultState};
+use lpl_token_vault::{error::VaultError, state::VaultState};
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
@@ -626,11 +626,11 @@ pub fn process_mint_new_edition_from_master_edition_via_vault_proxy<'a>(
     let safety_deposit_data = safety_deposit_info.data.borrow();
 
     // Since we're crunching out borsh for CPU units, do type checks this way
-    if vault_data[0] != mpl_token_vault::state::Key::VaultV1 as u8 {
+    if vault_data[0] != lpl_token_vault::state::Key::VaultV1 as u8 {
         return Err(VaultError::DataTypeMismatch.into());
     }
 
-    if safety_deposit_data[0] != mpl_token_vault::state::Key::SafetyDepositBoxV1 as u8 {
+    if safety_deposit_data[0] != lpl_token_vault::state::Key::SafetyDepositBoxV1 as u8 {
         return Err(VaultError::DataTypeMismatch.into());
     }
 
@@ -643,7 +643,7 @@ pub fn process_mint_new_edition_from_master_edition_via_vault_proxy<'a>(
     let owner = get_owner_from_token_account(store_info)?;
 
     let seeds = &[
-        mpl_token_vault::state::PREFIX.as_bytes(),
+        lpl_token_vault::state::PREFIX.as_bytes(),
         token_vault_program_info.key.as_ref(),
         vault_info.key.as_ref(),
     ];

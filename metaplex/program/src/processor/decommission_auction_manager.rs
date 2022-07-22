@@ -6,7 +6,7 @@ use crate::{
     },
 };
 use mpl_auction::processor::AuctionData;
-use mpl_token_vault::{instruction::create_set_authority_instruction, state::Vault};
+use lpl_token_vault::{instruction::create_set_authority_instruction, state::Vault};
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,

@@ -10,7 +10,7 @@ use crate::{
 };
 use borsh::BorshSerialize;
 use lpl_token_metadata::state::{MasterEditionV1, Metadata};
-use mpl_token_vault::state::{SafetyDepositBox, Vault};
+use lpl_token_vault::state::{SafetyDepositBox, Vault};
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,

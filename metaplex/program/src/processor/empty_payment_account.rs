@@ -15,7 +15,7 @@ use crate::{
 use borsh::BorshSerialize;
 use mpl_auction::processor::AuctionData;
 use lpl_token_metadata::state::{MasterEditionV1, Metadata};
-use mpl_token_vault::state::SafetyDepositBox;
+use lpl_token_vault::state::SafetyDepositBox;
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
