@@ -23,29 +23,29 @@ impl<'info> InitSellingResource<'info> {
 
         // Check `MasterEdition` derivation
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             master_edition_info,
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 resource_mint.key().as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
         )?;
 
         // Check, that provided metadata is correct
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             metadata,
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 resource_mint.key().as_ref(),
             ],
         )?;
 
         let metadata =
-            mpl_token_metadata::state::Metadata::from_account_info(&metadata.to_account_info())?;
+            lpl_token_metadata::state::Metadata::from_account_info(&metadata.to_account_info())?;
 
         // Check, that at least one creator exists in primary sale
         if !metadata.primary_sale_happened {
@@ -59,7 +59,7 @@ impl<'info> InitSellingResource<'info> {
         }
 
         let master_edition =
-            mpl_token_metadata::state::MasterEditionV2::from_account_info(master_edition_info)?;
+            lpl_token_metadata::state::MasterEditionV2::from_account_info(master_edition_info)?;
 
         let mut actual_max_supply = max_supply;
 

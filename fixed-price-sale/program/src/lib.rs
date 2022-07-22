@@ -131,7 +131,7 @@ pub mod fixed_price_sale {
     pub fn save_primary_metadata_creators<'info>(
         ctx: Context<'_, '_, '_, 'info, SavePrimaryMetadataCreators<'info>>,
         primary_metadata_creators_bump: u8,
-        creators: Vec<mpl_token_metadata::state::Creator>,
+        creators: Vec<lpl_token_metadata::state::Creator>,
     ) -> Result<()> {
         ctx.accounts
             .process(primary_metadata_creators_bump, creators)
@@ -159,9 +159,9 @@ pub struct InitSellingResource<'info> {
     selling_resource: Box<Account<'info, SellingResource>>,
     selling_resource_owner: UncheckedAccount<'info>,
     resource_mint: Box<Account<'info, Mint>>,
-    #[account(owner=mpl_token_metadata::id())]
+    #[account(owner=lpl_token_metadata::id())]
     master_edition: UncheckedAccount<'info>,
-    #[account(owner=mpl_token_metadata::id())]
+    #[account(owner=lpl_token_metadata::id())]
     metadata: UncheckedAccount<'info>,
     #[account(mut, has_one=owner)]
     vault: Box<Account<'info, TokenAccount>>,
@@ -209,17 +209,17 @@ pub struct Buy<'info> {
     trade_history: Box<Account<'info, TradeHistory>>,
     #[account(mut)]
     treasury_holder: UncheckedAccount<'info>,
-    // Will be created by `mpl_token_metadata`
+    // Will be created by `lpl_token_metadata`
     #[account(mut)]
     new_metadata: UncheckedAccount<'info>,
-    // Will be created by `mpl_token_metadata`
+    // Will be created by `lpl_token_metadata`
     #[account(mut)]
     new_edition: UncheckedAccount<'info>,
-    #[account(mut, owner=mpl_token_metadata::id())]
+    #[account(mut, owner=lpl_token_metadata::id())]
     master_edition: UncheckedAccount<'info>,
     #[account(mut)]
     new_mint: Box<Account<'info, Mint>>,
-    // Will be created by `mpl_token_metadata`
+    // Will be created by `lpl_token_metadata`
     #[account(mut)]
     edition_marker: UncheckedAccount<'info>,
     #[account(mut, has_one=owner)]
@@ -228,7 +228,7 @@ pub struct Buy<'info> {
     owner: UncheckedAccount<'info>,
     #[account(mut, constraint = new_token_account.owner == user_wallet.key())]
     new_token_account: Box<Account<'info, TokenAccount>>,
-    #[account(mut, owner=mpl_token_metadata::id())]
+    #[account(mut, owner=lpl_token_metadata::id())]
     master_edition_metadata: UncheckedAccount<'info>,
     clock: Sysvar<'info, Clock>,
     rent: Sysvar<'info, Rent>,
@@ -248,7 +248,7 @@ pub struct Withdraw<'info> {
     #[account(has_one=treasury_holder, has_one=selling_resource, has_one=treasury_mint)]
     market: Box<Account<'info, Market>>,
     selling_resource: Box<Account<'info, SellingResource>>,
-    #[account(owner=mpl_token_metadata::id())]
+    #[account(owner=lpl_token_metadata::id())]
     metadata: UncheckedAccount<'info>,
     #[account(mut)]
     treasury_holder: UncheckedAccount<'info>,
@@ -279,7 +279,7 @@ pub struct ClaimResource<'info> {
     selling_resource_owner: Signer<'info>,
     #[account(mut, has_one=owner)]
     vault: Box<Account<'info, TokenAccount>>,
-    #[account(mut, owner=mpl_token_metadata::id())]
+    #[account(mut, owner=lpl_token_metadata::id())]
     metadata: UncheckedAccount<'info>,
     #[account(seeds=[VAULT_OWNER_PREFIX.as_bytes(), selling_resource.resource.as_ref(), selling_resource.store.as_ref()], bump=vault_owner_bump)]
     owner: UncheckedAccount<'info>,
@@ -328,11 +328,11 @@ pub struct ChangeMarket<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(primary_metadata_creators: u8, creators: Vec<mpl_token_metadata::state::Creator>)]
+#[instruction(primary_metadata_creators: u8, creators: Vec<lpl_token_metadata::state::Creator>)]
 pub struct SavePrimaryMetadataCreators<'info> {
     #[account(mut)]
     admin: Signer<'info>,
-    #[account(mut, owner=mpl_token_metadata::id())]
+    #[account(mut, owner=lpl_token_metadata::id())]
     metadata: UncheckedAccount<'info>,
     #[account(init, space=PrimaryMetadataCreators::LEN, payer=admin, seeds=[PRIMARY_METADATA_CREATORS_PREFIX.as_bytes(), metadata.key.as_ref()], bump)]
     primary_metadata_creators: Box<Account<'info, PrimaryMetadataCreators>>,

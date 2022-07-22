@@ -1,6 +1,6 @@
 use crate::utils::*;
 use borsh::ser::BorshSerialize;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     id,
     instruction::{self, CreateMasterEditionArgs, MetadataInstruction},
     state::{EDITION, PREFIX},
@@ -48,7 +48,7 @@ impl MasterEditionV2 {
     pub async fn get_data(
         &self,
         context: &mut ProgramTestContext,
-    ) -> mpl_token_metadata::state::MasterEditionV2 {
+    ) -> lpl_token_metadata::state::MasterEditionV2 {
         let account = get_account(context, &self.pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }
@@ -56,7 +56,7 @@ impl MasterEditionV2 {
     pub async fn get_data_from_account(
         context: &mut ProgramTestContext,
         pubkey: &Pubkey,
-    ) -> mpl_token_metadata::state::MasterEditionV2 {
+    ) -> lpl_token_metadata::state::MasterEditionV2 {
         let account = get_account(context, pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }
@@ -69,7 +69,7 @@ impl MasterEditionV2 {
         let fake_token_program = Keypair::new();
 
         let fake_instruction = Instruction {
-            program_id: mpl_token_metadata::id(),
+            program_id: lpl_token_metadata::id(),
             accounts: vec![
                 AccountMeta::new(self.pubkey, false),
                 AccountMeta::new(self.mint_pubkey, false),

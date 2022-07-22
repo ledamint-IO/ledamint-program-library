@@ -34,7 +34,7 @@ pub use vault::TestVault;
 pub fn nft_packs_program_test<'a>() -> ProgramTest {
     let mut program = ProgramTest::new("mpl_nft_packs", mpl_nft_packs::id(), None);
     program.add_program("mpl_metaplex", mpl_metaplex::id(), None);
-    program.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
+    program.add_program("lpl_token_metadata", lpl_token_metadata::id(), None);
     program.prefer_bpf(false);
     program
 }

@@ -10,7 +10,7 @@ use {
     },
     arrayref::array_ref,
     mpl_auction::processor::AuctionData,
-    mpl_token_metadata::{
+    lpl_token_metadata::{
         deprecated_instruction::deprecated_set_reservation_list, state::Reservation,
     },
     safecoin_program::{

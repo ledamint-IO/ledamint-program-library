@@ -72,11 +72,11 @@ pub fn assert_metadata_valid<'a>(
     token_account: &anchor_lang::prelude::Account<'a, TokenAccount>,
 ) -> Result<()> {
     assert_derivation(
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
         &metadata.to_account_info(),
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             token_account.mint.as_ref(),
         ],
     )?;

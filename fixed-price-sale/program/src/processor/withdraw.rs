@@ -51,17 +51,17 @@ impl<'info> Withdraw<'info> {
 
         // Check, that provided metadata is correct
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             metadata,
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
         )?;
 
         // Obtain right creators according to sale type
-        let metadata = mpl_token_metadata::state::Metadata::from_account_info(&metadata)?;
+        let metadata = lpl_token_metadata::state::Metadata::from_account_info(&metadata)?;
         let actual_creators = if !metadata.primary_sale_happened {
             if remaining_accounts.len() == 0 {
                 return Err(ErrorCode::PrimaryMetadataCreatorsNotProvided.into());

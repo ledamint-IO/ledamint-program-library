@@ -19,7 +19,7 @@ use safe_token::state::Mint;
 pub use vault::Vault;
 
 pub fn program_test<'a>() -> ProgramTest {
-    ProgramTest::new("mpl_token_metadata", mpl_token_metadata::id(), None)
+    ProgramTest::new("lpl_token_metadata", lpl_token_metadata::id(), None)
 }
 
 pub async fn get_account(context: &mut ProgramTestContext, pubkey: &Pubkey) -> Account {

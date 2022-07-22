@@ -7,7 +7,7 @@ use crate::{
         CommonRedeemReturn,
     },
 };
-use mpl_token_metadata::state::Metadata;
+use lpl_token_metadata::state::Metadata;
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,

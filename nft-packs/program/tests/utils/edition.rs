@@ -1,4 +1,4 @@
-use mpl_token_metadata::state::{EDITION, PREFIX};
+use lpl_token_metadata::state::{EDITION, PREFIX};
 use safecoin_sdk::pubkey::Pubkey;
 
 #[derive(Debug)]
@@ -8,7 +8,7 @@ pub struct TestEdition {
 
 impl TestEdition {
     pub fn new(mint: &Pubkey) -> Self {
-        let program_id = mpl_token_metadata::id();
+        let program_id = lpl_token_metadata::id();
 
         let (pubkey, _) = Pubkey::find_program_address(
             &[

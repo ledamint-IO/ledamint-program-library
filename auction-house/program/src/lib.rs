@@ -690,11 +690,11 @@ pub mod auction_house {
             &token_account_mint,
         )?;
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             &metadata.to_account_info(),
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 token_account_mint.as_ref(),
             ],
         )?;

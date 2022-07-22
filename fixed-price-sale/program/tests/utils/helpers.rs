@@ -4,7 +4,7 @@ use anchor_client::safecoin_sdk::{
     pubkey::Pubkey,
     signer::{keypair::Keypair, Signer},
 };
-use mpl_token_metadata::state::Collection;
+use lpl_token_metadata::state::Collection;
 use safecoin_program::{clock::Clock, system_instruction};
 use safecoin_program_test::*;
 use safecoin_sdk::{program_pack::Pack, transaction::Transaction};
@@ -112,17 +112,17 @@ pub async fn create_master_edition(
 ) -> (Pubkey, u8) {
     let (edition, edition_bump) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let tx = Transaction::new_signed_with_payer(
-        &[mpl_token_metadata::instruction::create_master_edition_v3(
-            mpl_token_metadata::id(),
+        &[lpl_token_metadata::instruction::create_master_edition_v3(
+            lpl_token_metadata::id(),
             edition,
             *mint,
             update_authority.pubkey(),
@@ -149,7 +149,7 @@ pub async fn create_token_metadata(
     name: String,
     symbol: String,
     uri: String,
-    creators: Option<Vec<mpl_token_metadata::state::Creator>>,
+    creators: Option<Vec<lpl_token_metadata::state::Creator>>,
     seller_fee_basis_points: u16,
     update_authority_is_signer: bool,
     is_mutable: bool,
@@ -157,17 +157,17 @@ pub async fn create_token_metadata(
 ) -> Pubkey {
     let (metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            mpl_token_metadata::instruction::create_metadata_accounts_v2(
-                mpl_token_metadata::id(),
+            lpl_token_metadata::instruction::create_metadata_accounts_v2(
+                lpl_token_metadata::id(),
                 metadata,
                 *mint,
                 mint_authority.pubkey(),
@@ -202,26 +202,26 @@ pub async fn verify_collection(
 ) {
     let (collection_metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             collection_mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let (collection_master, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             collection_mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let tx = Transaction::new_signed_with_payer(
-        &[mpl_token_metadata::instruction::verify_collection(
-            mpl_token_metadata::id(),
+        &[lpl_token_metadata::instruction::verify_collection(
+            lpl_token_metadata::id(),
             *metadata,
             collection_authority.pubkey(),
             context.payer.pubkey(),

@@ -13,7 +13,7 @@ use {
         },
     },
     mpl_auction::processor::{AuctionData, AuctionDataExtended, BidderMetadata},
-    mpl_token_metadata::utils::get_supply_off_master_edition,
+    lpl_token_metadata::utils::get_supply_off_master_edition,
     safecoin_program::{
         account_info::{next_account_info, AccountInfo},
         entrypoint::ProgramResult,

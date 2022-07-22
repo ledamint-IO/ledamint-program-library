@@ -5,7 +5,7 @@ use {
     arrayref::{array_mut_ref, array_ref, mut_array_refs},
     borsh::{BorshDeserialize, BorshSerialize},
     mpl_auction::processor::AuctionData,
-    mpl_token_metadata::state::Metadata,
+    lpl_token_metadata::state::Metadata,
     mpl_token_vault::state::SafetyDepositBox,
     safecoin_program::{
         account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,

@@ -8,7 +8,7 @@ use crate::{
     state::{PackCard, PackDistributionType, PackSet, ProvingProcess, PREFIX},
     utils::*,
 };
-use mpl_token_metadata::state::{MasterEditionV2, Metadata};
+use lpl_token_metadata::state::{MasterEditionV2, Metadata};
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,

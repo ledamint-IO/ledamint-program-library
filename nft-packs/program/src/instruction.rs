@@ -197,7 +197,7 @@ pub enum NFTPacksInstruction {
     /// - read              metadata_mint_acc
     /// - read              edition_acc
     /// - read              rent program
-    /// - read              mpl_token_metadata program
+    /// - read              lpl_token_metadata program
     /// - read              safe_token program
     /// - read              system program
     ///
@@ -465,18 +465,18 @@ pub fn claim_pack(
     let (program_authority, _) = find_program_authority(program_id);
 
     let edition_number = (index as u64)
-        .checked_div(mpl_token_metadata::state::EDITION_MARKER_BIT_SIZE)
+        .checked_div(lpl_token_metadata::state::EDITION_MARKER_BIT_SIZE)
         .unwrap();
     let as_string = edition_number.to_string();
     let (edition_mark_pda, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             metadata_mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
             as_string.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let accounts = vec![
@@ -495,7 +495,7 @@ pub fn claim_pack(
         AccountMeta::new(*metadata_mint, false),
         AccountMeta::new(edition_mark_pda, false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
-        AccountMeta::new_readonly(mpl_token_metadata::id(), false),
+        AccountMeta::new_readonly(lpl_token_metadata::id(), false),
         AccountMeta::new_readonly(safe_token::id(), false),
         AccountMeta::new_readonly(system_program::id(), false),
     ];

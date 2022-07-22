@@ -121,7 +121,7 @@ pub fn sys_transfer<'a>(
     Ok(())
 }
 
-/// Wrapper of `mint_new_edition_from_master_edition_via_token` instruction from `mpl_token_metadata` program
+/// Wrapper of `mint_new_edition_from_master_edition_via_token` instruction from `lpl_token_metadata` program
 #[inline(always)]
 pub fn mpl_mint_new_edition_from_master_edition_via_token<'a>(
     new_metadata: &AccountInfo<'a>,
@@ -141,8 +141,8 @@ pub fn mpl_mint_new_edition_from_master_edition_via_token<'a>(
     edition: u64,
     signers_seeds: &[&[u8]],
 ) -> Result<()> {
-    let tx = mpl_token_metadata::instruction::mint_new_edition_from_master_edition_via_token(
-        mpl_token_metadata::id(),
+    let tx = lpl_token_metadata::instruction::mint_new_edition_from_master_edition_via_token(
+        lpl_token_metadata::id(),
         *new_metadata.key,
         *new_edition.key,
         *master_edition.key,
@@ -181,7 +181,7 @@ pub fn mpl_mint_new_edition_from_master_edition_via_token<'a>(
     Ok(())
 }
 
-/// Wrapper of `update_primary_sale_happened_via_token` instruction from `mpl_token_metadata` program
+/// Wrapper of `update_primary_sale_happened_via_token` instruction from `lpl_token_metadata` program
 #[inline(always)]
 pub fn mpl_update_primary_sale_happened_via_token<'a>(
     metadata: &AccountInfo<'a>,
@@ -189,8 +189,8 @@ pub fn mpl_update_primary_sale_happened_via_token<'a>(
     token: &AccountInfo<'a>,
     signers_seeds: &[&[u8]],
 ) -> Result<()> {
-    let tx = mpl_token_metadata::instruction::update_primary_sale_happened_via_token(
-        mpl_token_metadata::id(),
+    let tx = lpl_token_metadata::instruction::update_primary_sale_happened_via_token(
+        lpl_token_metadata::id(),
         metadata.key(),
         owner.key(),
         token.key(),
@@ -205,19 +205,19 @@ pub fn mpl_update_primary_sale_happened_via_token<'a>(
     Ok(())
 }
 
-/// Wrapper of `update_metadata_accounts_v2` instruction from `mpl_token_metadata` program
+/// Wrapper of `update_metadata_accounts_v2` instruction from `lpl_token_metadata` program
 #[inline(always)]
 pub fn mpl_update_metadata_accounts_v2<'a>(
     metadata: &AccountInfo<'a>,
     update_authority: &AccountInfo<'a>,
     new_update_authority: Option<Pubkey>,
-    data: Option<mpl_token_metadata::state::DataV2>,
+    data: Option<lpl_token_metadata::state::DataV2>,
     primary_sale_happened: Option<bool>,
     is_mutable: Option<bool>,
     signers_seeds: &[&[u8]],
 ) -> Result<()> {
-    let tx = mpl_token_metadata::instruction::update_metadata_accounts_v2(
-        mpl_token_metadata::id(),
+    let tx = lpl_token_metadata::instruction::update_metadata_accounts_v2(
+        lpl_token_metadata::id(),
         metadata.key(),
         update_authority.key(),
         new_update_authority,

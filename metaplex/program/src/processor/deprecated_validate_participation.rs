@@ -9,7 +9,7 @@ use crate::{
     },
 };
 use borsh::BorshSerialize;
-use mpl_token_metadata::state::{MasterEditionV1, Metadata};
+use lpl_token_metadata::state::{MasterEditionV1, Metadata};
 use mpl_token_vault::state::{SafetyDepositBox, Vault};
 use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
@@ -104,10 +104,10 @@ pub fn process_deprecated_validate_participation(
         &store.token_metadata_program,
         open_master_edition_info,
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
             store.token_metadata_program.as_ref(),
             &open_edition_metadata.mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ],
     )?;
 
