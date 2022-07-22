@@ -8,7 +8,7 @@ import {
   assertError,
   defaultSendOptions,
 } from '@j0nnyboi/amman';
-import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
+import { deprecated } from '@metaplex-foundation/lpl-token-metadata';
 import { findPayoutTicketAddress, findTradeHistoryAddress } from '../src/utils';
 import {
   createPrerequisites,

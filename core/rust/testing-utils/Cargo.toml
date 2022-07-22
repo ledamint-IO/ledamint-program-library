@@ -23,7 +23,7 @@ safecoin-sdk = {path = "../../../../Safecoin/sdk"}
 safe-token = {features = ["no-entrypoint"],path = "../../../../safecoin-program-library/token/program" }
 safe-associated-token-account = {features = ["no-entrypoint"] ,path = "../../../../safecoin-program-library/associated-token-account/program"}
 lpl-token-vault = { path = "../../../token-vault/program", features = [ "no-entrypoint" ] }
-mpl-token-metadata = { path = "../../../token-metadata/program", features = [ "no-entrypoint" ] }
+lpl-token-metadata = { path = "../../../token-metadata/program", features = [ "no-entrypoint" ] }
 rand = "~0.7.3"
 num = "~0.4"
 num-derive = "~0.3"

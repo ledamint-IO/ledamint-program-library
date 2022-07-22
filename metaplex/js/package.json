@@ -44,7 +44,7 @@
   "dependencies": {
     "@metaplex-foundation/mpl-auction": "^0.0.2",
     "@metaplex-foundation/mpl-core": "^0.0.5",
-    "@metaplex-foundation/mpl-token-metadata": "^0.0.2",
+    "@metaplex-foundation/lpl-token-metadata": "^0.0.2",
     "@metaplex-foundation/lpl-token-vault": "^0.0.2",
     "@safecoin/safe-token": "^0.1.7-b",
     "@safecoin/web3.js": "^1.29.4"

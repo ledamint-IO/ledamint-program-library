@@ -5,7 +5,7 @@ import {
   SYSVAR_CLOCK_PUBKEY,
   AccountMeta,
 } from '@safecoin/web3.js';
-import { PROGRAM_ID } from '@metaplex-foundation/mpl-token-metadata';
+import { PROGRAM_ID } from '@metaplex-foundation/lpl-token-metadata';
 
 import { createBuyInstruction } from '../../src/generated/instructions';
 

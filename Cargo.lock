@@ -1984,7 +1984,7 @@ dependencies = [
  "anchor-client 0.22.1",
  "anchor-lang 0.22.1",
  "anchor-spl 0.22.1",
- "mpl-token-metadata 1.1.0",
+ "lpl-token-metadata 1.1.0",
  "solana-program",
  "solana-program-test",
  "solana-sdk",
@@ -1999,7 +1999,7 @@ dependencies = [
  "arrayref",
  "borsh 0.9.3",
  "mpl-auction",
- "mpl-token-metadata 1.1.0",
+ "lpl-token-metadata 1.1.0",
  "lpl-token-vault 0.1.1",
  "num-derive",
  "num-traits",
@@ -2018,7 +2018,7 @@ dependencies = [
  "arrayref",
  "borsh 0.9.3",
  "mpl-metaplex",
- "mpl-token-metadata 1.1.0",
+ "lpl-token-metadata 1.1.0",
  "lpl-token-vault 0.1.1",
  "num-derive",
  "num-traits",
@@ -2038,7 +2038,7 @@ version = "0.0.2"
 dependencies = [
  "anchor-client 0.24.1",
  "borsh 0.9.3",
- "mpl-token-metadata 1.1.0",
+ "lpl-token-metadata 1.1.0",
  "lpl-token-vault 0.1.1",
  "num",
  "num-derive",
@@ -2060,7 +2060,7 @@ dependencies = [
  "anchor-lang 0.24.2",
  "anchor-spl 0.24.2",
  "arrayref",
- "mpl-token-metadata 1.2.8",
+ "lpl-token-metadata 1.2.8",
  "solana-program-test",
  "solana-sdk",
  "spl-associated-token-account",
@@ -2069,7 +2069,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-token-metadata"
+name = "lpl-token-metadata"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fe5e23f9f14cbd35ab82c471e7a024f617a8f65b0468fa2c8c7eb4def7ebaa18"
@@ -2086,7 +2086,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-token-metadata"
+name = "lpl-token-metadata"
 version = "1.2.8"
 dependencies = [
  "arrayref",

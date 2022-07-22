@@ -17,5 +17,5 @@ borsh = "0.9.1"
 clap = "2.33.0"
 solana-clap-utils = "1.9.5"
 solana-cli-config = "1.9.5"
-mpl-token-metadata = { path="../program", features = [ "no-entrypoint" ] }
+lpl-token-metadata = { path="../program", features = [ "no-entrypoint" ] }
 safe-token = { version="3.2.0", features = [ "no-entrypoint" ] }

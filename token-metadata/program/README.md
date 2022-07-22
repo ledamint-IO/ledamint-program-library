@@ -31,8 +31,8 @@ that can be perused for learning and run if desired with `cargo run --bin metapl
 ## Interface
 
 The on-chain Token Metadata program is written in Rust and available on crates.io as
-[mpl-token-metadata](https://crates.io/crates/mpl-token-metadata) and
-[docs.rs](https://docs.rs/mpl-token-metadata).
+[lpl-token-metadata](https://crates.io/crates/lpl-token-metadata) and
+[docs.rs](https://docs.rs/lpl-token-metadata).
 
 The crate provides four instructions, `create_metadata_accounts()`, `update_metadata_account()`, `create_master_edition()`, `mint_new_edition_from_master_edition_via_token(),` to easily create instructions for the program.
 

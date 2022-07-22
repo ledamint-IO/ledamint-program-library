@@ -1,7 +1,7 @@
 import BN from 'bn.js';
 import test from 'tape';
 import { assertConfirmedTransaction, defaultSendOptions } from '@j0nnyboi/amman';
-import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
+import { deprecated } from '@metaplex-foundation/lpl-token-metadata';
 import { TokenAccount } from '@metaplex-foundation/mpl-core';
 
 import { findTradeHistoryAddress, validateMembershipToken } from '../src/utils';

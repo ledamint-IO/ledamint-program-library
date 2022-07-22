@@ -1,4 +1,4 @@
-import { PROGRAM_ID } from '@metaplex-foundation/mpl-token-metadata';
+import { PROGRAM_ID } from '@metaplex-foundation/lpl-token-metadata';
 import { Connection, Keypair, PublicKey, Transaction, SYSVAR_CLOCK_PUBKEY } from '@safecoin/web3.js';
 import { createClaimResourceInstruction } from '../../src/generated/instructions';
 import { createAndSignTransaction } from '../utils';

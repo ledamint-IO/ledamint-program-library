@@ -5,7 +5,7 @@ import {
   PayerTransactionHandler,
 } from '@j0nnyboi/amman';
 import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
-import { Creator } from '@metaplex-foundation/mpl-token-metadata';
+import { Creator } from '@metaplex-foundation/lpl-token-metadata';
 
 import { findVaultOwnerAddress } from '../../src/utils';
 

@@ -16,7 +16,7 @@ import {
 } from '@safecoin/web3.js';
 import { Borsh, Transaction } from '@metaplex-foundation/mpl-core';
 import { ParamsWithStore, VaultProgram } from './vault';
-import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
+import { MetadataProgram } from '@metaplex-foundation/lpl-token-metadata';
 import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';
 

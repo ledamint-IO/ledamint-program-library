@@ -20,7 +20,7 @@ default = []
 anchor-lang = {path = "../../../anchor-22/lang", features=["init-if-needed"]}
 anchor-spl = {path = "../../../anchor-22/spl"}
 safe-token = {path = "../../../safecoin-program-library/token/program"}
-mpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
+lpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
 
 [dev-dependencies]
 anchor-client = {path = "../../../anchor-22/client"}

@@ -16,7 +16,7 @@ import {
   TransactionInstruction,
 } from '@safecoin/web3.js';
 
-import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
+import { MetadataProgram } from '@metaplex-foundation/lpl-token-metadata';
 import { VaultProgram, ParamsWithStore } from './vault';
 import { AuctionProgram } from '@metaplex-foundation/mpl-auction';
 import { MetaplexProgram } from '../MetaplexProgram';

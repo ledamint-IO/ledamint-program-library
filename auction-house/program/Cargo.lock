@@ -1836,7 +1836,7 @@ dependencies = [
  "env_logger",
  "metaplex-token-metadata",
  "mpl-testing-utils",
- "mpl-token-metadata",
+ "lpl-token-metadata",
  "safe-associated-token-account",
  "safe-token",
  "safecoin-program",
@@ -1853,7 +1853,7 @@ version = "0.0.2"
 dependencies = [
  "anchor-client 0.22.0",
  "borsh",
- "mpl-token-metadata",
+ "lpl-token-metadata",
  "lpl-token-vault",
  "num",
  "num-derive",
@@ -1869,7 +1869,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-token-metadata"
+name = "lpl-token-metadata"
 version = "1.2.7"
 dependencies = [
  "arrayref",

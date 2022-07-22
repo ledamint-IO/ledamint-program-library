@@ -22,7 +22,7 @@ default = []
 anchor-lang = {path = "../../../anchor-21/lang"}
 arrayref = "0.3.6"
 safe-token = { features = ["no-entrypoint"],path = "../../../safecoin-program-library/token/program" }
-mpl-token-metadata = { features = ["no-entrypoint"], path="../../token-metadata/program" }
+lpl-token-metadata = { features = ["no-entrypoint"], path="../../token-metadata/program" }
 safe-associated-token-account = { features = ["no-entrypoint",] ,path = "../../../safecoin-program-library/associated-token-account/program"}
 anchor-spl = {path = "../../../anchor-21/spl"}
 safecoin-program = {path = "../../../Safecoin/sdk/program"}

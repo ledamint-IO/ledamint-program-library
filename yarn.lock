@@ -1173,7 +1173,7 @@ __metadata:
     "@j0nnyboi/beet": ^0.1.1
     "@j0nnyboi/beet-safecoin": ^0.1.1
     "@metaplex-foundation/mpl-core": ^0.0.5
-    "@metaplex-foundation/mpl-token-metadata": 2.0.0
+    "@metaplex-foundation/lpl-token-metadata": 2.0.0
     "@metaplex-foundation/solita": ^0.2.0
     "@safecoin/safe-token": ^0.1.7-b
     "@safecoin/web3.js": ^1.29.4
@@ -1215,7 +1215,7 @@ __metadata:
     "@j0nnyboi/amman": ^0.1.0
     "@metaplex-foundation/mpl-auction": ^0.0.2
     "@metaplex-foundation/mpl-core": ^0.0.5
-    "@metaplex-foundation/mpl-token-metadata": ^0.0.2
+    "@metaplex-foundation/lpl-token-metadata": ^0.0.2
     "@metaplex-foundation/lpl-token-vault": ^0.0.2
     "@safecoin/safe-token": ^0.1.7-b
     "@safecoin/web3.js": ^1.29.4
@@ -1244,9 +1244,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@metaplex-foundation/mpl-token-metadata@npm:2.0.0":
+"@metaplex-foundation/lpl-token-metadata@npm:2.0.0":
   version: 2.0.0
-  resolution: "@metaplex-foundation/mpl-token-metadata@npm:2.0.0"
+  resolution: "@metaplex-foundation/lpl-token-metadata@npm:2.0.0"
   dependencies:
     "@metaplex-foundation/beet": ^0.1.0
     "@metaplex-foundation/beet-solana": ^0.1.1
@@ -1260,9 +1260,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metaplex-foundation/mpl-token-metadata@npm:^0.0.2":
+"@metaplex-foundation/lpl-token-metadata@npm:^0.0.2":
   version: 0.0.2
-  resolution: "@metaplex-foundation/mpl-token-metadata@npm:0.0.2"
+  resolution: "@metaplex-foundation/lpl-token-metadata@npm:0.0.2"
   dependencies:
     "@metaplex-foundation/mpl-core": ^0.0.2
     "@solana/spl-token": ^0.1.8

@@ -50,7 +50,7 @@ merged.
 | Package          | Link                                            | Version                                                        |
 | :--------------- | :---------------------------------------------- | :------------------------------------------------------------- |
 | Candy Machine    | [mpl-candy-machine][mpl-candy-machine-crate]    | [![Crate][mpl-candy-machine-img]][mpl-candy-machine-crate]     |
-| Token Metadata   | [mpl-token-metadata][mpl-token-metadata-crate]  | [![Crate][mpl-token-metadata-img]][mpl-token-metadata-crate]   |
+| Token Metadata   | [lpl-token-metadata][lpl-token-metadata-crate]  | [![Crate][lpl-token-metadata-img]][lpl-token-metadata-crate]   |
 | Token Vault      | [lpl-token-vault][lpl-token-vault-crate]        | [![Crate][lpl-token-vault-img]][lpl-token-vault-crate]         |
 | Auction House    | [mpl-auction-house][mpl-auction-house-crate]    | [![Crate][mpl-auction-house-img]][mpl-auction-house-crate]     |
 | Testing Utils    | [mpl-testing-utils][mpl-testing-utils-crate]    | [![Crate][mpl-testing-utils-img]][mpl-testing-utils-crate]     |
@@ -60,7 +60,7 @@ merged.
 | Package        | Link                                          | Version                                                    |
 | :------------- | :-------------------------------------------- | :--------------------------------------------------------- |
 | Candy Machine  | [mpl-candy-machine][mpl-candy-machine-npm]    | [![NPM][mpl-candy-machine-nimg]][mpl-candy-machine-npm]    |
-| Token Metadata | [mpl-token-metadata][mpl-token-metadata-npm]  | [![NPM][mpl-token-metadata-nimg]][mpl-token-metadata-npm]  |
+| Token Metadata | [lpl-token-metadata][lpl-token-metadata-npm]  | [![NPM][lpl-token-metadata-nimg]][lpl-token-metadata-npm]  |
 | Core           | [mpl-core][mpl-core-npm]                      | [![NPM][mpl-core-nimg]][mpl-core-npm]                      |
 | Auction House  | [mpl-auction-house][mpl-auction-house-npm]    | [![NPM][mpl-auction-house-nimg]][mpl-auction-house-npm]    |
 
@@ -128,23 +128,23 @@ The Rust/Cargo programs are licensed under the [AGPLv3](https://www.gnu.org/lice
 
 <!-- Crates -->
 [mpl-candy-machine-crate]:https://crates.io/crates/mpl-candy-machine
-[mpl-token-metadata-crate]:https://crates.io/crates/mpl-token-metadata
+[lpl-token-metadata-crate]:https://crates.io/crates/lpl-token-metadata
 [lpl-token-vault-crate]:https://crates.io/crates/lpl-token-vault
 [mpl-auction-house-crate]:https://crates.io/crates/mpl-auction-house
 [mpl-testing-utils-crate]:https://crates.io/crates/mpl-testing-utils
 [mpl-candy-machine-img]:https://img.shields.io/crates/v/mpl-candy-machine
-[mpl-token-metadata-img]:https://img.shields.io/crates/v/mpl-token-metadata
+[lpl-token-metadata-img]:https://img.shields.io/crates/v/lpl-token-metadata
 [lpl-token-vault-img]:https://img.shields.io/crates/v/lpl-token-vault
 [mpl-auction-house-img]:https://img.shields.io/crates/v/mpl-auction-house
 [mpl-testing-utils-img]:https://img.shields.io/crates/v/mpl-testing-utils
 
 <!-- NPM Packages -->
 [mpl-candy-machine-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-candy-machine
-[mpl-token-metadata-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-token-metadata
+[lpl-token-metadata-npm]:https://www.npmjs.com/package/@metaplex-foundation/lpl-token-metadata
 [mpl-core-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-core
 [mpl-auction-house-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-auction-house
 [mpl-candy-machine-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-candy-machine
-[mpl-token-metadata-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-token-metadata
+[lpl-token-metadata-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/lpl-token-metadata
 [mpl-core-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-core
 [mpl-auction-house-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-auction-house
 

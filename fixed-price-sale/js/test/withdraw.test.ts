@@ -4,7 +4,7 @@ import test from 'tape';
 // @ts-ignore createInitializeMintInstruction export actually exist but isn't setup correctly
 import { getAssociatedTokenAddress } from '@safecoin/safe-token';
 import { assertConfirmedTransaction, defaultSendOptions } from '@j0nnyboi/amman';
-import { deprecated } from '@metaplex-foundation/mpl-token-metadata';
+import { deprecated } from '@metaplex-foundation/lpl-token-metadata';
 import { findPayoutTicketAddress, findTradeHistoryAddress } from '../src/utils';
 import { closeMarket, createBuyTransaction, createWithdrawTransaction } from './transactions';
 import { killStuckProcess, logDebug, sleep } from './utils';

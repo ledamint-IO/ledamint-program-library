@@ -14,7 +14,7 @@ import {
   TransactionCtorFields,
   TransactionInstruction,
 } from '@safecoin/web3.js';
-import { MetadataProgram } from '@metaplex-foundation/mpl-token-metadata';
+import { MetadataProgram } from '@metaplex-foundation/lpl-token-metadata';
 import { VaultProgram, ParamsWithStore } from './vault';
 import { MetaplexProgram } from '../MetaplexProgram';
 import { strict as assert } from 'assert';

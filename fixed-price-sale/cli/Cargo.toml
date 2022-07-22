@@ -11,7 +11,7 @@ clap = { version = "3.0.5", features = [ "derive" ] }
 safecoin-sdk = "1.9.5"
 safecoin-client = "1.9.5"
 mpl-fixed-price-sale = { path = "../program", features = [ "no-entrypoint" ] }
-mpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
+lpl-token-metadata = { features = [ "no-entrypoint" ], path="../../token-metadata/program"}
 borsh = "0.9.1"
 safe-token = { version = "3.2.0", features = [ "no-entrypoint" ] }
 anchor-lang = {path = "../../../anchor/lang"}
