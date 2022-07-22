@@ -1,9 +1,9 @@
 #![cfg(feature = "test-bpf")]
 mod utils;
 
-use mpl_token_metadata::state::MasterEditionV2 as ProgramME;
-use mpl_token_metadata::{state::Key};
-use mpl_token_metadata::{state::MAX_MASTER_EDITION_LEN, utils::try_from_slice_checked};
+use lpl_token_metadata::state::MasterEditionV2 as ProgramME;
+use lpl_token_metadata::{state::Key};
+use lpl_token_metadata::{state::MAX_MASTER_EDITION_LEN, utils::try_from_slice_checked};
 
 use safecoin_program::borsh::try_from_slice_unchecked;
 use safecoin_program_test::*;

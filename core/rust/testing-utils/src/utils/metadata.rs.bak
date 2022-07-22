@@ -1,5 +1,5 @@
 use crate::{solana::create_associated_token_account, utils::*};
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     id, instruction,
     state::{Collection, Creator, Data, DataV2, Uses, PREFIX},
 };
@@ -36,7 +36,7 @@ impl Metadata {
     pub async fn get_data(
         &self,
         context: &mut ProgramTestContext,
-    ) -> mpl_token_metadata::state::Metadata {
+    ) -> lpl_token_metadata::state::Metadata {
         let account = get_account(context, &self.pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }

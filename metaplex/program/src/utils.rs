@@ -13,7 +13,7 @@ use mpl_auction::{
         end_auction::EndAuctionArgs, AuctionData, AuctionDataExtended, AuctionState, BidderMetadata,
     },
 };
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction::update_metadata_accounts,
     state::{Metadata, EDITION},
 };
@@ -855,7 +855,7 @@ pub fn assert_edition_valid(
     edition_account_info: &AccountInfo,
 ) -> ProgramResult {
     let edition_seeds = &[
-        mpl_token_metadata::state::PREFIX.as_bytes(),
+        lpl_token_metadata::state::PREFIX.as_bytes(),
         program_id.as_ref(),
         &mint.as_ref(),
         EDITION.as_bytes(),

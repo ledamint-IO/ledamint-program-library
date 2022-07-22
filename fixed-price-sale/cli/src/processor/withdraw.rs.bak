@@ -59,11 +59,11 @@ pub fn withdraw(
     // Should be created
     let (master_edition_metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             resource_mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let (primary_metadata_creators, _primary_metadata_creators_bump) =

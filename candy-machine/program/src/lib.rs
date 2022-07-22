@@ -18,7 +18,7 @@ use {
     },
     anchor_spl::token::Token,
     arrayref::array_ref,
-    mpl_token_metadata::{
+    lpl_token_metadata::{
         assertions::collection::assert_master_edition,
         error::MetadataError,
         instruction::{
@@ -293,15 +293,15 @@ pub mod candy_machine {
         let cm_key = candy_machine.key();
         let authority_seeds = [PREFIX.as_bytes(), cm_key.as_ref(), &[creator_bump]];
 
-        let mut creators: Vec<mpl_token_metadata::state::Creator> =
-            vec![mpl_token_metadata::state::Creator {
+        let mut creators: Vec<lpl_token_metadata::state::Creator> =
+            vec![lpl_token_metadata::state::Creator {
                 address: candy_machine_creator.key(),
                 verified: true,
                 share: 0,
             }];
 
         for c in &candy_machine.data.creators {
-            creators.push(mpl_token_metadata::state::Creator {
+            creators.push(lpl_token_metadata::state::Creator {
                 address: c.address,
                 verified: false,
                 share: c.share,
@@ -897,7 +897,7 @@ pub struct SetCollectionDuringMint<'info> {
     #[account(mut, seeds = [b"collection".as_ref(), candy_machine.to_account_info().key.as_ref()], bump)]
     collection_pda: Account<'info, CollectionPDA>,
     /// CHECK: account constraints checked in account trait
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     /// CHECK: account constraints checked in account trait
     #[account(address = sysvar::instructions::id())]
@@ -937,7 +937,7 @@ pub struct SetCollection<'info> {
     #[account(mut)]
     collection_authority_record: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
 }
 
@@ -957,7 +957,7 @@ pub struct RemoveCollection<'info> {
     #[account(mut)]
     collection_authority_record: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
 }
 
@@ -1010,7 +1010,7 @@ pub struct MintNFT<'info> {
     #[account(mut)]
     master_edition: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     token_program: Program<'info, Token>,
     system_program: Program<'info, System>,

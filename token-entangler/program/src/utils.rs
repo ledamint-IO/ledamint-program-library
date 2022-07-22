@@ -11,7 +11,7 @@ use anchor_lang::{
 };
 use anchor_spl::token::Token;
 use arrayref::array_ref;
-use mpl_token_metadata::state::Metadata;
+use lpl_token_metadata::state::Metadata;
 use safe_associated_token_account::get_associated_token_address;
 use safe_token::{instruction::initialize_account2, state::Account};
 use std::{convert::TryInto, slice::Iter};
@@ -73,11 +73,11 @@ pub fn assert_metadata_valid<'a>(
     mint: &Pubkey,
 ) -> Result<()> {
     assert_derivation(
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
         &metadata.to_account_info(),
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             mint.as_ref(),
         ],
     )?;
@@ -87,13 +87,13 @@ pub fn assert_metadata_valid<'a>(
 
     if let Some(ed) = edition {
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             &ed.to_account_info(),
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 mint.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
         )?;
         if ed.data_is_empty() {

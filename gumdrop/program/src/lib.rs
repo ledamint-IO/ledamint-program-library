@@ -2,7 +2,7 @@
 
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token, TokenAccount};
-use mpl_token_metadata;
+use lpl_token_metadata;
 use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     program::{invoke, invoke_signed},
@@ -338,8 +338,8 @@ pub mod merkle_distributor {
             required_lamports = CandyMachine::try_deserialize(&mut candy_machine_data)?
                 .data
                 .price
-                + rent.minimum_balance(mpl_token_metadata::state::MAX_METADATA_LEN)
-                + rent.minimum_balance(mpl_token_metadata::state::MAX_MASTER_EDITION_LEN);
+                + rent.minimum_balance(lpl_token_metadata::state::MAX_METADATA_LEN)
+                + rent.minimum_balance(lpl_token_metadata::state::MAX_MASTER_EDITION_LEN);
         }
         msg!(
             "Transferring {} lamports to distributor wallet for candy machine mint",
@@ -486,7 +486,7 @@ pub mod merkle_distributor {
         ];
 
         invoke_signed(
-            &mpl_token_metadata::instruction::mint_new_edition_from_master_edition_via_token(
+            &lpl_token_metadata::instruction::mint_new_edition_from_master_edition_via_token(
                 *ctx.accounts.token_metadata_program.key,
                 *ctx.accounts.metadata_new_metadata.key,
                 *ctx.accounts.metadata_new_edition.key,
@@ -728,7 +728,7 @@ pub struct ClaimCandy<'info> {
     pub token_program: Program<'info, Token>,
 
     /// SPL [TokenMetadata] program.
-    // #[account(address = mpl_token_metadata::id())]
+    // #[account(address = lpl_token_metadata::id())]
     pub token_metadata_program: AccountInfo<'info>,
 
     /// SPL [CandyMachine] program.
@@ -819,7 +819,7 @@ pub struct ClaimEdition<'info> {
     pub token_program: Program<'info, Token>,
 
     /// SPL [TokenMetadata] program.
-    // #[account(address = mpl_token_metadata::id())]
+    // #[account(address = lpl_token_metadata::id())]
     pub token_metadata_program: AccountInfo<'info>,
 
     rent: Sysvar<'info, Rent>,

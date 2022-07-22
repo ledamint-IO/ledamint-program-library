@@ -114,7 +114,7 @@ impl TradeHistory {
 
 #[account]
 pub struct PrimaryMetadataCreators {
-    pub creators: Vec<mpl_token_metadata::state::Creator>,
+    pub creators: Vec<lpl_token_metadata::state::Creator>,
 }
 
 impl PrimaryMetadataCreators {

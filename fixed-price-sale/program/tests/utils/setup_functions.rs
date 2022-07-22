@@ -78,7 +78,7 @@ pub async fn setup_selling_resource(
     admin_wallet: &Keypair,
     store_keypair: &Keypair,
     seller_fee_basis_points: u16,
-    creators: Option<Vec<mpl_token_metadata::state::Creator>>,
+    creators: Option<Vec<lpl_token_metadata::state::Creator>>,
     selling_resource_owner_creator: bool,
     is_mutable: bool,
 ) -> (Keypair, Keypair, Keypair) {
@@ -118,14 +118,14 @@ pub async fn setup_selling_resource(
     if selling_resource_owner_creator {
         if let Some(creators_captured) = creators {
             let mut cr = creators_captured.clone();
-            cr.push(mpl_token_metadata::state::Creator {
+            cr.push(lpl_token_metadata::state::Creator {
                 address: selling_resource_owner_keypair.pubkey(),
                 share: 100,
                 verified: false,
             });
             creators = Some(cr);
         } else {
-            creators = Some(vec![mpl_token_metadata::state::Creator {
+            creators = Some(vec![lpl_token_metadata::state::Creator {
                 address: selling_resource_owner_keypair.pubkey(),
                 share: 100,
                 verified: false,

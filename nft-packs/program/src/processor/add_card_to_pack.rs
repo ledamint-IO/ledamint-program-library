@@ -12,7 +12,7 @@ use crate::{
     utils::*,
 };
 use mpl_metaplex::state::Store;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     error::MetadataError,
     state::{MasterEditionV2, Metadata, EDITION, PREFIX},
     utils::{assert_derivation, assert_initialized},
@@ -143,7 +143,7 @@ pub fn add_card_to_pack(
     let mut pack_card = PackCard::unpack_unchecked(&pack_card_info.data.borrow_mut())?;
     assert_uninitialized(&pack_card)?;
 
-    let token_metadata_program_id = mpl_token_metadata::id();
+    let token_metadata_program_id = lpl_token_metadata::id();
 
     // Check for v2
     let master_edition = MasterEditionV2::from_account_info(master_edition_info)?;

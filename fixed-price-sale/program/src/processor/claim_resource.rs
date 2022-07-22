@@ -45,11 +45,11 @@ impl<'info> ClaimResource<'info> {
 
         // Check, that provided metadata is correct
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             metadata,
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
         )?;
@@ -62,7 +62,7 @@ impl<'info> ClaimResource<'info> {
         ]];
 
         // Update primary sale flag
-        let metadata_state = mpl_token_metadata::state::Metadata::from_account_info(&metadata)?;
+        let metadata_state = lpl_token_metadata::state::Metadata::from_account_info(&metadata)?;
         if !metadata_state.primary_sale_happened {
             mpl_update_primary_sale_happened_via_token(
                 &metadata.to_account_info(),

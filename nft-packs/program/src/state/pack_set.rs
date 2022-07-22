@@ -8,7 +8,7 @@ use crate::{
     MAX_WEIGHT_VALUE,
 };
 use borsh::{BorshDeserialize, BorshSerialize};
-use mpl_token_metadata::state::{MasterEdition, MasterEditionV2};
+use lpl_token_metadata::state::{MasterEdition, MasterEditionV2};
 use safecoin_program::{
     borsh::try_from_slice_unchecked,
     msg,

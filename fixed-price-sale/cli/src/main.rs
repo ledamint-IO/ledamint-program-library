@@ -220,17 +220,17 @@ fn main() -> Result<(), error::Error> {
 
                 let (metadata, _) = Pubkey::find_program_address(
                     &[
-                        mpl_token_metadata::state::PREFIX.as_bytes(),
-                        mpl_token_metadata::id().as_ref(),
+                        lpl_token_metadata::state::PREFIX.as_bytes(),
+                        lpl_token_metadata::id().as_ref(),
                         selling_resource_state.resource.as_ref(),
                     ],
-                    &mpl_token_metadata::id(),
+                    &lpl_token_metadata::id(),
                 );
 
                 let (primary_metadata_creators, _) =
                     mpl_fixed_price_sale::utils::find_primary_metadata_creators(&metadata);
 
-                let metadata_state: mpl_token_metadata::state::Metadata =
+                let metadata_state: lpl_token_metadata::state::Metadata =
                     processor::get_account_state_legacy(&client, &metadata)?;
 
                 if !metadata_state.primary_sale_happened
@@ -242,7 +242,7 @@ fn main() -> Result<(), error::Error> {
                         &payer_wallet,
                         &metadata,
                         &metadata_state.data.creators.unwrap_or(vec![
-                            mpl_token_metadata::state::Creator {
+                            lpl_token_metadata::state::Creator {
                                 address: payer_wallet.pubkey(),
                                 verified: false,
                                 share: 100,
@@ -365,7 +365,7 @@ fn main() -> Result<(), error::Error> {
                             )
                             .unwrap();
 
-                            mpl_token_metadata::state::Creator {
+                            lpl_token_metadata::state::Creator {
                                 address,
                                 verified: false,
                                 share: obj.get("share").unwrap().as_u64().unwrap() as u8,
@@ -373,7 +373,7 @@ fn main() -> Result<(), error::Error> {
                         })
                         .collect()
                 } else {
-                    vec![mpl_token_metadata::state::Creator {
+                    vec![lpl_token_metadata::state::Creator {
                         address: admin.pubkey(),
                         verified: false,
                         share: 100,

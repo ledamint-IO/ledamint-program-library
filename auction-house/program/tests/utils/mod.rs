@@ -83,7 +83,7 @@ pub mod setup_functions;
 // ) -> Result<Pubkey, ClientError> {
 //     let pid = match env::var("TOKEN_METADATA_PID") {
 //         Ok(val) => val,
-//         Err(_) => mpl_token_metadata::id().to_string(),
+//         Err(_) => lpl_token_metadata::id().to_string(),
 //     };
 
 //     let program_id = Pubkey::from_str(&pid).unwrap();
@@ -92,7 +92,7 @@ pub mod setup_functions;
 
 //     let (metadata_account, _) = Pubkey::find_program_address(
 //         &[
-//             mpl_token_metadata::state::PREFIX.as_bytes(),
+//             lpl_token_metadata::state::PREFIX.as_bytes(),
 //             program_id.as_ref(),
 //             mint.as_ref(),
 //         ],
@@ -100,7 +100,7 @@ pub mod setup_functions;
 //     );
 
 //     let tx = Transaction::new_signed_with_payer(
-//         &[mpl_token_metadata::instruction::create_metadata_accounts(
+//         &[lpl_token_metadata::instruction::create_metadata_accounts(
 //             program_id,
 //             metadata_account,
 //             *mint,
@@ -135,7 +135,7 @@ pub mod setup_functions;
 // ) -> Result<Pubkey, ClientError> {
 //     let pid = match env::var("TOKEN_METADATA_PID") {
 //         Ok(val) => val,
-//         Err(_) => mpl_token_metadata::id().to_string(),
+//         Err(_) => lpl_token_metadata::id().to_string(),
 //     };
 
 //     let program_id = Pubkey::from_str(&pid).unwrap();
@@ -143,7 +143,7 @@ pub mod setup_functions;
 //     let recent_blockhash = context.last_blockhash;
 //     let (metadata_account, _) = Pubkey::find_program_address(
 //         &[
-//             mpl_token_metadata::state::PREFIX.as_bytes(),
+//             lpl_token_metadata::state::PREFIX.as_bytes(),
 //             program_id.as_ref(),
 //             mint.as_ref(),
 //         ],
@@ -151,7 +151,7 @@ pub mod setup_functions;
 //     );
 
 //     let tx = Transaction::new_signed_with_payer(
-//         &[mpl_token_metadata::instruction::create_metadata_accounts(
+//         &[lpl_token_metadata::instruction::create_metadata_accounts(
 //             program_id,
 //             metadata_account,
 //             *mint,

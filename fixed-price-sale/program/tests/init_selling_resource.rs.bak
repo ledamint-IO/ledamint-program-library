@@ -24,7 +24,7 @@ mod init_selling_resource {
 
     #[tokio::test]
     async fn success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -66,7 +66,7 @@ mod init_selling_resource {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -152,7 +152,7 @@ mod init_selling_resource {
 
     #[tokio::test]
     async fn fail_supply_is_gt_than_available() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -200,7 +200,7 @@ mod init_selling_resource {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -276,7 +276,7 @@ mod init_selling_resource {
 
     #[tokio::test]
     async fn fail_supply_is_not_provided() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -324,7 +324,7 @@ mod init_selling_resource {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,

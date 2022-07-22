@@ -10,7 +10,7 @@ use anchor_lang::{
     System,
 };
 use anchor_spl::token;
-use mpl_token_metadata::{state::Metadata, utils::get_supply_off_master_edition};
+use lpl_token_metadata::{state::Metadata, utils::get_supply_off_master_edition};
 
 impl<'info> Buy<'info> {
     pub fn process(
@@ -210,14 +210,14 @@ impl<'info> Buy<'info> {
             let metadata = &remaining_accounts[2];
             let metadata_data = Metadata::from_account_info(metadata)?;
 
-            let token_metadata_program_key = mpl_token_metadata::id();
+            let token_metadata_program_key = lpl_token_metadata::id();
             let metadata_seeds = &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
                 token_metadata_program_key.as_ref(),
                 user_token_acc_data.mint.as_ref(),
             ];
             let (metadata_key, _metadata_bump_seed) =
-                Pubkey::find_program_address(metadata_seeds, &mpl_token_metadata::id());
+                Pubkey::find_program_address(metadata_seeds, &lpl_token_metadata::id());
 
             if metadata.key() != metadata_key {
                 return Err(ErrorCode::WrongGatingMetadataAccount.into());

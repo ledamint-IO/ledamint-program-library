@@ -1,7 +1,7 @@
 #![cfg(feature = "test-bpf")]
 mod utils;
 
-use mpl_token_metadata::{error::MetadataError, id, instruction, state::Key};
+use lpl_token_metadata::{error::MetadataError, id, instruction, state::Key};
 use mpl_token_vault::state::PREFIX;
 use num_traits::FromPrimitive;
 use safecoin_program_test::*;

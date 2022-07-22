@@ -2,7 +2,7 @@ use anchor_lang::{
     prelude::{Pubkey, Rent},
     InstructionData, ToAccountMetas,
 };
-use mpl_token_metadata::{instruction::create_metadata_accounts, pda::find_metadata_account};
+use lpl_token_metadata::{instruction::create_metadata_accounts, pda::find_metadata_account};
 use solana_program_test::ProgramTest;
 use solana_sdk::{
     instruction::Instruction, program_pack::Pack, signature::Keypair, signer::Signer,
@@ -25,7 +25,7 @@ async fn _lifecycle_test() {
     const SYSTEM_PROGRAM_ADDRESS: &str = "11111111111111111111111111111111";
 
     let mut program_test = ProgramTest::default();
-    program_test.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
+    program_test.add_program("lpl_token_metadata", lpl_token_metadata::id(), None);
     program_test.add_program("mpl_token_entangler", mpl_token_entangler::id(), None);
 
     let context = program_test.start_with_context().await;
@@ -255,7 +255,7 @@ async fn _lifecycle_test() {
 
 #[allow(unused)]
 mod test_utils {
-    use mpl_token_metadata::instruction::create_master_edition_v3;
+    use lpl_token_metadata::instruction::create_master_edition_v3;
 
     use crate::*;
 
@@ -275,7 +275,7 @@ mod test_utils {
             initialize_mint(&spl_token::id(), &mint, &payer, Some(&payer), 0).unwrap(),
             create_associated_token_account(&payer, &payer, &mint),
             create_metadata_accounts(
-                mpl_token_metadata::id(),
+                lpl_token_metadata::id(),
                 find_metadata_account(&mint).0,
                 mint,
                 payer,
@@ -299,7 +299,7 @@ mod test_utils {
             )
             .unwrap(),
             create_master_edition_v3(
-                mpl_token_metadata::id(),
+                lpl_token_metadata::id(),
                 find_master_edition_address(mint),
                 mint,
                 payer,
@@ -351,12 +351,12 @@ mod test_utils {
     pub fn find_master_edition_address(mint: Pubkey) -> Pubkey {
         let (address, _bump) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 mint.as_ref(),
                 "edition".as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
         address
     }

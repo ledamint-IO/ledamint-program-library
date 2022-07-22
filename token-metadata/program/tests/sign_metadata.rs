@@ -18,8 +18,8 @@ mod sign_metadata {
     
     use safecoin_sdk::transaction::Transaction;
 
-    use mpl_token_metadata::instruction::{remove_creator_verification, sign_metadata};
-    use mpl_token_metadata::state::{Creator};
+    use lpl_token_metadata::instruction::{remove_creator_verification, sign_metadata};
+    use lpl_token_metadata::state::{Creator};
 
     use super::*;
 
@@ -56,7 +56,7 @@ mod sign_metadata {
             .await
             .unwrap();
         let sign_ix = sign_metadata(
-            mpl_token_metadata::id(),
+            lpl_token_metadata::id(),
             test_meta.pubkey,
             creator.pubkey()
         );
@@ -72,7 +72,7 @@ mod sign_metadata {
         assert_eq!(after_sign.data.creators.unwrap()[1].verified, true);
 
         let remove_ix = remove_creator_verification(
-            mpl_token_metadata::id(),
+            lpl_token_metadata::id(),
             test_meta.pubkey,
             creator.pubkey()
         );
