@@ -18,7 +18,7 @@ import {
 import {
   createSetAuthorityInstruction,
   SetAuthorityInstructionAccounts,
-} from '../src/mpl-token-vault';
+} from '../src/lpl-token-vault';
 
 killStuckProcess();
 

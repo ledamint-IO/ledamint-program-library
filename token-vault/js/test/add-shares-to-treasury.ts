@@ -3,7 +3,7 @@ import test from 'tape';
 import { addressLabels, init, killStuckProcess } from './utils';
 import { Transaction } from '@safecoin/web3.js';
 import { assertConfirmedTransaction, assertTransactionSummary } from '@j0nnyboi/amman';
-import { AddSharesToTreasuryInstructionAccounts, QUOTE_MINT, Vault } from '../src/mpl-token-vault';
+import { AddSharesToTreasuryInstructionAccounts, QUOTE_MINT, Vault } from '../src/lpl-token-vault';
 import {
   addSharesToTreasury,
   createExternalPriceAccount,

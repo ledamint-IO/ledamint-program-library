@@ -21,7 +21,7 @@ safe-token = { features = [ "no-entrypoint" ],path = "../../../safecoin-program-
 thiserror = "~1.0"
 borsh = "~0.9.1"
 safe-associated-token-account = {path = "../../../safecoin-program-library/associated-token-account/program"}
-mpl-token-vault = { path = "../../token-vault/program", features = [ "no-entrypoint" ]}
+lpl-token-vault = { path = "../../token-vault/program", features = [ "no-entrypoint" ]}
 mpl-token-metadata = { path="../../token-metadata/program", features = [ "no-entrypoint" ] }
 
 [dev-dependencies]

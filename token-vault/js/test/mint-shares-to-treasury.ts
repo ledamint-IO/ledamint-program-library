@@ -24,7 +24,7 @@ import {
   MintFractionalSharesInstructionAccounts,
   VaultDoesNotAllowNewShareMintingError,
   VaultShouldBeActiveError,
-} from '../src/mpl-token-vault';
+} from '../src/lpl-token-vault';
 import spok, { Specifications } from 'spok';
 import { bignum } from '@j0nnyboi/beet';
 import BN from 'bn.js';

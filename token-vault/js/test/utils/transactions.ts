@@ -16,7 +16,7 @@ import {
   VaultSetup,
   initVault as createInitVaultIx,
   CompletedVaultSetup,
-} from '../../src/mpl-token-vault';
+} from '../../src/lpl-token-vault';
 
 export async function init() {
   const [payer, payerPair] = addressLabels.genKeypair('payer');

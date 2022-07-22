@@ -11,7 +11,7 @@ import {
 } from './utils';
 import { Transaction } from '@safecoin/web3.js';
 import { assertConfirmedTransaction, assertTransactionSummary } from '@j0nnyboi/amman';
-import { ExternalPriceAccount, Key, QUOTE_MINT } from '../src/mpl-token-vault';
+import { ExternalPriceAccount, Key, QUOTE_MINT } from '../src/lpl-token-vault';
 import { createExternalPriceAccount } from '../src/instructions/create-external-price-account';
 
 killStuckProcess();

@@ -6,7 +6,7 @@ import {
   UpdateExternalPriceAccountInstructionAccounts,
   UpdateExternalPriceAccountInstructionArgs,
 } from '../generated';
-import { QUOTE_MINT, VAULT_PROGRAM_ADDRESS } from '../mpl-token-vault';
+import { QUOTE_MINT, VAULT_PROGRAM_ADDRESS } from '../lpl-token-vault';
 import { InstructionsWithAccounts } from '../types';
 
 /**

@@ -17,5 +17,5 @@ borsh = "0.9.1"
 clap = "3.0.13"
 safecoin-clap-utils = {path = "../../../Safecoin/clap-utils"}
 safecoin-cli-config = {path = "../../../Safecoin/cli-config"}
-metaplex-token-vault = { package ="mpl-token-vault", path = "../program", features = [ "no-entrypoint" ] }
+metaplex-token-vault = { package ="lpl-token-vault", path = "../program", features = [ "no-entrypoint" ] }
 safe-token = { features = [ "no-entrypoint" ] ,path = "../../../safecoin-program-library/token/program" }

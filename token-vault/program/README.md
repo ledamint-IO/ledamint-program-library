@@ -22,5 +22,5 @@ that can be perused for learning and built if desired with `cargo build`. It all
 ## Interface
 
 The on-chain Token Fraction program is written in Rust and available on crates.io as
-[mpl-token-vault](https://crates.io/crates/mpl-token-vault) and
-[docs.rs](https://docs.rs/mpl-token-vault).
+[lpl-token-vault](https://crates.io/crates/lpl-token-vault) and
+[docs.rs](https://docs.rs/lpl-token-vault).

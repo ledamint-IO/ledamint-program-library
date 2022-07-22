@@ -18,7 +18,7 @@ num-derive = "~0.3"
 arrayref = "~0.3.6"
 num-traits = "~0.2"
 safecoin-program = {path = "../../../Safecoin/sdk/program"}
-mpl-token-vault = { path = "../../token-vault/program", features = [ "no-entrypoint" ] }
+lpl-token-vault = { path = "../../token-vault/program", features = [ "no-entrypoint" ] }
 safe-token = { path = "../../../safecoin-program-library/token/program", features = [ "no-entrypoint" ] }
 safe-associated-token-account = { path = "../../../safecoin-program-library/associated-token-account/program", features = ["no-entrypoint"] }
 thiserror = "~1.0"

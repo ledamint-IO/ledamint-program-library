@@ -21,7 +21,7 @@ import {
   SafetyDepositSetup,
   addTokenToInactiveVault,
   SafetyDepositBox,
-} from '../src/mpl-token-vault';
+} from '../src/lpl-token-vault';
 import { initVault } from './init-vault';
 import { fundedPayer } from './helpers';
 

@@ -19,7 +19,7 @@ spl-math = {features = [ "no-entrypoint" ], path = "../../../safecoin-program-li
 safe-token = {features = [ "no-entrypoint" ],path = "../../../safecoin-program-library/token/program" }
 mpl-metaplex = { path = "../../metaplex/program", features = ["no-entrypoint"] }
 mpl-token-metadata = { path = "../../token-metadata/program", features = [ "no-entrypoint" ] }
-mpl-token-vault = { path = "../../token-vault/program", features = [ "no-entrypoint" ] }
+lpl-token-vault = { path = "../../token-vault/program", features = [ "no-entrypoint" ] }
 arrayref = "0.3.6"
 
 [dev-dependencies]

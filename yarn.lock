@@ -1216,7 +1216,7 @@ __metadata:
     "@metaplex-foundation/mpl-auction": ^0.0.2
     "@metaplex-foundation/mpl-core": ^0.0.5
     "@metaplex-foundation/mpl-token-metadata": ^0.0.2
-    "@metaplex-foundation/mpl-token-vault": ^0.0.2
+    "@metaplex-foundation/lpl-token-vault": ^0.0.2
     "@safecoin/safe-token": ^0.1.7-b
     "@safecoin/web3.js": ^1.29.4
     esbuild: ^0.14.14
@@ -1271,9 +1271,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metaplex-foundation/mpl-token-vault@^0.0.2, @metaplex-foundation/mpl-token-vault@workspace:token-vault/js":
+"@metaplex-foundation/lpl-token-vault@^0.0.2, @metaplex-foundation/lpl-token-vault@workspace:token-vault/js":
   version: 0.0.0-use.local
-  resolution: "@metaplex-foundation/mpl-token-vault@workspace:token-vault/js"
+  resolution: "@metaplex-foundation/lpl-token-vault@workspace:token-vault/js"
   dependencies:
     "@j0nnyboi/amman": ^0.1.0
     "@j0nnyboi/beet": ^0.1.1

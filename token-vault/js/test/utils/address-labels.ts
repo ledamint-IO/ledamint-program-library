@@ -1,5 +1,5 @@
 import { AddressLabels } from '@j0nnyboi/amman';
-import { VAULT_PROGRAM_ADDRESS } from '../../src/mpl-token-vault';
+import { VAULT_PROGRAM_ADDRESS } from '../../src/lpl-token-vault';
 import { logDebug } from './log';
 
 const persistLabelsPath = process.env.ADDRESS_LABEL_PATH;

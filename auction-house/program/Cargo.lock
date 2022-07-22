@@ -1854,7 +1854,7 @@ dependencies = [
  "anchor-client 0.22.0",
  "borsh",
  "mpl-token-metadata",
- "mpl-token-vault",
+ "lpl-token-vault",
  "num",
  "num-derive",
  "num-traits",
@@ -1874,7 +1874,7 @@ version = "1.2.7"
 dependencies = [
  "arrayref",
  "borsh",
- "mpl-token-vault",
+ "lpl-token-vault",
  "num-derive",
  "num-traits",
  "safe-associated-token-account",
@@ -1885,7 +1885,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-token-vault"
+name = "lpl-token-vault"
 version = "0.1.1"
 dependencies = [
  "borsh",
