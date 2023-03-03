@@ -3,7 +3,7 @@
 //! Program for distributing tokens efficiently via uploading a Merkle root.
 use anchor_lang::{
     prelude::*,
-    solana_program::{
+    safecoin_program::{
         instruction::{AccountMeta, Instruction},
         program::{invoke, invoke_signed},
         system_instruction, sysvar,
@@ -325,7 +325,7 @@ pub mod gumdrop {
 
         // Verify the merkle proof.
         let node = if resource_nonce.is_empty() {
-            solana_program::keccak::hashv(&[
+            safecoin_program::keccak::hashv(&[
                 &[0x00],
                 &index.to_le_bytes(),
                 &claimant_secret.to_bytes(),
@@ -333,7 +333,7 @@ pub mod gumdrop {
                 &amount.to_le_bytes(),
             ])
         } else {
-            solana_program::keccak::hashv(&[
+            safecoin_program::keccak::hashv(&[
                 &[0x00],
                 &index.to_le_bytes(),
                 &claimant_secret.to_bytes(),
@@ -390,7 +390,7 @@ pub mod gumdrop {
         )?;
 
         // Verify the merkle proof.
-        let node = solana_program::keccak::hashv(&[
+        let node = safecoin_program::keccak::hashv(&[
             &[0x00],
             &index.to_le_bytes(),
             &claimant_secret.to_bytes(),
@@ -466,7 +466,7 @@ pub mod gumdrop {
         // TODO: this is a bit weird but we verify elsewhere that the candy_machine_config is
         // actually a config thing and not a mint
         // Verify the merkle proof.
-        let node = solana_program::keccak::hashv(&[
+        let node = safecoin_program::keccak::hashv(&[
             &[0x00],
             &index.to_le_bytes(),
             &claimant_secret.to_bytes(),
@@ -544,7 +544,7 @@ pub mod gumdrop {
         );
 
         // TODO: master_edition or something else? should we has the edition here also?
-        let node = solana_program::keccak::hashv(&[
+        let node = safecoin_program::keccak::hashv(&[
             &[0x00],
             &index.to_le_bytes(),
             &claimant_secret.to_bytes(),
@@ -593,7 +593,7 @@ pub mod gumdrop {
         ];
 
         invoke_signed(
-            &mpl_token_metadata::instruction::mint_new_edition_from_master_edition_via_token(
+            &lpl_token_metadata::instruction::mint_new_edition_from_master_edition_via_token(
                 *ctx.accounts.token_metadata_program.key,
                 *ctx.accounts.metadata_new_metadata.key,
                 *ctx.accounts.metadata_new_edition.key,
@@ -688,7 +688,7 @@ pub mod gumdrop {
         ];
 
         invoke_signed(
-            &mpl_token_metadata::instruction::update_metadata_accounts_v2(
+            &lpl_token_metadata::instruction::update_metadata_accounts_v2(
                 *ctx.accounts.token_metadata_program.key,
                 *ctx.accounts.metadata.key,
                 *ctx.accounts.distributor_wallet.key,
@@ -736,8 +736,8 @@ fn issue_mint_nft<'info>(
         let mut candy_machine_data: &[u8] = &candy_machine.try_borrow_data()?;
         verify_candy(candy_machine_program.key)?;
         let candy_machine = CandyMachine::try_deserialize(&mut candy_machine_data)?;
-        let required_rent = rent.minimum_balance(mpl_token_metadata::state::MAX_METADATA_LEN)
-            + rent.minimum_balance(mpl_token_metadata::state::MAX_MASTER_EDITION_LEN);
+        let required_rent = rent.minimum_balance(lpl_token_metadata::state::MAX_METADATA_LEN)
+            + rent.minimum_balance(lpl_token_metadata::state::MAX_MASTER_EDITION_LEN);
 
         if candy_machine.token_mint.is_some() {
             required_lamports = required_rent;
@@ -821,7 +821,7 @@ fn issue_mint_nft<'info>(
     let cm_config = Config::try_deserialize(&mut cm_config_data)?;
     if cm_config.data.retain_authority {
         invoke_signed(
-            &mpl_token_metadata::instruction::update_metadata_accounts_v2(
+            &lpl_token_metadata::instruction::update_metadata_accounts_v2(
                 *token_metadata_program.key,
                 *candy_machine_metadata.key,
                 *distributor_wallet.key,
@@ -1114,7 +1114,7 @@ pub struct ClaimCandy<'info> {
     pub token_program: Program<'info, Token>,
 
     /// SPL [TokenMetadata] program.
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     /// CHECK: Address Checked
     pub token_metadata_program: AccountInfo<'info>,
 
@@ -1215,7 +1215,7 @@ pub struct ClaimEdition<'info> {
     pub token_program: Program<'info, Token>,
 
     /// SPL [TokenMetadata] program.
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     /// CHECK: Address Check
     pub token_metadata_program: AccountInfo<'info>,
 
@@ -1294,7 +1294,7 @@ pub struct ClaimCandyProven<'info> {
     pub token_program: Program<'info, Token>,
 
     /// SPL [TokenMetadata] program.
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     /// CHECK:
     pub token_metadata_program: AccountInfo<'info>,
 
@@ -1347,7 +1347,7 @@ pub struct RecoverUpdateAuthority<'info> {
     pub system_program: Program<'info, System>,
 
     /// SPL [TokenMetadata] program.
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     /// CHECK: Address Checked
     pub token_metadata_program: AccountInfo<'info>,
 }

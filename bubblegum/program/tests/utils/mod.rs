@@ -5,9 +5,9 @@ pub mod tx_builder;
 use anchor_lang::{self, InstructionData, ToAccountMetas};
 use bytemuck::PodCastError;
 use mpl_bubblegum::{hash_creators, hash_metadata, state::metaplex_adapter::MetadataArgs};
-use solana_program::{instruction::Instruction, pubkey::Pubkey};
-use solana_program_test::{BanksClientError, ProgramTest};
-use solana_sdk::signature::{Keypair, SignerError};
+use safecoin_program::{instruction::Instruction, pubkey::Pubkey};
+use safecoin_program_test::{BanksClientError, ProgramTest};
+use safecoin_sdk::signature::{Keypair, SignerError};
 use std::result;
 
 #[derive(Debug)]
@@ -32,7 +32,7 @@ pub fn program_test() -> ProgramTest {
         spl_account_compression::id(),
         None,
     );
-    test.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
+    test.add_program("lpl_token_metadata", lpl_token_metadata::id(), None);
     test.set_compute_max_units(u64::MAX);
     test
 }

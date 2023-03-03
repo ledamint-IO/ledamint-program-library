@@ -1,5 +1,5 @@
 [package]
-name = "mpl-token-metadata-context-derive"
+name = "lpl-token-metadata-context-derive"
 version = "0.2.1"
 edition = "2021"
 description = "Metaplex Metadata"

@@ -3,16 +3,16 @@ use anchor_lang::{
     prelude::{Pubkey, Rent},
     InstructionData, ToAccountMetas,
 };
-use mpl_token_metadata::{instruction::create_metadata_accounts_v3, pda::find_metadata_account};
-use solana_program_test::{tokio, ProgramTest};
-use solana_sdk::{
+use lpl_token_metadata::{instruction::create_metadata_accounts_v3, pda::find_metadata_account};
+use safecoin_program_test::{tokio, ProgramTest};
+use safecoin_sdk::{
     instruction::Instruction, program_pack::Pack, signature::Keypair, signer::Signer,
     system_instruction::create_account, transaction::Transaction,
 };
-use spl_associated_token_account::{
+use safe_associated_token_account::{
     get_associated_token_address, instruction::create_associated_token_account,
 };
-use spl_token::{
+use safe_token::{
     instruction::{approve, initialize_mint, mint_to, revoke},
     state::Mint,
 };
@@ -28,8 +28,8 @@ async fn _lifecycle_test() {
     const SYSTEM_PROGRAM_ADDRESS: &str = "11111111111111111111111111111111";
 
     let mut program_test = ProgramTest::default();
-    program_test.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
-    program_test.add_program("mpl_token_entangler", mpl_token_entangler::id(), None);
+    program_test.add_program("lpl_token_metadata", lpl_token_metadata::id(), None);
+    program_test.add_program("lpl_token_entangler", lpl_token_entangler::id(), None);
 
     let context = program_test.start_with_context().await;
     let mut banks_client = context.banks_client;
@@ -65,7 +65,7 @@ async fn _lifecycle_test() {
         let transfer_authority = Keypair::new();
         let token_b = get_associated_token_address(&payer.pubkey(), &mint_b.pubkey());
 
-        let accounts = mpl_token_entangler::accounts::CreateEntangledPair {
+        let accounts = lpl_token_entangler::accounts::CreateEntangledPair {
             payer: payer.pubkey(),
             authority: payer.pubkey(),
             treasury_mint: TREASURY_MINT.parse().unwrap(),
@@ -81,12 +81,12 @@ async fn _lifecycle_test() {
             edition_a: find_master_edition_address(mint_a.pubkey()),
             edition_b: find_master_edition_address(mint_b.pubkey()),
             token_b,
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             rent: RENT_SYSVAR_ADDRESS.parse().unwrap(),
             system_program: SYSTEM_PROGRAM_ADDRESS.parse().unwrap(),
         };
 
-        let instruction = mpl_token_entangler::instruction::CreateEntangledPair {
+        let instruction = lpl_token_entangler::instruction::CreateEntangledPair {
             _bump: entangled_pair.1,
             _reverse_bump: reverse_pair.1,
             token_a_escrow_bump: escrow_a.1,
@@ -97,7 +97,7 @@ async fn _lifecycle_test() {
 
         let instructions = [
             approve(
-                &spl_token::id(),
+                &safe_token::id(),
                 &token_b,
                 &transfer_authority.pubkey(),
                 &payer.pubkey(),
@@ -106,12 +106,12 @@ async fn _lifecycle_test() {
             )
             .unwrap(),
             Instruction {
-                program_id: mpl_token_entangler::id(),
+                program_id: lpl_token_entangler::id(),
                 accounts: accounts.to_account_metas(None),
                 data: instruction.data(),
             },
             revoke(
-                &spl_token::id(),
+                &safe_token::id(),
                 &token_b,
                 &payer.pubkey(),
                 &[], //
@@ -136,7 +136,7 @@ async fn _lifecycle_test() {
         let token_a = get_associated_token_address(&payer.pubkey(), &mint_a.pubkey());
         let token_b = get_associated_token_address(&payer.pubkey(), &mint_b.pubkey());
 
-        let accounts = mpl_token_entangler::accounts::Swap {
+        let accounts = lpl_token_entangler::accounts::Swap {
             treasury_mint: TREASURY_MINT.parse().unwrap(),
             payer: payer.pubkey(),
             payment_account: payer.pubkey(),
@@ -150,17 +150,17 @@ async fn _lifecycle_test() {
             token_a_escrow: escrow_a.0,
             token_b_escrow: escrow_b.0,
             entangled_pair: entangled_pair.0,
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: SYSTEM_PROGRAM_ADDRESS.parse().unwrap(),
-            ata_program: spl_associated_token_account::id(),
+            ata_program: safe_associated_token_account::id(),
             rent: RENT_SYSVAR_ADDRESS.parse().unwrap(),
         };
 
-        let instruction = mpl_token_entangler::instruction::Swap {};
+        let instruction = lpl_token_entangler::instruction::Swap {};
 
         let instructions = [
             approve(
-                &spl_token::id(),
+                &safe_token::id(),
                 &token_a,
                 &transfer_authority.pubkey(),
                 &payer.pubkey(),
@@ -169,12 +169,12 @@ async fn _lifecycle_test() {
             )
             .unwrap(),
             Instruction {
-                program_id: mpl_token_entangler::id(),
+                program_id: lpl_token_entangler::id(),
                 accounts: accounts.to_account_metas(None),
                 data: instruction.data(),
             },
             revoke(
-                &spl_token::id(),
+                &safe_token::id(),
                 &token_a,
                 &payer.pubkey(),
                 &[], //
@@ -199,7 +199,7 @@ async fn _lifecycle_test() {
         let token_a = get_associated_token_address(&payer.pubkey(), &mint_a.pubkey());
         let token_b = get_associated_token_address(&payer.pubkey(), &mint_b.pubkey());
 
-        let accounts = mpl_token_entangler::accounts::Swap {
+        let accounts = lpl_token_entangler::accounts::Swap {
             treasury_mint: TREASURY_MINT.parse().unwrap(),
             payer: payer.pubkey(),
             payment_account: payer.pubkey(),
@@ -213,17 +213,17 @@ async fn _lifecycle_test() {
             token_a_escrow: escrow_a.0,
             token_b_escrow: escrow_b.0,
             entangled_pair: entangled_pair.0,
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: SYSTEM_PROGRAM_ADDRESS.parse().unwrap(),
-            ata_program: spl_associated_token_account::id(),
+            ata_program: safe_associated_token_account::id(),
             rent: RENT_SYSVAR_ADDRESS.parse().unwrap(),
         };
 
-        let instruction = mpl_token_entangler::instruction::Swap {};
+        let instruction = lpl_token_entangler::instruction::Swap {};
 
         let instructions = [
             approve(
-                &spl_token::id(),
+                &safe_token::id(),
                 &token_b,
                 &transfer_authority.pubkey(),
                 &payer.pubkey(),
@@ -232,12 +232,12 @@ async fn _lifecycle_test() {
             )
             .unwrap(),
             Instruction {
-                program_id: mpl_token_entangler::id(),
+                program_id: lpl_token_entangler::id(),
                 accounts: accounts.to_account_metas(None),
                 data: instruction.data(),
             },
             revoke(
-                &spl_token::id(),
+                &safe_token::id(),
                 &token_b,
                 &payer.pubkey(),
                 &[], //
@@ -258,7 +258,7 @@ async fn _lifecycle_test() {
 
 #[allow(unused)]
 mod test_utils {
-    use mpl_token_metadata::instruction::create_master_edition_v3;
+    use lpl_token_metadata::instruction::create_master_edition_v3;
 
     use crate::*;
 
@@ -266,19 +266,19 @@ mod test_utils {
         payer: Pubkey,
         mint: Pubkey,
         rent: &Rent,
-    ) -> Vec<solana_sdk::instruction::Instruction> {
+    ) -> Vec<safecoin_sdk::instruction::Instruction> {
         vec![
             create_account(
                 &payer,
                 &mint,
                 rent.minimum_balance(Mint::LEN),
                 Mint::LEN as u64,
-                &spl_token::id(),
+                &safe_token::id(),
             ),
-            initialize_mint(&spl_token::id(), &mint, &payer, Some(&payer), 0).unwrap(),
-            create_associated_token_account(&payer, &payer, &mint, &spl_token::ID),
+            initialize_mint(&safe_token::id(), &mint, &payer, Some(&payer), 0).unwrap(),
+            create_associated_token_account(&payer, &payer, &mint, &safe_token::ID),
             create_metadata_accounts_v3(
-                mpl_token_metadata::id(),
+                lpl_token_metadata::id(),
                 find_metadata_account(&mint).0,
                 mint,
                 payer,
@@ -296,7 +296,7 @@ mod test_utils {
                 None,
             ),
             mint_to(
-                &spl_token::id(),
+                &safe_token::id(),
                 &mint,
                 &get_associated_token_address(&payer, &mint),
                 &payer,
@@ -305,7 +305,7 @@ mod test_utils {
             )
             .unwrap(),
             create_master_edition_v3(
-                mpl_token_metadata::id(),
+                lpl_token_metadata::id(),
                 find_master_edition_address(mint),
                 mint,
                 payer,
@@ -324,7 +324,7 @@ mod test_utils {
                 mint_a.as_ref(),
                 mint_b.as_ref(),
             ],
-            &mpl_token_entangler::id(),
+            &lpl_token_entangler::id(),
         )
     }
 
@@ -337,7 +337,7 @@ mod test_utils {
                 "escrow".as_bytes(),
                 "A".as_bytes(),
             ],
-            &mpl_token_entangler::id(),
+            &lpl_token_entangler::id(),
         )
     }
 
@@ -350,19 +350,19 @@ mod test_utils {
                 "escrow".as_bytes(),
                 "B".as_bytes(),
             ],
-            &mpl_token_entangler::id(),
+            &lpl_token_entangler::id(),
         )
     }
 
     pub fn find_master_edition_address(mint: Pubkey) -> Pubkey {
         let (address, _bump) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 mint.as_ref(),
                 "edition".as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
         address
     }

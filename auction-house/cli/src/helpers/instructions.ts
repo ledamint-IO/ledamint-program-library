@@ -5,7 +5,7 @@ import {
   TransactionInstruction,
 } from '@solana/web3.js';
 import {
-  SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+  safe_associated_token_account_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
   TOKEN_METADATA_PROGRAM_ID,
   CONFIG_ARRAY_START_V2,
@@ -60,7 +60,7 @@ export function createAssociatedTokenAccountInstruction(
   ];
   return new TransactionInstruction({
     keys,
-    programId: SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    programId: safe_associated_token_account_PROGRAM_ID,
     data: Buffer.from([]),
   });
 }

@@ -3,7 +3,7 @@ pub mod common;
 pub mod utils;
 
 use common::*;
-use solana_sdk::sysvar;
+use safecoin_sdk::sysvar;
 use utils::{helpers::default_scopes, setup_functions::*};
 
 #[tokio::test]
@@ -50,7 +50,7 @@ async fn cancel_listing() {
         token_account: token,
         authority: ah.authority,
         trade_state: acc.seller_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -69,7 +69,7 @@ async fn cancel_listing() {
 
     let accounts = mpl_auction_house::accounts::CancelListingReceipt {
         receipt: listing_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);
@@ -177,7 +177,7 @@ async fn auction_cancel_listing() {
         auctioneer_authority: auctioneer_authority.pubkey(),
         trade_state: acc.seller_trade_state,
         ah_auctioneer_pda: auctioneer_pda,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -274,7 +274,7 @@ async fn auction_cancel_listing_missing_scope_fails() {
         auctioneer_authority: auctioneer_authority.pubkey(),
         trade_state: acc.seller_trade_state,
         ah_auctioneer_pda: auctioneer_pda,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -293,7 +293,7 @@ async fn auction_cancel_listing_missing_scope_fails() {
 
     let accounts = mpl_auction_house::accounts::CancelListingReceipt {
         receipt: listing_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);
@@ -370,7 +370,7 @@ async fn auction_cancel_listing_no_delegate_fails() {
         auctioneer_authority: auctioneer_authority.pubkey(),
         trade_state: acc.seller_trade_state,
         ah_auctioneer_pda: auctioneer_pda,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -389,7 +389,7 @@ async fn auction_cancel_listing_no_delegate_fails() {
 
     let accounts = mpl_auction_house::accounts::CancelBidReceipt {
         receipt: bid_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);
@@ -467,7 +467,7 @@ async fn cancel_bid() {
         token_account: acc.token_account,
         authority: ah.authority,
         trade_state: acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -486,7 +486,7 @@ async fn cancel_bid() {
 
     let accounts = mpl_auction_house::accounts::CancelBidReceipt {
         receipt: bid_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);
@@ -596,7 +596,7 @@ async fn auction_cancel_bid() {
         auctioneer_authority: auctioneer_authority.pubkey(),
         trade_state: acc.buyer_trade_state,
         ah_auctioneer_pda: auctioneer_pda,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -695,7 +695,7 @@ async fn auction_cancel_bid_missing_scope_fails() {
         auctioneer_authority: auctioneer_authority.pubkey(),
         trade_state: acc.buyer_trade_state,
         ah_auctioneer_pda: auctioneer_pda,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -714,7 +714,7 @@ async fn auction_cancel_bid_missing_scope_fails() {
 
     let accounts = mpl_auction_house::accounts::CancelBidReceipt {
         receipt: bid_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);
@@ -800,7 +800,7 @@ async fn auction_cancel_bid_no_delegate_fails() {
         auctioneer_authority: auctioneer_authority.pubkey(),
         trade_state: acc.buyer_trade_state,
         ah_auctioneer_pda: auctioneer_pda,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
     }
@@ -819,7 +819,7 @@ async fn auction_cancel_bid_no_delegate_fails() {
 
     let accounts = mpl_auction_house::accounts::CancelBidReceipt {
         receipt: bid_receipt,
-        system_program: solana_program::system_program::id(),
+        system_program: safecoin_program::system_program::id(),
         instruction: sysvar::instructions::id(),
     }
     .to_account_metas(None);

@@ -7,22 +7,22 @@ use utils::setup_functions::*;
 
 use anchor_lang::{InstructionData, ToAccountMetas};
 use mpl_testing_utils::{solana::airdrop, utils::Metadata};
-use solana_sdk::signer::Signer;
+use safecoin_sdk::signer::Signer;
 
 use std::{assert_eq, time::SystemTime};
 
-use solana_program::{instruction::Instruction, system_program, sysvar};
+use safecoin_program::{instruction::Instruction, system_program, sysvar};
 
-use solana_program::program_pack::Pack;
+use safecoin_program::program_pack::Pack;
 
 use mpl_auction_house::pda::{
     find_auctioneer_pda, find_escrow_payment_address, find_program_as_signer_address,
     find_trade_state_address,
 };
 use mpl_auctioneer::pda::find_auctioneer_authority_seeds;
-use solana_sdk::{signature::Keypair, transaction::Transaction};
-use spl_associated_token_account::get_associated_token_address;
-use spl_token::state::Account;
+use safecoin_sdk::{signature::Keypair, transaction::Transaction};
+use safe_associated_token_account::get_associated_token_address;
+use safe_token::state::Account;
 
 #[tokio::test]
 async fn execute_sale_early_failure() {
@@ -112,7 +112,7 @@ async fn execute_sale_early_failure() {
         authority: ah.authority,
         seller_trade_state: sell_acc.seller_trade_state,
         buyer_trade_state: bid_acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         free_trade_state: sell_acc.free_seller_trade_state,
         seller_payment_receipt_account: test_metadata.token.pubkey(),
         buyer_receipt_token_account: buyer_token_account,
@@ -123,7 +123,7 @@ async fn execute_sale_early_failure() {
         treasury_mint: ah.treasury_mint,
         program_as_signer: sell_acc.program_as_signer,
         system_program: system_program::id(),
-        ata_program: spl_associated_token_account::id(),
+        ata_program: safe_associated_token_account::id(),
         rent: sysvar::rent::id(),
         auctioneer_authority,
         ah_auctioneer_pda: auctioneer_pda,
@@ -268,7 +268,7 @@ async fn execute_sale_success() {
         token_account: sell_acc.token_account,
         seller_trade_state: sell_acc.seller_trade_state,
         buyer_trade_state: bid_acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         free_trade_state: sell_acc.free_seller_trade_state,
         seller_payment_receipt_account: test_metadata.token.pubkey(),
         buyer_receipt_token_account: buyer_token_account,
@@ -279,7 +279,7 @@ async fn execute_sale_success() {
         treasury_mint: ah.treasury_mint,
         program_as_signer: sell_acc.program_as_signer,
         system_program: system_program::id(),
-        ata_program: spl_associated_token_account::id(),
+        ata_program: safe_associated_token_account::id(),
         rent: sysvar::rent::id(),
         auctioneer_authority,
         ah_auctioneer_pda: auctioneer_pda,
@@ -493,7 +493,7 @@ async fn execute_sale_two_bids_success() {
         token_account: sell_acc.token_account,
         seller_trade_state: sell_acc.seller_trade_state,
         buyer_trade_state: bid1_acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         free_trade_state: sell_acc.free_seller_trade_state,
         seller_payment_receipt_account: test_metadata.token.pubkey(),
         buyer_receipt_token_account: buyer1_token_account,
@@ -504,7 +504,7 @@ async fn execute_sale_two_bids_success() {
         treasury_mint: ah.treasury_mint,
         program_as_signer: sell_acc.program_as_signer,
         system_program: system_program::id(),
-        ata_program: spl_associated_token_account::id(),
+        ata_program: safe_associated_token_account::id(),
         rent: sysvar::rent::id(),
         auctioneer_authority,
         ah_auctioneer_pda: auctioneer_pda,
@@ -717,7 +717,7 @@ async fn execute_sale_two_bids_failure() {
         token_account: sell_acc.token_account,
         seller_trade_state: sell_acc.seller_trade_state,
         buyer_trade_state: bid0_acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         free_trade_state: sell_acc.free_seller_trade_state,
         seller_payment_receipt_account: test_metadata.token.pubkey(),
         buyer_receipt_token_account: buyer0_token_account,
@@ -728,7 +728,7 @@ async fn execute_sale_two_bids_failure() {
         treasury_mint: ah.treasury_mint,
         program_as_signer: sell_acc.program_as_signer,
         system_program: system_program::id(),
-        ata_program: spl_associated_token_account::id(),
+        ata_program: safe_associated_token_account::id(),
         rent: sysvar::rent::id(),
         auctioneer_authority,
         ah_auctioneer_pda: auctioneer_pda,

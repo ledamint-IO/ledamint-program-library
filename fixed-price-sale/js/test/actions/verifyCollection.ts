@@ -3,7 +3,7 @@ import { PayerTransactionHandler } from '@metaplex-foundation/amman-client';
 import {
   VerifyCollectionInstructionAccounts,
   createVerifyCollectionInstruction,
-} from '@metaplex-foundation/mpl-token-metadata';
+} from '@metaplex-foundation/lpl-token-metadata';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore createMintToInstruction export actually exist but isn't setup correctly
 import { strict as assert } from 'assert';

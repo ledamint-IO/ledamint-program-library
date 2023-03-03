@@ -1,10 +1,10 @@
 use anchor_lang::prelude::*;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction::{set_and_verify_collection, set_and_verify_sized_collection_item},
     state::{Metadata, TokenMetadataAccount},
     utils::assert_derivation,
 };
-use solana_program::{
+use safecoin_program::{
     program::invoke_signed, sysvar, sysvar::instructions::get_instruction_relative,
 };
 
@@ -21,7 +21,7 @@ pub struct SetCollectionDuringMint<'info> {
     #[account(mut, seeds = [CollectionPDA::PREFIX.as_ref(), candy_machine.to_account_info().key.as_ref()], bump)]
     collection_pda: Account<'info, CollectionPDA>,
     /// CHECK: account constraints checked in account trait
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     /// CHECK: account constraints checked in account trait
     #[account(address = sysvar::instructions::id())]
@@ -57,7 +57,7 @@ pub fn handle_set_collection_during_mint(ctx: Context<SetCollectionDuringMint>) 
         return Ok(());
     }
     // Check if the metadata account has data if not bot fee
-    if !cmp_pubkeys(ctx.accounts.metadata.owner, &mpl_token_metadata::id())
+    if !cmp_pubkeys(ctx.accounts.metadata.owner, &lpl_token_metadata::id())
         || ctx.accounts.metadata.data_len() == 0
     {
         return Ok(());

@@ -1,4 +1,4 @@
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult,
     msg,
@@ -10,7 +10,7 @@ use solana_program::{
 };
 
 /// Create account almost from scratch, lifted from
-/// <https://github.com/solana-labs/solana-program-library/tree/master/associated-token-account/program/src/processor.rs#L51-L98>
+/// <https://github.com/solana-labs/safecoin-program-library/tree/master/associated-token-account/program/src/processor.rs#L51-L98>
 pub fn create_or_allocate_account_raw<'a>(
     program_id: Pubkey,
     new_account_info: &AccountInfo<'a>,

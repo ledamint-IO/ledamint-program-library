@@ -1,5 +1,5 @@
-use mpl_utils::cmp_pubkeys;
-use solana_program::{
+use lpl_utils::cmp_pubkeys;
+use safecoin_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult,
     program_error::ProgramError,
@@ -8,7 +8,7 @@ use solana_program::{
     pubkey::Pubkey,
     rent::Rent,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 use crate::{
     error::MetadataError,
@@ -39,7 +39,7 @@ pub fn assert_keys_equal_with_error(
 pub fn assert_initialized<T: Pack + IsInitialized>(
     account_info: &AccountInfo,
 ) -> Result<T, ProgramError> {
-    mpl_utils::assert_initialized(account_info, MetadataError::Uninitialized)
+    lpl_utils::assert_initialized(account_info, MetadataError::Uninitialized)
 }
 
 pub fn assert_mint_authority_matches_mint(
@@ -86,11 +86,11 @@ pub fn assert_delegated_tokens(
     mint_info: &AccountInfo,
     token_account_info: &AccountInfo,
 ) -> ProgramResult {
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     let token_account: Account = assert_initialized(token_account_info)?;
 
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
 
     if token_account.mint != *mint_info.key {
         return Err(MetadataError::MintMismatch.into());
@@ -114,22 +114,22 @@ pub fn assert_derivation(
     account: &AccountInfo,
     path: &[&[u8]],
 ) -> Result<u8, ProgramError> {
-    mpl_utils::assert_derivation(program_id, account, path, MetadataError::DerivedKeyInvalid)
+    lpl_utils::assert_derivation(program_id, account, path, MetadataError::DerivedKeyInvalid)
 }
 
 pub fn assert_owned_by(account: &AccountInfo, owner: &Pubkey) -> ProgramResult {
-    mpl_utils::assert_owned_by(account, owner, MetadataError::IncorrectOwner)
+    lpl_utils::assert_owned_by(account, owner, MetadataError::IncorrectOwner)
 }
 
 pub fn assert_token_program_matches_package(token_program_info: &AccountInfo) -> ProgramResult {
-    mpl_utils::token::assert_token_program_matches_package(
+    lpl_utils::token::assert_token_program_matches_package(
         token_program_info,
         MetadataError::InvalidTokenProgram,
     )
 }
 
 pub fn assert_rent_exempt(rent: &Rent, account_info: &AccountInfo) -> ProgramResult {
-    mpl_utils::assert_rent_exempt(rent, account_info, MetadataError::NotRentExempt)
+    lpl_utils::assert_rent_exempt(rent, account_info, MetadataError::NotRentExempt)
 }
 
 pub fn assert_delegate(

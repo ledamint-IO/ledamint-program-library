@@ -1,11 +1,11 @@
 use borsh::BorshSerialize;
-use mpl_utils::create_or_allocate_account_raw;
-use solana_program::{
+use lpl_utils::create_or_allocate_account_raw;
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 
 use crate::{
     assertions::{
@@ -54,7 +54,7 @@ pub fn process_create_master_edition(
     assert_token_program_matches_package(token_program_info)?;
     assert_mint_authority_matches_mint(&mint.mint_authority, mint_authority_info)?;
     assert_owned_by(metadata_account_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     if metadata.mint != *mint_info.key {
         return Err(MetadataError::MintMismatch.into());

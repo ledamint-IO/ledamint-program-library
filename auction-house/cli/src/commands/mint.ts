@@ -18,7 +18,7 @@ import {
   TOKEN_PROGRAM_ID,
 } from '../helpers/constants';
 import * as anchor from '@project-serum/anchor';
-import { MintLayout, Token } from '@solana/spl-token';
+import { MintLayout, Token } from '@solana/safe-token ';
 import { createAssociatedTokenAccountInstruction } from '../helpers/instructions';
 import { sendTransactionWithRetryWithKeypair } from '../helpers/transactions';
 import log from 'loglevel';

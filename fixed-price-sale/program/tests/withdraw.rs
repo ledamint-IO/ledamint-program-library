@@ -20,9 +20,9 @@ mod withdraw {
             find_treasury_owner_address, find_vault_owner_address,
         },
     };
-    use solana_program::clock::Clock;
-    use solana_program_test::*;
-    use solana_sdk::{
+    use safecoin_program::clock::Clock;
+    use safecoin_program_test::*;
+    use safecoin_sdk::{
         account::ReadableAccount,
         commitment_config::CommitmentLevel,
         instruction::{AccountMeta, Instruction},
@@ -36,7 +36,7 @@ mod withdraw {
 
     #[tokio::test]
     async fn success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _vault) =
@@ -209,51 +209,51 @@ mod withdraw {
 
         let (master_edition_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (master_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (edition_marker, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
                 selling_resource.supply.to_string().as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (primary_metadata_creators, primary_metadata_creators_bump) =
@@ -318,8 +318,8 @@ mod withdraw {
             master_edition_metadata,
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
-            token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_metadata_program: lpl_token_metadata::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -387,18 +387,18 @@ mod withdraw {
             &primary_royalties_holder.pubkey(),
         );
 
-        let destination = spl_associated_token_account::get_associated_token_address(
+        let destination = safe_associated_token_account::get_associated_token_address(
             &primary_royalties_holder.pubkey(),
             &treasury_mint_keypair.pubkey(),
         );
 
         let (metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let mut accounts = mpl_fixed_price_sale_accounts::Withdraw {
@@ -414,8 +414,8 @@ mod withdraw {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -461,13 +461,13 @@ mod withdraw {
             .unwrap()
             .unwrap();
         let destination_token_acc =
-            spl_token::state::Account::unpack(&destination_acc.data).unwrap();
+            safe_token::state::Account::unpack(&destination_acc.data).unwrap();
         assert_eq!(destination_token_acc.amount, 1000000);
     }
 
     #[tokio::test]
     async fn success_native_sol() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _vault) =
@@ -608,51 +608,51 @@ mod withdraw {
 
         let (master_edition_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (master_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (edition_marker, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
                 selling_resource.supply.to_string().as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         // SavePrimaryMetadataCreators
@@ -717,8 +717,8 @@ mod withdraw {
             master_edition_metadata,
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
-            token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_metadata_program: lpl_token_metadata::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -790,11 +790,11 @@ mod withdraw {
 
         let (metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let mut accounts = mpl_fixed_price_sale_accounts::Withdraw {
@@ -810,8 +810,8 @@ mod withdraw {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -862,7 +862,7 @@ mod withdraw {
 
     #[tokio::test]
     async fn fail_invalid_destination() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _vault) =
@@ -1035,51 +1035,51 @@ mod withdraw {
 
         let (master_edition_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (master_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (edition_marker, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
                 selling_resource.supply.to_string().as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         // Buy
@@ -1101,8 +1101,8 @@ mod withdraw {
             master_edition_metadata,
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
-            token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_metadata_program: lpl_token_metadata::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1174,11 +1174,11 @@ mod withdraw {
 
         let (metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let accounts = mpl_fixed_price_sale_accounts::Withdraw {
@@ -1194,8 +1194,8 @@ mod withdraw {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1234,7 +1234,7 @@ mod withdraw {
 
     #[tokio::test]
     async fn fail_invalid_funder() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _vault) =
@@ -1407,51 +1407,51 @@ mod withdraw {
 
         let (master_edition_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (master_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (edition_marker, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
                 selling_resource.supply.to_string().as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         // Buy
@@ -1473,8 +1473,8 @@ mod withdraw {
             master_edition_metadata,
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
-            token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_metadata_program: lpl_token_metadata::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1545,11 +1545,11 @@ mod withdraw {
 
         let (metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let accounts = mpl_fixed_price_sale_accounts::Withdraw {
@@ -1565,8 +1565,8 @@ mod withdraw {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1605,7 +1605,7 @@ mod withdraw {
 
     #[tokio::test]
     async fn fail_withdraw_twice() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _vault) =
@@ -1778,51 +1778,51 @@ mod withdraw {
 
         let (master_edition_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (master_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (edition_marker, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
                 selling_resource.supply.to_string().as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let (new_edition, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 new_mint_keypair.pubkey().as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         // SavePrimaryMetadataCreators
@@ -1887,8 +1887,8 @@ mod withdraw {
             master_edition_metadata,
             clock: sysvar::clock::id(),
             rent: sysvar::rent::id(),
-            token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
+            token_metadata_program: lpl_token_metadata::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -1956,18 +1956,18 @@ mod withdraw {
             &primary_royalties_holder.pubkey(),
         );
 
-        let destination = spl_associated_token_account::get_associated_token_address(
+        let destination = safe_associated_token_account::get_associated_token_address(
             &primary_royalties_holder.pubkey(),
             &treasury_mint_keypair.pubkey(),
         );
 
         let (metadata, _) = Pubkey::find_program_address(
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
         );
 
         let mut accounts = mpl_fixed_price_sale_accounts::Withdraw {
@@ -1983,8 +1983,8 @@ mod withdraw {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -2032,8 +2032,8 @@ mod withdraw {
             payout_ticket,
             rent: sysvar::rent::id(),
             clock: sysvar::clock::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);

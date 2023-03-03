@@ -1,6 +1,6 @@
 use borsh::BorshSerialize;
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -31,7 +31,7 @@ pub fn set_and_verify_collection(program_id: &Pubkey, accounts: &[AccountInfo]) 
 
     assert_owned_by(metadata_info, program_id)?;
     assert_owned_by(collection_info, program_id)?;
-    assert_owned_by(collection_mint, &spl_token::id())?;
+    assert_owned_by(collection_mint, &safe_token::id())?;
     assert_owned_by(edition_account_info, program_id)?;
 
     let mut metadata = Metadata::from_account_info(metadata_info)?;

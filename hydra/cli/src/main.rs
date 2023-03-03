@@ -1,18 +1,18 @@
 use crate::cli_api::init_api;
-use anchor_client::anchor_lang::solana_program::example_mocks::solana_sdk::signature::Keypair;
+use anchor_client::anchor_lang::safecoin_program::example_mocks::safecoin_sdk::signature::Keypair;
 use anchor_client::anchor_lang::AccountDeserialize;
-use anchor_client::solana_client::client_error::ClientError;
-use anchor_client::solana_client::rpc_client::RpcClient;
-use anchor_client::solana_client::rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig};
+use anchor_client::safecoin_client::client_error::ClientError;
+use anchor_client::safecoin_client::rpc_client::RpcClient;
+use anchor_client::safecoin_client::rpc_config::{RpcAccountInfoConfig, RpcProgramAccountsConfig};
 
-use anchor_client::solana_client::rpc_filter::{Memcmp, MemcmpEncodedBytes, RpcFilterType};
+use anchor_client::safecoin_client::rpc_filter::{Memcmp, MemcmpEncodedBytes, RpcFilterType};
 
 use clap::{ArgMatches, Error, ErrorKind};
 use hydra::state::{Fanout, FanoutMint};
 use solana_account_decoder::UiAccountEncoding;
-use solana_sdk::commitment_config::{CommitmentConfig, CommitmentLevel};
-use solana_sdk::pubkey::Pubkey;
-use solana_sdk::signature::read_keypair_file;
+use safecoin_sdk::commitment_config::{CommitmentConfig, CommitmentLevel};
+use safecoin_sdk::pubkey::Pubkey;
+use safecoin_sdk::signature::read_keypair_file;
 
 use std::str::FromStr;
 use std::time::Duration;

@@ -615,7 +615,7 @@
   integrity sha512-AB2zKDrGyJtQqUmOswsZCflIuldYmsPvL/zIU/66JOD9HDo8yyz5ITCrs+/0QoW+CIJkotC5JEhuYuBnqLhmNw==
   dependencies:
     "@metaplex-foundation/cusper" "^0.0.2"
-    "@solana/spl-token-registry" "^0.2.2405"
+    "@solana/safe-token -registry" "^0.2.2405"
     "@solana/web3.js" "^1.66.2"
     bn.js "^5.2.1"
     debug "^4.3.3"
@@ -629,7 +629,7 @@
   integrity sha512-T6fE5rglKVmnDrPvs6Vv8ijXUZyBqALICb/OA39n+UAhkYP80MafGmV+ViuhfxoWgtD2tSBCan8VDshcH7l3UA==
   dependencies:
     "@metaplex-foundation/amman-client" "^0.2.0"
-    "@solana/spl-token" "^0.2.0"
+    "@solana/safe-token " "^0.2.0"
     "@solana/web3.js" "^1.43.4"
     ansi-colors "^4.1.1"
     bn.js "^5.2.0"
@@ -682,15 +682,15 @@
   resolved "https://registry.yarnpkg.com/@metaplex-foundation/cusper/-/cusper-0.0.2.tgz#dc2032a452d6c269e25f016aa4dd63600e2af975"
   integrity sha512-S9RulC2fFCFOQraz61bij+5YCHhSO9llJegK8c8Y6731fSi6snUSQJdCUqYS8AIgR0TKbQvdvgSyIIdbDFZbBA==
 
-"@metaplex-foundation/mpl-token-metadata@^2.5.2":
+"@metaplex-foundation/lpl-token-metadata@^2.5.2":
   version "2.5.2"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/mpl-token-metadata/-/mpl-token-metadata-2.5.2.tgz#ec84464e2bf65bf491abdc71c3882e5973dd9978"
+  resolved "https://registry.yarnpkg.com/@metaplex-foundation/lpl-token-metadata/-/lpl-token-metadata-2.5.2.tgz#ec84464e2bf65bf491abdc71c3882e5973dd9978"
   integrity sha512-lAjQjj2gGtyLq8MOkp4tWZSC5DK9NWgPd3EoH0KQ9gMs3sKIJRik0CBaZg+JA0uLwzkiErY2Izus4vbWtRADJQ==
   dependencies:
     "@metaplex-foundation/beet" "^0.7.1"
     "@metaplex-foundation/beet-solana" "^0.4.0"
     "@metaplex-foundation/cusper" "^0.0.2"
-    "@solana/spl-token" "^0.3.6"
+    "@solana/safe-token " "^0.3.6"
     "@solana/web3.js" "^1.66.2"
     bn.js "^5.2.0"
     debug "^4.3.4"
@@ -826,16 +826,16 @@
     bn.js "^5.2.1"
     borsh "^0.7.0"
 
-"@solana/spl-token-registry@^0.2.2405":
+"@solana/safe-token -registry@^0.2.2405":
   version "0.2.4574"
-  resolved "https://registry.yarnpkg.com/@solana/spl-token-registry/-/spl-token-registry-0.2.4574.tgz#13f4636b7bec90d2bb43bbbb83512cd90d2ce257"
+  resolved "https://registry.yarnpkg.com/@solana/safe-token -registry/-/safe-token -registry-0.2.4574.tgz#13f4636b7bec90d2bb43bbbb83512cd90d2ce257"
   integrity sha512-JzlfZmke8Rxug20VT/VpI2XsXlsqMlcORIUivF+Yucj7tFi7A0dXG7h+2UnD0WaZJw8BrUz2ABNkUnv89vbv1A==
   dependencies:
     cross-fetch "3.0.6"
 
-"@solana/spl-token@^0.1.8":
+"@solana/safe-token @^0.1.8":
   version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@solana/spl-token/-/spl-token-0.1.8.tgz#f06e746341ef8d04165e21fc7f555492a2a0faa6"
+  resolved "https://registry.yarnpkg.com/@solana/safe-token /-/safe-token -0.1.8.tgz#f06e746341ef8d04165e21fc7f555492a2a0faa6"
   integrity sha512-LZmYCKcPQDtJgecvWOgT/cnoIQPWjdH+QVyzPcFvyDUiT0DiRjZaam4aqNUyvchLFhzgunv3d9xOoyE34ofdoQ==
   dependencies:
     "@babel/runtime" "^7.10.5"
@@ -845,9 +845,9 @@
     buffer-layout "^1.2.0"
     dotenv "10.0.0"
 
-"@solana/spl-token@^0.2.0":
+"@solana/safe-token @^0.2.0":
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@solana/spl-token/-/spl-token-0.2.0.tgz#329bb6babb5de0f9c40035ddb1657f01a8347acd"
+  resolved "https://registry.yarnpkg.com/@solana/safe-token /-/safe-token -0.2.0.tgz#329bb6babb5de0f9c40035ddb1657f01a8347acd"
   integrity sha512-RWcn31OXtdqIxmkzQfB2R+WpsJOVS6rKuvpxJFjvik2LyODd+WN58ZP3Rpjpro03fscGAkzlFuP3r42doRJgyQ==
   dependencies:
     "@solana/buffer-layout" "^4.0.0"
@@ -855,9 +855,9 @@
     "@solana/web3.js" "^1.32.0"
     start-server-and-test "^1.14.0"
 
-"@solana/spl-token@^0.3.6":
+"@solana/safe-token @^0.3.6":
   version "0.3.6"
-  resolved "https://registry.yarnpkg.com/@solana/spl-token/-/spl-token-0.3.6.tgz#35473ad2ed71fe91e5754a2ac72901e1b8b26a42"
+  resolved "https://registry.yarnpkg.com/@solana/safe-token /-/safe-token -0.3.6.tgz#35473ad2ed71fe91e5754a2ac72901e1b8b26a42"
   integrity sha512-P9pTXjDIRvVbjr3J0mCnSamYqLnICeds7IoH1/Ro2R9OBuOHdp5pqKZoscfZ3UYrgnCWUc1bc9M2m/YPHjw+1g==
   dependencies:
     "@solana/buffer-layout" "^4.0.0"

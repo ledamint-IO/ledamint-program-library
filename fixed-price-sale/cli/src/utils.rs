@@ -3,23 +3,23 @@
 #![allow(unused)]
 
 use crate::error;
-use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_client::rpc_client::RpcClient;
+use safecoin_sdk::{
     program_pack::Pack,
     pubkey::Pubkey,
     signer::{keypair::Keypair, Signer},
     system_instruction,
     transaction::Transaction,
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 
-/// Return `Mint` account state from `spl_token` program.
+/// Return `Mint` account state from `safe_token` program.
 pub fn get_mint(client: &RpcClient, mint: &Pubkey) -> Result<Mint, error::Error> {
     let data = client.get_account_data(mint)?;
     Ok(Mint::unpack(&data)?)
 }
 
-/// Create token `Account` from `spl_token` program.
+/// Create token `Account` from `safe_token` program.
 pub fn create_token_account(
     client: &RpcClient,
     payer: &Keypair,
@@ -28,7 +28,7 @@ pub fn create_token_account(
     owner: &Pubkey,
 ) -> Result<(), error::Error> {
     let recent_blockhash = client.get_latest_blockhash()?;
-    let lamports = client.get_minimum_balance_for_rent_exemption(spl_token::state::Account::LEN)?;
+    let lamports = client.get_minimum_balance_for_rent_exemption(safe_token::state::Account::LEN)?;
 
     let tx = Transaction::new_signed_with_payer(
         &[
@@ -36,11 +36,11 @@ pub fn create_token_account(
                 &payer.pubkey(),
                 &account.pubkey(),
                 lamports,
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 owner,
@@ -57,7 +57,7 @@ pub fn create_token_account(
     Ok(())
 }
 
-/// Create token `Mint` from `spl_token` program.
+/// Create token `Mint` from `safe_token` program.
 pub fn create_mint(
     client: &RpcClient,
     payer: &Keypair,
@@ -65,7 +65,7 @@ pub fn create_mint(
     decimals: u8,
 ) -> Result<(), error::Error> {
     let recent_blockhash = client.get_latest_blockhash()?;
-    let lamports = client.get_minimum_balance_for_rent_exemption(spl_token::state::Mint::LEN)?;
+    let lamports = client.get_minimum_balance_for_rent_exemption(safe_token::state::Mint::LEN)?;
 
     let tx = Transaction::new_signed_with_payer(
         &[
@@ -73,11 +73,11 @@ pub fn create_mint(
                 &payer.pubkey(),
                 &mint.pubkey(),
                 lamports,
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 &payer.pubkey(),
                 None,
@@ -113,8 +113,8 @@ pub fn mint_to(
     let recent_blockhash = client.get_latest_blockhash()?;
 
     let tx = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::mint_to(
-            &spl_token::id(),
+        &[safe_token::instruction::mint_to(
+            &safe_token::id(),
             mint,
             to,
             &payer.pubkey(),

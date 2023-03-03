@@ -177,7 +177,7 @@ the Candy Machine.
 | `collection_master_edition`   |          |        | Master Edition account of the collection.                                                 |
 | `collection_update_authority` |          |        | Update authority of the collection.                                                       |
 | `token_metadata_program`      |          |        | Metaplex `TokenMetadata` program ID.                                                      |
-| `token_program`               |          |        | `spl-token` program ID.                                                                   |
+| `token_program`               |          |        | `safe-token ` program ID.                                                                   |
 | `system_program`              |          |        | `SystemProgram` account.                                                                  |
 | `rent`                        |          |        | `Rent` account.                                                                           |
 

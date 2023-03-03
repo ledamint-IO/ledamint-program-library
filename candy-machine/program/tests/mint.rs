@@ -1,11 +1,11 @@
 #![cfg(feature = "test-bpf")]
 #![allow(dead_code)]
 
-use anchor_client::solana_sdk::transaction::Transaction;
+use anchor_client::safecoin_sdk::transaction::Transaction;
 use mpl_candy_machine::WhitelistMintMode;
-use solana_program::{instruction::InstructionError, pubkey::Pubkey};
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::{instruction::InstructionError, pubkey::Pubkey};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::{AccountSharedData, WritableAccount},
     signature::Keypair,
     signer::Signer,
@@ -50,7 +50,7 @@ async fn fail_metadata_not_blank() {
         &AccountSharedData::create(
             1000000000,
             vec![1, 1, 1, 1, 1, 1, 1, 1, 1],
-            mpl_token_metadata::id(),
+            lpl_token_metadata::id(),
             false,
             1,
         ),
@@ -121,7 +121,7 @@ async fn metadata_check_before_bot_tax() {
         &AccountSharedData::create(
             1000000000,
             vec![1, 1, 1, 1, 1, 1, 1, 1, 1],
-            mpl_token_metadata::id(),
+            lpl_token_metadata::id(),
             false,
             1,
         ),

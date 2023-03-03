@@ -1,6 +1,6 @@
 use borsh::BorshSerialize;
-use mpl_utils::{assert_signer, create_or_allocate_account_raw};
-use solana_program::{
+use lpl_utils::{assert_signer, create_or_allocate_account_raw};
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -30,7 +30,7 @@ pub fn process_approve_collection_authority(
 
     let metadata = Metadata::from_account_info(metadata_info)?;
     assert_owned_by(metadata_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
     assert_signer(update_authority)?;
     assert_signer(payer)?;
     if metadata.update_authority != *update_authority.key {

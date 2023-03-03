@@ -5,7 +5,7 @@ pub mod utils;
 use crate::utils::*;
 use anchor_lang::{
     prelude::*,
-    solana_program::program::{invoke, invoke_signed},
+    safecoin_program::program::{invoke, invoke_signed},
     AnchorDeserialize, AnchorSerialize,
 };
 use anchor_spl::{
@@ -21,7 +21,7 @@ const A_NAME: &str = "A";
 const B_NAME: &str = "B";
 #[program]
 pub mod token_entangler {
-    use spl_token::amount_to_ui_amount;
+    use safe_token::amount_to_ui_amount;
 
     use super::*;
 
@@ -147,7 +147,7 @@ pub mod token_entangler {
         )?;
 
         invoke(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &token_b.key(),
                 &token_b_escrow.key(),
@@ -252,7 +252,7 @@ pub mod token_entangler {
         }
 
         invoke(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &token.key(),
                 &swap_from_escrow.key(),
@@ -271,7 +271,7 @@ pub mod token_entangler {
         let (replacement_token_mint_supply, _) =
             get_mint_details(&replacement_token_mint.to_account_info())?;
         invoke_signed(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &swap_to_escrow.key(),
                 &replacement_token.key(),
@@ -288,7 +288,7 @@ pub mod token_entangler {
             &[&signer_seeds],
         )?;
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         if !entangled_pair.paid || entangled_pair.pays_every_time {
             pay_creator_fees(

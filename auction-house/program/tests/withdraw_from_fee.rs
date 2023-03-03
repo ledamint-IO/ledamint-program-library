@@ -9,7 +9,7 @@
 //         transfer_lamports,
 //     };
 //     use anchor_client::{
-//         solana_sdk::{signature::Keypair, signer::Signer, system_program},
+//         safecoin_sdk::{signature::Keypair, signer::Signer, system_program},
 //         ClientError,
 //     };
 //     use mpl_auction_house::{
@@ -38,7 +38,7 @@
 //         let authority_keypair = Keypair::new();
 
 //         // Treasury mint key
-//         let t_mint_key = spl_token::native_mint::id();
+//         let t_mint_key = safe_token::native_mint::id();
 
 //         let auction_house_key =
 //             setup_auction_house(&program, &authority_keypair.pubkey(), &t_mint_key).unwrap();

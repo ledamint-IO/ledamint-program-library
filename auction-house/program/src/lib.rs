@@ -26,14 +26,14 @@ use crate::{
 
 use anchor_lang::{
     prelude::*,
-    solana_program::{program::invoke_signed, system_instruction},
+    safecoin_program::{program::invoke_signed, system_instruction},
     AnchorDeserialize, AnchorSerialize,
 };
 use anchor_spl::{
     associated_token::AssociatedToken,
     token::{Mint, Token, TokenAccount},
 };
-use spl_token::instruction::revoke;
+use safe_token::instruction::revoke;
 
 anchor_lang::declare_id!("hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk");
 
@@ -88,7 +88,7 @@ pub mod auction_house {
         let token_program = &ctx.accounts.token_program;
         let system_program = &ctx.accounts.system_program;
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
         let auction_house_seeds = [
             PREFIX.as_bytes(),
             auction_house.creator.as_ref(),
@@ -105,7 +105,7 @@ pub mod auction_house {
         ];
         if !is_native {
             invoke_signed(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     token_program.key,
                     &auction_house_treasury.key(),
                     &treasury_withdrawal_destination.key(),
@@ -159,7 +159,7 @@ pub mod auction_house {
         let system_program = &ctx.accounts.system_program;
         let ata_program = &ctx.accounts.ata_program;
         let rent = &ctx.accounts.rent;
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         if let Some(sfbp) = seller_fee_basis_points {
             if sfbp > 10000 {
@@ -275,7 +275,7 @@ pub mod auction_house {
         auction_house.treasury_withdrawal_destination = treasury_withdrawal_destination.key();
         auction_house.fee_withdrawal_destination = fee_withdrawal_destination.key();
 
-        let is_native = treasury_mint.key() == spl_token::native_mint::id();
+        let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
         let ah_key = auction_house.key();
 

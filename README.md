@@ -19,8 +19,8 @@ Metaplex smart contracts and SDK.
 | [Gumdrop](./gumdrop)                       | [![Crate][mpl-gumdrop-img-long]][mpl-gumdrop-crate]                       | [![NPM][mpl-gumdrop-nimg-long]][mpl-gumdrop-npm]                       |
 | [Hydra](./hydra)                           | [![Crate][mpl-hydra-img-long]][mpl-hydra-crate]                           | [![NPM][mpl-hydra-nimg-long]][mpl-hydra-npm]                           |
 | [NFT Packs](./nft-packs)                   | [![Crate][mpl-nft-packs-img-long]][mpl-nft-packs-crate]                   | [![NPM][mpl-nft-packs-nimg-long]][mpl-nft-packs-npm]                   |
-| [Token Entangler](./token-entangler)       | [![Crate][mpl-token-entangler-img-long]][mpl-token-entangler-crate]       | [![NPM][mpl-token-entangler-nimg-long]][mpl-token-entangler-npm]       |
-| [Token Metadata](./token-metadata)         | [![Crate][mpl-token-metadata-img-long]][mpl-token-metadata-crate]         | [![NPM][mpl-token-metadata-nimg-long]][mpl-token-metadata-npm]         |
+| [Token Entangler](./token-entangler)       | [![Crate][lpl-token-entangler-img-long]][lpl-token-entangler-crate]       | [![NPM][lpl-token-entangler-nimg-long]][lpl-token-entangler-npm]       |
+| [Token Metadata](./token-metadata)         | [![Crate][lpl-token-metadata-img-long]][lpl-token-metadata-crate]         | [![NPM][lpl-token-metadata-nimg-long]][lpl-token-metadata-npm]         |
 
 ## Development
 
@@ -71,13 +71,13 @@ merged.
 | Bubblegum          | [mpl-bubblegum][mpl-bubblegum-crate]                   | [![Crate][mpl-bubblegum-img]][mpl-bubblegum-crate]                   |
 | Candy Machine Core | [mpl-candy-machine-core][mpl-candy-machine-core-crate] | [![Crate][mpl-candy-machine-core-img]][mpl-candy-machine-core-crate] |
 | Testing Utils      | [mpl-testing-utils][mpl-testing-utils-crate]           | [![Crate][mpl-testing-utils-img]][mpl-testing-utils-crate]           |
-| Utils              | [mpl-utils][mpl-utils-crate]                           | [![Crate][mpl-utils-img]][mpl-utils-crate]                           |
+| Utils              | [lpl-utils][lpl-utils-crate]                           | [![Crate][lpl-utils-img]][lpl-utils-crate]                           |
 | Fixed Price Sale   | [mpl-fixed-price-sale][mpl-fixed-price-sale-crate]     | [![Crate][mpl-fixed-price-sale-img]][mpl-fixed-price-sale-crate]     |
 | Gumdrop            | [mpl-gumdrop][mpl-gumdrop-crate]                       | [![Crate][mpl-gumdrop-img]][mpl-gumdrop-crate]                       |
 | Hydra              | [mpl-hydra][mpl-hydra-crate]                           | [![Crate][mpl-hydra-img]][mpl-hydra-crate]                           |
 | NFT Packs          | [mpl-nft-packs][mpl-nft-packs-crate]                   | [![Crate][mpl-nft-packs-img]][mpl-nft-packs-crate]                   |
-| Token Entangler    | [mpl-token-entangler][mpl-token-entangler-crate]       | [![Crate][mpl-token-entangler-img]][mpl-token-entangler-crate]       |
-| Token Metadata     | [mpl-token-metadata][mpl-token-metadata-crate]         | [![Crate][mpl-token-metadata-img]][mpl-token-metadata-crate]         |
+| Token Entangler    | [lpl-token-entangler][lpl-token-entangler-crate]       | [![Crate][lpl-token-entangler-img]][lpl-token-entangler-crate]       |
+| Token Metadata     | [lpl-token-metadata][lpl-token-metadata-crate]         | [![Crate][lpl-token-metadata-img]][lpl-token-metadata-crate]         |
 
 ### npm Packages
 
@@ -92,8 +92,8 @@ merged.
 | Gumdrop            | [mpl-gumdrop][mpl-gumdrop-npm]                       | [![NPM][mpl-gumdrop-nimg]][mpl-gumdrop-npm]                       |
 | Hydra              | [mpl-hydra][mpl-hydra-npm]                           | [![NPM][mpl-hydra-nimg]][mpl-hydra-npm]                           |
 | NFT Packs          | [mpl-nft-packs][mpl-nft-packs-npm]                   | [![NPM][mpl-nft-packs-nimg]][mpl-nft-packs-npm]                   |
-| Token Entangler    | [mpl-token-entangler][mpl-token-entangler-npm]       | [![NPM][mpl-token-entangler-nimg]][mpl-token-entangler-npm]       |
-| Token Metadata     | [mpl-token-metadata][mpl-token-metadata-npm]         | [![NPM][mpl-token-metadata-nimg]][mpl-token-metadata-npm]         |
+| Token Entangler    | [lpl-token-entangler][lpl-token-entangler-npm]       | [![NPM][lpl-token-entangler-nimg]][lpl-token-entangler-npm]       |
+| Token Metadata     | [lpl-token-metadata][lpl-token-metadata-npm]         | [![NPM][lpl-token-metadata-nimg]][lpl-token-metadata-npm]         |
 
 ## Reporting security issues
 
@@ -129,13 +129,13 @@ under either the [MIT][mit-license] or the [Apache][apache-license] licenses.
 [mpl-candy-machine-core-crate]:https://crates.io/crates/mpl-candy-machine-core
 [mpl-candy-machine-crate]:https://crates.io/crates/mpl-candy-machine
 [mpl-fixed-price-sale-crate]:https://crates.io/crates/mpl-fixed-price-sale
-[mpl-utils-crate]:https://crates.io/crates/mpl-utils
+[lpl-utils-crate]:https://crates.io/crates/lpl-utils
 [mpl-testing-utils-crate]:https://crates.io/crates/mpl-testing-utils
 [mpl-gumdrop-crate]:https://crates.io/crates/mpl-gumdrop
 [mpl-hydra-crate]:https://crates.io/crates/mpl-hydra
 [mpl-nft-packs-crate]:https://crates.io/crates/mpl-nft-packs
-[mpl-token-entangler-crate]:https://crates.io/crates/mpl-token-entangler
-[mpl-token-metadata-crate]:https://crates.io/crates/mpl-token-metadata
+[lpl-token-entangler-crate]:https://crates.io/crates/lpl-token-entangler
+[lpl-token-metadata-crate]:https://crates.io/crates/lpl-token-metadata
 
 [mpl-auction-house-img-long]:https://img.shields.io/crates/v/mpl-auction-house?label=crates.io%20%7C%20mpl-auction-house&logo=rust
 [mpl-auction-house-img]:https://img.shields.io/crates/v/mpl-auction-house?logo=rust
@@ -155,8 +155,8 @@ under either the [MIT][mit-license] or the [Apache][apache-license] licenses.
 [mpl-fixed-price-sale-img-long]:https://img.shields.io/crates/v/mpl-fixed-price-sale?label=crates.io%20%7C%20mpl-fixed-price-sale&logo=rust
 [mpl-fixed-price-sale-img]:https://img.shields.io/crates/v/mpl-fixed-price-sale?logo=rust
 
-[mpl-utils-img-long]:https://img.shields.io/crates/v/mpl-utils?label=crates.io%20%7C%20mpl-utils&logo=rust
-[mpl-utils-img]:https://img.shields.io/crates/v/mpl-utils?logo=rust
+[lpl-utils-img-long]:https://img.shields.io/crates/v/lpl-utils?label=crates.io%20%7C%20lpl-utils&logo=rust
+[lpl-utils-img]:https://img.shields.io/crates/v/lpl-utils?logo=rust
 
 [mpl-testing-utils-img-long]:https://img.shields.io/crates/v/mpl-testing-utils?label=crates.io%20%7C%20mpl-testing-utils&logo=rust
 [mpl-testing-utils-img]:https://img.shields.io/crates/v/mpl-testing-utils?logo=rust
@@ -170,11 +170,11 @@ under either the [MIT][mit-license] or the [Apache][apache-license] licenses.
 [mpl-nft-packs-img-long]:https://img.shields.io/crates/v/mpl-nft-packs?label=crates.io%20%7C%20mpl-nft-packs&logo=rust
 [mpl-nft-packs-img]:https://img.shields.io/crates/v/mpl-nft-packs?logo=rust
 
-[mpl-token-entangler-img-long]:https://img.shields.io/crates/v/mpl-token-entangler?label=crates.io%20%7C%20mpl-token-entangler&logo=rust
-[mpl-token-entangler-img]:https://img.shields.io/crates/v/mpl-token-entangler?logo=rust
+[lpl-token-entangler-img-long]:https://img.shields.io/crates/v/lpl-token-entangler?label=crates.io%20%7C%20mpl-token-entangler&logo=rust
+[lpl-token-entangler-img]:https://img.shields.io/crates/v/lpl-token-entangler?logo=rust
 
-[mpl-token-metadata-img-long]:https://img.shields.io/crates/v/mpl-token-metadata?label=crates.io%20%7C%20mpl-token-metadata&logo=rust
-[mpl-token-metadata-img]:https://img.shields.io/crates/v/mpl-token-metadata?logo=rust
+[lpl-token-metadata-img-long]:https://img.shields.io/crates/v/lpl-token-metadata?label=crates.io%20%7C%20mpl-token-metadata&logo=rust
+[lpl-token-metadata-img]:https://img.shields.io/crates/v/lpl-token-metadata?logo=rust
 
 <!-- NPM Packages -->
 
@@ -188,8 +188,8 @@ under either the [MIT][mit-license] or the [Apache][apache-license] licenses.
 [mpl-gumdrop-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-gumdrop
 [mpl-hydra-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-hydra
 [mpl-nft-packs-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-nft-packs
-[mpl-token-entangler-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-token-entangler
-[mpl-token-metadata-npm]:https://www.npmjs.com/package/@metaplex-foundation/mpl-token-metadata
+[lpl-token-entangler-npm]:https://www.npmjs.com/package/@metaplex-foundation/lpl-token-entangler
+[lpl-token-metadata-npm]:https://www.npmjs.com/package/@metaplex-foundation/lpl-token-metadata
 
 [mpl-auction-house-nimg-long]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-auction-house?label=npm%20%7C%20mpl-auction-house&logo=typescript
 [mpl-auction-house-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-auction-house?logo=typescript
@@ -218,11 +218,11 @@ under either the [MIT][mit-license] or the [Apache][apache-license] licenses.
 [mpl-nft-packs-nimg-long]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-nft-packs?label=npm%20%7C%20mpl-nft-packs&logo=typescript
 [mpl-nft-packs-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-nft-packs?logo=typescript
 
-[mpl-token-entangler-nimg-long]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-token-entangler?label=npm%20%7C%20mpl-token-entangler&logo=typescript
-[mpl-token-entangler-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-token-entangler?logo=typescript
+[lpl-token-entangler-nimg-long]:https://img.shields.io/npm/v/@metaplex-foundation/lpl-token-entangler?label=npm%20%7C%20mpl-token-entangler&logo=typescript
+[lpl-token-entangler-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/lpl-token-entangler?logo=typescript
 
-[mpl-token-metadata-nimg-long]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-token-metadata?label=npm%20%7C%20mpl-token-metadata&logo=typescript
-[mpl-token-metadata-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/mpl-token-metadata?logo=typescript
+[lpl-token-metadata-nimg-long]:https://img.shields.io/npm/v/@metaplex-foundation/lpl-token-metadata?label=npm%20%7C%20mpl-token-metadata&logo=typescript
+[lpl-token-metadata-nimg]:https://img.shields.io/npm/v/@metaplex-foundation/lpl-token-metadata?logo=typescript
 
 <!-- Licenses -->
 

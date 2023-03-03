@@ -16,7 +16,7 @@ use crate::{
 };
 use anchor_lang::{
     prelude::*,
-    solana_program::{
+    safecoin_program::{
         account_info::AccountInfo,
         keccak,
         program::{invoke, invoke_signed},
@@ -26,14 +26,14 @@ use anchor_lang::{
     },
     system_program::System,
 };
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     assertions::collection::{assert_collection_verify_is_valid, assert_has_collection_authority},
     state::CollectionDetails,
 };
 use spl_account_compression::{
     program::SplAccountCompression, wrap_application_data_v1, Node, Noop,
 };
-use spl_token::state::Mint as SplMint;
+use safe_token::state::Mint as SplMint;
 use std::collections::HashSet;
 
 pub mod error;
@@ -699,7 +699,7 @@ fn process_collection_verification_mpl_only<'info>(
         BubblegumError::IncorrectOwner
     );
     require!(
-        *collection_mint.owner == spl_token::id(),
+        *collection_mint.owner == safe_token::id(),
         BubblegumError::IncorrectOwner
     );
     require!(
@@ -776,7 +776,7 @@ fn process_collection_verification_mpl_only<'info>(
         }
 
         invoke_signed(
-            &mpl_token_metadata::instruction::bubblegum_set_collection_size(
+            &lpl_token_metadata::instruction::bubblegum_set_collection_size(
                 token_metadata_program.key(),
                 collection_metadata.to_account_info().key(),
                 collection_authority.key(),
@@ -1435,7 +1435,7 @@ pub mod bubblegum {
                             &ctx.accounts.mint.key(),
                             Rent::get()?.minimum_balance(SplMint::LEN),
                             SplMint::LEN as u64,
-                            &spl_token::id(),
+                            &safe_token::id(),
                         ),
                         &[
                             ctx.accounts.leaf_owner.to_account_info(),
@@ -1450,8 +1450,8 @@ pub mod bubblegum {
                         ]],
                     )?;
                     invoke(
-                        &spl_token::instruction::initialize_mint2(
-                            &spl_token::id(),
+                        &safe_token::instruction::initialize_mint2(
+                            &safe_token::id(),
                             &ctx.accounts.mint.key(),
                             &ctx.accounts.mint_authority.key(),
                             Some(&ctx.accounts.mint_authority.key()),
@@ -1465,11 +1465,11 @@ pub mod bubblegum {
                 }
                 if ctx.accounts.token_account.data_is_empty() {
                     invoke(
-                        &spl_associated_token_account::instruction::create_associated_token_account(
+                        &safe_associated_token_account::instruction::create_associated_token_account(
                             &ctx.accounts.leaf_owner.key(),
                             &ctx.accounts.leaf_owner.key(),
                             &ctx.accounts.mint.key(),
-                            &spl_token::ID,
+                            &safe_token::ID,
                         ),
                         &[
                             ctx.accounts.leaf_owner.to_account_info(),
@@ -1483,8 +1483,8 @@ pub mod bubblegum {
                     )?;
                 }
                 invoke_signed(
-                    &spl_token::instruction::mint_to(
-                        &spl_token::id(),
+                    &safe_token::instruction::mint_to(
+                        &safe_token::id(),
                         &ctx.accounts.mint.key(),
                         &ctx.accounts.token_account.key(),
                         &ctx.accounts.mint_authority.key(),
@@ -1540,7 +1540,7 @@ pub mod bubblegum {
 
         msg!("Creating metadata!");
         invoke_signed(
-            &mpl_token_metadata::instruction::create_metadata_accounts_v3(
+            &lpl_token_metadata::instruction::create_metadata_accounts_v3(
                 ctx.accounts.token_metadata_program.key(),
                 ctx.accounts.metadata.key(),
                 ctx.accounts.mint.key(),
@@ -1571,7 +1571,7 @@ pub mod bubblegum {
 
         msg!("Creating master edition!");
         invoke_signed(
-            &mpl_token_metadata::instruction::create_master_edition_v3(
+            &lpl_token_metadata::instruction::create_master_edition_v3(
                 ctx.accounts.token_metadata_program.key(),
                 ctx.accounts.master_edition.key(),
                 ctx.accounts.mint.key(),

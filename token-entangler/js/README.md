@@ -1,4 +1,4 @@
-# mpl-token-entangler
+# lpl-token-entangler
 
 This package contains the Token Entangler contract SDK code.
 

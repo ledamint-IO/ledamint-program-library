@@ -1,4 +1,4 @@
-use solana_program::{
+use safecoin_program::{
     program_memory::sol_memcmp,
     pubkey::{Pubkey, PUBKEY_BYTES},
 };

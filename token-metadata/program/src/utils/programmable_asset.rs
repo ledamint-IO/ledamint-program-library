@@ -1,13 +1,13 @@
-use mpl_token_auth_rules::{
+use lpl_token_auth_rules::{
     instruction::{builders::ValidateBuilder, InstructionBuilder, ValidateArgs},
     payload::PayloadType,
 };
-use mpl_utils::{create_or_allocate_account_raw, token::TokenTransferParams};
-use solana_program::{
+use lpl_utils::{create_or_allocate_account_raw, token::TokenTransferParams};
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, msg, program::invoke_signed,
     program_error::ProgramError, pubkey::Pubkey,
 };
-use spl_token::instruction::{freeze_account, thaw_account};
+use safe_token::instruction::{freeze_account, thaw_account};
 
 use crate::{
     assertions::{assert_derivation, programmable::assert_valid_authorization},
@@ -70,7 +70,7 @@ pub fn freeze<'a>(
     mint: AccountInfo<'a>,
     token: AccountInfo<'a>,
     edition: AccountInfo<'a>,
-    spl_token_program: AccountInfo<'a>,
+    safe_token_program: AccountInfo<'a>,
 ) -> ProgramResult {
     let edition_info_path = Vec::from([
         PREFIX.as_bytes(),
@@ -87,7 +87,7 @@ pub fn freeze<'a>(
     edition_info_seeds.push(edition_info_path_bump_seed);
 
     invoke_signed(
-        &freeze_account(spl_token_program.key, token.key, mint.key, edition.key, &[]).unwrap(),
+        &freeze_account(safe_token_program.key, token.key, mint.key, edition.key, &[]).unwrap(),
         &[token, mint, edition],
         &[&edition_info_seeds],
     )?;
@@ -98,7 +98,7 @@ pub fn thaw<'a>(
     mint_info: AccountInfo<'a>,
     token_info: AccountInfo<'a>,
     edition_info: AccountInfo<'a>,
-    spl_token_program: AccountInfo<'a>,
+    safe_token_program: AccountInfo<'a>,
 ) -> ProgramResult {
     let edition_info_path = Vec::from([
         PREFIX.as_bytes(),
@@ -116,7 +116,7 @@ pub fn thaw<'a>(
 
     invoke_signed(
         &thaw_account(
-            spl_token_program.key,
+            safe_token_program.key,
             token_info.key,
             mint_info.key,
             edition_info.key,
@@ -321,7 +321,7 @@ pub fn frozen_transfer<'a, 'b>(
     let dest_info = params.destination.clone();
     let token_program_info = params.token_program.clone();
 
-    mpl_utils::token::spl_token_transfer(params).unwrap();
+    lpl_utils::token::safe_token_transfer(params).unwrap();
 
     freeze(
         mint_info,

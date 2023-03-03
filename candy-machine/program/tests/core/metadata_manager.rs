@@ -1,10 +1,10 @@
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction,
     state::{Collection, CollectionDetails, Creator, Metadata, Uses, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program_test::{BanksClientError, ProgramTestContext};
-use solana_sdk::{
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_program_test::{BanksClientError, ProgramTestContext};
+use safecoin_sdk::{
     pubkey::Pubkey, signature::Signer, signer::keypair::Keypair, transaction::Transaction,
 };
 
@@ -47,7 +47,7 @@ impl MetadataManager {
     pub fn new(authority: &Keypair) -> Self {
         let mint = Keypair::new();
         let mint_pubkey = mint.pubkey();
-        let program_id = mpl_token_metadata::id();
+        let program_id = lpl_token_metadata::id();
 
         let metadata_seeds = &[PREFIX.as_bytes(), program_id.as_ref(), mint_pubkey.as_ref()];
         let (pubkey, _) = Pubkey::find_program_address(metadata_seeds, &program_id);
@@ -111,7 +111,7 @@ impl MetadataManager {
         update_blockhash(context).await?;
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_metadata_accounts_v3(
-                mpl_token_metadata::id(),
+                lpl_token_metadata::id(),
                 self.pubkey,
                 self.mint.pubkey(),
                 self.authority.pubkey(),
@@ -136,7 +136,7 @@ impl MetadataManager {
     }
 
     pub fn get_ata(&self) -> Pubkey {
-        spl_associated_token_account::get_associated_token_address(
+        safe_associated_token_account::get_associated_token_address(
             &self.owner.pubkey(),
             &self.mint.pubkey(),
         )

@@ -13,11 +13,11 @@ use crate::{
 };
 use arrayref::array_ref;
 use mpl_metaplex::state::Store;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     state::{Edition, EDITION, PREFIX as EDITION_PREFIX},
     utils::assert_derivation,
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     clock::Clock,
     entrypoint::ProgramResult,
@@ -27,7 +27,7 @@ use solana_program::{
     pubkey::Pubkey,
     sysvar::{rent::Rent, slot_hashes, Sysvar},
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 /// Process RequestCardForRedeem instruction
 pub fn request_card_for_redeem(
@@ -49,16 +49,16 @@ pub fn request_card_for_redeem(
     let clock = Clock::from_account_info(clock_info)?;
     let rent_info = next_account_info(account_info_iter)?;
     let rent = &Rent::from_account_info(rent_info)?;
-    let _spl_token_account_info = next_account_info(account_info_iter)?;
+    let _safe_token_account_info = next_account_info(account_info_iter)?;
     let _system_account_info = next_account_info(account_info_iter)?;
     let user_token_account = next_account_info(account_info_iter).ok();
 
     // Validate owners
     assert_owned_by(pack_set_account, program_id)?;
     assert_owned_by(store_account, &mpl_metaplex::id())?;
-    assert_owned_by(edition_mint_account, &spl_token::id())?;
+    assert_owned_by(edition_mint_account, &safe_token::id())?;
     if let Some(user_token_account) = user_token_account {
-        assert_owned_by(user_token_account, &spl_token::id())?;
+        assert_owned_by(user_token_account, &safe_token::id())?;
     }
     assert_owned_by(voucher_account, program_id)?;
     assert_owned_by(pack_config_account, program_id)?;

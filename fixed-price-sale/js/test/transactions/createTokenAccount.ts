@@ -5,7 +5,7 @@ import {
   // @ts-ignore createInitializeAccountInstruction export actually exist but isn't setup correctly
   createInitializeAccountInstruction,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 
 export const createTokenAccount = async ({
   payer,

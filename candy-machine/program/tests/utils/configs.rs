@@ -1,5 +1,5 @@
-use solana_program::{native_token::LAMPORTS_PER_SOL, pubkey::Pubkey};
-use solana_sdk::signer::Signer;
+use safecoin_program::{native_token::LAMPORTS_PER_SOL, pubkey::Pubkey};
+use safecoin_sdk::signer::Signer;
 
 use mpl_candy_machine::{
     CandyMachineData, Creator, EndSettings, GatekeeperConfig as GKConfig, HiddenSettings,

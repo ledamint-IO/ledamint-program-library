@@ -2,10 +2,10 @@
 #![allow(dead_code)]
 
 use mpl_candy_machine::CandyError;
-use mpl_token_metadata::state::CollectionDetails;
-use solana_program::instruction::InstructionError;
-use solana_program_test::*;
-use solana_sdk::{
+use lpl_token_metadata::state::CollectionDetails;
+use safecoin_program::instruction::InstructionError;
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::{Keypair, Signer},
     transaction::TransactionError,
 };

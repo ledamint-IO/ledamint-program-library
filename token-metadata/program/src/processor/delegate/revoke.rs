@@ -1,9 +1,9 @@
-use mpl_utils::{assert_signer, close_account_raw, cmp_pubkeys};
-use solana_program::{
+use lpl_utils::{assert_signer, close_account_raw, cmp_pubkeys};
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program::invoke, program_option::COption,
     program_pack::Pack, pubkey::Pubkey, system_program, sysvar,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 use crate::{
     assertions::{
@@ -82,7 +82,7 @@ fn revoke_delegate_v1(
     // ownership
 
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::id())?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::id())?;
 
     // key match
 
@@ -156,8 +156,8 @@ fn revoke_persistent_delegate_v1(
         }
     };
 
-    let spl_token_program_info = match ctx.accounts.spl_token_program_info {
-        Some(spl_token_program_info) => spl_token_program_info,
+    let safe_token_program_info = match ctx.accounts.safe_token_program_info {
+        Some(safe_token_program_info) => safe_token_program_info,
         None => {
             return Err(MetadataError::MissingSplTokenProgram.into());
         }
@@ -171,8 +171,8 @@ fn revoke_persistent_delegate_v1(
     // ownership
 
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::id())?;
-    assert_owned_by(token_info, &spl_token::id())?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::id())?;
+    assert_owned_by(token_info, &safe_token::id())?;
 
     // key match
 
@@ -181,7 +181,7 @@ fn revoke_persistent_delegate_v1(
         ctx.accounts.sysvar_instructions_info.key,
         &sysvar::instructions::ID,
     )?;
-    assert_keys_equal(spl_token_program_info.key, &spl_token::ID)?;
+    assert_keys_equal(safe_token_program_info.key, &safe_token::ID)?;
 
     // account relationships
 
@@ -190,7 +190,7 @@ fn revoke_persistent_delegate_v1(
         return Err(MetadataError::MintMismatch.into());
     }
 
-    // authority must be the owner of the token account: spl-token required the
+    // authority must be the owner of the token account: safe-token  required the
     // token owner to revoke a delegate
     let token = Account::unpack(&token_info.try_borrow_data()?).unwrap();
     if token.owner != *ctx.accounts.authority_info.key {
@@ -256,7 +256,7 @@ fn revoke_persistent_delegate_v1(
                     ctx.accounts.mint_info.clone(),
                     token_info.clone(),
                     master_edition_info.clone(),
-                    spl_token_program_info.clone(),
+                    safe_token_program_info.clone(),
                 )?;
             } else {
                 return Err(MetadataError::MissingEditionAccount.into());
@@ -269,10 +269,10 @@ fn revoke_persistent_delegate_v1(
         }
     }
 
-    // revokes the spl-token delegate
+    // revokes the safe-token  delegate
     invoke(
-        &spl_token::instruction::revoke(
-            spl_token_program_info.key,
+        &safe_token::instruction::revoke(
+            safe_token_program_info.key,
             token_info.key,
             ctx.accounts.authority_info.key,
             &[],
@@ -293,7 +293,7 @@ fn revoke_persistent_delegate_v1(
                 ctx.accounts.mint_info.clone(),
                 token_info.clone(),
                 master_edition_info.clone(),
-                spl_token_program_info.clone(),
+                safe_token_program_info.clone(),
             )?;
         } else {
             // sanity check: this should not happen at this point since the master

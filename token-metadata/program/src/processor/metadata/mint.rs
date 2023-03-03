@@ -1,5 +1,5 @@
-use mpl_utils::{assert_signer, cmp_pubkeys};
-use solana_program::{
+use lpl_utils::{assert_signer, cmp_pubkeys};
+use safecoin_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult,
     msg,
@@ -7,7 +7,7 @@ use solana_program::{
     program_error::ProgramError,
     pubkey::Pubkey,
 };
-use spl_token::state::{Account, Mint as MintAccount};
+use safe_token::state::{Account, Mint as MintAccount};
 
 use crate::{
     assertions::{
@@ -68,10 +68,10 @@ pub fn mint_v1(program_id: &Pubkey, ctx: Context<Mint>, args: MintArgs) -> Progr
         return Err(MetadataError::MintMismatch.into());
     }
 
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::id())?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::id())?;
     let mint: MintAccount = assert_initialized(ctx.accounts.mint_info)?;
 
-    if !cmp_pubkeys(ctx.accounts.spl_token_program_info.key, &spl_token::id()) {
+    if !cmp_pubkeys(ctx.accounts.safe_token_program_info.key, &safe_token::id()) {
         return Err(ProgramError::IncorrectProgramId);
     }
 
@@ -124,11 +124,11 @@ pub fn mint_v1(program_id: &Pubkey, ctx: Context<Mint>, args: MintArgs) -> Progr
         // if the token account is empty, we will initialize a new one but it must
         // be an ATA account
         assert_derivation(
-            &spl_associated_token_account::id(),
+            &safe_associated_token_account::id(),
             ctx.accounts.token_info,
             &[
                 token_owner_info.key.as_ref(),
-                spl_token::id().as_ref(),
+                safe_token::id().as_ref(),
                 ctx.accounts.mint_info.key.as_ref(),
             ],
         )?;
@@ -137,11 +137,11 @@ pub fn mint_v1(program_id: &Pubkey, ctx: Context<Mint>, args: MintArgs) -> Progr
 
         // creating the associated token account
         invoke(
-            &spl_associated_token_account::instruction::create_associated_token_account(
+            &safe_associated_token_account::instruction::create_associated_token_account(
                 ctx.accounts.payer_info.key,
                 token_owner_info.key,
                 ctx.accounts.mint_info.key,
-                &spl_token::id(),
+                &safe_token::id(),
             ),
             &[
                 ctx.accounts.payer_info.clone(),
@@ -151,7 +151,7 @@ pub fn mint_v1(program_id: &Pubkey, ctx: Context<Mint>, args: MintArgs) -> Progr
             ],
         )?;
     } else {
-        assert_owned_by(ctx.accounts.token_info, &spl_token::id())?;
+        assert_owned_by(ctx.accounts.token_info, &safe_token::id())?;
     }
 
     let token: Account = assert_initialized(ctx.accounts.token_info)?;
@@ -224,13 +224,13 @@ pub fn mint_v1(program_id: &Pubkey, ctx: Context<Mint>, args: MintArgs) -> Progr
                     ctx.accounts.mint_info.clone(),
                     ctx.accounts.token_info.clone(),
                     master_edition_info.clone(),
-                    ctx.accounts.spl_token_program_info.clone(),
+                    ctx.accounts.safe_token_program_info.clone(),
                 )?;
             }
 
             invoke_signed(
-                &spl_token::instruction::mint_to(
-                    ctx.accounts.spl_token_program_info.key,
+                &safe_token::instruction::mint_to(
+                    ctx.accounts.safe_token_program_info.key,
                     ctx.accounts.mint_info.key,
                     ctx.accounts.token_info.key,
                     &master_edition_key,
@@ -254,14 +254,14 @@ pub fn mint_v1(program_id: &Pubkey, ctx: Context<Mint>, args: MintArgs) -> Progr
                     ctx.accounts.mint_info.clone(),
                     ctx.accounts.token_info.clone(),
                     master_edition_info.clone(),
-                    ctx.accounts.spl_token_program_info.clone(),
+                    ctx.accounts.safe_token_program_info.clone(),
                 )?;
             }
         }
         _ => {
             invoke(
-                &spl_token::instruction::mint_to(
-                    ctx.accounts.spl_token_program_info.key,
+                &safe_token::instruction::mint_to(
+                    ctx.accounts.safe_token_program_info.key,
                     ctx.accounts.mint_info.key,
                     ctx.accounts.token_info.key,
                     ctx.accounts.authority_info.key,

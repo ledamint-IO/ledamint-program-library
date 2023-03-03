@@ -1,11 +1,11 @@
 use anchor_lang::prelude::*;
 use arrayref::array_ref;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     error::MetadataError,
     state::{EDITION, PREFIX},
     utils::assert_derivation,
 };
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo,
     program::invoke,
     program_memory::sol_memcmp,
@@ -91,11 +91,11 @@ pub fn assert_edition_from_mint(
     mint_account: &AccountInfo,
 ) -> StdResult<(), ProgramError> {
     assert_derivation(
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
         edition_account,
         &[
             PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::id().as_ref(),
             mint_account.key().as_ref(),
             EDITION.as_bytes(),
         ],

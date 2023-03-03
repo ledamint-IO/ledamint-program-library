@@ -1,8 +1,8 @@
 use std::fmt::Display;
 
-use mpl_token_auth_rules::processor::cmp_pubkeys;
-use mpl_utils::{assert_signer, token::TokenTransferParams};
-use solana_program::{
+use lpl_token_auth_rules::processor::cmp_pubkeys;
+use lpl_utils::{assert_signer, token::TokenTransferParams};
+use safecoin_program::{
     account_info::AccountInfo,
     entrypoint::ProgramResult,
     msg,
@@ -14,7 +14,7 @@ use solana_program::{
     system_program,
     sysvar::{self, instructions::get_instruction_relative},
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 use crate::{
     assertions::{
@@ -102,8 +102,8 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
 
     // Assert program ownership.
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::ID)?;
-    assert_owned_by(ctx.accounts.token_info, &spl_token::ID)?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::ID)?;
+    assert_owned_by(ctx.accounts.token_info, &safe_token::ID)?;
     if let Some(owner_token_record_info) = ctx.accounts.owner_token_record_info {
         assert_owned_by(owner_token_record_info, program_id)?;
     }
@@ -111,7 +111,7 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
         assert_owned_by(master_edition, program_id)?;
     }
     if let Some(authorization_rules) = ctx.accounts.authorization_rules_info {
-        assert_owned_by(authorization_rules, &mpl_token_auth_rules::ID)?;
+        assert_owned_by(authorization_rules, &lpl_token_auth_rules::ID)?;
     }
 
     // Check if the destination exists.
@@ -119,22 +119,22 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
         // if the token account is empty, we will initialize a new one but it must
         // be a ATA account
         assert_derivation(
-            &spl_associated_token_account::id(),
+            &safe_associated_token_account::id(),
             ctx.accounts.destination_info,
             &[
                 ctx.accounts.destination_owner_info.key.as_ref(),
-                spl_token::id().as_ref(),
+                safe_token::id().as_ref(),
                 ctx.accounts.mint_info.key.as_ref(),
             ],
         )?;
 
         // creating the associated token account
         invoke(
-            &spl_associated_token_account::instruction::create_associated_token_account(
+            &safe_associated_token_account::instruction::create_associated_token_account(
                 ctx.accounts.payer_info.key,
                 ctx.accounts.destination_owner_info.key,
                 ctx.accounts.mint_info.key,
-                &spl_token::id(),
+                &safe_token::id(),
             ),
             &[
                 ctx.accounts.payer_info.clone(),
@@ -144,7 +144,7 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
             ],
         )?;
     } else {
-        assert_owned_by(ctx.accounts.destination_info, &spl_token::id())?;
+        assert_owned_by(ctx.accounts.destination_info, &safe_token::id())?;
         assert_token_matches_owner_and_mint(
             ctx.accounts.destination_info,
             ctx.accounts.destination_owner_info.key,
@@ -154,11 +154,11 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
 
     // Check program IDs.
 
-    if ctx.accounts.spl_token_program_info.key != &spl_token::ID {
+    if ctx.accounts.safe_token_program_info.key != &safe_token::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
 
-    if ctx.accounts.spl_ata_program_info.key != &spl_associated_token_account::ID {
+    if ctx.accounts.spl_ata_program_info.key != &safe_associated_token_account::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
 
@@ -171,7 +171,7 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
     }
 
     if let Some(auth_rules_program) = ctx.accounts.authorization_rules_program_info {
-        if auth_rules_program.key != &mpl_token_auth_rules::ID {
+        if auth_rules_program.key != &lpl_token_auth_rules::ID {
             return Err(ProgramError::IncorrectProgramId);
         }
     }
@@ -200,7 +200,7 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
         amount,
         authority: ctx.accounts.authority_info.clone(),
         authority_signer_seeds: None,
-        token_program: ctx.accounts.spl_token_program_info.clone(),
+        token_program: ctx.accounts.safe_token_program_info.clone(),
     };
 
     let token_standard = metadata.token_standard;
@@ -406,7 +406,7 @@ fn transfer_v1(program_id: &Pubkey, ctx: Context<Transfer>, args: TransferArgs) 
                 )?;
             }
         }
-        _ => mpl_utils::token::spl_token_transfer(token_transfer_params).unwrap(),
+        _ => lpl_utils::token::safe_token_transfer(token_transfer_params).unwrap(),
     }
 
     Ok(())

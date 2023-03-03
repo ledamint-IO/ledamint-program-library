@@ -15,8 +15,8 @@ mod suspend_market {
         state::{Market, MarketState},
         utils::find_treasury_owner_address,
     };
-    use solana_program_test::*;
-    use solana_sdk::{
+    use safecoin_program_test::*;
+    use safecoin_sdk::{
         commitment_config::CommitmentLevel,
         instruction::Instruction,
         signature::Keypair,
@@ -28,7 +28,7 @@ mod suspend_market {
 
     #[tokio::test]
     async fn success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -175,7 +175,7 @@ mod suspend_market {
 
     #[tokio::test]
     async fn fail_market_immutable() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -319,7 +319,7 @@ mod suspend_market {
 
     #[tokio::test]
     async fn fail_market_suspended() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -495,7 +495,7 @@ mod suspend_market {
 
     #[tokio::test]
     async fn fail_market_ended_unlimited_duration() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -668,7 +668,7 @@ mod suspend_market {
 
     #[tokio::test]
     async fn fail_market_ended() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(

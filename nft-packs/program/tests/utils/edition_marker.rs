@@ -1,17 +1,17 @@
 use crate::*;
 use borsh::BorshSerialize;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     id,
     instruction::{self, MetadataInstruction, MintNewEditionFromMasterEditionViaTokenArgs},
     state::{EDITION, EDITION_MARKER_BIT_SIZE, PREFIX},
 };
-use solana_program::{
+use safecoin_program::{
     borsh::try_from_slice_unchecked,
     instruction::{AccountMeta, Instruction},
     sysvar,
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     pubkey::Pubkey, signature::Signer, signer::keypair::Keypair, transaction::Transaction,
     transport,
 };
@@ -82,7 +82,7 @@ impl TestEditionMarker {
     pub async fn get_data(
         &self,
         context: &mut ProgramTestContext,
-    ) -> mpl_token_metadata::state::EditionMarker {
+    ) -> lpl_token_metadata::state::EditionMarker {
         let account = get_account(context, &self.pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }
@@ -129,8 +129,8 @@ impl TestEditionMarker {
                     vault.keypair.pubkey(),
                     context.payer.pubkey(),
                     self.metadata_pubkey,
-                    spl_token::id(),
-                    mpl_token_vault::id(),
+                    safe_token::id(),
+                    lpl_token_vault::id(),
                     self.edition,
                 ),
             ],
@@ -143,7 +143,7 @@ impl TestEditionMarker {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -204,7 +204,7 @@ impl TestEditionMarker {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -214,7 +214,7 @@ impl TestEditionMarker {
         context: &mut ProgramTestContext,
     ) -> transport::Result<()> {
         let fake_token_program = Keypair::new();
-        let program_id = mpl_token_metadata::id();
+        let program_id = lpl_token_metadata::id();
 
         let edition_number = self.edition.checked_div(EDITION_MARKER_BIT_SIZE).unwrap();
         let as_string = edition_number.to_string();
@@ -242,7 +242,7 @@ impl TestEditionMarker {
             AccountMeta::new_readonly(context.payer.pubkey(), false),
             AccountMeta::new_readonly(self.metadata_pubkey, false),
             AccountMeta::new_readonly(fake_token_program.pubkey(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
             AccountMeta::new_readonly(sysvar::rent::id(), false),
         ];
 
@@ -269,7 +269,7 @@ impl TestEditionMarker {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }

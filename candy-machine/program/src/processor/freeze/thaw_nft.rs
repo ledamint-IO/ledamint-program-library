@@ -3,9 +3,9 @@ use anchor_lang::{
     system_program::{transfer, Transfer},
 };
 use anchor_spl::token::{Mint, Token, TokenAccount};
-use mpl_token_metadata::instruction::thaw_delegated_account;
-use solana_program::program::{invoke, invoke_signed};
-use spl_token::instruction::revoke;
+use lpl_token_metadata::instruction::thaw_delegated_account;
+use safecoin_program::program::{invoke, invoke_signed};
+use safe_token::instruction::revoke;
 
 use crate::{cmp_pubkeys, CandyError, CandyMachine, FreezePDA};
 
@@ -28,7 +28,7 @@ pub struct ThawNFT<'info> {
     payer: Signer<'info>,
     token_program: Program<'info, Token>,
     /// CHECK: checked in account constraints
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     system_program: Program<'info, System>,
 }
@@ -65,7 +65,7 @@ pub fn handle_thaw_nft(ctx: Context<ThawNFT>) -> Result<()> {
         msg!("Token account is frozen! Now attempting to thaw!");
         invoke_signed(
             &thaw_delegated_account(
-                mpl_token_metadata::ID,
+                lpl_token_metadata::ID,
                 freeze_pda.key(),
                 token_account.key(),
                 edition.key(),
@@ -103,7 +103,7 @@ pub fn handle_thaw_nft(ctx: Context<ThawNFT>) -> Result<()> {
     if cmp_pubkeys(&payer.key(), &owner.key()) {
         msg!("Revoking authority");
         invoke(
-            &revoke(&spl_token::ID, &token_account.key(), &payer.key(), &[])?,
+            &revoke(&safe_token::ID, &token_account.key(), &payer.key(), &[])?,
             &[token_account.to_account_info(), payer.to_account_info()],
         )?;
     } else {

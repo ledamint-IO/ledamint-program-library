@@ -1,4 +1,4 @@
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -31,7 +31,7 @@ pub fn set_collection_size(
     assert_owned_by(parent_nft_metadata_account_info, program_id)?;
 
     // Mint owned by spl token program.
-    assert_owned_by(collection_mint_account_info, &spl_token::id())?;
+    assert_owned_by(collection_mint_account_info, &safe_token::id())?;
 
     let mut metadata = Metadata::from_account_info(parent_nft_metadata_account_info)?;
 

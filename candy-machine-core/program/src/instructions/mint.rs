@@ -1,13 +1,13 @@
 use anchor_lang::prelude::*;
 use arrayref::array_ref;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction::{
         create_master_edition_v3, create_metadata_accounts_v3, set_and_verify_collection,
         set_and_verify_sized_collection_item, update_metadata_accounts_v2,
     },
     state::{Metadata, TokenMetadataAccount},
 };
-use solana_program::{program::invoke_signed, sysvar};
+use safecoin_program::{program::invoke_signed, sysvar};
 
 use crate::{
     constants::{AUTHORITY_SEED, EMPTY_STR, HIDDEN_SECTION, NULL_STRING},
@@ -37,7 +37,7 @@ pub fn mint<'info>(ctx: Context<'_, '_, '_, 'info, Mint<'info>>) -> Result<()> {
 
     if !cmp_pubkeys(
         ctx.accounts.collection_metadata.owner,
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     ) {
         return err!(CandyError::IncorrectOwner);
     }
@@ -76,15 +76,15 @@ pub fn mint<'info>(ctx: Context<'_, '_, '_, 'info, Mint<'info>>) -> Result<()> {
 
     // (3) minting
 
-    let mut creators: Vec<mpl_token_metadata::state::Creator> =
-        vec![mpl_token_metadata::state::Creator {
+    let mut creators: Vec<lpl_token_metadata::state::Creator> =
+        vec![lpl_token_metadata::state::Creator {
             address: ctx.accounts.authority_pda.key(),
             verified: true,
             share: 0,
         }];
 
     for c in &candy_machine.data.creators {
-        creators.push(mpl_token_metadata::state::Creator {
+        creators.push(lpl_token_metadata::state::Creator {
             address: c.address,
             verified: false,
             share: c.percentage_share,
@@ -322,7 +322,7 @@ pub struct Token;
 
 impl anchor_lang::Id for Token {
     fn id() -> Pubkey {
-        spl_token::id()
+        safe_token::id()
     }
 }
 
@@ -367,7 +367,7 @@ pub struct Mint<'info> {
     /// CHECK: account checked in CPI
     collection_update_authority: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     token_program: Program<'info, Token>,
     system_program: Program<'info, System>,

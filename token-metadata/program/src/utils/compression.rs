@@ -1,5 +1,5 @@
-use mpl_utils::cmp_pubkeys;
-use solana_program::{account_info::AccountInfo, pubkey, pubkey::Pubkey};
+use lpl_utils::cmp_pubkeys;
+use safecoin_program::{account_info::AccountInfo, pubkey, pubkey::Pubkey};
 
 pub const BUBBLEGUM_PROGRAM_ADDRESS: Pubkey =
     pubkey!("BGUMAp9Gq7iTEuizy4pqaxsTyUCBK68MDfK752saRPUY");

@@ -1,4 +1,4 @@
-use solana_program::pubkey::Pubkey;
+use safecoin_program::pubkey::Pubkey;
 
 use crate::{instruction::MetadataDelegateRole, state::TOKEN_RECORD_SEED};
 

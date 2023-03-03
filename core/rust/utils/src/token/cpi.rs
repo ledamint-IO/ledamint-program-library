@@ -1,8 +1,8 @@
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program::invoke_signed,
 };
 
-pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
     let TokenBurnParams {
         mint,
         source,
@@ -16,7 +16,7 @@ pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> ProgramResult {
         seeds.push(seed);
     }
     invoke_signed(
-        &spl_token::instruction::burn(
+        &safe_token::instruction::burn(
             token_program.key,
             source.key,
             mint.key,
@@ -45,7 +45,7 @@ pub struct TokenBurnParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn spl_token_close(params: TokenCloseParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_close(params: TokenCloseParams<'_, '_>) -> ProgramResult {
     let TokenCloseParams {
         account,
         destination,
@@ -58,7 +58,7 @@ pub fn spl_token_close(params: TokenCloseParams<'_, '_>) -> ProgramResult {
         seeds.push(seed);
     }
     invoke_signed(
-        &spl_token::instruction::close_account(
+        &safe_token::instruction::close_account(
             token_program.key,
             account.key,
             destination.key,
@@ -84,7 +84,7 @@ pub struct TokenCloseParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
     let TokenMintToParams {
         mint,
         destination,
@@ -98,7 +98,7 @@ pub fn spl_token_mint_to(params: TokenMintToParams<'_, '_>) -> ProgramResult {
         seeds.push(seed);
     }
     invoke_signed(
-        &spl_token::instruction::mint_to(
+        &safe_token::instruction::mint_to(
             token_program.key,
             mint.key,
             destination.key,
@@ -127,7 +127,7 @@ pub struct TokenMintToParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
+pub fn safe_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult {
     let TokenTransferParams {
         mint: _,
         source,
@@ -142,7 +142,7 @@ pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> ProgramResult 
         seeds.push(seed);
     }
     invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             source.key,
             destination.key,

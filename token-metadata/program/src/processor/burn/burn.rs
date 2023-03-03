@@ -56,8 +56,8 @@ fn burn_v1(program_id: &Pubkey, ctx: Context<Burn>, args: BurnArgs) -> ProgramRe
 
     // Assert program ownership.
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::ID)?;
-    assert_owned_by(ctx.accounts.token_info, &spl_token::ID)?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::ID)?;
+    assert_owned_by(ctx.accounts.token_info, &safe_token::ID)?;
 
     if let Some(edition_info) = ctx.accounts.edition_info {
         assert_owned_by(edition_info, program_id)?;
@@ -66,10 +66,10 @@ fn burn_v1(program_id: &Pubkey, ctx: Context<Burn>, args: BurnArgs) -> ProgramRe
         assert_owned_by(master_edition, program_id)?;
     }
     if let Some(master_edition_mint) = ctx.accounts.master_edition_mint_info {
-        assert_owned_by(master_edition_mint, &spl_token::ID)?;
+        assert_owned_by(master_edition_mint, &safe_token::ID)?;
     }
     if let Some(master_edition_token) = ctx.accounts.master_edition_token_info {
-        assert_owned_by(master_edition_token, &spl_token::ID)?;
+        assert_owned_by(master_edition_token, &safe_token::ID)?;
     }
     if let Some(edition_marker) = ctx.accounts.edition_marker_info {
         assert_owned_by(edition_marker, program_id)?;
@@ -87,7 +87,7 @@ fn burn_v1(program_id: &Pubkey, ctx: Context<Burn>, args: BurnArgs) -> ProgramRe
         return Err(ProgramError::IncorrectProgramId);
     }
 
-    if ctx.accounts.spl_token_program_info.key != &spl_token::ID {
+    if ctx.accounts.safe_token_program_info.key != &safe_token::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
 
@@ -184,7 +184,7 @@ fn burn_v1(program_id: &Pubkey, ctx: Context<Burn>, args: BurnArgs) -> ProgramRe
                 ctx.accounts.mint_info.clone(),
                 ctx.accounts.token_info.clone(),
                 ctx.accounts.edition_info.unwrap().clone(),
-                ctx.accounts.spl_token_program_info.clone(),
+                ctx.accounts.safe_token_program_info.clone(),
             )?;
 
             let args = BurnNonFungibleArgs { metadata };

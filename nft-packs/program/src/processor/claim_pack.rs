@@ -8,8 +8,8 @@ use crate::{
     state::{PackCard, PackDistributionType, PackSet, ProvingProcess, PREFIX},
     utils::*,
 };
-use mpl_token_metadata::state::{MasterEditionV2, Metadata};
-use solana_program::{
+use lpl_token_metadata::state::{MasterEditionV2, Metadata};
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_pack::Pack,
@@ -95,7 +95,7 @@ pub fn claim_pack(
     }
 
     // Mint token
-    spl_token_metadata_mint_new_edition_from_master_edition_via_token(
+    safe_token_metadata_mint_new_edition_from_master_edition_via_token(
         new_metadata_account,
         new_edition_account,
         new_mint_account,

@@ -233,7 +233,7 @@ dependencies = [
  "bincode",
  "borsh",
  "bytemuck",
- "solana-program",
+ "safecoin-program",
  "thiserror",
 ]
 
@@ -2048,58 +2048,58 @@ version = "0.7.0"
 dependencies = [
  "anchor-lang",
  "bytemuck",
- "mpl-token-metadata",
- "solana-program",
- "solana-program-test",
- "solana-sdk",
+ "lpl-token-metadata",
+ "safecoin-program",
+ "safecoin-program-test",
+ "safecoin-sdk",
  "spl-account-compression",
- "spl-associated-token-account",
+ "safe-associated-token-account",
  "spl-concurrent-merkle-tree",
  "spl-merkle-tree-reference",
  "spl-noop",
- "spl-token",
+ "safe-token ",
 ]
 
 [[package]]
-name = "mpl-token-auth-rules"
+name = "lpl-token-auth-rules"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a14e1ac5350734fd07f17d7eab733d27b7b45ca963642c565ec34ab015d9ceda"
 dependencies = [
  "borsh",
- "mpl-token-metadata-context-derive",
+ "lpl-token-metadata-context-derive",
  "num-derive",
  "num-traits",
  "rmp-serde",
  "serde",
  "shank",
- "solana-program",
+ "safecoin-program",
  "solana-zk-token-sdk",
  "thiserror",
 ]
 
 [[package]]
-name = "mpl-token-metadata"
+name = "lpl-token-metadata"
 version = "1.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5accdfde5c18465c65bd664169845a185f8a00d973d5c15396fef858dd2e52d9"
 dependencies = [
  "arrayref",
  "borsh",
- "mpl-token-auth-rules",
- "mpl-token-metadata-context-derive",
- "mpl-utils",
+ "lpl-token-auth-rules",
+ "lpl-token-metadata-context-derive",
+ "lpl-utils",
  "num-derive",
  "num-traits",
  "shank",
- "solana-program",
- "spl-associated-token-account",
- "spl-token",
+ "safecoin-program",
+ "safe-associated-token-account",
+ "safe-token ",
  "thiserror",
 ]
 
 [[package]]
-name = "mpl-token-metadata-context-derive"
+name = "lpl-token-metadata-context-derive"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "12989bc45715b0ee91944855130131479f9c772e198a910c3eb0ea327d5bffc3"
@@ -2109,15 +2109,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-utils"
+name = "lpl-utils"
 version = "0.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d6195ce98b92f1d0ea06d0cc9b2392d81673e02b8fb063589926fa73ee6b071a"
 dependencies = [
  "arrayref",
  "borsh",
- "solana-program",
- "spl-token",
+ "safecoin-program",
+ "safe-token ",
 ]
 
 [[package]]
@@ -3342,10 +3342,10 @@ dependencies = [
  "serde_json",
  "solana-address-lookup-table-program",
  "solana-config-program",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-vote-program",
- "spl-token",
- "spl-token-2022",
+ "safe-token ",
+ "safe-token -2022",
  "thiserror",
  "zstd",
 ]
@@ -3365,9 +3365,9 @@ dependencies = [
  "serde",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
- "solana-program",
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
  "thiserror",
 ]
 
@@ -3380,8 +3380,8 @@ dependencies = [
  "borsh",
  "futures",
  "solana-banks-interface",
- "solana-program",
- "solana-sdk",
+ "safecoin-program",
+ "safecoin-sdk",
  "tarpc",
  "thiserror",
  "tokio",
@@ -3395,7 +3395,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2e0cb35613656f5884041196a93598d20f3ebbcd46266600004299ed6c734f1e"
 dependencies = [
  "serde",
- "solana-sdk",
+ "safecoin-sdk",
  "tarpc",
 ]
 
@@ -3409,9 +3409,9 @@ dependencies = [
  "crossbeam-channel",
  "futures",
  "solana-banks-interface",
- "solana-client",
+ "safecoin-client",
  "solana-runtime",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-send-transaction-service",
  "tarpc",
  "tokio",
@@ -3431,8 +3431,8 @@ dependencies = [
  "log",
  "solana-measure",
  "solana-metrics",
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
  "solana-zk-token-sdk",
  "solana_rbpf",
  "thiserror",
@@ -3449,12 +3449,12 @@ dependencies = [
  "modular-bitfield",
  "rand 0.7.3",
  "solana-measure",
- "solana-sdk",
+ "safecoin-sdk",
  "tempfile",
 ]
 
 [[package]]
-name = "solana-clap-utils"
+name = "safecoin-clap-utils"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "36228e03e14bc7d7707189b66f625981993f1a000b0b192d5b42367349901d91"
@@ -3464,7 +3464,7 @@ dependencies = [
  "rpassword",
  "solana-perf",
  "solana-remote-wallet",
- "solana-sdk",
+ "safecoin-sdk",
  "thiserror",
  "tiny-bip39",
  "uriparse",
@@ -3472,7 +3472,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-cli-config"
+name = "safecoin-cli-config"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c43b08f24fd605eaeaafe0e834dc9b209137ac253bc874d32a5bdd791cbd318"
@@ -3482,13 +3482,13 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_yaml",
- "solana-clap-utils",
- "solana-sdk",
+ "safecoin-clap-utils",
+ "safecoin-sdk",
  "url",
 ]
 
 [[package]]
-name = "solana-client"
+name = "safecoin-client"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a3e270b1afd0b360c2aec42ae302ae7980ebb226017275b32a6156ab2ccbdad9"
@@ -3522,17 +3522,17 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "solana-account-decoder",
- "solana-clap-utils",
+ "safecoin-clap-utils",
  "solana-faucet",
  "solana-measure",
  "solana-metrics",
  "solana-net-utils",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-streamer",
  "solana-transaction-status",
  "solana-version",
  "solana-vote-program",
- "spl-token-2022",
+ "safe-token -2022",
  "thiserror",
  "tokio",
  "tokio-stream",
@@ -3547,8 +3547,8 @@ version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57103610e5cd924399ac520238a11b7c65a869b14d89ce651f4f3b60072b5cdb"
 dependencies = [
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
 ]
 
 [[package]]
@@ -3561,8 +3561,8 @@ dependencies = [
  "chrono",
  "serde",
  "serde_derive",
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
 ]
 
 [[package]]
@@ -3578,11 +3578,11 @@ dependencies = [
  "log",
  "serde",
  "serde_derive",
- "solana-clap-utils",
- "solana-cli-config",
+ "safecoin-clap-utils",
+ "safecoin-cli-config",
  "solana-logger",
  "solana-metrics",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-version",
  "spl-memo",
  "thiserror",
@@ -3653,7 +3653,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2400d2534a19f7605c5059060edea0499600a223f1a1f6a4b172666c04946a77"
 dependencies = [
  "log",
- "solana-sdk",
+ "safecoin-sdk",
 ]
 
 [[package]]
@@ -3667,7 +3667,7 @@ dependencies = [
  "lazy_static",
  "log",
  "reqwest",
- "solana-sdk",
+ "safecoin-sdk",
 ]
 
 [[package]]
@@ -3686,7 +3686,7 @@ dependencies = [
  "serde_derive",
  "socket2",
  "solana-logger",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-version",
  "tokio",
  "url",
@@ -3715,12 +3715,12 @@ dependencies = [
  "serde",
  "solana-metrics",
  "solana-rayon-threadlimit",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-vote-program",
 ]
 
 [[package]]
-name = "solana-program"
+name = "safecoin-program"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d0937481f080f5dd495fae456c94718a7bacf30fb5fdabb02dcb8a9622e446d5"
@@ -3761,7 +3761,7 @@ dependencies = [
  "sha3 0.10.6",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
- "solana-sdk-macro",
+ "safecoin-sdk-macro",
  "thiserror",
  "tiny-bip39",
  "wasm-bindgen",
@@ -3769,7 +3769,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-program-runtime"
+name = "safecoin-program-runtime"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b4d12047608bac77fca000e18f7a2df3c7fa90656d7c7d387b1cd7faf18b238c"
@@ -3791,12 +3791,12 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-measure",
  "solana-metrics",
- "solana-sdk",
+ "safecoin-sdk",
  "thiserror",
 ]
 
 [[package]]
-name = "solana-program-test"
+name = "safecoin-program-test"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "930a7116109f53d97ee35a88a9964c7bef0981399b7818117bd13a9f31f5854f"
@@ -3812,9 +3812,9 @@ dependencies = [
  "solana-banks-server",
  "solana-bpf-loader-program",
  "solana-logger",
- "solana-program-runtime",
+ "safecoin-program-runtime",
  "solana-runtime",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-vote-program",
  "thiserror",
  "tokio",
@@ -3844,7 +3844,7 @@ dependencies = [
  "parking_lot 0.12.1",
  "qstring",
  "semver",
- "solana-sdk",
+ "safecoin-sdk",
  "thiserror",
  "uriparse",
 ]
@@ -3894,9 +3894,9 @@ dependencies = [
  "solana-frozen-abi-macro",
  "solana-measure",
  "solana-metrics",
- "solana-program-runtime",
+ "safecoin-program-runtime",
  "solana-rayon-threadlimit",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-stake-program",
  "solana-vote-program",
  "solana-zk-token-proof-program",
@@ -3911,7 +3911,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "solana-sdk"
+name = "safecoin-sdk"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "390e7481c56dda2ceab2652beeda30a533e9667b34861a2eb4eec92fa1d826d7"
@@ -3954,15 +3954,15 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-logger",
- "solana-program",
- "solana-sdk-macro",
+ "safecoin-program",
+ "safecoin-sdk-macro",
  "thiserror",
  "uriparse",
  "wasm-bindgen",
 ]
 
 [[package]]
-name = "solana-sdk-macro"
+name = "safecoin-sdk-macro"
 version = "1.14.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "33d0acbad862093ea123f3a27364336dcb0c8373522cd6810496a34e932c56c1"
@@ -3982,11 +3982,11 @@ checksum = "1f539ebfe19fc2e3412bfcb5de06fc23d6a70cf44412a4e8edc6ac715db708b3"
 dependencies = [
  "crossbeam-channel",
  "log",
- "solana-client",
+ "safecoin-client",
  "solana-measure",
  "solana-metrics",
  "solana-runtime",
- "solana-sdk",
+ "safecoin-sdk",
 ]
 
 [[package]]
@@ -4006,8 +4006,8 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-metrics",
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
  "solana-vote-program",
  "thiserror",
 ]
@@ -4035,7 +4035,7 @@ dependencies = [
  "rustls",
  "solana-metrics",
  "solana-perf",
- "solana-sdk",
+ "safecoin-sdk",
  "thiserror",
  "tokio",
  "x509-parser",
@@ -4061,12 +4061,12 @@ dependencies = [
  "solana-address-lookup-table-program",
  "solana-measure",
  "solana-metrics",
- "solana-sdk",
+ "safecoin-sdk",
  "solana-vote-program",
- "spl-associated-token-account",
+ "safe-associated-token-account",
  "spl-memo",
- "spl-token",
- "spl-token-2022",
+ "safe-token ",
+ "safe-token -2022",
  "thiserror",
 ]
 
@@ -4083,7 +4083,7 @@ dependencies = [
  "serde_derive",
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
- "solana-sdk",
+ "safecoin-sdk",
 ]
 
 [[package]]
@@ -4102,8 +4102,8 @@ dependencies = [
  "solana-frozen-abi",
  "solana-frozen-abi-macro",
  "solana-metrics",
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
  "thiserror",
 ]
 
@@ -4117,8 +4117,8 @@ dependencies = [
  "getrandom 0.1.16",
  "num-derive",
  "num-traits",
- "solana-program-runtime",
- "solana-sdk",
+ "safecoin-program-runtime",
+ "safecoin-sdk",
  "solana-zk-token-sdk",
 ]
 
@@ -4146,8 +4146,8 @@ dependencies = [
  "serde",
  "serde_json",
  "sha3 0.9.1",
- "solana-program",
- "solana-sdk",
+ "safecoin-program",
+ "safecoin-sdk",
  "subtle",
  "thiserror",
  "zeroize",
@@ -4200,7 +4200,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "spl-associated-token-account"
+name = "safe-associated-token-account"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fbc000f0fdf1f12f99d77d398137c1751345b18c88258ce0f99b7872cf6c9bd6"
@@ -4209,9 +4209,9 @@ dependencies = [
  "borsh",
  "num-derive",
  "num-traits",
- "solana-program",
- "spl-token",
- "spl-token-2022",
+ "safecoin-program",
+ "safe-token ",
+ "safe-token -2022",
  "thiserror",
 ]
 
@@ -4222,7 +4222,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b8518df14b19ada73c6bd15ee344de8ab720580fb2df0029342f9a772e2392d"
 dependencies = [
  "bytemuck",
- "solana-program",
+ "safecoin-program",
  "thiserror",
 ]
 
@@ -4232,7 +4232,7 @@ version = "3.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd0dc6f70db6bacea7ff25870b016a65ba1d1b6013536f08e4fd79a8f9005325"
 dependencies = [
- "solana-program",
+ "safecoin-program",
 ]
 
 [[package]]
@@ -4241,7 +4241,7 @@ version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28437c617c7f0db6b7229a489239f3ea6160499542d9367fbca2fc5ec7744abb"
 dependencies = [
- "solana-program",
+ "safecoin-program",
  "thiserror",
 ]
 
@@ -4251,11 +4251,11 @@ version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "558536c75b5aed018113bfca39cddb414cd7ca77da7658d668e751d977830cda"
 dependencies = [
- "solana-program",
+ "safecoin-program",
 ]
 
 [[package]]
-name = "spl-token"
+name = "safe-token "
 version = "3.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8e85e168a785e82564160dcb87b2a8e04cee9bfd1f4d488c729d53d6a4bd300d"
@@ -4265,12 +4265,12 @@ dependencies = [
  "num-derive",
  "num-traits",
  "num_enum",
- "solana-program",
+ "safecoin-program",
  "thiserror",
 ]
 
 [[package]]
-name = "spl-token-2022"
+name = "safe-token -2022"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0edb869dbe159b018f17fb9bfa67118c30f232d7f54a73742bc96794dff77ed8"
@@ -4280,10 +4280,10 @@ dependencies = [
  "num-derive",
  "num-traits",
  "num_enum",
- "solana-program",
+ "safecoin-program",
  "solana-zk-token-sdk",
  "spl-memo",
- "spl-token",
+ "safe-token ",
  "thiserror",
 ]
 

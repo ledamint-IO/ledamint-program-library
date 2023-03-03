@@ -8,11 +8,11 @@ pub use mpl_auction_house::{
 pub use mpl_testing_utils::{
     assert_error, assert_transport_error, solana::airdrop, utils::Metadata,
 };
-pub use spl_associated_token_account::get_associated_token_address;
-pub use spl_token;
+pub use safe_associated_token_account::get_associated_token_address;
+pub use safe_token;
 
-pub use solana_program_test::*;
-pub use solana_sdk::{
+pub use safecoin_program_test::*;
+pub use safecoin_sdk::{
     instruction::{Instruction, InstructionError},
     signature::{Keypair, Signer},
     transaction::{Transaction, TransactionError},

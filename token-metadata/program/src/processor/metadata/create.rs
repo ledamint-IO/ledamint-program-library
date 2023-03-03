@@ -1,9 +1,9 @@
-use mpl_utils::assert_initialized;
-use solana_program::{
+use lpl_utils::assert_initialized;
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, msg, program::invoke, program_pack::Pack,
     pubkey::Pubkey, rent::Rent, system_instruction, sysvar::Sysvar,
 };
-use spl_token::{native_mint::DECIMALS, state::Mint};
+use safe_token::{native_mint::DECIMALS, state::Mint};
 
 use crate::{
     error::MetadataError,
@@ -62,9 +62,9 @@ fn create_v1(program_id: &Pubkey, ctx: Context<Create>, args: CreateArgs) -> Pro
             &system_instruction::create_account(
                 ctx.accounts.payer_info.key,
                 ctx.accounts.mint_info.key,
-                Rent::get()?.minimum_balance(spl_token::state::Mint::LEN),
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                Rent::get()?.minimum_balance(safe_token::state::Mint::LEN),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
             &[
                 ctx.accounts.payer_info.clone(),
@@ -77,7 +77,7 @@ fn create_v1(program_id: &Pubkey, ctx: Context<Create>, args: CreateArgs) -> Pro
             // always use 0 decimals
             TokenStandard::NonFungible | TokenStandard::ProgrammableNonFungible => 0,
             // for Fungile variants, we either use the specified decimals or the default
-            // DECIMALS from spl-token
+            // DECIMALS from safe-token 
             TokenStandard::FungibleAsset | TokenStandard::Fungible => match decimals {
                 Some(decimals) => decimals,
                 // if decimals not provided, use the default
@@ -90,8 +90,8 @@ fn create_v1(program_id: &Pubkey, ctx: Context<Create>, args: CreateArgs) -> Pro
 
         // initializing the mint account
         invoke(
-            &spl_token::instruction::initialize_mint2(
-                ctx.accounts.spl_token_program_info.key,
+            &safe_token::instruction::initialize_mint2(
+                ctx.accounts.safe_token_program_info.key,
                 ctx.accounts.mint_info.key,
                 ctx.accounts.authority_info.key,
                 Some(ctx.accounts.authority_info.key),
@@ -161,7 +161,7 @@ fn create_v1(program_id: &Pubkey, ctx: Context<Create>, args: CreateArgs) -> Pro
                 ctx.accounts.authority_info,
                 ctx.accounts.payer_info,
                 ctx.accounts.metadata_info,
-                ctx.accounts.spl_token_program_info,
+                ctx.accounts.safe_token_program_info,
                 ctx.accounts.system_program_info,
                 print_supply.to_option(),
             )?;

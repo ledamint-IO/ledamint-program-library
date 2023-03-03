@@ -4,7 +4,7 @@ use anchor_spl::token::{close_account, CloseAccount, Token};
 use crate::{
     assert_is_ata,
     constants::{FREEZE_FEATURE_INDEX, FREEZE_LOCK_FEATURE_INDEX},
-    remove_feature_flag, spl_token_transfer, CandyError, CandyMachine, FreezePDA,
+    remove_feature_flag, safe_token_transfer, CandyError, CandyMachine, FreezePDA,
     TokenTransferParams,
 };
 
@@ -65,7 +65,7 @@ pub fn handle_unlock_funds<'info>(
             candy_key.as_ref(),
             &[*ctx.bumps.get("freeze_pda").unwrap()],
         ];
-        spl_token_transfer(TokenTransferParams {
+        safe_token_transfer(TokenTransferParams {
             source: freeze_ata_info.to_account_info(),
             destination: destination_ata.to_account_info(),
             authority: freeze_pda.to_account_info(),

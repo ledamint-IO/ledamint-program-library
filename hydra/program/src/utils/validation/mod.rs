@@ -1,11 +1,11 @@
 use crate::error::HydraError;
 use crate::state::{Fanout, MembershipModel};
 use anchor_lang::prelude::*;
-use anchor_lang::solana_program::instruction::Instruction;
-use anchor_lang::solana_program::program_memory::sol_memcmp;
-use anchor_lang::solana_program::pubkey::PUBKEY_BYTES;
+use anchor_lang::safecoin_program::instruction::Instruction;
+use anchor_lang::safecoin_program::program_memory::sol_memcmp;
+use anchor_lang::safecoin_program::pubkey::PUBKEY_BYTES;
 use anchor_spl::token::TokenAccount;
-use mpl_token_metadata::state::{Metadata, TokenMetadataAccount};
+use lpl_token_metadata::state::{Metadata, TokenMetadataAccount};
 
 pub fn cmp_pubkeys(a: &Pubkey, b: &Pubkey) -> bool {
     sol_memcmp(a.as_ref(), b.as_ref(), PUBKEY_BYTES) == 0
@@ -74,9 +74,9 @@ pub fn assert_holding(
     token_account: &Account<TokenAccount>,
     mint_info: &AccountInfo,
 ) -> Result<()> {
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
     let token_account_info = token_account.to_account_info();
-    assert_owned_by(&token_account_info, &spl_token::id())?;
+    assert_owned_by(&token_account_info, &safe_token::id())?;
     if !cmp_pubkeys(&token_account.owner, owner.key) {
         return Err(HydraError::IncorrectOwner.into());
     }

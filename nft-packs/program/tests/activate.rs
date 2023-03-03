@@ -7,9 +7,9 @@ use mpl_nft_packs::{
     state::{PackDistributionType, PackSetState},
 };
 use num_traits::FromPrimitive;
-use solana_program::{instruction::InstructionError, system_instruction};
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::{instruction::InstructionError, system_instruction};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::Keypair,
     signer::Signer,
     transaction::{Transaction, TransactionError},
@@ -142,7 +142,7 @@ async fn setup() -> (
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -153,7 +153,7 @@ async fn setup() -> (
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();

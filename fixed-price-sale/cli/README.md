@@ -48,7 +48,7 @@ This example demonstrate market creation. Follow step by step (assumed that you 
     
     `~ $: ./mpl-fixed-price-sale-cli create-store --name example1 --description example2`
 
-2. Next we can initialize selling resource, but before you must create edition mint(and token), this can be done with `mpl-token-metadata-cli` [tool](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/token-metadata/cli):
+2. Next we can initialize selling resource, but before you must create edition mint(and token), this can be done with `lpl-token-metadata-cli` [tool](https://github.com/metaplex-foundation/metaplex-program-library/tree/master/token-metadata/cli):
 
     `~ $: ./mpl-fixed-price-sale-cli init-selling-resource --store 'STORE_ADDRESS' --resource_mint 'EDITION_MINT' --resource_token 'EDITION_TOKEN'`
 

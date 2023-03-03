@@ -4,7 +4,7 @@ import {
   NATIVE_MINT,
   Token,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 import { PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
 import { expect } from 'chai';
 export class TokenUtils {

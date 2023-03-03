@@ -11,7 +11,7 @@ import {
   MintLayout,
   Token,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 import {
   Keypair,
   Connection,
@@ -30,7 +30,7 @@ import {
   CreateMasterEditionV3,
   UpdateMetadataV2,
   SetAndVerifyCollectionCollection,
-} from '@metaplex-foundation/mpl-token-metadata';
+} from '@metaplex-foundation/lpl-token-metadata';
 import PromisePool from '@supercharge/promise-pool/dist';
 import * as cliProgress from 'cli-progress';
 import { sleep } from '../helpers/various';

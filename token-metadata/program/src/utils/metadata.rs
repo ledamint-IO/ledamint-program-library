@@ -1,6 +1,6 @@
 use borsh::{maybestd::io::Error as BorshError, BorshDeserialize, BorshSerialize};
-use mpl_utils::{create_or_allocate_account_raw, token::get_mint_authority};
-use solana_program::{
+use lpl_utils::{create_or_allocate_account_raw, token::get_mint_authority};
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program_option::COption, pubkey::Pubkey,
 };
 
@@ -83,7 +83,7 @@ pub fn process_create_metadata_accounts_logic(
             }
         },
     )?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     let metadata_seeds = &[
         PREFIX.as_bytes(),
@@ -265,7 +265,7 @@ pub fn clean_write_metadata(
 
 #[cfg(test)]
 pub mod tests {
-    use solana_program::pubkey;
+    use safecoin_program::pubkey;
 
     use super::*;
     pub use crate::{state::Creator, utils::puff_out_data_fields};

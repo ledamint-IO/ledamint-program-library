@@ -5,8 +5,8 @@ import {
   Creator,
   DataV2,
   createCreateMetadataAccountV2Instruction,
-} from '@metaplex-foundation/mpl-token-metadata';
-import { createMintToInstruction } from '@solana/spl-token';
+} from '@metaplex-foundation/lpl-token-metadata';
+import { createMintToInstruction } from '@solana/safe-token ';
 import { strict as assert } from 'assert';
 
 import { createTokenAccount } from '../transactions/createTokenAccount';

@@ -1,8 +1,8 @@
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program_option::COption,
     program_pack::Pack, pubkey::Pubkey,
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 
 use crate::{
     error::MetadataError,

@@ -1,6 +1,6 @@
 use crate::{constants::*, errors::*, utils::*, AuctionHouse, Auctioneer, AuthorityScope, *};
-use anchor_lang::{prelude::*, solana_program::program_pack::Pack, AnchorDeserialize};
-use spl_token::state::Account as SplAccount;
+use anchor_lang::{prelude::*, safecoin_program::program_pack::Pack, AnchorDeserialize};
+use safe_token::state::Account as SplAccount;
 
 /// Accounts for the [`execute_sale` handler](auction_house/fn.execute_sale.html).
 #[derive(Accounts)]
@@ -1024,7 +1024,7 @@ fn auctioneer_execute_sale_logic<'c, 'info>(
     let buyer_receipt_clone = buyer_receipt_token_account.to_account_info();
     let token_account_clone = token_account.to_account_info();
 
-    let is_native = treasury_mint.key() == spl_token::native_mint::id();
+    let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
     if buyer_price == 0 && !authority_clone.is_signer && !seller.is_signer {
         return Err(
@@ -1133,11 +1133,11 @@ fn auctioneer_execute_sale_logic<'c, 'info>(
         &token_account_mint,
     )?;
     assert_derivation(
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
         &metadata.to_account_info(),
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             token_account_mint.as_ref(),
         ],
     )?;
@@ -1253,7 +1253,7 @@ fn auctioneer_execute_sale_logic<'c, 'info>(
         }
 
         invoke_signed(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &escrow_payment_account.key(),
                 &seller_payment_receipt_account.key(),
@@ -1320,7 +1320,7 @@ fn auctioneer_execute_sale_logic<'c, 'info>(
     ];
 
     invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             &token_account.key(),
             &buyer_receipt_token_account.key(),
@@ -1407,7 +1407,7 @@ fn execute_sale_logic<'c, 'info>(
     let buyer_receipt_clone = buyer_receipt_token_account.to_account_info();
     let token_account_clone = token_account.to_account_info();
 
-    let is_native = treasury_mint.key() == spl_token::native_mint::id();
+    let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
     if buyer_price == 0 && !authority_clone.is_signer && !seller.is_signer {
         return Err(
@@ -1516,11 +1516,11 @@ fn execute_sale_logic<'c, 'info>(
         &token_account_mint,
     )?;
     assert_derivation(
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
         &metadata.to_account_info(),
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             token_account_mint.as_ref(),
         ],
     )?;
@@ -1635,7 +1635,7 @@ fn execute_sale_logic<'c, 'info>(
         }
 
         invoke_signed(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &escrow_payment_account.key(),
                 &seller_payment_receipt_account.key(),
@@ -1696,7 +1696,7 @@ fn execute_sale_logic<'c, 'info>(
     ];
 
     invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             &token_account.key(),
             &buyer_receipt_token_account.key(),

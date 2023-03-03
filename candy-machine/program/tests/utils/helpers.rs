@@ -1,6 +1,6 @@
 use console::style;
-use solana_program::{native_token::LAMPORTS_PER_SOL, pubkey::Pubkey};
-use spl_associated_token_account::get_associated_token_address;
+use safecoin_program::{native_token::LAMPORTS_PER_SOL, pubkey::Pubkey};
+use safe_associated_token_account::get_associated_token_address;
 
 use crate::utils::{FreezeInfo, TokenInfo};
 use mpl_candy_machine::{constants::PREFIX as CANDY_PREFIX, CollectionPDA, ConfigLine};

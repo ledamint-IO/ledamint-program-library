@@ -1,9 +1,9 @@
 use anchor_lang::prelude::*;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction::revoke_collection_authority,
     state::{Metadata, TokenMetadataAccount},
 };
-use solana_program::program::invoke;
+use safecoin_program::program::invoke;
 
 use crate::{
     cmp_pubkeys, constants::COLLECTIONS_FEATURE_INDEX, remove_feature_flag, CandyError,
@@ -26,7 +26,7 @@ pub struct RemoveCollection<'info> {
     #[account(mut)]
     collection_authority_record: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
 }
 

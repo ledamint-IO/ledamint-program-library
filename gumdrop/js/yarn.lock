@@ -147,9 +147,9 @@
   dependencies:
     buffer "~6.0.3"
 
-"@solana/spl-token@^0.3.5":
+"@solana/safe-token @^0.3.5":
   version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@solana/spl-token/-/spl-token-0.3.5.tgz#cabf9f92d755589420b46e457b9b10a879e755aa"
+  resolved "https://registry.yarnpkg.com/@solana/safe-token /-/safe-token -0.3.5.tgz#cabf9f92d755589420b46e457b9b10a879e755aa"
   integrity sha512-0bGC6n415lGjKu02gkLOIpP1wzndSP0SHwN9PefJ+wKAhmfU1rl3AV1Pa41uap2kzSCD6F9642ngNO8KXPvh/g==
   dependencies:
     "@solana/buffer-layout" "^4.0.0"

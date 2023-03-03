@@ -4,8 +4,8 @@ use super::UiTransactionInfo;
 use crate::{error, utils};
 use anchor_lang::{InstructionData, ToAccountMetas};
 use mpl_fixed_price_sale::utils::find_vault_owner_address;
-use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_client::rpc_client::RpcClient;
+use safecoin_sdk::{
     instruction::Instruction, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
     system_program, sysvar::rent, transaction::Transaction,
 };
@@ -45,21 +45,21 @@ pub fn init_selling_resource(
     // Should be created
     let (master_edition, master_edition_bump) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             resource_mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let (metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             resource_mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let vault_keypair = Keypair::new();
@@ -77,7 +77,7 @@ pub fn init_selling_resource(
         owner: vault_owner,
         resource_token: *resource_token,
         rent: rent::id(),
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
     }
     .to_account_metas(None);

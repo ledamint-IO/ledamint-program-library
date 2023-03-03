@@ -2,7 +2,7 @@
 
 use crate::utils::{DESCRIPTION_DEFAULT_SIZE, MAX_PRIMARY_CREATORS_LEN, NAME_DEFAULT_SIZE};
 use anchor_lang::prelude::*;
-use mpl_token_metadata::state::Creator as MPL_Creator;
+use lpl_token_metadata::state::Creator as MPL_Creator;
 use std::convert::From;
 
 // by system acc I mean account to hold only native SOL
@@ -122,7 +122,7 @@ pub struct PrimaryMetadataCreators {
     pub creators: Vec<Creator>,
 }
 
-pub fn from_mpl_creators(creators: Vec<mpl_token_metadata::state::Creator>) -> Vec<Creator> {
+pub fn from_mpl_creators(creators: Vec<lpl_token_metadata::state::Creator>) -> Vec<Creator> {
     creators
         .iter()
         .map(|e| Creator {

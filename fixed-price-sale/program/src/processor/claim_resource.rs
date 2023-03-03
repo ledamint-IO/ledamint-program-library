@@ -4,9 +4,9 @@ use crate::{
     utils::*,
     ClaimResource,
 };
-use anchor_lang::{prelude::*, solana_program::program_pack::Pack, system_program::System};
+use anchor_lang::{prelude::*, safecoin_program::program_pack::Pack, system_program::System};
 use anchor_spl::token;
-use mpl_token_metadata::state::TokenMetadataAccount;
+use lpl_token_metadata::state::TokenMetadataAccount;
 
 impl<'info> ClaimResource<'info> {
     pub fn process(&mut self, vault_owner_bump: u8) -> Result<()> {
@@ -37,7 +37,7 @@ impl<'info> ClaimResource<'info> {
                 .checked_sub(MINIMUM_BALANCE_FOR_SYSTEM_ACCS)
                 .ok_or(ErrorCode::MathOverflow)?
         } else {
-            let token_account = spl_token::state::Account::unpack(&treasury_holder.data.borrow())?;
+            let token_account = safe_token::state::Account::unpack(&treasury_holder.data.borrow())?;
             if token_account.owner != market.treasury_owner {
                 return Err(ErrorCode::DerivedKeyInvalid.into());
             }
@@ -52,11 +52,11 @@ impl<'info> ClaimResource<'info> {
 
         // Check, that provided metadata is correct
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             metadata,
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
         )?;
@@ -69,8 +69,8 @@ impl<'info> ClaimResource<'info> {
         ]];
 
         // Update primary sale flag
-        let metadata_state: mpl_token_metadata::state::Metadata =
-            mpl_token_metadata::state::Metadata::from_account_info(metadata)?;
+        let metadata_state: lpl_token_metadata::state::Metadata =
+            lpl_token_metadata::state::Metadata::from_account_info(metadata)?;
         if !metadata_state.primary_sale_happened {
             mpl_update_primary_sale_happened_via_token(
                 &metadata.to_account_info(),

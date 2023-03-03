@@ -282,7 +282,7 @@ fn withdraw_logic<'info>(
         &seeds,
     )?;
 
-    let is_native = treasury_mint.key() == spl_token::native_mint::id();
+    let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
     if !is_native {
         if receipt_account.data_is_empty() {
@@ -312,7 +312,7 @@ fn withdraw_logic<'info>(
 
         assert_is_ata(receipt_account, &wallet.key(), &treasury_mint.key())?;
         invoke_signed(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &escrow_payment_account.key(),
                 &receipt_account.key(),

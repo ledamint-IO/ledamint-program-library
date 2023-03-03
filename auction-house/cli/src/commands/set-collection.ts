@@ -12,14 +12,14 @@ import {
   TOKEN_PROGRAM_ID,
   MintLayout,
   Token,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 import { sendTransactionWithRetryWithKeypair } from '../helpers/transactions';
 import {
   CreateMasterEditionV3,
   CreateMetadataV2,
   Creator,
   DataV2,
-} from '@metaplex-foundation/mpl-token-metadata';
+} from '@metaplex-foundation/lpl-token-metadata';
 import log from 'loglevel';
 import { Program } from '@project-serum/anchor';
 import { parseCollectionMintPubkey } from '../helpers/various';

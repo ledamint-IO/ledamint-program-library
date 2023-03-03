@@ -1,10 +1,10 @@
 use anchor_lang::prelude::*;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     assertions::collection::assert_master_edition,
     instruction::{approve_collection_authority, revoke_collection_authority},
     state::{Metadata, TokenMetadataAccount},
 };
-use solana_program::program::{invoke, invoke_signed};
+use safecoin_program::program::{invoke, invoke_signed};
 
 use crate::{
     cmp_pubkeys, constants::AUTHORITY_SEED, utils::assert_edition_from_mint, CandyError,
@@ -187,7 +187,7 @@ pub struct SetCollection<'info> {
     #[account(mut)]
     new_collection_authority_record: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     system_program: Program<'info, System>,
 }

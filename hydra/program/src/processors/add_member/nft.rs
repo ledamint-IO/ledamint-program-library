@@ -39,7 +39,7 @@ pub fn add_member_nft(ctx: Context<AddMemberWithNFT>, args: AddMemberArgs) -> Re
     let membership_account = &mut ctx.accounts.membership_account;
     let metadata = &ctx.accounts.metadata;
     let mint = &ctx.accounts.mint;
-    assert_owned_by(metadata, &mpl_token_metadata::id())?;
+    assert_owned_by(metadata, &lpl_token_metadata::id())?;
     assert_membership_model(fanout, MembershipModel::NFT)?;
     assert_valid_metadata(metadata, &mint.to_account_info())?;
     update_fanout_for_add(fanout, args.shares)?;

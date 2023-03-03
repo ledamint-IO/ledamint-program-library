@@ -4,12 +4,12 @@ use crate::{
     utils::*,
     Withdraw,
 };
-use anchor_lang::{prelude::*, solana_program::borsh::try_from_slice_unchecked};
+use anchor_lang::{prelude::*, safecoin_program::borsh::try_from_slice_unchecked};
 use anchor_spl::{
     associated_token::{self, get_associated_token_address},
     token,
 };
-use mpl_token_metadata::state::TokenMetadataAccount;
+use lpl_token_metadata::state::TokenMetadataAccount;
 
 impl<'info> Withdraw<'info> {
     pub fn process(
@@ -49,18 +49,18 @@ impl<'info> Withdraw<'info> {
 
         // Check, that provided metadata is correct
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             metadata,
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 selling_resource.resource.as_ref(),
             ],
         )?;
 
         // Obtain right creators according to sale type
-        let metadata: mpl_token_metadata::state::Metadata =
-            mpl_token_metadata::state::Metadata::from_account_info(metadata)?;
+        let metadata: lpl_token_metadata::state::Metadata =
+            lpl_token_metadata::state::Metadata::from_account_info(metadata)?;
         let actual_creators = if !metadata.primary_sale_happened {
             if remaining_accounts.is_empty() {
                 return Err(ErrorCode::PrimaryMetadataCreatorsNotProvided.into());
@@ -168,11 +168,11 @@ impl<'info> Withdraw<'info> {
                 signer_seeds[0],
             )?;
         } else {
-            if *treasury_mint.owner != spl_token::id() {
+            if *treasury_mint.owner != safe_token::id() {
                 return Err(ProgramError::InvalidArgument.into());
             }
 
-            if *treasury_holder.owner != spl_token::id() {
+            if *treasury_holder.owner != safe_token::id() {
                 return Err(ProgramError::InvalidArgument.into());
             }
 

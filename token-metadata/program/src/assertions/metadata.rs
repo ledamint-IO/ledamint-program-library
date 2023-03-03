@@ -1,10 +1,10 @@
 use std::collections::HashMap;
 
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,
     pubkey::Pubkey,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 use crate::{
     assertions::{assert_initialized, assert_owned_by},
@@ -212,11 +212,11 @@ pub fn assert_holding_amount(
     amount: u64,
 ) -> ProgramResult {
     assert_owned_by(metadata_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     let token_account: Account = assert_initialized(token_account_info)?;
 
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
 
     if token_account.owner != *owner_info.key {
         return Err(MetadataError::InvalidOwner.into());

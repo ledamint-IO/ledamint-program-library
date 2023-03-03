@@ -3,14 +3,14 @@ use mpl_nft_packs::{
     instruction::{self, EditPackSetArgs},
     state::PackSet,
 };
-use solana_program::{
+use safecoin_program::{
     instruction::AccountMeta, program_pack::Pack, pubkey::Pubkey, system_instruction,
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::Signer, signer::keypair::Keypair, transaction::Transaction, transport,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 #[derive(Debug)]
 pub struct TestPackSet {
@@ -69,7 +69,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -88,7 +88,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -110,7 +110,7 @@ impl TestPackSet {
                     &test_pack_card.token_account.pubkey(),
                     rent.minimum_balance(Account::LEN),
                     Account::LEN as u64,
-                    &spl_token::id(),
+                    &safe_token::id(),
                 ),
                 instruction::add_card_to_pack(
                     &mpl_nft_packs::id(),
@@ -138,7 +138,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -159,7 +159,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -180,7 +180,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -201,7 +201,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -227,7 +227,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -261,7 +261,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -292,7 +292,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -318,7 +318,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -346,7 +346,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -368,7 +368,7 @@ impl TestPackSet {
                     &test_pack_voucher.token_account.pubkey(),
                     rent.minimum_balance(Account::LEN),
                     Account::LEN as u64,
-                    &spl_token::id(),
+                    &safe_token::id(),
                 ),
                 instruction::add_voucher_to_pack(
                     &mpl_nft_packs::id(),
@@ -396,7 +396,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -431,7 +431,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -471,7 +471,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -518,24 +518,24 @@ impl TestPackSet {
         .unwrap();
 
         let mint_key = new_mint.pubkey();
-        let spl_token_metadata_key = mpl_token_metadata::id();
+        let safe_token_metadata_key = lpl_token_metadata::id();
 
         let metadata_seeds = &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            spl_token_metadata_key.as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            safe_token_metadata_key.as_ref(),
             mint_key.as_ref(),
         ];
         let (new_metadata_pubkey, _) =
-            Pubkey::find_program_address(metadata_seeds, &mpl_token_metadata::id());
+            Pubkey::find_program_address(metadata_seeds, &lpl_token_metadata::id());
 
         let master_edition_seeds = &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            spl_token_metadata_key.as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            safe_token_metadata_key.as_ref(),
             mint_key.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ];
         let (new_edition_pubkey, _) =
-            Pubkey::find_program_address(master_edition_seeds, &mpl_token_metadata::id());
+            Pubkey::find_program_address(master_edition_seeds, &lpl_token_metadata::id());
 
         let tx = Transaction::new_signed_with_payer(
             &[instruction::claim_pack(
@@ -562,7 +562,7 @@ impl TestPackSet {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }

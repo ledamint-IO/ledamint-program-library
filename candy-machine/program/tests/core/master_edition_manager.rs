@@ -1,10 +1,10 @@
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction::{self},
     state::{MasterEditionV2, Metadata, EDITION, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_sdk::{pubkey::Pubkey, signature::Signer, transaction::Transaction};
-use spl_associated_token_account::get_associated_token_address;
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_sdk::{pubkey::Pubkey, signature::Signer, transaction::Transaction};
+use safe_associated_token_account::get_associated_token_address;
 
 use crate::{
     core::{
@@ -39,7 +39,7 @@ impl Clone for MasterEditionManager {
 
 impl MasterEditionManager {
     pub fn new(metadata: &MetadataManager) -> Self {
-        let program_id = mpl_token_metadata::id();
+        let program_id = lpl_token_metadata::id();
         let mint_pubkey = metadata.mint.pubkey();
 
         let master_edition_seeds = &[
@@ -49,7 +49,7 @@ impl MasterEditionManager {
             EDITION.as_bytes(),
         ];
         let edition_pubkey =
-            Pubkey::find_program_address(master_edition_seeds, &mpl_token_metadata::id()).0;
+            Pubkey::find_program_address(master_edition_seeds, &lpl_token_metadata::id()).0;
 
         MasterEditionManager {
             authority: clone_keypair(&metadata.authority),
@@ -92,7 +92,7 @@ impl MasterEditionManager {
         update_blockhash(context).await?;
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_master_edition_v3(
-                mpl_token_metadata::id(),
+                lpl_token_metadata::id(),
                 self.edition_pubkey,
                 self.mint.pubkey(),
                 self.authority.pubkey(),

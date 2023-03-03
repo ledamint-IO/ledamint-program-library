@@ -7,7 +7,7 @@ use crate::{
     state::{PackCard, PackSet, PackSetState, PREFIX},
     utils::*,
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_pack::Pack,
@@ -63,13 +63,13 @@ pub fn delete_pack_card(program_id: &Pubkey, accounts: &[AccountInfo]) -> Progra
     }
 
     // Obtain PackCard token account instance
-    let pack_card_token_account = spl_token::state::Account::unpack(&token_account.data.borrow())?;
+    let pack_card_token_account = safe_token::state::Account::unpack(&token_account.data.borrow())?;
 
     // Decrement PackCard's counter in PackSet instance
     pack_set.pack_cards = pack_set.pack_cards.error_decrement()?;
 
     // Transfer PackCard tokens
-    spl_token_transfer(
+    safe_token_transfer(
         token_account.clone(),
         new_master_edition_owner_account.clone(),
         program_authority_account.clone(),

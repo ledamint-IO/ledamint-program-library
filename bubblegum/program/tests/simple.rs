@@ -1,8 +1,8 @@
 #![cfg(feature = "test-bpf")]
 pub mod utils;
 
-use anchor_lang::solana_program::instruction::InstructionError;
-use mpl_token_metadata::{
+use anchor_lang::safecoin_program::instruction::InstructionError;
+use lpl_token_metadata::{
     pda::{find_master_edition_account, find_metadata_account},
     state::{
         MasterEditionV2, TokenMetadataAccount, TokenStandard, MAX_NAME_LENGTH, MAX_SYMBOL_LENGTH,
@@ -10,13 +10,13 @@ use mpl_token_metadata::{
     },
     utils::puffed_out_string,
 };
-use solana_program::{account_info::AccountInfo, program_option::COption, program_pack::Pack};
-use solana_program_test::{tokio, BanksClientError};
-use solana_sdk::signature::{Keypair, Signer};
-use solana_sdk::transaction::TransactionError;
+use safecoin_program::{account_info::AccountInfo, program_option::COption, program_pack::Pack};
+use safecoin_program_test::{tokio, BanksClientError};
+use safecoin_sdk::signature::{Keypair, Signer};
+use safecoin_sdk::transaction::TransactionError;
 
-use spl_associated_token_account::get_associated_token_address;
-use spl_token::{self, state::Mint};
+use safe_associated_token_account::get_associated_token_address;
+use safe_token::{self, state::Mint};
 
 use crate::utils::tree::decompress_mint_auth_pda;
 use crate::utils::Error::BanksClient;
@@ -223,13 +223,13 @@ async fn test_decompress_passes() {
 
         let token_account_key = get_associated_token_address(&leaf.owner.pubkey(), &mint_key);
         let token_account = tree.read_account(token_account_key).await.unwrap();
-        let t = spl_token::state::Account::unpack(token_account.data.as_slice()).unwrap();
+        let t = safe_token::state::Account::unpack(token_account.data.as_slice()).unwrap();
 
-        let expected_t = spl_token::state::Account {
+        let expected_t = safe_token::state::Account {
             mint: mint_key,
             owner: leaf.owner.pubkey(),
             amount: 1,
-            state: spl_token::state::AccountState::Initialized,
+            state: safe_token::state::AccountState::Initialized,
             delegated_amount: 0,
             delegate: COption::None,
             is_native: COption::None,
@@ -241,8 +241,8 @@ async fn test_decompress_passes() {
         let metadata_key = find_metadata_account(&mint_key).0;
         let mut meta_account = tree.read_account(metadata_key).await.unwrap();
 
-        let meta: mpl_token_metadata::state::Metadata =
-            mpl_token_metadata::state::Metadata::from_account_info(&AccountInfo::from((
+        let meta: lpl_token_metadata::state::Metadata =
+            lpl_token_metadata::state::Metadata::from_account_info(&AccountInfo::from((
                 &metadata_key,
                 &mut meta_account,
             )))
@@ -252,7 +252,7 @@ async fn test_decompress_passes() {
 
         // Can't compare directly as they are different types for some reason.
         for c1 in leaf.metadata.creators.iter() {
-            expected_creators.push(mpl_token_metadata::state::Creator {
+            expected_creators.push(lpl_token_metadata::state::Creator {
                 address: c1.address,
                 verified: c1.verified,
                 share: c1.share,
@@ -261,11 +261,11 @@ async fn test_decompress_passes() {
 
         assert!(expected_creators[0].verified);
 
-        let expected_meta = mpl_token_metadata::state::Metadata {
-            key: mpl_token_metadata::state::Key::MetadataV1,
+        let expected_meta = lpl_token_metadata::state::Metadata {
+            key: lpl_token_metadata::state::Key::MetadataV1,
             update_authority: decompress_mint_auth_pda(mint_key),
             mint: mint_key,
-            data: mpl_token_metadata::state::Data {
+            data: lpl_token_metadata::state::Data {
                 name: puffed_out_string(&leaf.metadata.name, MAX_NAME_LENGTH),
                 symbol: puffed_out_string(&leaf.metadata.symbol, MAX_SYMBOL_LENGTH),
                 uri: puffed_out_string(&leaf.metadata.uri, MAX_URI_LENGTH),
@@ -293,7 +293,7 @@ async fn test_decompress_passes() {
                 .unwrap();
 
         let expected_me = MasterEditionV2 {
-            key: mpl_token_metadata::state::Key::MasterEditionV2,
+            key: lpl_token_metadata::state::Key::MasterEditionV2,
             supply: 0,
             max_supply: Some(0),
         };

@@ -1,12 +1,12 @@
-use anchor_client::solana_sdk::{signature::Signer, system_program, sysvar};
+use anchor_client::safecoin_sdk::{signature::Signer, system_program, sysvar};
 use anchor_lang::*;
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
     system_instruction,
 };
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, transaction::Transaction};
+use safecoin_program_test::*;
+use safecoin_sdk::{signature::Keypair, transaction::Transaction};
 
 use mpl_candy_machine::{
     constants::{CONFIG_ARRAY_START, CONFIG_LINE_SIZE},
@@ -26,7 +26,7 @@ use std::result::Result;
 
 pub fn candy_machine_program_test() -> ProgramTest {
     let mut program = ProgramTest::new("mpl_candy_machine", mpl_candy_machine::id(), None);
-    program.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
+    program.add_program("lpl_token_metadata", lpl_token_metadata::id(), None);
     program
 }
 
@@ -246,7 +246,7 @@ pub async fn set_collection(
         mint: collection_info.mint.pubkey(),
         edition: collection_info.master_edition,
         collection_authority_record: collection_info.authority_record,
-        token_metadata_program: mpl_token_metadata::id(),
+        token_metadata_program: lpl_token_metadata::id(),
     }
     .to_account_metas(None);
 
@@ -282,7 +282,7 @@ pub async fn remove_collection(
         metadata: collection_info.metadata,
         mint: collection_info.mint.pubkey(),
         collection_authority_record: collection_info.authority_record,
-        token_metadata_program: mpl_token_metadata::id(),
+        token_metadata_program: lpl_token_metadata::id(),
     }
     .to_account_metas(None);
 
@@ -389,8 +389,8 @@ pub async fn thaw_nft(
         mint: nft_info.mint.pubkey(),
         edition: nft_info.edition_pubkey,
         payer: signer.pubkey(),
-        token_program: spl_token::ID,
-        token_metadata_program: mpl_token_metadata::ID,
+        token_program: safe_token::ID,
+        token_metadata_program: lpl_token_metadata::ID,
         system_program: system_program::id(),
     }
     .to_account_metas(None);
@@ -429,7 +429,7 @@ pub async fn unlock_funds(
     }
     .to_account_metas(None);
     if token_info.set {
-        accounts.push(AccountMeta::new_readonly(spl_token::id(), false));
+        accounts.push(AccountMeta::new_readonly(safe_token::id(), false));
         accounts.push(AccountMeta::new(
             freeze_info.find_freeze_ata(&token_info.mint),
             false,
@@ -515,8 +515,8 @@ pub fn mint_nft_ix(
         mint_authority: payer.pubkey(),
         update_authority: payer.pubkey(),
         master_edition,
-        token_metadata_program: mpl_token_metadata::id(),
-        token_program: spl_token::id(),
+        token_metadata_program: lpl_token_metadata::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
         rent: sysvar::rent::id(),
         clock: sysvar::clock::id(),
@@ -577,7 +577,7 @@ pub fn mint_nft_ix(
             metadata,
             payer: payer.pubkey(),
             collection_pda: collection_info.pda,
-            token_metadata_program: mpl_token_metadata::id(),
+            token_metadata_program: lpl_token_metadata::id(),
             instructions: sysvar::instructions::id(),
             collection_mint: collection_info.mint.pubkey(),
             collection_metadata: collection_info.metadata,

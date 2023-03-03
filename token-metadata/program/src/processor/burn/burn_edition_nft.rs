@@ -1,10 +1,10 @@
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
 };
-use spl_token::state::Account as TokenAccount;
+use safe_token::state::Account as TokenAccount;
 
 use crate::{
     assertions::assert_owned_by,
@@ -31,7 +31,7 @@ pub fn process_burn_edition_nft<'a>(
     let master_edition_info = next_account_info(account_info_iter)?;
     let print_edition_info = next_account_info(account_info_iter)?;
     let edition_marker_info = next_account_info(account_info_iter)?;
-    let spl_token_program_info = next_account_info(account_info_iter)?;
+    let safe_token_program_info = next_account_info(account_info_iter)?;
 
     // Validate accounts
     // Owner is a signer.
@@ -43,11 +43,11 @@ pub fn process_burn_edition_nft<'a>(
     assert_owned_by(print_edition_info, program_id)?;
     assert_owned_by(edition_marker_info, program_id)?;
 
-    // Owned by spl-token program.
-    assert_owned_by(master_edition_mint_info, &spl_token::id())?;
-    assert_owned_by(master_edition_token_info, &spl_token::id())?;
-    assert_owned_by(print_edition_mint_info, &spl_token::id())?;
-    assert_owned_by(print_edition_token_info, &spl_token::id())?;
+    // Owned by safe-token  program.
+    assert_owned_by(master_edition_mint_info, &safe_token::id())?;
+    assert_owned_by(master_edition_token_info, &safe_token::id())?;
+    assert_owned_by(print_edition_mint_info, &safe_token::id())?;
+    assert_owned_by(print_edition_token_info, &safe_token::id())?;
 
     let metadata = Metadata::from_account_info(metadata_info)?;
     let token: TokenAccount = assert_initialized(print_edition_token_info)?;
@@ -88,9 +88,9 @@ pub fn process_burn_edition_nft<'a>(
         token_record_info: None,
         // This handler doesn't get system program and sysvars instructions
         // but we need them to create the Burn struct. They are not used in the burn_nonfungible_edition handler.
-        system_program_info: spl_token_program_info,
-        sysvar_instructions_info: spl_token_program_info,
-        spl_token_program_info,
+        system_program_info: safe_token_program_info,
+        sysvar_instructions_info: safe_token_program_info,
+        safe_token_program_info,
     };
     let context = Context {
         accounts,

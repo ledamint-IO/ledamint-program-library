@@ -1,4 +1,4 @@
-use anchor_lang::{prelude::*, solana_program::program::invoke, AnchorDeserialize};
+use anchor_lang::{prelude::*, safecoin_program::program::invoke, AnchorDeserialize};
 
 use crate::{constants::*, errors::*, utils::*, AuctionHouse, AuthorityScope, *};
 
@@ -273,7 +273,7 @@ fn deposit_logic<'info>(
         &seeds,
     )?;
 
-    let is_native = treasury_mint.key() == spl_token::native_mint::id();
+    let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
     create_program_token_account_if_not_present(
         escrow_payment_account,
@@ -291,7 +291,7 @@ fn deposit_logic<'info>(
     if !is_native {
         assert_is_ata(payment_account, &wallet.key(), &treasury_mint.key())?;
         invoke(
-            &spl_token::instruction::transfer(
+            &safe_token::instruction::transfer(
                 token_program.key,
                 &payment_account.key(),
                 &escrow_payment_account.key(),

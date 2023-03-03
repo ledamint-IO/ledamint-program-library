@@ -10,8 +10,8 @@ import {
   getMint,
   MintLayout,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
-import { SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID, spokSameBigint, spokSamePubkey } from './utils';
+} from '@solana/safe-token ';
+import { safe_associated_token_account_PROGRAM_ID, spokSameBigint, spokSamePubkey } from './utils';
 import { BN } from 'bn.js';
 
 killStuckProcess();
@@ -130,7 +130,7 @@ test('Create: fail to create ProgrammableNonFungible with minted mint account', 
   const [mint, mintKeypair] = await amman.genLabeledKeypair('Mint Account');
   const tokenAccount = PublicKey.findProgramAddressSync(
     [payer.publicKey.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    safe_associated_token_account_PROGRAM_ID,
   )[0];
 
   const ixs: TransactionInstruction[] = [];
@@ -396,7 +396,7 @@ test('Create: create NonFungible with minted mint account', async (t) => {
   const [mint, mintKeypair] = await amman.genLabeledKeypair('Mint Account');
   const tokenAccount = PublicKey.findProgramAddressSync(
     [payer.publicKey.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    safe_associated_token_account_PROGRAM_ID,
   )[0];
 
   const ixs: TransactionInstruction[] = [];
@@ -481,7 +481,7 @@ test('Create: fail to create NonFungible with more than 2 mints', async (t) => {
   const [mint, mintKeypair] = await amman.genLabeledKeypair('Mint Account');
   const tokenAccount = PublicKey.findProgramAddressSync(
     [payer.publicKey.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    safe_associated_token_account_PROGRAM_ID,
   )[0];
 
   const ixs: TransactionInstruction[] = [];
@@ -657,7 +657,7 @@ test('Create: create Fungible with minted mint account', async (t) => {
   const [mint, mintKeypair] = await amman.genLabeledKeypair('Mint Account');
   const tokenAccount = PublicKey.findProgramAddressSync(
     [payer.publicKey.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    safe_associated_token_account_PROGRAM_ID,
   )[0];
 
   const ixs: TransactionInstruction[] = [];
@@ -742,7 +742,7 @@ test('Create: create FungibleAsset with minted mint account', async (t) => {
   const [mint, mintKeypair] = await amman.genLabeledKeypair('Mint Account');
   const tokenAccount = PublicKey.findProgramAddressSync(
     [payer.publicKey.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    safe_associated_token_account_PROGRAM_ID,
   )[0];
 
   const ixs: TransactionInstruction[] = [];

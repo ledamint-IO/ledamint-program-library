@@ -1,15 +1,15 @@
 use std::io::Error;
 
 use borsh::{BorshDeserialize, BorshSerialize};
-use mpl_utils::cmp_pubkeys;
+use lpl_utils::cmp_pubkeys;
 #[cfg(feature = "serde-feature")]
 use serde::{Deserialize, Serialize};
 use shank::ShankAccount;
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, instruction::AccountMeta, program_error::ProgramError,
     program_option::COption, pubkey::Pubkey,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 use super::*;
 use crate::{
@@ -42,7 +42,7 @@ pub const TOKEN_RECORD_SIZE: usize = 1 // Key
 /// of frozen (locked) and thaw (unlocked).
 ///
 /// It also stores state regarding token delegates that are set on the token account: the pubkey
-/// of the delegate set (this would match the spl-token account delegate) and the role.
+/// of the delegate set (this would match the safe-token  account delegate) and the role.
 ///
 /// Every token account holding a `pNFT` has a token record associated. The seeds for the token
 /// record PDA are:
@@ -64,7 +64,7 @@ pub struct TokenRecord {
     /// Stores the rule set revision (if any). The revision is updated every time
     /// a new token delegate is approved.
     pub rule_set_revision: Option<u64>,
-    /// Pubkey of the current token delegate. This delegate key will match the spl-token
+    /// Pubkey of the current token delegate. This delegate key will match the safe-token 
     /// delegate pubkey.
     #[cfg_attr(
         feature = "serde-feature",

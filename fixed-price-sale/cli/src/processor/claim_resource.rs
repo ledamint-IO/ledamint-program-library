@@ -3,8 +3,8 @@
 use super::{get_account_state, UiTransactionInfo};
 use crate::error;
 use anchor_lang::{InstructionData, ToAccountMetas};
-use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_client::rpc_client::RpcClient;
+use safecoin_sdk::{
     instruction::Instruction, pubkey::Pubkey, signature::Signer, signer::keypair::Keypair,
     system_program, sysvar::clock, transaction::Transaction,
 };
@@ -39,11 +39,11 @@ pub fn claim_resource(
     // Should be created
     let (master_edition_metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             resource_mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let (_owner, vault_owner_bump) = mpl_fixed_price_sale::utils::find_vault_owner_address(
@@ -60,9 +60,9 @@ pub fn claim_resource(
         destination: *claim_token,
         selling_resource_owner: selling_resource_state.owner,
         vault: selling_resource_state.vault,
-        token_metadata_program: mpl_token_metadata::id(),
+        token_metadata_program: lpl_token_metadata::id(),
         clock: clock::id(),
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
     }
     .to_account_metas(None);

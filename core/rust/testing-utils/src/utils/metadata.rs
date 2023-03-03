@@ -1,11 +1,11 @@
 use crate::{solana::create_associated_token_account, utils::*};
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     id, instruction,
     state::{Collection, Creator, DataV2, Uses, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_program_test::*;
+use safecoin_sdk::{
     pubkey::Pubkey, signature::Signer, signer::keypair::Keypair, transaction::Transaction,
 };
 
@@ -41,7 +41,7 @@ impl Metadata {
     pub async fn get_data(
         &self,
         context: &mut ProgramTestContext,
-    ) -> mpl_token_metadata::state::Metadata {
+    ) -> lpl_token_metadata::state::Metadata {
         let account = get_account(context, &self.pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }

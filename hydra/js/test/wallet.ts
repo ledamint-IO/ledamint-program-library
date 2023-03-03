@@ -1,6 +1,6 @@
 import { Account, Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { NodeWallet } from '@project-serum/common'; //TODO remove this
-import { NATIVE_MINT, Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { NATIVE_MINT, Token, TOKEN_PROGRAM_ID } from '@solana/safe-token ';
 import { expect, use } from 'chai';
 import ChaiAsPromised from 'chai-as-promised';
 import { Fanout, FanoutClient, FanoutMembershipVoucher, FanoutMint, MembershipModel } from '../src';

@@ -17,7 +17,7 @@ impl UpdateAccounts {
             AccountMeta::new(self.metadata_account, false),
             AccountMeta::new(self.master_edition_account, false),
             AccountMeta::new(self.mint_account, false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
             AccountMeta::new_readonly(sysvar::instructions::id(), false),
         ];
         if let Some(new_update_authority) = self.new_update_authority {
@@ -57,7 +57,7 @@ pub struct AuthorizationRules {
 //     owner: &'info AccountInfo<'info>,
 //     destination_token_account: &'info AccountInfo<'info>,
 //     destination_owner: &'info AccountInfo<'info>,
-//     spl_token_program: &'info AccountInfo<'info>,
+//     safe_token_program: &'info AccountInfo<'info>,
 //     spl_associated_token_program: &'info AccountInfo<'info>,
 //     system_program: &'info AccountInfo<'info>,
 //     sysvar_instructions: &'info AccountInfo<'info>,
@@ -72,7 +72,7 @@ pub struct AuthorizationRules {
 //         owner: &'info AccountInfo<'info>,
 //         destination_token_account: &'info AccountInfo<'info>,
 //         destination_owner: &'info AccountInfo<'info>,
-//         spl_token_program: &'info AccountInfo<'info>,
+//         safe_token_program: &'info AccountInfo<'info>,
 //         spl_associated_token_program: &'info AccountInfo<'info>,
 //         system_program: &'info AccountInfo<'info>,
 //         sysvar_instructions: &'info AccountInfo<'info>,
@@ -85,7 +85,7 @@ pub struct AuthorizationRules {
 //             owner,
 //             destination_token_account,
 //             destination_owner,
-//             spl_token_program,
+//             safe_token_program,
 //             spl_associated_token_program,
 //             system_program,
 //             sysvar_instructions,
@@ -107,7 +107,7 @@ pub struct AuthorizationRules {
 //         //     let owner = next_account_info(account_info_iter)?;
 //         //     let destination_token_account = next_account_info(account_info_iter)?;
 //         //     let destination_owner = next_account_info(account_info_iter)?;
-//         //     let spl_token_program = next_account_info(account_info_iter)?;
+//         //     let safe_token_program = next_account_info(account_info_iter)?;
 //         //     let spl_associated_token_program = next_account_info(account_info_iter)?;
 //         //     let system_program = next_account_info(account_info_iter)?;
 //         //     let sysvar_instructions = next_account_info(account_info_iter)?;
@@ -129,7 +129,7 @@ pub struct AuthorizationRules {
 //         //         owner,
 //         //         destination_token_account,
 //         //         destination_owner,
-//         //         spl_token_program,
+//         //         safe_token_program,
 //         //         spl_associated_token_program,
 //         //         system_program,
 //         //         sysvar_instructions,

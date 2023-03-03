@@ -1,5 +1,5 @@
 use anchor_lang::{prelude::*, Discriminator};
-use mpl_token_metadata::state::MAX_SYMBOL_LENGTH;
+use lpl_token_metadata::state::MAX_SYMBOL_LENGTH;
 
 use crate::{
     approve_collection_authority_helper,
@@ -87,7 +87,7 @@ pub struct Initialize<'info> {
     #[account(mut)]
     collection_authority_record: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     system_program: Program<'info, System>,
 }

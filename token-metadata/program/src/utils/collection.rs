@@ -1,4 +1,4 @@
-use solana_program::msg;
+use safecoin_program::msg;
 
 use super::*;
 use crate::state::CollectionDetails;

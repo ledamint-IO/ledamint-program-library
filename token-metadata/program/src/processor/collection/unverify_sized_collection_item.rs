@@ -1,5 +1,5 @@
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -33,7 +33,7 @@ pub fn unverify_sized_collection_item(
     assert_signer(payer_info)?;
 
     assert_owned_by(metadata_info, program_id)?;
-    assert_owned_by(collection_mint_info, &spl_token::id())?;
+    assert_owned_by(collection_mint_info, &safe_token::id())?;
 
     let mut metadata = Metadata::from_account_info(metadata_info)?;
 

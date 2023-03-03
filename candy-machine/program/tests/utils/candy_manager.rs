@@ -1,16 +1,16 @@
 use std::{fmt::Debug, str::FromStr};
 
 use anchor_lang::AccountDeserialize;
-use mpl_token_metadata::{pda::find_collection_authority_account, state::Metadata};
+use lpl_token_metadata::{pda::find_collection_authority_account, state::Metadata};
 use solana_gateway::state::{get_expire_address_with_seed, get_gateway_token_address_with_seed};
-use solana_program::{clock::Clock, program_option::COption, pubkey::Pubkey};
-use solana_program_test::ProgramTestContext;
-use solana_sdk::{
+use safecoin_program::{clock::Clock, program_option::COption, pubkey::Pubkey};
+use safecoin_program_test::ProgramTestContext;
+use safecoin_sdk::{
     signature::{Keypair, Signer},
     transport,
 };
-use spl_associated_token_account::get_associated_token_address;
-use spl_token::state::AccountState;
+use safe_associated_token_account::get_associated_token_address;
+use safe_token::state::AccountState;
 
 use mpl_candy_machine::{
     constants::{BOT_FEE, FREEZE_FEATURE_INDEX, FREEZE_LOCK_FEATURE_INDEX},

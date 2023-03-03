@@ -13,7 +13,7 @@ const programs = {
   metadata: {
     label: 'Metadata',
     programId: 'metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s',
-    deployPath: localDeployPath('mpl_token_metadata'),
+    deployPath: localDeployPath('lpl_token_metadata'),
   },
   token_sale: {
     label: 'Fixed Price Token Sale',
@@ -38,7 +38,7 @@ const programs = {
   token_auth_rules: {
     label: 'Token Auth Rules',
     programId: 'auth9SigNpDKz4sJJ1DfCTuZrZNSAgh9sFD3rboVmgg',
-    deployPath: localDeployPath('mpl_token_auth_rules'),
+    deployPath: localDeployPath('lpl_token_auth_rules'),
   },
 };
 

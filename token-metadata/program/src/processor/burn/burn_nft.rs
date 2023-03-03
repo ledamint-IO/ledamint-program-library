@@ -1,7 +1,7 @@
 use super::*;
 
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_error::ProgramError,
@@ -24,7 +24,7 @@ pub fn process_burn_nft<'a>(program_id: &Pubkey, accounts: &'a [AccountInfo<'a>]
     let mint_info = next_account_info(account_info_iter)?;
     let token_info = next_account_info(account_info_iter)?;
     let edition_info = next_account_info(account_info_iter)?;
-    let spl_token_program_info = next_account_info(account_info_iter)?;
+    let safe_token_program_info = next_account_info(account_info_iter)?;
 
     let collection_nft_provided = accounts.len() == 7;
     let collection_metadata_info = if collection_nft_provided {
@@ -41,11 +41,11 @@ pub fn process_burn_nft<'a>(program_id: &Pubkey, accounts: &'a [AccountInfo<'a>]
     // Assert program ownership.
     assert_owned_by(metadata_info, program_id)?;
     assert_owned_by(edition_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::ID)?;
-    assert_owned_by(token_info, &spl_token::ID)?;
+    assert_owned_by(mint_info, &safe_token::ID)?;
+    assert_owned_by(token_info, &safe_token::ID)?;
 
     // Check program IDs.
-    if spl_token_program_info.key != &spl_token::ID {
+    if safe_token_program_info.key != &safe_token::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
 
@@ -90,9 +90,9 @@ pub fn process_burn_nft<'a>(program_id: &Pubkey, accounts: &'a [AccountInfo<'a>]
         token_record_info: None,
         // This handler doesn't get system program and sysvars instructions
         // but we need them to create the Burn struct. They are not used in the burn_nonfungible handler.
-        system_program_info: spl_token_program_info,
-        sysvar_instructions_info: spl_token_program_info,
-        spl_token_program_info,
+        system_program_info: safe_token_program_info,
+        sysvar_instructions_info: safe_token_program_info,
+        safe_token_program_info,
     };
     let context = Context {
         accounts,

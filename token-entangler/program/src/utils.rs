@@ -1,7 +1,7 @@
 use crate::ErrorCode;
 use anchor_lang::{
     prelude::*,
-    solana_program::{
+    safecoin_program::{
         program::{invoke, invoke_signed},
         program_memory::sol_memcmp,
         program_pack::{IsInitialized, Pack},
@@ -11,13 +11,13 @@ use anchor_lang::{
 };
 use anchor_spl::token::Token;
 use arrayref::array_ref;
-use mpl_token_metadata::state::{Metadata, TokenMetadataAccount};
-use spl_associated_token_account::get_associated_token_address;
-use spl_token::{instruction::initialize_account2, state::Account};
+use lpl_token_metadata::state::{Metadata, TokenMetadataAccount};
+use safe_associated_token_account::get_associated_token_address;
+use safe_token::{instruction::initialize_account2, state::Account};
 use std::{convert::TryInto, slice::Iter};
 
 pub fn assert_is_ata(ata: &AccountInfo, wallet: &Pubkey, mint: &Pubkey) -> Result<Account> {
-    assert_owned_by(ata, &spl_token::id())?;
+    assert_owned_by(ata, &safe_token::id())?;
     let ata_account: Account = assert_initialized(ata)?;
     assert_keys_equal(ata_account.owner, *wallet)?;
     assert_keys_equal(ata_account.mint, *mint)?;
@@ -45,11 +45,11 @@ pub fn make_ata<'a>(
     };
 
     invoke_signed(
-        &spl_associated_token_account::instruction::create_associated_token_account(
+        &safe_associated_token_account::instruction::create_associated_token_account(
             fee_payer.key,
             wallet.key,
             mint.key,
-            &spl_token::ID,
+            &safe_token::ID,
         ),
         &[
             ata,
@@ -73,11 +73,11 @@ pub fn assert_metadata_valid(
     mint: &Pubkey,
 ) -> Result<()> {
     assert_derivation(
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
         &metadata.to_account_info(),
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             mint.as_ref(),
         ],
     )?;
@@ -87,13 +87,13 @@ pub fn assert_metadata_valid(
 
     if let Some(ed) = edition {
         assert_derivation(
-            &mpl_token_metadata::id(),
+            &lpl_token_metadata::id(),
             &ed.to_account_info(),
             &[
-                mpl_token_metadata::state::PREFIX.as_bytes(),
-                mpl_token_metadata::id().as_ref(),
+                lpl_token_metadata::state::PREFIX.as_bytes(),
+                lpl_token_metadata::id().as_ref(),
                 mint.as_ref(),
-                mpl_token_metadata::state::EDITION.as_bytes(),
+                lpl_token_metadata::state::EDITION.as_bytes(),
             ],
         )?;
         if ed.data_is_empty() {
@@ -149,7 +149,7 @@ pub fn create_program_token_account_if_not_present<'a>(
             &rent.to_account_info(),
             system_program,
             fee_payer,
-            spl_token::state::Account::LEN,
+            safe_token::state::Account::LEN,
             fee_seeds,
             signer_seeds,
         )?;
@@ -226,7 +226,7 @@ pub fn pay_creator_fees<'a>(
                     )?;
                     if creator_fee > 0 {
                         invoke(
-                            &spl_token::instruction::transfer(
+                            &safe_token::instruction::transfer(
                                 token_program.key,
                                 payment_account.key,
                                 current_creator_token_account_info.key,
@@ -266,7 +266,7 @@ pub fn pay_creator_fees<'a>(
 }
 
 /// Create account almost from scratch, lifted from
-/// https://github.com/solana-labs/solana-program-library/blob/7d4873c61721aca25464d42cc5ef651a7923ca79/associated-token-account/program/src/processor.rs#L51-L98
+/// https://github.com/solana-labs/safecoin-program-library/blob/7d4873c61721aca25464d42cc5ef651a7923ca79/associated-token-account/program/src/processor.rs#L51-L98
 #[inline(always)]
 pub fn create_or_allocate_account_raw<'a>(
     program_id: Pubkey,
@@ -351,9 +351,9 @@ mod tests {
     use crate::utils::get_mint_details;
     use anchor_lang::{
         prelude::{AccountInfo, Pubkey},
-        solana_program::{program_option::COption, program_pack::Pack},
+        safecoin_program::{program_option::COption, program_pack::Pack},
     };
-    use spl_token::state::Mint;
+    use safe_token::state::Mint;
 
     #[test]
     fn get_mint_details_smoke_test() {
@@ -368,7 +368,7 @@ mod tests {
             is_initialized: true,
             freeze_authority: COption::None,
         };
-        spl_token::state::Mint::pack(mint, &mut data).unwrap();
+        safe_token::state::Mint::pack(mint, &mut data).unwrap();
 
         let owner = Pubkey::new_unique();
 

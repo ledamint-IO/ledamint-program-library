@@ -109,20 +109,20 @@ pub(crate) fn burn_nonfungible_edition(ctx: &Context<Burn>) -> ProgramResult {
         mint: ctx.accounts.mint_info.clone(),
         source: ctx.accounts.token_info.clone(),
         authority: ctx.accounts.authority_info.clone(),
-        token_program: ctx.accounts.spl_token_program_info.clone(),
+        token_program: ctx.accounts.safe_token_program_info.clone(),
         amount: 1,
         authority_signer_seeds: None,
     };
-    spl_token_burn(params)?;
+    safe_token_burn(params)?;
 
     let params = TokenCloseParams {
-        token_program: ctx.accounts.spl_token_program_info.clone(),
+        token_program: ctx.accounts.safe_token_program_info.clone(),
         account: ctx.accounts.token_info.clone(),
         destination: ctx.accounts.authority_info.clone(),
         owner: ctx.accounts.authority_info.clone(),
         authority_signer_seeds: None,
     };
-    spl_token_close(params)?;
+    safe_token_close(params)?;
 
     close_program_account(ctx.accounts.metadata_info, ctx.accounts.authority_info)?;
     close_program_account(edition_info, ctx.accounts.authority_info)?;

@@ -429,8 +429,8 @@ Decompress an NFT into an uncompressed Metaplex NFT.  This will cost rent for th
 | `system_program`                  |          |        | The Solana System Program ID.
 | `sysvar_rent`                     |          |        | `Rent` account.
 | `token_metadata_program`          |          |        | Metaplex `TokenMetadata` program ID.
-| `token_program`                   |          |        | Solana Program Library spl-token program ID. 
-| `associated_token_program`        |          |        | Solana Program Library spl-associated-token-account program ID. 
+| `token_program`                   |          |        | Solana Program Library safe-token  program ID. 
+| `associated_token_program`        |          |        | Solana Program Library safe-associated-token-account program ID. 
 | `log_wrapper`                     |          |        | The Solana Program Library Wrapper (spl-noop) program ID.
 
 </details>

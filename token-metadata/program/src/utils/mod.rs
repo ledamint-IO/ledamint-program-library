@@ -8,20 +8,20 @@ pub use collection::*;
 pub use compression::*;
 pub use master_edition::*;
 pub use metadata::*;
-pub use mpl_utils::{
+pub use lpl_utils::{
     assert_signer, close_account_raw, create_or_allocate_account_raw,
     resize_or_reallocate_account_raw,
     token::{
         get_mint_authority, get_mint_decimals, get_mint_freeze_authority, get_mint_supply,
-        get_owner_from_token_account, spl_token_burn, spl_token_close, spl_token_mint_to,
+        get_owner_from_token_account, safe_token_burn, safe_token_close, safe_token_mint_to,
     },
 };
 pub use programmable_asset::*;
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, borsh::try_from_slice_unchecked, entrypoint::ProgramResult,
     program::invoke_signed, program_error::ProgramError, pubkey::Pubkey, system_program,
 };
-use spl_token::instruction::{set_authority, AuthorityType};
+use safe_token::instruction::{set_authority, AuthorityType};
 
 pub use crate::assertions::{
     assert_delegated_tokens, assert_derivation, assert_freeze_authority_matches_mint,
@@ -203,7 +203,7 @@ pub fn close_program_account<'a>(
 
 #[cfg(test)]
 mod tests {
-    pub use solana_program::pubkey::Pubkey;
+    pub use safecoin_program::pubkey::Pubkey;
 
     use crate::{
         state::MAX_METADATA_LEN,

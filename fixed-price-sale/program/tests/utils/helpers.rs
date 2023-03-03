@@ -1,18 +1,18 @@
 #![allow(unused)]
 
-use anchor_client::solana_sdk::{
+use anchor_client::safecoin_sdk::{
     pubkey::Pubkey,
     signer::{keypair::Keypair, Signer},
 };
 use mpl_testing_utils::assert_error;
-use mpl_token_metadata::state::Collection;
-use solana_program::instruction::InstructionError;
-use solana_program::{clock::Clock, system_instruction};
-use solana_program_test::*;
-use solana_sdk::{
+use lpl_token_metadata::state::Collection;
+use safecoin_program::instruction::InstructionError;
+use safecoin_program::{clock::Clock, system_instruction};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     commitment_config::CommitmentLevel, program_pack::Pack, transaction::Transaction,
 };
-use solana_sdk::{transaction::TransactionError, transport::TransportError};
+use safecoin_sdk::{transaction::TransactionError, transport::TransportError};
 use std::convert::TryFrom;
 use std::env;
 
@@ -24,8 +24,8 @@ pub async fn mint_to(
     amount: u64,
 ) {
     let tx = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::mint_to(
-            &spl_token::id(),
+        &[safe_token::instruction::mint_to(
+            &safe_token::id(),
             mint,
             to,
             &owner.pubkey(),
@@ -42,7 +42,7 @@ pub async fn mint_to(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();
@@ -61,12 +61,12 @@ pub async fn create_token_account(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &account.pubkey(),
-                rent.minimum_balance(spl_token::state::Account::LEN),
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Account::LEN),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 manager,
@@ -82,7 +82,7 @@ pub async fn create_token_account(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();
@@ -101,12 +101,12 @@ pub async fn create_mint(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &mint.pubkey(),
-                rent.minimum_balance(spl_token::state::Mint::LEN),
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Mint::LEN),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 authority,
                 Some(&authority),
@@ -123,7 +123,7 @@ pub async fn create_mint(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();
@@ -139,17 +139,17 @@ pub async fn create_master_edition(
 ) -> (Pubkey, u8) {
     let (edition, edition_bump) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let tx = Transaction::new_signed_with_payer(
-        &[mpl_token_metadata::instruction::create_master_edition_v3(
-            mpl_token_metadata::id(),
+        &[lpl_token_metadata::instruction::create_master_edition_v3(
+            lpl_token_metadata::id(),
             edition,
             *mint,
             update_authority.pubkey(),
@@ -167,7 +167,7 @@ pub async fn create_master_edition(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();
@@ -183,7 +183,7 @@ pub async fn create_token_metadata(
     name: String,
     symbol: String,
     uri: String,
-    creators: Option<Vec<mpl_token_metadata::state::Creator>>,
+    creators: Option<Vec<lpl_token_metadata::state::Creator>>,
     seller_fee_basis_points: u16,
     update_authority_is_signer: bool,
     is_mutable: bool,
@@ -191,17 +191,17 @@ pub async fn create_token_metadata(
 ) -> Pubkey {
     let (metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            mpl_token_metadata::instruction::create_metadata_accounts_v3(
-                mpl_token_metadata::id(),
+            lpl_token_metadata::instruction::create_metadata_accounts_v3(
+                lpl_token_metadata::id(),
                 metadata,
                 *mint,
                 mint_authority.pubkey(),
@@ -241,26 +241,26 @@ pub async fn verify_collection(
 ) {
     let (collection_metadata, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             collection_mint.as_ref(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let (collection_master, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             collection_mint.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let tx = Transaction::new_signed_with_payer(
-        &[mpl_token_metadata::instruction::verify_collection(
-            mpl_token_metadata::id(),
+        &[lpl_token_metadata::instruction::verify_collection(
+            lpl_token_metadata::id(),
             *metadata,
             collection_authority.pubkey(),
             context.payer.pubkey(),

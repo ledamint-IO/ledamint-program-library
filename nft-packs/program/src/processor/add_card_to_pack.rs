@@ -12,12 +12,12 @@ use crate::{
     utils::*,
 };
 use mpl_metaplex::state::Store;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     error::MetadataError,
     state::{MasterEditionV2, Metadata, EDITION, PREFIX},
     utils::{assert_derivation, assert_initialized},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     msg,
@@ -26,7 +26,7 @@ use solana_program::{
     pubkey::Pubkey,
     sysvar::{rent::Rent, Sysvar},
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 /// Process AddCardToPack instruction
 pub fn add_card_to_pack(
@@ -143,7 +143,7 @@ pub fn add_card_to_pack(
     let mut pack_card = PackCard::unpack_unchecked(&pack_card_info.data.borrow_mut())?;
     assert_uninitialized(&pack_card)?;
 
-    let token_metadata_program_id = mpl_token_metadata::id();
+    let token_metadata_program_id = lpl_token_metadata::id();
 
     // Check for v2
     let master_edition = MasterEditionV2::from_account_info(master_edition_info)?;
@@ -180,7 +180,7 @@ pub fn add_card_to_pack(
     )?;
 
     // Transfer from source to token account
-    spl_token_transfer(
+    safe_token_transfer(
         source_info.clone(),
         token_account_info.clone(),
         authority_info.clone(),

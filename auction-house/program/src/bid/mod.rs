@@ -3,11 +3,11 @@
 
 use anchor_lang::{
     prelude::*,
-    solana_program::{program::invoke, system_instruction},
+    safecoin_program::{program::invoke, system_instruction},
     AnchorDeserialize,
 };
 use anchor_spl::token::{Mint, Token, TokenAccount};
-use solana_program::program_memory::sol_memset;
+use safecoin_program::program_memory::sol_memset;
 
 use crate::{
     constants::*, errors::AuctionHouseError, utils::*, AuctionHouse, Auctioneer, AuthorityScope,
@@ -629,7 +629,7 @@ pub fn bid_logic<'info>(
         &seeds,
     )?;
 
-    let is_native = treasury_mint.key() == spl_token::native_mint::id();
+    let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
     let auction_house_key = auction_house.key();
     let wallet_key = wallet.key();
@@ -679,7 +679,7 @@ pub fn bid_logic<'info>(
             )?;
         }
     } else {
-        let escrow_payment_loaded: spl_token::state::Account =
+        let escrow_payment_loaded: safe_token::state::Account =
             assert_initialized(&escrow_payment_account)?;
 
         if escrow_payment_loaded.amount < buyer_price {
@@ -687,7 +687,7 @@ pub fn bid_logic<'info>(
                 .checked_sub(escrow_payment_loaded.amount)
                 .ok_or(AuctionHouseError::NumericalOverflow)?;
             invoke(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     &token_program.key(),
                     &payment_account.key(),
                     &escrow_payment_account.key(),
@@ -831,7 +831,7 @@ pub fn auctioneer_bid_logic<'info>(
         &seeds,
     )?;
 
-    let is_native = treasury_mint.key() == spl_token::native_mint::id();
+    let is_native = treasury_mint.key() == safe_token::native_mint::id();
 
     let auction_house_key = auction_house.key();
     let wallet_key = wallet.key();
@@ -881,7 +881,7 @@ pub fn auctioneer_bid_logic<'info>(
             )?;
         }
     } else {
-        let escrow_payment_loaded: spl_token::state::Account =
+        let escrow_payment_loaded: safe_token::state::Account =
             assert_initialized(&escrow_payment_account)?;
 
         if escrow_payment_loaded.amount < buyer_price {
@@ -889,7 +889,7 @@ pub fn auctioneer_bid_logic<'info>(
                 .checked_sub(escrow_payment_loaded.amount)
                 .ok_or(AuctionHouseError::NumericalOverflow)?;
             invoke(
-                &spl_token::instruction::transfer(
+                &safe_token::instruction::transfer(
                     &token_program.key(),
                     &payment_account.key(),
                     &escrow_payment_account.key(),

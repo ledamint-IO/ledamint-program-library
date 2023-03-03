@@ -6,16 +6,16 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
-use anchor_client::solana_client::rpc_client::RpcClient;
+use anchor_client::safecoin_client::rpc_client::RpcClient;
 use solana_gateway::{
     instruction::{self, NetworkFeature},
     state::{
         get_gatekeeper_address_with_seed, get_gateway_token_address_with_seed, GatewayTokenState,
     },
 };
-use solana_program::pubkey;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::pubkey;
+use safecoin_program_test::*;
+use safecoin_sdk::{
     clock::UnixTimestamp,
     pubkey::Pubkey,
     signature::{Keypair, Signer},

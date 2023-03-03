@@ -1,9 +1,9 @@
 #![cfg(feature = "test-bpf")]
 #![allow(dead_code)]
 
-use solana_program::clock::Clock;
-use solana_program_test::*;
-use solana_sdk::{signature::Keypair, signer::Signer};
+use safecoin_program::clock::Clock;
+use safecoin_program_test::*;
+use safecoin_sdk::{signature::Keypair, signer::Signer};
 
 use mpl_candy_machine::{
     constants::{FREEZE_FEATURE_INDEX, FREEZE_FEE, FREEZE_LOCK_FEATURE_INDEX, MAX_FREEZE_TIME},
@@ -27,7 +27,7 @@ pub mod core;
 pub mod utils;
 
 #[tokio::test]
-async fn freeze_flow_with_spl_token() {
+async fn freeze_flow_with_safe_token() {
     test_start("Test Freeze With SPL Token");
     let mut context = candy_machine_program_test().start_with_context().await;
     let context = &mut context;

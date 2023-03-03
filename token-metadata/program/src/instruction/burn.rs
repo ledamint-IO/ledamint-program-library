@@ -1,7 +1,7 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 #[cfg(feature = "serde-feature")]
 use serde::{Deserialize, Serialize};
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
 };
@@ -36,7 +36,7 @@ pub fn burn_edition_nft(
     master_edition: Pubkey,
     print_edition: Pubkey,
     edition_marker: Pubkey,
-    spl_token: Pubkey,
+    safe_token: Pubkey,
 ) -> Instruction {
     let accounts = vec![
         AccountMeta::new(metadata, false),
@@ -48,7 +48,7 @@ pub fn burn_edition_nft(
         AccountMeta::new(master_edition, false),
         AccountMeta::new(print_edition, false),
         AccountMeta::new(edition_marker, false),
-        AccountMeta::new_readonly(spl_token, false),
+        AccountMeta::new_readonly(safe_token, false),
     ];
 
     Instruction {
@@ -76,7 +76,7 @@ pub fn burn_nft(
     mint: Pubkey,
     token: Pubkey,
     edition: Pubkey,
-    spl_token: Pubkey,
+    safe_token: Pubkey,
     collection_metadata: Option<Pubkey>,
 ) -> Instruction {
     let mut accounts = vec![
@@ -85,7 +85,7 @@ pub fn burn_nft(
         AccountMeta::new(mint, false),
         AccountMeta::new(token, false),
         AccountMeta::new(edition, false),
-        AccountMeta::new_readonly(spl_token, false),
+        AccountMeta::new_readonly(safe_token, false),
     ];
 
     if let Some(collection_metadata) = collection_metadata {
@@ -129,7 +129,7 @@ pub enum BurnArgs {
 ///  12.   `[]` Instruction sysvar account
 ///  13.   `[]` SPL Token Program
 impl InstructionBuilder for super::builders::Burn {
-    fn instruction(&self) -> solana_program::instruction::Instruction {
+    fn instruction(&self) -> safecoin_program::instruction::Instruction {
         let accounts = vec![
             AccountMeta::new(self.authority, true),
             if let Some(collection_metadata) = self.collection_metadata {
@@ -164,7 +164,7 @@ impl InstructionBuilder for super::builders::Burn {
             },
             AccountMeta::new_readonly(self.system_program, false),
             AccountMeta::new_readonly(self.sysvar_instructions, false),
-            AccountMeta::new_readonly(self.spl_token_program, false),
+            AccountMeta::new_readonly(self.safe_token_program, false),
         ];
 
         Instruction {

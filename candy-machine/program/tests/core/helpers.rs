@@ -1,5 +1,5 @@
-use solana_program_test::{BanksClientError, ProgramTestContext};
-use solana_sdk::{
+use safecoin_program_test::{BanksClientError, ProgramTestContext};
+use safecoin_sdk::{
     account::Account,
     commitment_config::CommitmentLevel,
     program_pack::Pack,
@@ -8,7 +8,7 @@ use solana_sdk::{
     system_instruction,
     transaction::Transaction,
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 
 use crate::core::{master_edition_manager::MasterEditionManager, metadata_manager};
 
@@ -44,9 +44,9 @@ pub async fn transfer_lamports(
 pub async fn get_token_account(
     client: &mut ProgramTestContext,
     token_account: &Pubkey,
-) -> Result<spl_token::state::Account, BanksClientError> {
+) -> Result<safe_token::state::Account, BanksClientError> {
     let account = client.banks_client.get_account(*token_account).await?;
-    Ok(spl_token::state::Account::unpack(&account.unwrap().data).unwrap())
+    Ok(safe_token::state::Account::unpack(&account.unwrap().data).unwrap())
 }
 
 pub async fn get_balance(context: &mut ProgramTestContext, pubkey: &Pubkey) -> u64 {
@@ -130,12 +130,12 @@ pub async fn create_token_account(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &account.pubkey(),
-                rent.minimum_balance(spl_token::state::Account::LEN),
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Account::LEN),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 manager,
@@ -160,11 +160,11 @@ pub async fn create_associated_token_account(
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            spl_associated_token_account::instruction::create_associated_token_account(
+            safe_associated_token_account::instruction::create_associated_token_account(
                 &context.payer.pubkey(),
                 wallet,
                 token_mint,
-                &spl_token::ID,
+                &safe_token::ID,
             ),
         ],
         Some(&context.payer.pubkey()),
@@ -173,7 +173,7 @@ pub async fn create_associated_token_account(
     );
     context.banks_client.process_transaction(tx).await.unwrap();
 
-    Ok(spl_associated_token_account::get_associated_token_address(
+    Ok(safe_associated_token_account::get_associated_token_address(
         wallet, token_mint,
     ))
 }
@@ -196,10 +196,10 @@ pub async fn create_mint(
                 &mint.pubkey(),
                 rent.minimum_balance(Mint::LEN),
                 Mint::LEN as u64,
-                &spl_token::id(),
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 authority,
                 freeze_authority,
@@ -256,8 +256,8 @@ pub async fn mint_tokens(
         signing_keypairs.push(signer);
     }
 
-    let ix = spl_token::instruction::mint_to(
-        &spl_token::id(),
+    let ix = safe_token::instruction::mint_to(
+        &safe_token::id(),
         mint,
         account,
         &authority.pubkey(),
@@ -285,8 +285,8 @@ pub async fn transfer(
     update_blockhash(context).await?;
     create_associated_token_account(context, &to.pubkey(), mint).await?;
     let tx = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::transfer(
-            &spl_token::id(),
+        &[safe_token::instruction::transfer(
+            &safe_token::id(),
             &from.pubkey(),
             &to.pubkey(),
             &from.pubkey(),

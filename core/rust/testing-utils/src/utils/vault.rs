@@ -1,8 +1,8 @@
 use super::{create_mint, create_token_account, ExternalPrice, Metadata};
-use mpl_token_vault::{instruction, state::PREFIX};
-use solana_program::{pubkey::Pubkey, system_instruction};
-use solana_program_test::*;
-use solana_sdk::{
+use lpl_token_vault::{instruction, state::PREFIX};
+use safecoin_program::{pubkey::Pubkey, system_instruction};
+use safecoin_program_test::*;
+use safecoin_sdk::{
     signature::{Keypair, Signer},
     transaction::Transaction,
     transport,
@@ -38,7 +38,7 @@ impl Vault {
         metadata: &Metadata,
     ) -> transport::Result<(Pubkey, Pubkey)> {
         let vault_pubkey = self.keypair.pubkey();
-        let metaplex_token_vault_id = mpl_token_vault::id();
+        let metaplex_token_vault_id = lpl_token_vault::id();
 
         let store = Keypair::new();
         let token_mint_pubkey = metadata.mint.pubkey();
@@ -59,7 +59,7 @@ impl Vault {
 
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_add_token_to_inactive_vault_instruction(
-                mpl_token_vault::id(),
+                lpl_token_vault::id(),
                 safety_deposit_box,
                 metadata.token.pubkey(),
                 store.pubkey(),
@@ -83,7 +83,7 @@ impl Vault {
         context: &mut ProgramTestContext,
         number_of_shares: u64,
     ) -> Result<(), BanksClientError> {
-        let metaplex_token_vault_id = mpl_token_vault::id();
+        let metaplex_token_vault_id = lpl_token_vault::id();
         let vault_pubkey = self.keypair.pubkey();
 
         let seeds = &[
@@ -95,7 +95,7 @@ impl Vault {
 
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_activate_vault_instruction(
-                mpl_token_vault::id(),
+                lpl_token_vault::id(),
                 self.keypair.pubkey(),
                 self.mint.pubkey(),
                 self.fraction_treasury.pubkey(),
@@ -119,7 +119,7 @@ impl Vault {
         let outstanding_token_account = Keypair::new();
         let paying_token_account = Keypair::new();
 
-        let metaplex_token_vault_id = mpl_token_vault::id();
+        let metaplex_token_vault_id = lpl_token_vault::id();
         let vault_pubkey = self.keypair.pubkey();
 
         create_token_account(
@@ -146,7 +146,7 @@ impl Vault {
 
         let tx = Transaction::new_signed_with_payer(
             &[instruction::create_combine_vault_instruction(
-                mpl_token_vault::id(),
+                lpl_token_vault::id(),
                 self.keypair.pubkey(),
                 outstanding_token_account.pubkey(),
                 paying_token_account.pubkey(),
@@ -172,7 +172,7 @@ impl Vault {
         context: &mut ProgramTestContext,
         external_price: &ExternalPrice,
     ) -> Result<(), BanksClientError> {
-        let metaplex_token_vault_id = mpl_token_vault::id();
+        let metaplex_token_vault_id = lpl_token_vault::id();
         let vault_pubkey = self.keypair.pubkey();
 
         let seeds = &[
@@ -204,12 +204,12 @@ impl Vault {
                 system_instruction::create_account(
                     &context.payer.pubkey(),
                     &self.keypair.pubkey(),
-                    rent.minimum_balance(mpl_token_vault::state::MAX_VAULT_SIZE),
-                    mpl_token_vault::state::MAX_VAULT_SIZE as u64,
-                    &mpl_token_vault::id(),
+                    rent.minimum_balance(lpl_token_vault::state::MAX_VAULT_SIZE),
+                    lpl_token_vault::state::MAX_VAULT_SIZE as u64,
+                    &lpl_token_vault::id(),
                 ),
                 instruction::create_init_vault_instruction(
-                    mpl_token_vault::id(),
+                    lpl_token_vault::id(),
                     self.mint.pubkey(),
                     self.redeem_treasury.pubkey(),
                     self.fraction_treasury.pubkey(),

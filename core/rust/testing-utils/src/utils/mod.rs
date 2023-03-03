@@ -8,16 +8,16 @@ pub use edition_marker::EditionMarker;
 pub use external_price::ExternalPrice;
 pub use master_edition_v2::MasterEditionV2;
 pub use metadata::Metadata;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::Account, program_pack::Pack, pubkey::Pubkey, signature::Signer,
     signer::keypair::Keypair, system_instruction, transaction::Transaction,
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 pub use vault::Vault;
 
 pub fn program_test() -> ProgramTest {
-    ProgramTest::new("mpl_token_metadata", mpl_token_metadata::id(), None)
+    ProgramTest::new("lpl_token_metadata", lpl_token_metadata::id(), None)
 }
 
 pub async fn get_account(context: &mut ProgramTestContext, pubkey: &Pubkey) -> Account {
@@ -49,7 +49,7 @@ pub async fn mint_tokens(
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            spl_token::instruction::mint_to(&spl_token::id(), mint, account, owner, &[], amount)
+            safe_token::instruction::mint_to(&safe_token::id(), mint, account, owner, &[], amount)
                 .unwrap(),
         ],
         Some(&context.payer.pubkey()),
@@ -73,12 +73,12 @@ pub async fn create_token_account(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &account.pubkey(),
-                rent.minimum_balance(spl_token::state::Account::LEN),
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Account::LEN),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 manager,
@@ -106,12 +106,12 @@ pub async fn create_mint(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &mint.pubkey(),
-                rent.minimum_balance(spl_token::state::Mint::LEN),
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Mint::LEN),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 manager,
                 freeze_authority,

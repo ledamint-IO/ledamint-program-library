@@ -20,7 +20,7 @@ import {
   createMintToInstruction,
   MintLayout,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 import { Test } from 'tape';
 import * as program from '../../src/generated';
 import { CandyMachine, CandyMachineData } from '../../src/generated';

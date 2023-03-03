@@ -1,11 +1,11 @@
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program::invoke,
     pubkey::Pubkey,
 };
-use spl_token::instruction::revoke;
+use safe_token::instruction::revoke;
 
 use crate::{
     assertions::{
@@ -36,7 +36,7 @@ pub fn process_revoke_use_authority(
     if metadata.uses.is_none() {
         return Err(MetadataError::Unusable.into());
     }
-    if *token_program_account_info.key != spl_token::id() {
+    if *token_program_account_info.key != safe_token::id() {
         return Err(MetadataError::InvalidTokenProgram.into());
     }
     assert_signer(owner_info)?;

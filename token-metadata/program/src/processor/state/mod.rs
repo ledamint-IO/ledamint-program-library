@@ -3,12 +3,12 @@ mod unlock;
 
 use borsh::BorshSerialize;
 pub use lock::*;
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program::invoke, program_pack::Pack,
     pubkey::Pubkey, system_program, sysvar,
 };
-use spl_token::{
+use safe_token::{
     instruction::{freeze_account, thaw_account},
     state::{Account, Mint},
 };
@@ -38,7 +38,7 @@ pub(crate) struct ToggleAccounts<'a> {
     token_record_info: Option<&'a AccountInfo<'a>>,
     system_program_info: &'a AccountInfo<'a>,
     sysvar_instructions_info: &'a AccountInfo<'a>,
-    spl_token_program_info: Option<&'a AccountInfo<'a>>,
+    safe_token_program_info: Option<&'a AccountInfo<'a>>,
 }
 
 pub(crate) fn toggle_asset_state(
@@ -55,7 +55,7 @@ pub(crate) fn toggle_asset_state(
     // ownership
 
     assert_owned_by(accounts.metadata_info, program_id)?;
-    assert_owned_by(accounts.mint_info, &spl_token::id())?;
+    assert_owned_by(accounts.mint_info, &safe_token::id())?;
 
     // key match
 
@@ -139,10 +139,10 @@ pub(crate) fn toggle_asset_state(
             .serialize(&mut *token_record_info.try_borrow_mut_data()?)
             .map_err(|_| MetadataError::BorshSerializationError.into())
     } else {
-        let spl_token_program_info = match accounts.spl_token_program_info {
-            Some(spl_token_program_info) => {
-                assert_keys_equal(spl_token_program_info.key, &spl_token::ID)?;
-                spl_token_program_info
+        let safe_token_program_info = match accounts.safe_token_program_info {
+            Some(safe_token_program_info) => {
+                assert_keys_equal(safe_token_program_info.key, &safe_token::ID)?;
+                safe_token_program_info
             }
             None => {
                 return Err(MetadataError::MissingSplTokenProgram.into());
@@ -155,7 +155,7 @@ pub(crate) fn toggle_asset_state(
         // fungibles, the authority must match the freeze authority of the mint
 
         if let Some(edition_info) = accounts.edition_info {
-            // check whether the authority is an spl-token delegate or not
+            // check whether the authority is an safe-token  delegate or not
             assert_delegated_tokens(
                 accounts.authority_info,
                 accounts.mint_info,
@@ -171,7 +171,7 @@ pub(crate) fn toggle_asset_state(
                         accounts.mint_info.clone(),
                         accounts.token_info.clone(),
                         edition_info.clone(),
-                        spl_token_program_info.clone(),
+                        safe_token_program_info.clone(),
                     )
                 }
                 TokenState::Unlocked => {
@@ -181,7 +181,7 @@ pub(crate) fn toggle_asset_state(
                         accounts.mint_info.clone(),
                         accounts.token_info.clone(),
                         edition_info.clone(),
-                        spl_token_program_info.clone(),
+                        safe_token_program_info.clone(),
                     )
                 }
                 TokenState::Listed => Err(MetadataError::IncorrectTokenState.into()),
@@ -195,11 +195,11 @@ pub(crate) fn toggle_asset_state(
 
             match to {
                 TokenState::Locked => {
-                    // for fungible assets, we invoke spl-token directly
+                    // for fungible assets, we invoke safe-token  directly
                     // since we have the freeze authority
                     invoke(
                         &freeze_account(
-                            spl_token_program_info.key,
+                            safe_token_program_info.key,
                             accounts.token_info.key,
                             accounts.mint_info.key,
                             accounts.authority_info.key,
@@ -213,11 +213,11 @@ pub(crate) fn toggle_asset_state(
                     )
                 }
                 TokenState::Unlocked => {
-                    // for fungible assets, we invoke spl-token directly
+                    // for fungible assets, we invoke safe-token  directly
                     // since we have the freeze authority
                     invoke(
                         &thaw_account(
-                            spl_token_program_info.key,
+                            safe_token_program_info.key,
                             accounts.token_info.key,
                             accounts.mint_info.key,
                             accounts.authority_info.key,

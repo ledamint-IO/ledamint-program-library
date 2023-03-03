@@ -9,8 +9,8 @@ use mpl_fixed_price_sale::{
     accounts as mpl_fixed_price_sale_accounts, instruction as mpl_fixed_price_sale_instruction,
     utils::{find_treasury_owner_address, find_vault_owner_address},
 };
-use solana_program_test::ProgramTestContext;
-use solana_sdk::{
+use safecoin_program_test::ProgramTestContext;
+use safecoin_sdk::{
     commitment_config::CommitmentLevel,
     instruction::Instruction,
     signature::Keypair,
@@ -73,7 +73,7 @@ pub async fn setup_store(context: &mut ProgramTestContext) -> (Keypair, Keypair)
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();
@@ -87,7 +87,7 @@ pub async fn setup_selling_resource(
     admin_wallet: &Keypair,
     store_keypair: &Keypair,
     seller_fee_basis_points: u16,
-    creators: Option<Vec<mpl_token_metadata::state::Creator>>,
+    creators: Option<Vec<lpl_token_metadata::state::Creator>>,
     selling_resource_owner_creator: bool,
     is_mutable: bool,
 ) -> (Keypair, Keypair, Keypair) {
@@ -127,14 +127,14 @@ pub async fn setup_selling_resource(
     if selling_resource_owner_creator {
         if let Some(creators_captured) = creators {
             let mut cr = creators_captured;
-            cr.push(mpl_token_metadata::state::Creator {
+            cr.push(lpl_token_metadata::state::Creator {
                 address: selling_resource_owner_keypair.pubkey(),
                 share: 100,
                 verified: false,
             });
             creators = Some(cr);
         } else {
-            creators = Some(vec![mpl_token_metadata::state::Creator {
+            creators = Some(vec![lpl_token_metadata::state::Creator {
                 address: selling_resource_owner_keypair.pubkey(),
                 share: 100,
                 verified: false,
@@ -192,7 +192,7 @@ pub async fn setup_selling_resource(
         owner: vault_owner,
         resource_token: resource_token.pubkey(),
         rent: sysvar::rent::id(),
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         system_program: system_program::id(),
     }
     .to_account_metas(None);
@@ -221,7 +221,7 @@ pub async fn setup_selling_resource(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
         .unwrap();

@@ -7,7 +7,7 @@ import {
 import {
   CANDY_MACHINE,
   CANDY_MACHINE_PROGRAM_ID,
-  SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+  safe_associated_token_account_PROGRAM_ID,
   TOKEN_METADATA_PROGRAM_ID,
   TOKEN_PROGRAM_ID,
   FAIR_LAUNCH_PROGRAM_ID,
@@ -28,7 +28,7 @@ import fs from 'fs';
 import { createCandyMachineV2Account } from './instructions';
 import { web3 } from '@project-serum/anchor';
 import log from 'loglevel';
-import { AccountLayout, u64 } from '@solana/spl-token';
+import { AccountLayout, u64 } from '@solana/safe-token ';
 import { getCluster } from './various';
 import { bs58 } from '@project-serum/anchor/dist/cjs/utils/bytes';
 export type AccountAndPubkey = {
@@ -185,7 +185,7 @@ export const getTokenWallet = async function (
   return (
     await PublicKey.findProgramAddress(
       [wallet.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-      SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+      safe_associated_token_account_PROGRAM_ID,
     )
   )[0];
 };
@@ -277,7 +277,7 @@ export const getAtaForMint = async (
 ): Promise<[anchor.web3.PublicKey, number]> => {
   return await anchor.web3.PublicKey.findProgramAddress(
     [buyer.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
-    SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+    safe_associated_token_account_PROGRAM_ID,
   );
 };
 

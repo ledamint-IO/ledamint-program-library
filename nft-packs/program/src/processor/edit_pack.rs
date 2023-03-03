@@ -6,7 +6,7 @@ use crate::{
     state::{PackSet, MAX_DESCRIPTION_LEN, MAX_URI_LENGTH},
     utils::*,
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_error::ProgramError,

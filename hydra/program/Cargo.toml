@@ -21,8 +21,8 @@ default = []
 [dependencies]
 anchor-lang = "0.26.0"
 anchor-spl = "0.26.0"
-spl-token = {version="3.5.0", features = [ "no-entrypoint" ]}
-mpl-token-metadata = {version="1.7.0", features = [ "no-entrypoint" ]}
+safe-token  = {version="3.5.0", features = [ "no-entrypoint" ]}
+lpl-token-metadata = {version="1.7.0", features = [ "no-entrypoint" ]}
 
 [profile.release]
 overflow-checks = true     # Enable integer overflow checks.

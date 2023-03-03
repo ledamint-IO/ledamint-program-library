@@ -6,7 +6,7 @@ use common::*;
 use utils::setup_functions::*;
 
 use mpl_testing_utils::{solana::airdrop, utils::Metadata};
-use solana_sdk::signer::Signer;
+use safecoin_sdk::signer::Signer;
 use std::{assert_eq, time::SystemTime};
 
 #[tokio::test]

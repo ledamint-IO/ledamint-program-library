@@ -1,5 +1,5 @@
-use anchor_lang::{prelude::*, solana_program::program::invoke, AnchorDeserialize};
-use spl_token::instruction::approve;
+use anchor_lang::{prelude::*, safecoin_program::program::invoke, AnchorDeserialize};
+use safe_token::instruction::approve;
 
 use crate::{constants::*, errors::*, utils::*, AuctionHouse, AuthorityScope, *};
 

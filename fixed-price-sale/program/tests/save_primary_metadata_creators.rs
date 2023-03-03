@@ -9,19 +9,19 @@ mod save_primary_metadata_creators {
             setup_functions::setup_store,
         },
     };
-    use anchor_client::solana_sdk::{signature::Keypair, signer::Signer, system_program};
+    use anchor_client::safecoin_sdk::{signature::Keypair, signer::Signer, system_program};
     use anchor_lang::{AccountDeserialize, InstructionData, ToAccountMetas};
     use mpl_fixed_price_sale::{
         accounts as mpl_fixed_price_sale_accounts, instruction as mpl_fixed_price_sale_instruction,
         state::PrimaryMetadataCreators,
     };
-    use solana_program::instruction::Instruction;
-    use solana_program_test::*;
-    use solana_sdk::{commitment_config::CommitmentLevel, transaction::Transaction};
+    use safecoin_program::instruction::Instruction;
+    use safecoin_program_test::*;
+    use safecoin_sdk::{commitment_config::CommitmentLevel, transaction::Transaction};
 
     #[tokio::test]
     async fn success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -64,7 +64,7 @@ mod save_primary_metadata_creators {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -132,7 +132,7 @@ mod save_primary_metadata_creators {
 
     #[tokio::test]
     async fn fail_creators_is_gt_than_available() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -175,7 +175,7 @@ mod save_primary_metadata_creators {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -263,7 +263,7 @@ mod save_primary_metadata_creators {
 
     #[tokio::test]
     async fn fail_creators_is_empty() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -306,7 +306,7 @@ mod save_primary_metadata_creators {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -363,7 +363,7 @@ mod save_primary_metadata_creators {
 
     #[tokio::test]
     async fn fail_metadata_is_not_mutable() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -406,7 +406,7 @@ mod save_primary_metadata_creators {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,

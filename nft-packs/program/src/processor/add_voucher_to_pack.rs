@@ -8,12 +8,12 @@ use crate::{
     utils::*,
 };
 use mpl_metaplex::state::Store;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     error::MetadataError,
     state::{MasterEdition, MasterEditionV2, Metadata, EDITION, PREFIX},
     utils::{assert_derivation, assert_initialized},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     msg,
@@ -21,7 +21,7 @@ use solana_program::{
     pubkey::Pubkey,
     sysvar::{rent::Rent, Sysvar},
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 /// Process AddVoucherToPack instruction
 pub fn add_voucher_to_pack(program_id: &Pubkey, accounts: &[AccountInfo]) -> ProgramResult {
@@ -82,7 +82,7 @@ pub fn add_voucher_to_pack(program_id: &Pubkey, accounts: &[AccountInfo]) -> Pro
     let mut pack_voucher = PackVoucher::unpack_unchecked(&pack_voucher_info.data.borrow_mut())?;
     assert_uninitialized(&pack_voucher)?;
 
-    let token_metadata_program_id = mpl_token_metadata::id();
+    let token_metadata_program_id = lpl_token_metadata::id();
 
     // Check for v2
     let master_edition = MasterEditionV2::from_account_info(master_edition_info)?;

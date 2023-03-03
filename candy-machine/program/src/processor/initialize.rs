@@ -1,6 +1,6 @@
 use anchor_lang::{prelude::*, Discriminator};
-use mpl_token_metadata::state::{MAX_CREATOR_LIMIT, MAX_SYMBOL_LENGTH};
-use spl_token::state::Mint;
+use lpl_token_metadata::state::{MAX_CREATOR_LIMIT, MAX_SYMBOL_LENGTH};
+use safe_token::state::Mint;
 
 use crate::{
     assert_initialized, assert_owned_by, cmp_pubkeys,
@@ -47,10 +47,10 @@ pub fn handle_initialize_candy_machine(
     if !ctx.remaining_accounts.is_empty() {
         let token_mint_info = &ctx.remaining_accounts[0];
         let _token_mint: Mint = assert_initialized(token_mint_info)?;
-        let token_account: spl_token::state::Account = assert_initialized(&ctx.accounts.wallet)?;
+        let token_account: safe_token::state::Account = assert_initialized(&ctx.accounts.wallet)?;
 
-        assert_owned_by(token_mint_info, &spl_token::id())?;
-        assert_owned_by(&ctx.accounts.wallet, &spl_token::id())?;
+        assert_owned_by(token_mint_info, &safe_token::id())?;
+        assert_owned_by(&ctx.accounts.wallet, &safe_token::id())?;
 
         if !cmp_pubkeys(&token_account.mint, &token_mint_info.key()) {
             return err!(CandyError::MintMismatch);

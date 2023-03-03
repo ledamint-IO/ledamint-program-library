@@ -41,8 +41,8 @@ The Token Metadata Program's source is available on
 ## Interface
 
 The on-chain Token Metadata program is written in Rust and available on crates.io as
-[mpl-token-metadata](https://crates.io/crates/mpl-token-metadata) and
-[docs.rs](https://docs.rs/mpl-token-metadata).
+[lpl-token-metadata](https://crates.io/crates/lpl-token-metadata) and
+[docs.rs](https://docs.rs/lpl-token-metadata).
 
 ## Documentation
 

@@ -19,11 +19,11 @@ pub use edition::*;
 pub use escrow::*;
 pub use freeze::*;
 pub use metadata::*;
-use mpl_token_metadata_context_derive::AccountContext;
+use lpl_token_metadata_context_derive::AccountContext;
 #[cfg(feature = "serde-feature")]
 use serde::{Deserialize, Serialize};
 use shank::ShankInstruction;
-use solana_program::account_info::AccountInfo;
+use safecoin_program::account_info::AccountInfo;
 pub use state::*;
 pub use uses::*;
 
@@ -373,7 +373,7 @@ pub enum MetadataInstruction {
     #[account(2, writable, name="mint", desc="Mint of the NFT")]
     #[account(3, writable, name="token_account", desc="Token account to close")]
     #[account(4, writable, name="master_edition_account", desc="MasterEdition2 of the NFT")]
-    #[account(5, name="spl_token_program", desc="SPL Token Program")]
+    #[account(5, name="safe_token_program", desc="SPL Token Program")]
     #[account(6, optional, writable, name="collection_metadata", desc="Metadata of the Collection")]
     BurnNft,
 
@@ -455,7 +455,7 @@ pub enum MetadataInstruction {
     #[account(6, writable, name="master_edition_account", desc="MasterEdition2 of the original NFT")]
     #[account(7, writable, name="print_edition_account", desc="Print Edition account of the NFT")]
     #[account(8, writable, name="edition_marker_account", desc="Edition Marker PDA of the NFT")]
-    #[account(9, name="spl_token_program", desc="SPL Token Program")]
+    #[account(9, name="safe_token_program", desc="SPL Token Program")]
     BurnEditionNft,
 
     /// Create an escrow account to hold tokens.
@@ -538,7 +538,7 @@ pub enum MetadataInstruction {
     #[account(10, optional, writable, name="token_record", desc="Token record account")]
     #[account(11, name="system_program", desc="System program")]
     #[account(12, name="sysvar_instructions", desc="Instructions sysvar account")]
-    #[account(13, name="spl_token_program", desc="SPL Token Program")]
+    #[account(13, name="safe_token_program", desc="SPL Token Program")]
     #[default_optional_accounts]
     Burn(BurnArgs),
 
@@ -556,7 +556,7 @@ pub enum MetadataInstruction {
     #[account(5, name="update_authority", desc="Update authority for the metadata account")]
     #[account(6, name="system_program", desc="System program")]
     #[account(7, name="sysvar_instructions", desc="Instructions sysvar account")]
-    #[account(8, name="spl_token_program", desc="SPL Token program")]
+    #[account(8, name="safe_token_program", desc="SPL Token program")]
     #[args(initialize_mint: bool)]
     #[args(update_authority_as_signer: bool)]
     #[default_optional_accounts]
@@ -579,7 +579,7 @@ pub enum MetadataInstruction {
     #[account(8, signer, writable, name="payer", desc="Payer")]
     #[account(9, name="system_program", desc="System program")]
     #[account(10, name="sysvar_instructions", desc="Instructions sysvar account")]
-    #[account(11, name="spl_token_program", desc="SPL Token program")]
+    #[account(11, name="safe_token_program", desc="SPL Token program")]
     #[account(12, name="spl_ata_program", desc="SPL Associated Token Account program")]
     #[account(13, optional, name="authorization_rules_program", desc="Token Authorization Rules program")]
     #[account(14, optional, name="authorization_rules", desc="Token Authorization Rules account")]
@@ -605,7 +605,7 @@ pub enum MetadataInstruction {
     #[account(8, signer, writable, name="payer", desc="Payer")]
     #[account(9, name="system_program", desc="System Program")]
     #[account(10, name="sysvar_instructions", desc="Instructions sysvar account")]
-    #[account(11, optional, name="spl_token_program", desc="SPL Token Program")]
+    #[account(11, optional, name="safe_token_program", desc="SPL Token Program")]
     #[account(12, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(13, optional, name="authorization_rules", desc="Token Authorization Rules account")]
     #[default_optional_accounts]
@@ -625,7 +625,7 @@ pub enum MetadataInstruction {
     #[account(8, signer, writable, name="payer", desc="Payer")]
     #[account(9, name="system_program", desc="System Program")]
     #[account(10, name="sysvar_instructions", desc="Instructions sysvar account")]
-    #[account(11, optional, name="spl_token_program", desc="SPL Token Program")]
+    #[account(11, optional, name="safe_token_program", desc="SPL Token Program")]
     #[account(12, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(13, optional, name="authorization_rules", desc="Token Authorization Rules account")]
     #[default_optional_accounts]
@@ -645,7 +645,7 @@ pub enum MetadataInstruction {
     #[account(7, signer, writable, name="payer", desc="Payer")]
     #[account(8, name="system_program", desc="System program")]
     #[account(9, name="sysvar_instructions", desc="System program")]
-    #[account(10, optional, name="spl_token_program", desc="SPL Token Program")]
+    #[account(10, optional, name="safe_token_program", desc="SPL Token Program")]
     #[account(11, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(12, optional, name="authorization_rules", desc="Token Authorization Rules account")]
     #[default_optional_accounts]
@@ -665,7 +665,7 @@ pub enum MetadataInstruction {
     #[account(7, signer, writable, name="payer", desc="Payer")]
     #[account(8, name="system_program", desc="System program")]
     #[account(9, name="sysvar_instructions", desc="System program")]
-    #[account(10, optional, name="spl_token_program", desc="SPL Token Program")]
+    #[account(10, optional, name="safe_token_program", desc="SPL Token Program")]
     #[account(11, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(12, optional, name="authorization_rules", desc="Token Authorization Rules account")]
     #[default_optional_accounts]
@@ -684,7 +684,7 @@ pub enum MetadataInstruction {
     #[account(9, writable, name="token_record", desc="Token record account")]
     #[account(10, name="system_program", desc="System program")]
     #[account(11, name="sysvar_instructions", desc="Instruction sysvar account")]
-    #[account(12, name="spl_token_program", desc="SPL Token Program")]
+    #[account(12, name="safe_token_program", desc="SPL Token Program")]
     #[account(13, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(14, optional, name="authorization_rules", desc="Token Authorization Rules account")]
     #[default_optional_accounts]
@@ -707,7 +707,7 @@ pub enum MetadataInstruction {
     #[account(10, signer, writable, name="payer", desc="Payer")]
     #[account(11, name="system_program", desc="System Program")]
     #[account(12, name="sysvar_instructions", desc="Instructions sysvar account")]
-    #[account(13, name="spl_token_program", desc="SPL Token Program")]
+    #[account(13, name="safe_token_program", desc="SPL Token Program")]
     #[account(14, name="spl_ata_program", desc="SPL Associated Token Account program")]
     #[account(15, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(16, optional, name="authorization_rules", desc="Token Authorization Rules account")]
@@ -747,7 +747,7 @@ pub enum MetadataInstruction {
     #[account(6, signer, name="payer", desc="Payer")]
     #[account(7, name="system_program", desc="System program")]
     #[account(8, name="sysvar_instructions", desc="System program")]
-    #[account(9, optional, name="spl_token_program", desc="SPL Token Program")]
+    #[account(9, optional, name="safe_token_program", desc="SPL Token Program")]
     #[account(10, optional, name="authorization_rules_program", desc="Token Authorization Rules Program")]
     #[account(11, optional, name="authorization_rules", desc="Token Authorization Rules account")]
     #[default_optional_accounts]
@@ -775,5 +775,5 @@ pub struct Context<'a, T> {
 }
 
 pub trait InstructionBuilder {
-    fn instruction(&self) -> solana_program::instruction::Instruction;
+    fn instruction(&self) -> safecoin_program::instruction::Instruction;
 }

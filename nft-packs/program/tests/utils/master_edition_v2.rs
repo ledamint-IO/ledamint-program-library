@@ -1,18 +1,18 @@
 use crate::*;
 use borsh::ser::BorshSerialize;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     id,
     instruction::{self, CreateMasterEditionArgs, MetadataInstruction},
     state::{EDITION, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program::{
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     sysvar,
 };
-use solana_program_test::*;
-use solana_sdk::signature::Keypair;
-use solana_sdk::{pubkey::Pubkey, signature::Signer, transaction::Transaction, transport};
+use safecoin_program_test::*;
+use safecoin_sdk::signature::Keypair;
+use safecoin_sdk::{pubkey::Pubkey, signature::Signer, transaction::Transaction, transport};
 
 #[derive(Debug)]
 pub struct TestMasterEditionV2 {
@@ -44,7 +44,7 @@ impl TestMasterEditionV2 {
     pub async fn get_data(
         &self,
         context: &mut ProgramTestContext,
-    ) -> mpl_token_metadata::state::MasterEditionV2 {
+    ) -> lpl_token_metadata::state::MasterEditionV2 {
         let account = get_account(context, &self.pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }
@@ -52,7 +52,7 @@ impl TestMasterEditionV2 {
     pub async fn get_data_from_account(
         context: &mut ProgramTestContext,
         pubkey: &Pubkey,
-    ) -> mpl_token_metadata::state::MasterEditionV2 {
+    ) -> lpl_token_metadata::state::MasterEditionV2 {
         let account = get_account(context, pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }
@@ -65,7 +65,7 @@ impl TestMasterEditionV2 {
         let fake_token_program = Keypair::new();
 
         let fake_instruction = Instruction {
-            program_id: mpl_token_metadata::id(),
+            program_id: lpl_token_metadata::id(),
             accounts: vec![
                 AccountMeta::new(self.pubkey, false),
                 AccountMeta::new(self.mint_pubkey, false),
@@ -74,7 +74,7 @@ impl TestMasterEditionV2 {
                 AccountMeta::new_readonly(context.payer.pubkey(), true),
                 AccountMeta::new_readonly(self.metadata_pubkey, false),
                 AccountMeta::new_readonly(fake_token_program.pubkey(), false),
-                AccountMeta::new_readonly(solana_program::system_program::id(), false),
+                AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
                 AccountMeta::new_readonly(sysvar::rent::id(), false),
             ],
             data: MetadataInstruction::CreateMasterEdition(CreateMasterEditionArgs { max_supply })

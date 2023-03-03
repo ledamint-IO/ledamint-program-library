@@ -18,9 +18,9 @@ pub use metadata::TestMetadata;
 pub use pack_card::TestPackCard;
 pub use pack_set::TestPackSet;
 pub use pack_voucher::TestPackVoucher;
-use solana_program::clock::Clock;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::clock::Clock;
+use safecoin_program_test::*;
+use safecoin_sdk::{
     account::Account,
     program_pack::Pack,
     pubkey::Pubkey,
@@ -30,14 +30,14 @@ use solana_sdk::{
     transaction::Transaction,
     transport::{self, TransportError},
 };
-use spl_token::state::Mint;
+use safe_token::state::Mint;
 use std::{env, time};
 pub use user::*;
 pub use vault::TestVault;
 
 pub fn nft_packs_program_test() -> ProgramTest {
     let mut program = ProgramTest::new("mpl_nft_packs", mpl_nft_packs::id(), None);
-    program.add_program("mpl_token_metadata", mpl_token_metadata::id(), None);
+    program.add_program("lpl_token_metadata", lpl_token_metadata::id(), None);
     program.add_program("mpl_metaplex", mpl_metaplex::id(), None);
     program.prefer_bpf(false);
     program
@@ -105,7 +105,7 @@ pub async fn mint_tokens(
 
     let tx = Transaction::new_signed_with_payer(
         &[
-            spl_token::instruction::mint_to(&spl_token::id(), mint, account, owner, &[], amount)
+            safe_token::instruction::mint_to(&safe_token::id(), mint, account, owner, &[], amount)
                 .unwrap(),
         ],
         Some(&context.payer.pubkey()),
@@ -117,7 +117,7 @@ pub async fn mint_tokens(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
 }
@@ -135,12 +135,12 @@ pub async fn create_token_account(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &account.pubkey(),
-                rent.minimum_balance(spl_token::state::Account::LEN),
-                spl_token::state::Account::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Account::LEN),
+                safe_token::state::Account::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_account(
-                &spl_token::id(),
+            safe_token::instruction::initialize_account(
+                &safe_token::id(),
                 &account.pubkey(),
                 mint,
                 manager,
@@ -156,7 +156,7 @@ pub async fn create_token_account(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
 }
@@ -169,8 +169,8 @@ pub async fn transfer_token(
     amount: u64,
 ) -> transport::Result<()> {
     let tx = Transaction::new_signed_with_payer(
-        &[spl_token::instruction::transfer(
-            &spl_token::id(),
+        &[safe_token::instruction::transfer(
+            &safe_token::id(),
             source,
             destination,
             &authority.pubkey(),
@@ -187,7 +187,7 @@ pub async fn transfer_token(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
 }
@@ -216,7 +216,7 @@ pub async fn create_account<S: Pack>(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
 }
@@ -234,12 +234,12 @@ pub async fn create_mint(
             system_instruction::create_account(
                 &context.payer.pubkey(),
                 &mint.pubkey(),
-                rent.minimum_balance(spl_token::state::Mint::LEN),
-                spl_token::state::Mint::LEN as u64,
-                &spl_token::id(),
+                rent.minimum_balance(safe_token::state::Mint::LEN),
+                safe_token::state::Mint::LEN as u64,
+                &safe_token::id(),
             ),
-            spl_token::instruction::initialize_mint(
-                &spl_token::id(),
+            safe_token::instruction::initialize_mint(
+                &safe_token::id(),
                 &mint.pubkey(),
                 manager,
                 freeze_authority,
@@ -256,7 +256,7 @@ pub async fn create_mint(
         .banks_client
         .process_transaction_with_commitment(
             tx,
-            solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+            safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
         )
         .await
 }
@@ -294,7 +294,7 @@ pub async fn create_store(
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await,
     );

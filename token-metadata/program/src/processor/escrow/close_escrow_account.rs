@@ -1,5 +1,5 @@
-use mpl_utils::{assert_signer, close_account_raw};
-use solana_program::{
+use lpl_utils::{assert_signer, close_account_raw};
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -28,10 +28,10 @@ pub fn process_close_escrow_account(
     assert_owned_by(metadata_account_info, &crate::ID)?;
 
     let mint_account_info = next_account_info(account_info_iter)?;
-    assert_owned_by(mint_account_info, &spl_token::id())?;
+    assert_owned_by(mint_account_info, &safe_token::id())?;
 
     let token_account_info = next_account_info(account_info_iter)?;
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
 
     let edition_account_info = next_account_info(account_info_iter)?;
     assert_owned_by(edition_account_info, &crate::ID)?;
@@ -69,7 +69,7 @@ pub fn process_close_escrow_account(
         ],
     )?;
 
-    let token_account: spl_token::state::Account = assert_initialized(token_account_info)?;
+    let token_account: safe_token::state::Account = assert_initialized(token_account_info)?;
 
     if token_account.mint != *mint_account_info.key {
         return Err(MetadataError::MintMismatch.into());
@@ -94,7 +94,7 @@ pub fn process_close_escrow_account(
 
     let bump_seed = assert_derivation(&crate::ID, escrow_account_info, &escrow_seeds)?;
 
-    let token_account: spl_token::state::Account = assert_initialized(token_account_info)?;
+    let token_account: safe_token::state::Account = assert_initialized(token_account_info)?;
     let toe = TokenOwnedEscrow::from_account_info(escrow_account_info)?;
     assert_keys_equal(&toe.base_token, mint_account_info.key)?;
 

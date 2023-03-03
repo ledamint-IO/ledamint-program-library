@@ -6,8 +6,8 @@ mod utils;
 use chrono::prelude::*;
 use clap::Parser;
 use cli_args::{CliArgs, Commands};
-use solana_client::rpc_client::RpcClient;
-use solana_sdk::{
+use safecoin_client::rpc_client::RpcClient;
+use safecoin_sdk::{
     pubkey::Pubkey,
     signer::{keypair::read_keypair_file, Signer},
     transaction::Transaction,
@@ -81,7 +81,7 @@ fn main() -> Result<(), error::Error> {
                 println!("Market::mutable - {}", market.mutable);
                 println!(
                     "Market::price - {}",
-                    spl_token::amount_to_ui_amount(market.price, decimals)
+                    safe_token::amount_to_ui_amount(market.price, decimals)
                 );
                 println!(
                     "Market::pieces_in_one_wallet - {}",
@@ -202,7 +202,7 @@ fn main() -> Result<(), error::Error> {
                 let mint = if let Some(mint) = mint {
                     mint
                 } else {
-                    spl_token::native_mint::id()
+                    safe_token::native_mint::id()
                 };
 
                 let start_date = if let Some(start_date) = start_date {
@@ -220,17 +220,17 @@ fn main() -> Result<(), error::Error> {
 
                 let (metadata, _) = Pubkey::find_program_address(
                     &[
-                        mpl_token_metadata::state::PREFIX.as_bytes(),
-                        mpl_token_metadata::id().as_ref(),
+                        lpl_token_metadata::state::PREFIX.as_bytes(),
+                        lpl_token_metadata::id().as_ref(),
                         selling_resource_state.resource.as_ref(),
                     ],
-                    &mpl_token_metadata::id(),
+                    &lpl_token_metadata::id(),
                 );
 
                 let (primary_metadata_creators, _) =
                     mpl_fixed_price_sale::utils::find_primary_metadata_creators(&metadata);
 
-                let metadata_state: mpl_token_metadata::state::Metadata =
+                let metadata_state: lpl_token_metadata::state::Metadata =
                     processor::get_account_state_legacy(&client, &metadata)?;
 
                 if !metadata_state.primary_sale_happened
@@ -290,7 +290,7 @@ fn main() -> Result<(), error::Error> {
                     &name,
                     &description,
                     mutable,
-                    spl_token::ui_amount_to_amount(price, decimals),
+                    safe_token::ui_amount_to_amount(price, decimals),
                     pieces_in_one_wallet,
                     start_date,
                     end_date,

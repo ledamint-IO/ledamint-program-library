@@ -1,10 +1,10 @@
-use mpl_token_auth_rules::utils::assert_owned_by;
-use mpl_utils::{assert_signer, create_or_allocate_account_raw};
-use solana_program::{
+use lpl_token_auth_rules::utils::assert_owned_by;
+use lpl_utils::{assert_signer, create_or_allocate_account_raw};
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,
     program_option::COption, pubkey, pubkey::Pubkey, system_program, sysvar,
 };
-use spl_token::state::{Account, Mint};
+use safe_token::state::{Account, Mint};
 
 use crate::{
     assertions::{
@@ -51,7 +51,7 @@ pub fn migrate_v1(program_id: &Pubkey, ctx: Context<Migrate>, args: MigrateArgs)
     let token_record_info = ctx.accounts.token_record_info;
     let system_program_info = ctx.accounts.system_program_info;
     let sysvar_instructions_info = ctx.accounts.sysvar_instructions_info;
-    let spl_token_program_info = ctx.accounts.spl_token_program_info;
+    let safe_token_program_info = ctx.accounts.safe_token_program_info;
 
     // Validate Accounts
 
@@ -62,11 +62,11 @@ pub fn migrate_v1(program_id: &Pubkey, ctx: Context<Migrate>, args: MigrateArgs)
     // Assert program ownership
     assert_owned_by(metadata_info, program_id)?;
     assert_owned_by(edition_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::ID)?;
-    assert_owned_by(token_info, &spl_token::ID)?;
+    assert_owned_by(mint_info, &safe_token::ID)?;
+    assert_owned_by(token_info, &safe_token::ID)?;
 
     // Check program IDs.
-    if spl_token_program_info.key != &spl_token::ID {
+    if safe_token_program_info.key != &safe_token::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
 
@@ -78,7 +78,7 @@ pub fn migrate_v1(program_id: &Pubkey, ctx: Context<Migrate>, args: MigrateArgs)
         return Err(ProgramError::IncorrectProgramId);
     }
     if let Some(auth_rules_program) = ctx.accounts.authorization_rules_program_info {
-        if auth_rules_program.key != &mpl_token_auth_rules::ID {
+        if auth_rules_program.key != &lpl_token_auth_rules::ID {
             return Err(ProgramError::IncorrectProgramId);
         }
     }
@@ -186,7 +186,7 @@ pub fn migrate_v1(program_id: &Pubkey, ctx: Context<Migrate>, args: MigrateArgs)
                     mint_info.clone(),
                     token_info.clone(),
                     edition_info.clone(),
-                    spl_token_program_info.clone(),
+                    safe_token_program_info.clone(),
                 )?;
             } else if token.delegate.is_some() {
                 token_record.state = TokenState::Locked;

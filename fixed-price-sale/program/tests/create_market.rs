@@ -14,8 +14,8 @@ mod create_market {
             find_treasury_owner_address, puffed_out_string, DESCRIPTION_MAX_LEN, NAME_MAX_LEN,
         },
     };
-    use solana_program_test::*;
-    use solana_sdk::{
+    use safecoin_program_test::*;
+    use safecoin_sdk::{
         commitment_config::CommitmentLevel, instruction::Instruction, signature::Keypair,
         signer::Signer, system_program, sysvar::clock::Clock, transaction::Transaction,
     };
@@ -24,7 +24,7 @@ mod create_market {
 
     #[tokio::test]
     async fn success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -159,7 +159,7 @@ mod create_market {
 
     #[tokio::test]
     async fn function_setup_market_success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -202,7 +202,7 @@ mod create_market {
 
     #[tokio::test]
     async fn failure_name_is_long() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -313,7 +313,7 @@ mod create_market {
 
     #[tokio::test]
     async fn failure_description_is_long() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -427,7 +427,7 @@ mod create_market {
     #[tokio::test]
     #[should_panic]
     async fn failure_signer_is_missed() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -528,7 +528,7 @@ mod create_market {
 
     #[tokio::test]
     async fn failure_start_date_is_in_the_past() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -640,7 +640,7 @@ mod create_market {
     #[tokio::test]
     #[should_panic]
     async fn failure_treasure_min_unitialized() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -738,7 +738,7 @@ mod create_market {
 
     #[tokio::test]
     async fn failure_treasure_holder_unitialized() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(
@@ -843,7 +843,7 @@ mod create_market {
     #[tokio::test]
     // #[should_panic]
     async fn failure_end_date_is_earlier_than_start_date() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         let (selling_resource_keypair, selling_resource_owner_keypair, _) = setup_selling_resource(

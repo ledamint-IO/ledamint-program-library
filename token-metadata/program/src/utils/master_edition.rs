@@ -1,14 +1,14 @@
 use arrayref::{array_mut_ref, array_ref, mut_array_refs};
 use borsh::BorshSerialize;
-use mpl_utils::{
+use lpl_utils::{
     assert_signer, create_or_allocate_account_raw,
     token::{get_mint_authority, get_mint_supply},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,
     pubkey::Pubkey,
 };
-use spl_token::state::{Account, Mint};
+use safe_token::state::{Account, Mint};
 
 use super::*;
 use crate::{
@@ -64,8 +64,8 @@ pub fn process_mint_new_edition_from_master_edition_via_token_logic<'a>(
     } = accounts;
 
     assert_token_program_matches_package(token_program_account_info)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
     assert_owned_by(master_edition_account_info, program_id)?;
     assert_owned_by(master_metadata_account_info, program_id)?;
 
@@ -188,7 +188,7 @@ pub fn extract_edition_number_from_deprecated_reservation_list(
                 break;
             }
 
-            if reservation.address == solana_program::system_program::id() {
+            if reservation.address == safecoin_program::system_program::id() {
                 // This is an anchor point in the array...it means we reset our math to
                 // this offset because we may be missing information in between this point and
                 // the points before it.
@@ -496,7 +496,7 @@ pub fn create_master_edition<'a>(
     assert_token_program_matches_package(token_program_info)?;
     assert_mint_authority_matches_mint(&mint.mint_authority, mint_authority_info)?;
     assert_owned_by(metadata_account_info, program_id)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
+    assert_owned_by(mint_info, &safe_token::id())?;
 
     if metadata.mint != *mint_info.key {
         return Err(MetadataError::MintMismatch.into());

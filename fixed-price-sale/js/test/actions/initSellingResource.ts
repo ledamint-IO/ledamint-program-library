@@ -1,7 +1,7 @@
 import test from 'tape';
 import { PayerTransactionHandler } from '@metaplex-foundation/amman-client';
 import { Connection, Keypair, PublicKey } from '@solana/web3.js';
-import { Creator } from '@metaplex-foundation/mpl-token-metadata';
+import { Creator } from '@metaplex-foundation/lpl-token-metadata';
 
 import { findVaultOwnerAddress } from '../../src/utils';
 

@@ -10,15 +10,15 @@ use mpl_nft_packs::{
     state::{PackDistributionType, ProvingProcess},
 };
 use num_traits::FromPrimitive;
-use solana_program::{
+use safecoin_program::{
     clock::Clock,
     instruction::{AccountMeta, Instruction},
     program_pack::Pack,
     pubkey::Pubkey,
     system_instruction, system_program, sysvar,
 };
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program_test::*;
+use safecoin_sdk::{
     instruction::InstructionError,
     signature::Keypair,
     signer::Signer,
@@ -112,7 +112,7 @@ async fn success_fixed_probability() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -274,7 +274,7 @@ async fn success_max_supply_probability() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -430,7 +430,7 @@ async fn success_claim_two_same_cards() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -614,7 +614,7 @@ async fn success_claim_decrement_redeem_cards() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -817,7 +817,7 @@ async fn success_claim_two_indexes() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -1013,7 +1013,7 @@ async fn success_claim_after_redeem_end_date() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -1166,7 +1166,7 @@ async fn fail_wrong_user_wallet() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -1265,24 +1265,24 @@ async fn fail_wrong_user_wallet() {
     .unwrap();
 
     let mint_key = new_mint.pubkey();
-    let spl_token_metadata_key = mpl_token_metadata::id();
+    let safe_token_metadata_key = lpl_token_metadata::id();
 
     let metadata_seeds = &[
-        mpl_token_metadata::state::PREFIX.as_bytes(),
-        spl_token_metadata_key.as_ref(),
+        lpl_token_metadata::state::PREFIX.as_bytes(),
+        safe_token_metadata_key.as_ref(),
         mint_key.as_ref(),
     ];
     let (new_metadata_pubkey, _) =
-        Pubkey::find_program_address(metadata_seeds, &mpl_token_metadata::id());
+        Pubkey::find_program_address(metadata_seeds, &lpl_token_metadata::id());
 
     let master_edition_seeds = &[
-        mpl_token_metadata::state::PREFIX.as_bytes(),
-        spl_token_metadata_key.as_ref(),
+        lpl_token_metadata::state::PREFIX.as_bytes(),
+        safe_token_metadata_key.as_ref(),
         mint_key.as_ref(),
-        mpl_token_metadata::state::EDITION.as_bytes(),
+        lpl_token_metadata::state::EDITION.as_bytes(),
     ];
     let (new_edition_pubkey, _) =
-        Pubkey::find_program_address(master_edition_seeds, &mpl_token_metadata::id());
+        Pubkey::find_program_address(master_edition_seeds, &lpl_token_metadata::id());
 
     let index = 1;
 
@@ -1300,18 +1300,18 @@ async fn fail_wrong_user_wallet() {
     let (program_authority, _) = find_program_authority(&mpl_nft_packs::id());
 
     let edition_number = (index as u64)
-        .checked_div(mpl_token_metadata::state::EDITION_MARKER_BIT_SIZE)
+        .checked_div(lpl_token_metadata::state::EDITION_MARKER_BIT_SIZE)
         .unwrap();
     let as_string = edition_number.to_string();
     let (edition_mark_pda, _) = Pubkey::find_program_address(
         &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
-            mpl_token_metadata::id().as_ref(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::id().as_ref(),
             card_master_edition.mint_pubkey.as_ref(),
-            mpl_token_metadata::state::EDITION.as_bytes(),
+            lpl_token_metadata::state::EDITION.as_bytes(),
             as_string.as_bytes(),
         ],
-        &mpl_token_metadata::id(),
+        &lpl_token_metadata::id(),
     );
 
     let accounts = vec![
@@ -1330,8 +1330,8 @@ async fn fail_wrong_user_wallet() {
         AccountMeta::new(card_master_edition.mint_pubkey, false),
         AccountMeta::new(edition_mark_pda, false),
         AccountMeta::new_readonly(sysvar::rent::id(), false),
-        AccountMeta::new_readonly(mpl_token_metadata::id(), false),
-        AccountMeta::new_readonly(spl_token::id(), false),
+        AccountMeta::new_readonly(lpl_token_metadata::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
         AccountMeta::new_readonly(system_program::id(), false),
         AccountMeta::new_readonly(sysvar::clock::id(), false),
     ];
@@ -1410,7 +1410,7 @@ async fn fail_claim_twice() {
             &edition_authority.pubkey(),
             100000000000000,
             0,
-            &solana_program::system_program::id(),
+            &safecoin_program::system_program::id(),
         )],
         Some(&context.payer.pubkey()),
         &[&context.payer, &edition_authority],
@@ -1501,24 +1501,24 @@ async fn fail_claim_twice() {
     context.warp_to_slot(5).unwrap();
 
     let mint_key = new_mint.pubkey();
-    let spl_token_metadata_key = mpl_token_metadata::id();
+    let safe_token_metadata_key = lpl_token_metadata::id();
 
     let metadata_seeds = &[
-        mpl_token_metadata::state::PREFIX.as_bytes(),
-        spl_token_metadata_key.as_ref(),
+        lpl_token_metadata::state::PREFIX.as_bytes(),
+        safe_token_metadata_key.as_ref(),
         mint_key.as_ref(),
     ];
     let (new_metadata_pubkey, _) =
-        Pubkey::find_program_address(metadata_seeds, &mpl_token_metadata::id());
+        Pubkey::find_program_address(metadata_seeds, &lpl_token_metadata::id());
 
     let master_edition_seeds = &[
-        mpl_token_metadata::state::PREFIX.as_bytes(),
-        spl_token_metadata_key.as_ref(),
+        lpl_token_metadata::state::PREFIX.as_bytes(),
+        safe_token_metadata_key.as_ref(),
         mint_key.as_ref(),
-        mpl_token_metadata::state::EDITION.as_bytes(),
+        lpl_token_metadata::state::EDITION.as_bytes(),
     ];
     let (new_edition_pubkey, _) =
-        Pubkey::find_program_address(master_edition_seeds, &mpl_token_metadata::id());
+        Pubkey::find_program_address(master_edition_seeds, &lpl_token_metadata::id());
 
     let tx = Transaction::new_signed_with_payer(
         &[claim_pack(

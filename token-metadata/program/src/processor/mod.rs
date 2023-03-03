@@ -20,11 +20,11 @@ pub use edition::*;
 pub use escrow::*;
 pub use freeze::*;
 pub use metadata::*;
-use mpl_token_auth_rules::payload::Payload;
-use mpl_utils::cmp_pubkeys;
+use lpl_token_auth_rules::payload::Payload;
+use lpl_utils::cmp_pubkeys;
 #[cfg(feature = "serde-feature")]
 use serde::{Deserialize, Serialize};
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, msg, program_error::ProgramError,
     pubkey::Pubkey,
 };

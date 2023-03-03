@@ -4,7 +4,7 @@ pub mod utils;
 
 use common::*;
 use mpl_auctioneer::pda::*;
-use solana_sdk::signature::Keypair;
+use safecoin_sdk::signature::Keypair;
 use std::time::SystemTime;
 use utils::setup_functions::*;
 
@@ -76,7 +76,7 @@ async fn cancel_listing() {
         token_account: token,
         authority: ah.authority,
         trade_state: acc.seller_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
         auctioneer_authority,
@@ -200,7 +200,7 @@ async fn cancel_bid() {
         token_account: acc.token_account,
         authority: ah.authority,
         trade_state: acc.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
         auctioneer_authority,
@@ -327,7 +327,7 @@ async fn cancel_highest_bid() {
         token_account: acc0.token_account,
         authority: ah.authority,
         trade_state: acc0.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
         auctioneer_authority,
@@ -396,7 +396,7 @@ async fn cancel_highest_bid() {
         token_account: acc1.token_account,
         authority: ah.authority,
         trade_state: acc1.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
         auctioneer_authority,
@@ -441,7 +441,7 @@ async fn cancel_highest_bid() {
         token_account: acc0.token_account,
         authority: ah.authority,
         trade_state: acc0.buyer_trade_state,
-        token_program: spl_token::id(),
+        token_program: safe_token::id(),
         token_mint: test_metadata.mint.pubkey(),
         auction_house_fee_account: ah.auction_house_fee_account,
         auctioneer_authority,

@@ -5,7 +5,7 @@ import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   NATIVE_MINT,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 import {
   AccountInfo,
   Connection,
@@ -37,7 +37,7 @@ import {
 } from './generated/instructions';
 import { MembershipModel } from './generated/types';
 import { Fanout } from './generated/accounts';
-import { PROGRAM_ADDRESS as TM_PROGRAM_ADDRESS } from '@metaplex-foundation/mpl-token-metadata';
+import { PROGRAM_ADDRESS as TM_PROGRAM_ADDRESS } from '@metaplex-foundation/lpl-token-metadata';
 import bs58 from 'bs58';
 import { chunks } from './utils';
 

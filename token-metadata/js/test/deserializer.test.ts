@@ -14,7 +14,7 @@ import {
   TokenState,
   tokenStateBeet,
   UseMethod,
-} from '../src/mpl-token-metadata';
+} from '../src/lpl-token-metadata';
 import { PublicKey } from '@solana/web3.js';
 import * as beet from '@metaplex-foundation/beet';
 import * as beetSolana from '@metaplex-foundation/beet-solana';

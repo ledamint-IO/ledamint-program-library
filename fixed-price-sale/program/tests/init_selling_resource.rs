@@ -12,19 +12,19 @@ mod init_selling_resource {
             setup_functions::setup_store,
         },
     };
-    use anchor_client::solana_sdk::{signature::Keypair, signer::Signer, system_program};
+    use anchor_client::safecoin_sdk::{signature::Keypair, signer::Signer, system_program};
     use anchor_lang::{AccountDeserialize, InstructionData, ToAccountMetas};
     use mpl_fixed_price_sale::{
         accounts as mpl_fixed_price_sale_accounts, instruction as mpl_fixed_price_sale_instruction,
         state::{SellingResource, SellingResourceState},
     };
-    use solana_program::{instruction::Instruction, sysvar};
-    use solana_program_test::*;
-    use solana_sdk::{commitment_config::CommitmentLevel, transaction::Transaction};
+    use safecoin_program::{instruction::Instruction, sysvar};
+    use safecoin_program_test::*;
+    use safecoin_sdk::{commitment_config::CommitmentLevel, transaction::Transaction};
 
     #[tokio::test]
     async fn success() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -66,7 +66,7 @@ mod init_selling_resource {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -103,7 +103,7 @@ mod init_selling_resource {
             owner: vault_owner,
             resource_token: resource_token.pubkey(),
             rent: sysvar::rent::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -156,7 +156,7 @@ mod init_selling_resource {
 
     #[tokio::test]
     async fn fail_supply_is_gt_than_available() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -204,7 +204,7 @@ mod init_selling_resource {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -241,7 +241,7 @@ mod init_selling_resource {
             owner: vault_owner,
             resource_token: resource_token.pubkey(),
             rent: sysvar::rent::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);
@@ -281,7 +281,7 @@ mod init_selling_resource {
 
     #[tokio::test]
     async fn fail_supply_is_not_provided() {
-        setup_context!(context, mpl_fixed_price_sale, mpl_token_metadata);
+        setup_context!(context, mpl_fixed_price_sale, lpl_token_metadata);
         let (admin_wallet, store_keypair) = setup_store(&mut context).await;
 
         // Create `SellingResource`
@@ -329,7 +329,7 @@ mod init_selling_resource {
             String::from("TEST"),
             String::from("TST"),
             String::from("https://github.com/"),
-            Some(vec![mpl_token_metadata::state::Creator {
+            Some(vec![lpl_token_metadata::state::Creator {
                 address: admin_wallet.pubkey(),
                 share: 100,
                 verified: false,
@@ -366,7 +366,7 @@ mod init_selling_resource {
             owner: vault_owner,
             resource_token: resource_token.pubkey(),
             rent: sysvar::rent::id(),
-            token_program: spl_token::id(),
+            token_program: safe_token::id(),
             system_program: system_program::id(),
         }
         .to_account_metas(None);

@@ -1,7 +1,7 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 #[cfg(feature = "serde-feature")]
 use serde::{Deserialize, Serialize};
-use solana_program::instruction::{AccountMeta, Instruction};
+use safecoin_program::instruction::{AccountMeta, Instruction};
 
 use super::{InstructionBuilder, MetadataInstruction};
 use crate::processor::AuthorizationData;
@@ -44,7 +44,7 @@ pub enum UnlockArgs {
 ///   11. `[optional]` Token Authorization Rules program
 ///   12. `[optional]` Token Authorization Rules account
 impl InstructionBuilder for super::builders::Lock {
-    fn instruction(&self) -> solana_program::instruction::Instruction {
+    fn instruction(&self) -> safecoin_program::instruction::Instruction {
         let mut accounts = vec![
             AccountMeta::new_readonly(self.authority, true),
             AccountMeta::new_readonly(self.token_owner.unwrap_or(crate::ID), false),
@@ -60,12 +60,12 @@ impl InstructionBuilder for super::builders::Lock {
             AccountMeta::new(self.payer, true),
             AccountMeta::new_readonly(self.system_program, false),
             AccountMeta::new_readonly(self.sysvar_instructions, false),
-            AccountMeta::new_readonly(self.spl_token_program.unwrap_or(crate::ID), false),
+            AccountMeta::new_readonly(self.safe_token_program.unwrap_or(crate::ID), false),
         ];
 
         // Optional authorization rules accounts
         if let Some(rules) = &self.authorization_rules {
-            accounts.push(AccountMeta::new_readonly(mpl_token_auth_rules::ID, false));
+            accounts.push(AccountMeta::new_readonly(lpl_token_auth_rules::ID, false));
             accounts.push(AccountMeta::new_readonly(*rules, false));
         } else {
             accounts.push(AccountMeta::new_readonly(crate::ID, false));
@@ -100,7 +100,7 @@ impl InstructionBuilder for super::builders::Lock {
 ///   11. `[optional]` Token Authorization Rules program
 ///   12. `[optional]` Token Authorization Rules account
 impl InstructionBuilder for super::builders::Unlock {
-    fn instruction(&self) -> solana_program::instruction::Instruction {
+    fn instruction(&self) -> safecoin_program::instruction::Instruction {
         let mut accounts = vec![
             AccountMeta::new_readonly(self.authority, true),
             AccountMeta::new_readonly(self.token_owner.unwrap_or(crate::ID), false),
@@ -116,12 +116,12 @@ impl InstructionBuilder for super::builders::Unlock {
             AccountMeta::new(self.payer, true),
             AccountMeta::new_readonly(self.system_program, false),
             AccountMeta::new_readonly(self.sysvar_instructions, false),
-            AccountMeta::new_readonly(self.spl_token_program.unwrap_or(crate::ID), false),
+            AccountMeta::new_readonly(self.safe_token_program.unwrap_or(crate::ID), false),
         ];
 
         // Optional authorization rules accounts
         if let Some(rules) = &self.authorization_rules {
-            accounts.push(AccountMeta::new_readonly(mpl_token_auth_rules::ID, false));
+            accounts.push(AccountMeta::new_readonly(lpl_token_auth_rules::ID, false));
             accounts.push(AccountMeta::new_readonly(*rules, false));
         } else {
             accounts.push(AccountMeta::new_readonly(crate::ID, false));

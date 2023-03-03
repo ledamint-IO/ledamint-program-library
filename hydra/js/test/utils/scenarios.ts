@@ -1,6 +1,6 @@
 import { Fanout, FanoutClient, MembershipModel } from '../../src';
 import { Keypair, PublicKey, TransactionInstruction } from '@solana/web3.js';
-import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { Token, TOKEN_PROGRAM_ID } from '@solana/safe-token ';
 import { Metaplex } from '@metaplex-foundation/js';
 type BuiltNftFanout = {
   fanout: PublicKey;

@@ -3,7 +3,7 @@ mod utils;
 #[cfg(feature = "test-bpf")]
 mod create_store {
     use crate::{setup_context, utils::helpers::airdrop};
-    use anchor_client::solana_sdk::{signature::Keypair, signer::Signer, system_program};
+    use anchor_client::safecoin_sdk::{signature::Keypair, signer::Signer, system_program};
     use anchor_lang::{AccountDeserialize, InstructionData, ToAccountMetas};
     use mpl_fixed_price_sale::utils::puffed_out_string;
 
@@ -12,10 +12,10 @@ mod create_store {
         state::Store,
         utils::{DESCRIPTION_MAX_LEN, NAME_MAX_LEN},
     };
-    use solana_program::instruction::Instruction;
-    use solana_program_test::*;
-    use solana_sdk::commitment_config::CommitmentLevel;
-    use solana_sdk::transaction::Transaction;
+    use safecoin_program::instruction::Instruction;
+    use safecoin_program_test::*;
+    use safecoin_sdk::commitment_config::CommitmentLevel;
+    use safecoin_sdk::transaction::Transaction;
 
     #[tokio::test]
     async fn success() {

@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo,
     clock::Clock,
     program::{invoke, invoke_signed},
@@ -8,7 +8,7 @@ use solana_program::{
     pubkey::{Pubkey, PUBKEY_BYTES},
     system_instruction,
 };
-use spl_associated_token_account::get_associated_token_address;
+use safe_associated_token_account::get_associated_token_address;
 
 use crate::{constants::*, CandyError, CandyMachine};
 
@@ -74,7 +74,7 @@ pub struct TokenTransferParams<'a: 'b, 'b> {
 }
 
 #[inline(always)]
-pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> Result<()> {
+pub fn safe_token_transfer(params: TokenTransferParams<'_, '_>) -> Result<()> {
     let TokenTransferParams {
         source,
         destination,
@@ -90,7 +90,7 @@ pub fn spl_token_transfer(params: TokenTransferParams<'_, '_>) -> Result<()> {
     }
 
     let result = invoke_signed(
-        &spl_token::instruction::transfer(
+        &safe_token::instruction::transfer(
             token_program.key,
             source.key,
             destination.key,
@@ -109,9 +109,9 @@ pub fn assert_is_ata(
     ata: &AccountInfo,
     wallet: &Pubkey,
     mint: &Pubkey,
-) -> core::result::Result<spl_token::state::Account, ProgramError> {
-    assert_owned_by(ata, &spl_token::id())?;
-    let ata_account: spl_token::state::Account = assert_initialized(ata)?;
+) -> core::result::Result<safe_token::state::Account, ProgramError> {
+    assert_owned_by(ata, &safe_token::id())?;
+    let ata_account: safe_token::state::Account = assert_initialized(ata)?;
     assert_keys_equal(&ata_account.owner, wallet)?;
     assert_keys_equal(&ata_account.mint, mint)?;
     assert_keys_equal(&get_associated_token_address(wallet, mint), ata.key)?;
@@ -146,7 +146,7 @@ pub struct TokenBurnParams<'a: 'b, 'b> {
     pub token_program: AccountInfo<'a>,
 }
 
-pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> Result<()> {
+pub fn safe_token_burn(params: TokenBurnParams<'_, '_>) -> Result<()> {
     let TokenBurnParams {
         mint,
         source,
@@ -160,7 +160,7 @@ pub fn spl_token_burn(params: TokenBurnParams<'_, '_>) -> Result<()> {
         seeds.push(seed);
     }
     let result = invoke_signed(
-        &spl_token::instruction::burn(
+        &safe_token::instruction::burn(
             token_program.key,
             source.key,
             mint.key,

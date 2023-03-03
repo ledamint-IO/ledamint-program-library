@@ -8,7 +8,7 @@ import {
 import fs from 'fs';
 import log from 'loglevel';
 import { BN, Program, web3 } from '@project-serum/anchor';
-import { Token, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { Token, TOKEN_PROGRAM_ID } from '@solana/safe-token ';
 import { StorageType } from './storage-type';
 
 import { getAtaForMint } from './accounts';
@@ -18,7 +18,7 @@ import {
   UseMethod,
   Metadata,
   MetadataKey,
-} from '@metaplex-foundation/mpl-token-metadata';
+} from '@metaplex-foundation/lpl-token-metadata';
 
 export async function getCandyMachineV2Config(
   walletKeyPair: web3.Keypair,
@@ -110,19 +110,19 @@ export async function getCandyMachineV2Config(
   if (splTokenAccount) {
     if (solTreasuryAccount) {
       throw new Error(
-        'If spl-token-account or spl-token is set then sol-treasury-account cannot be set',
+        'If safe-token -account or safe-token  is set then sol-treasury-account cannot be set',
       );
     }
     if (!splToken) {
       throw new Error(
-        'If spl-token-account is set, spl-token must also be set',
+        'If safe-token -account is set, safe-token  must also be set',
       );
     }
     const splTokenKey = new web3.PublicKey(splToken);
     const splTokenAccountKey = new web3.PublicKey(splTokenAccountFigured);
     if (!splTokenAccountFigured) {
       throw new Error(
-        'If spl-token is set, spl-token-account must also be set',
+        'If safe-token  is set, safe-token -account must also be set',
       );
     }
 
@@ -135,15 +135,15 @@ export async function getCandyMachineV2Config(
 
     const mintInfo = await token.getMintInfo();
     if (!mintInfo.isInitialized) {
-      throw new Error(`The specified spl-token is not initialized`);
+      throw new Error(`The specified safe-token  is not initialized`);
     }
     const tokenAccount = await token.getAccountInfo(splTokenAccountKey);
     if (!tokenAccount.isInitialized) {
-      throw new Error(`The specified spl-token-account is not initialized`);
+      throw new Error(`The specified safe-token -account is not initialized`);
     }
     if (!tokenAccount.mint.equals(splTokenKey)) {
       throw new Error(
-        `The spl-token-account's mint (${tokenAccount.mint.toString()}) does not match specified spl-token ${splTokenKey.toString()}`,
+        `The safe-token -account's mint (${tokenAccount.mint.toString()}) does not match specified safe-token  ${splTokenKey.toString()}`,
       );
     }
 

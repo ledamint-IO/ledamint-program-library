@@ -8,11 +8,11 @@ use crate::{
 };
 use anchor_lang::prelude::*;
 use anchor_lang::{
-    solana_program::{program::invoke, program_pack::Pack, system_instruction},
+    safecoin_program::{program::invoke, program_pack::Pack, system_instruction},
     system_program::System,
 };
 use anchor_spl::token;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     state::{Metadata, TokenMetadataAccount},
     utils::get_supply_off_master_edition,
 };
@@ -230,8 +230,8 @@ impl<'info> Buy<'info> {
 
             if gatekeeper.expire_on_use {
                 invoke(
-                    &spl_token::instruction::burn(
-                        &spl_token::id(),
+                    &safe_token::instruction::burn(
+                        &safe_token::id(),
                         &user_token_acc.key(),
                         &token_acc_mint.key(),
                         &user_wallet.key(),
@@ -257,11 +257,11 @@ impl<'info> Buy<'info> {
         user_wallet: &Pubkey,
         collection: &Pubkey,
     ) -> Result<()> {
-        if user_token_acc.owner != &spl_token::id() {
+        if user_token_acc.owner != &safe_token::id() {
             return Err(ErrorCode::InvalidOwnerForGatingToken.into());
         }
 
-        let user_token_acc_data = spl_token::state::Account::unpack_from_slice(
+        let user_token_acc_data = safe_token::state::Account::unpack_from_slice(
             user_token_acc.try_borrow_data()?.as_ref(),
         )?;
 
@@ -282,23 +282,23 @@ impl<'info> Buy<'info> {
         user_wallet: &Pubkey,
         collection_key: &Pubkey,
     ) -> Result<()> {
-        if user_token_acc.owner != &spl_token::id() {
+        if user_token_acc.owner != &safe_token::id() {
             return Err(ErrorCode::InvalidOwnerForGatingToken.into());
         }
-        let user_token_acc_data = spl_token::state::Account::unpack_from_slice(
+        let user_token_acc_data = safe_token::state::Account::unpack_from_slice(
             user_token_acc.try_borrow_data()?.as_ref(),
         )?;
 
         let metadata_data = Metadata::from_account_info(metadata)?;
 
-        let token_metadata_program_key = mpl_token_metadata::id();
+        let token_metadata_program_key = lpl_token_metadata::id();
         let metadata_seeds = &[
-            mpl_token_metadata::state::PREFIX.as_bytes(),
+            lpl_token_metadata::state::PREFIX.as_bytes(),
             token_metadata_program_key.as_ref(),
             user_token_acc_data.mint.as_ref(),
         ];
         let (metadata_key, _metadata_bump_seed) =
-            Pubkey::find_program_address(metadata_seeds, &mpl_token_metadata::id());
+            Pubkey::find_program_address(metadata_seeds, &lpl_token_metadata::id());
 
         if metadata.key() != metadata_key {
             return Err(ErrorCode::WrongGatingMetadataAccount.into());

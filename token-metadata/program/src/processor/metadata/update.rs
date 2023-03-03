@@ -1,11 +1,11 @@
 use std::fmt::{Display, Formatter};
 
-use mpl_utils::assert_signer;
-use solana_program::{
+use lpl_utils::assert_signer;
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, msg, program_error::ProgramError,
     program_pack::Pack, pubkey::Pubkey, sysvar,
 };
-use spl_token::state::Account;
+use safe_token::state::Account;
 
 use crate::{
     assertions::{assert_owned_by, programmable::assert_valid_authorization},
@@ -59,7 +59,7 @@ fn update_v1(program_id: &Pubkey, ctx: Context<Update>, args: UpdateArgs) -> Pro
     // Assert program ownership
 
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::ID)?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::ID)?;
 
     if let Some(edition) = ctx.accounts.edition_info {
         assert_owned_by(edition, program_id)?;
@@ -78,7 +78,7 @@ fn update_v1(program_id: &Pubkey, ctx: Context<Update>, args: UpdateArgs) -> Pro
 
     // token owner
     if let Some(holder_token_account) = ctx.accounts.token_info {
-        assert_owned_by(holder_token_account, &spl_token::ID)?;
+        assert_owned_by(holder_token_account, &safe_token::ID)?;
     }
     // delegate
     if let Some(delegate_record_info) = ctx.accounts.delegate_record_info {
@@ -87,18 +87,18 @@ fn update_v1(program_id: &Pubkey, ctx: Context<Update>, args: UpdateArgs) -> Pro
 
     // Check program IDs
 
-    if ctx.accounts.system_program_info.key != &solana_program::system_program::ID {
+    if ctx.accounts.system_program_info.key != &safecoin_program::system_program::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
     if ctx.accounts.sysvar_instructions_info.key != &sysvar::instructions::ID {
         return Err(ProgramError::IncorrectProgramId);
     }
 
-    // If the current rule set is passed in, also require the mpl-token-auth-rules program
+    // If the current rule set is passed in, also require the lpl-token-auth-rules program
     // to be passed in.
     if ctx.accounts.authorization_rules_info.is_some() {
         if let Some(authorization_rules_program) = ctx.accounts.authorization_rules_program_info {
-            if authorization_rules_program.key != &mpl_token_auth_rules::ID {
+            if authorization_rules_program.key != &lpl_token_auth_rules::ID {
                 return Err(ProgramError::IncorrectProgramId);
             }
         } else {

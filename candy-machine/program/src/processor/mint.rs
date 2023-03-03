@@ -3,7 +3,7 @@ use std::{cell::RefMut, ops::Deref};
 use anchor_lang::prelude::*;
 use anchor_spl::token::Token;
 use arrayref::array_ref;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     instruction::{
         create_master_edition_v3, create_metadata_accounts_v3, freeze_delegated_account,
         update_metadata_accounts_v2,
@@ -14,14 +14,14 @@ use solana_gateway::{
     state::{GatewayTokenAccess, InPlaceGatewayToken},
     Gateway,
 };
-use solana_program::{
+use safecoin_program::{
     clock::Clock,
     program::{invoke, invoke_signed},
     serialize_utils::{read_pubkey, read_u16},
     system_instruction, sysvar,
     sysvar::{instructions::get_instruction_relative, SysvarId},
 };
-use spl_token::instruction::approve;
+use safe_token::instruction::approve;
 
 use crate::{
     constants::{
@@ -64,7 +64,7 @@ pub struct MintNFT<'info> {
     #[account(mut)]
     master_edition: UncheckedAccount<'info>,
     /// CHECK: account checked in CPI
-    #[account(address = mpl_token_metadata::id())]
+    #[account(address = lpl_token_metadata::id())]
     token_metadata_program: UncheckedAccount<'info>,
     token_program: Program<'info, Token>,
     system_program: Program<'info, System>,
@@ -203,8 +203,8 @@ pub fn handle_mint_nft<'info>(
         let program_id = read_pubkey(&mut current, &instruction_sysvar).unwrap();
 
         if !cmp_pubkeys(&program_id, &crate::id())
-            && !cmp_pubkeys(&program_id, &spl_token::id())
-            && !cmp_pubkeys(&program_id, &solana_program::system_program::ID)
+            && !cmp_pubkeys(&program_id, &safe_token::id())
+            && !cmp_pubkeys(&program_id, &safecoin_program::system_program::ID)
             && !cmp_pubkeys(&program_id, &A_TOKEN)
             && !cmp_pubkeys(&program_id, &COMPUTE_BUDGET)
         {
@@ -390,7 +390,7 @@ pub fn handle_mint_nft<'info>(
                             return Ok(());
                         }
 
-                        spl_token_burn(TokenBurnParams {
+                        safe_token_burn(TokenBurnParams {
                             mint: whitelist_token_mint.clone(),
                             source: whitelist_token_account.clone(),
                             amount: 1,
@@ -515,7 +515,7 @@ pub fn handle_mint_nft<'info>(
             return err!(CandyError::NotEnoughTokens);
         }
 
-        spl_token_transfer(TokenTransferParams {
+        safe_token_transfer(TokenTransferParams {
             source: token_account_info.clone(),
             destination: wallet_to_use.to_account_info(),
             authority: transfer_authority_info.clone(),
@@ -555,15 +555,15 @@ pub fn handle_mint_nft<'info>(
     let cm_key = candy_machine.key();
     let authority_seeds = [PREFIX.as_bytes(), cm_key.as_ref(), &[creator_bump]];
 
-    let mut creators: Vec<mpl_token_metadata::state::Creator> =
-        vec![mpl_token_metadata::state::Creator {
+    let mut creators: Vec<lpl_token_metadata::state::Creator> =
+        vec![lpl_token_metadata::state::Creator {
             address: candy_machine_creator.key(),
             verified: true,
             share: 0,
         }];
 
     for c in &candy_machine.data.creators {
-        creators.push(mpl_token_metadata::state::Creator {
+        creators.push(lpl_token_metadata::state::Creator {
             address: c.address,
             verified: false,
             share: c.share,
@@ -703,7 +703,7 @@ pub fn handle_mint_nft<'info>(
             &[freeze_bump],
         ];
         let mut freeze_ix = freeze_delegated_account(
-            mpl_token_metadata::ID,
+            lpl_token_metadata::ID,
             freeze_pda.key(),
             nft_token_account_info.key(),
             ctx.accounts.master_edition.key(),
@@ -714,7 +714,7 @@ pub fn handle_mint_nft<'info>(
 
         invoke(
             &approve(
-                &spl_token::ID,
+                &safe_token::ID,
                 &nft_token_account_info.key(),
                 &freeze_pda.key(),
                 &payer.key(),

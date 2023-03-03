@@ -1,9 +1,9 @@
 use borsh::BorshSerialize;
-use mpl_utils::{
+use lpl_utils::{
     assert_signer,
-    token::{spl_token_burn, TokenBurnParams},
+    token::{safe_token_burn, TokenBurnParams},
 };
-use solana_program::{
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     pubkey::Pubkey,
@@ -54,7 +54,7 @@ pub fn process_utilize(
     if metadata.uses.is_none() {
         return Err(MetadataError::Unusable.into());
     }
-    if *token_program_account_info.key != spl_token::id() {
+    if *token_program_account_info.key != safe_token::id() {
         return Err(MetadataError::InvalidTokenProgram.into());
     }
     assert_signer(user_info)?;
@@ -117,7 +117,7 @@ pub fn process_utilize(
                 BURN.as_bytes(),
                 &[seed],
             ];
-            spl_token_burn(TokenBurnParams {
+            safe_token_burn(TokenBurnParams {
                 mint: mint_info.clone(),
                 amount: 1,
                 authority: burn_authority_info.clone(),
@@ -126,7 +126,7 @@ pub fn process_utilize(
                 authority_signer_seeds: Some(burn_bump_ref),
             })?;
         } else {
-            spl_token_burn(TokenBurnParams {
+            safe_token_burn(TokenBurnParams {
                 mint: mint_info.clone(),
                 amount: 1,
                 authority: owner_info.clone(),

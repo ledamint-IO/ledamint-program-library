@@ -3,7 +3,7 @@ use crate::state::Fanout;
 use crate::utils::validation::assert_owned_by;
 use anchor_lang::prelude::*;
 
-use spl_token::solana_program::program::invoke_signed;
+use safe_token::safecoin_program::program::invoke_signed;
 
 #[derive(Accounts)]
 pub struct SignMetadata<'info> {
@@ -25,7 +25,7 @@ pub struct SignMetadata<'info> {
     #[account(mut)]
     /// CHECK: Checked in Program
     pub metadata: UncheckedAccount<'info>,
-    #[account(address=mpl_token_metadata::id())]
+    #[account(address=lpl_token_metadata::id())]
     /// CHECK: Checked in Program
     pub token_metadata_program: UncheckedAccount<'info>,
 }
@@ -33,13 +33,13 @@ pub struct SignMetadata<'info> {
 pub fn sign_metadata(ctx: Context<SignMetadata>) -> Result<()> {
     let metadata = ctx.accounts.metadata.to_account_info();
     let holding_account = &ctx.accounts.holding_account;
-    assert_owned_by(&metadata, &mpl_token_metadata::id())?;
+    assert_owned_by(&metadata, &lpl_token_metadata::id())?;
     let meta_data = metadata.try_borrow_data()?;
-    if meta_data[0] != mpl_token_metadata::state::Key::MetadataV1 as u8 {
+    if meta_data[0] != lpl_token_metadata::state::Key::MetadataV1 as u8 {
         return Err(HydraError::InvalidMetadata.into());
     }
     drop(meta_data);
-    let ix = mpl_token_metadata::instruction::sign_metadata(
+    let ix = lpl_token_metadata::instruction::sign_metadata(
         ctx.accounts.token_metadata_program.key(),
         metadata.key(),
         holding_account.key(),

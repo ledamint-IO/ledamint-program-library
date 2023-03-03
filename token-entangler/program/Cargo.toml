@@ -1,5 +1,5 @@
 [package]
-name = "mpl-token-entangler"
+name = "lpl-token-entangler"
 version = "0.2.0"
 edition = "2018"
 authors = ["Metaplex Developers <dev@metaplex.com>"]
@@ -11,7 +11,7 @@ repository = "https://github.com/metaplex-foundation/metaplex-program-library"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "mpl_token_entangler"
+name = "lpl_token_entangler"
 
 [features]
 no-entrypoint = []
@@ -23,15 +23,15 @@ default = []
 [dependencies]
 anchor-lang = "0.26.0"
 anchor-spl = "0.26.0"
-spl-token = { version = "3.5",  features = ["no-entrypoint"] }
-spl-associated-token-account = {version = "1.1.1", features = ["no-entrypoint"]}
-mpl-token-metadata = { version="1.7.0", features = [ "no-entrypoint" ] }
+safe-token  = { version = "3.5",  features = ["no-entrypoint"] }
+safe-associated-token-account = {version = "1.1.1", features = ["no-entrypoint"]}
+lpl-token-metadata = { version="1.7.0", features = [ "no-entrypoint" ] }
 thiserror = "~1.0"
 arrayref = "~0.3.6"
 
 [dev-dependencies]
-solana-program-test = "1.14"
-solana-sdk = "1.14"
+safecoin-program-test = "1.14"
+safecoin-sdk = "1.14"
 
 [profile.release]
 overflow-checks = true     # Enable integer overflow checks.

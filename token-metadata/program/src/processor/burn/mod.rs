@@ -1,18 +1,18 @@
 #![allow(clippy::module_inception)]
 
 use arrayref::array_ref;
-use mpl_utils::{
+use lpl_utils::{
     assert_signer,
     token::{
-        get_mint_decimals, get_mint_supply, spl_token_burn, spl_token_close, TokenBurnParams,
+        get_mint_decimals, get_mint_supply, safe_token_burn, safe_token_close, TokenBurnParams,
         TokenCloseParams,
     },
 };
-use solana_program::{
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, msg, program_error::ProgramError,
     program_pack::Pack, pubkey::Pubkey, system_program, sysvar,
 };
-use spl_token::state::Account as TokenAccount;
+use safe_token::state::Account as TokenAccount;
 
 use crate::{
     error::MetadataError,

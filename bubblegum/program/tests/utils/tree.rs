@@ -5,21 +5,21 @@ use mpl_bubblegum::{
     state::{leaf_schema::LeafSchema, TreeConfig, Voucher, VOUCHER_PREFIX},
     utils::get_asset_id,
 };
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
     rent::Rent,
     system_instruction, system_program, sysvar,
 };
-use solana_program_test::BanksClient;
-use solana_sdk::{
+use safecoin_program_test::BanksClient;
+use safecoin_sdk::{
     account::Account,
     signature::{Keypair, Signer},
     signer::signers::Signers,
     transaction::Transaction,
 };
 use spl_account_compression::state::CONCURRENT_MERKLE_TREE_HEADER_SIZE_V1;
-use spl_associated_token_account::get_associated_token_address;
+use safe_associated_token_account::get_associated_token_address;
 use spl_concurrent_merkle_tree::concurrent_merkle_tree::ConcurrentMerkleTree;
 use spl_merkle_tree_reference::{MerkleTree, Node};
 use std::{
@@ -658,8 +658,8 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize> Tree<MAX_DEPTH, MAX_B
         let mint = voucher.decompress_mint_pda();
         let mint_authority = decompress_mint_auth_pda(mint);
         let token_account = get_associated_token_address(&args.owner.pubkey(), &mint);
-        let metadata = mpl_token_metadata::pda::find_metadata_account(&mint).0;
-        let master_edition = mpl_token_metadata::pda::find_master_edition_account(&mint).0;
+        let metadata = lpl_token_metadata::pda::find_metadata_account(&mint).0;
+        let master_edition = lpl_token_metadata::pda::find_master_edition_account(&mint).0;
 
         let accounts = mpl_bubblegum::accounts::DecompressV1 {
             voucher: voucher.pda(),
@@ -671,9 +671,9 @@ impl<const MAX_DEPTH: usize, const MAX_BUFFER_SIZE: usize> Tree<MAX_DEPTH, MAX_B
             master_edition,
             system_program: system_program::id(),
             sysvar_rent: sysvar::rent::id(),
-            token_metadata_program: mpl_token_metadata::id(),
-            token_program: spl_token::id(),
-            associated_token_program: spl_associated_token_account::id(),
+            token_metadata_program: lpl_token_metadata::id(),
+            token_program: safe_token::id(),
+            associated_token_program: safe_associated_token_account::id(),
             log_wrapper: spl_noop::id(),
         };
 

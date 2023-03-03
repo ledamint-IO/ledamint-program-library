@@ -1,6 +1,6 @@
 use borsh::BorshSerialize;
-use mpl_utils::{assert_signer, create_or_allocate_account_raw};
-use solana_program::{
+use lpl_utils::{assert_signer, create_or_allocate_account_raw};
+use safecoin_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint::ProgramResult,
     program_memory::sol_memcpy,
@@ -34,10 +34,10 @@ pub fn process_create_escrow_account(
     assert_owned_by(metadata_account_info, &crate::ID)?;
 
     let mint_account_info = next_account_info(account_info_iter)?;
-    assert_owned_by(mint_account_info, &spl_token::id())?;
+    assert_owned_by(mint_account_info, &safe_token::id())?;
 
     let token_account_info = next_account_info(account_info_iter)?;
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by(token_account_info, &safe_token::id())?;
 
     let edition_account_info = next_account_info(account_info_iter)?;
     assert_owned_by(edition_account_info, &crate::ID)?;
@@ -51,7 +51,7 @@ pub fn process_create_escrow_account(
     }
 
     let sysvar_ix_account_info = next_account_info(account_info_iter)?;
-    if sysvar_ix_account_info.key != &solana_program::sysvar::instructions::ID {
+    if sysvar_ix_account_info.key != &safecoin_program::sysvar::instructions::ID {
         return Err(MetadataError::InvalidInstructionsSysvar.into());
     }
 
@@ -92,7 +92,7 @@ pub fn process_create_escrow_account(
     let creator = maybe_authority_info.unwrap_or(payer_account_info);
     assert_signer(creator)?;
 
-    let token_account: spl_token::state::Account = assert_initialized(token_account_info)?;
+    let token_account: safe_token::state::Account = assert_initialized(token_account_info)?;
 
     if token_account.mint != *mint_account_info.key {
         return Err(MetadataError::MintMismatch.into());

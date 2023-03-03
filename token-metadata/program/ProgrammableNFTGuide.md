@@ -2,12 +2,12 @@
 
 ## Developer packages
 Token Metadata
-* :crab: Rust crate: [v1.8.1](https://crates.io/crates/mpl-token-metadata/1.8.1)
-* :package: NPM package: [v2.8.1](https://www.npmjs.com/package/@metaplex-foundation/mpl-token-metadata/v/2.8.1)
+* :crab: Rust crate: [v1.8.1](https://crates.io/crates/lpl-token-metadata/1.8.1)
+* :package: NPM package: [v2.8.1](https://www.npmjs.com/package/@metaplex-foundation/lpl-token-metadata/v/2.8.1)
 
 Token Authorization Rules
-* :crab: Rust crate: [v1.1.0](https://crates.io/crates/mpl-token-auth-rules/1.1.0)
-* :package: NPM package: [v1.1.0](https://www.npmjs.com/package/@metaplex-foundation/mpl-token-auth-rules/v/1.1.0)
+* :crab: Rust crate: [v1.1.0](https://crates.io/crates/lpl-token-auth-rules/1.1.0)
+* :package: NPM package: [v1.1.0](https://www.npmjs.com/package/@metaplex-foundation/lpl-token-auth-rules/v/1.1.0)
 
 ## 📄  Technical Summary
 
@@ -33,8 +33,8 @@ These lifecycle rules will be configured by creators – e.g., creators may choo
 
 Interaction with assets will be provided by Token Metadata:
 
-1. Transfer instructions (and other spl-token instructions) are now sent to Token Metadata instead.
-2. Token Metadata will expose new versioned instructions under a unified and simplified API. Spl-token proxy instructions are close to the existing instruction interface with the addition of a new required `authorization_rules` account argument. E.g., `CreateMetadataAccount` and `UpdateMetadata` are replaced with `Create` and `Update`.
+1. Transfer instructions (and other safe-token  instructions) are now sent to Token Metadata instead.
+2. Token Metadata will expose new versioned instructions under a unified and simplified API. safe-token  proxy instructions are close to the existing instruction interface with the addition of a new required `authorization_rules` account argument. E.g., `CreateMetadataAccount` and `UpdateMetadata` are replaced with `Create` and `Update`.
 3. The `authorization_rules` account can be easily discovered on-chain using account derivation or via the Metaplex Read API, an RPC indexing extension run by many existing RPC providers.
 
 ## 🚛  Extending the `TokenStandard`
@@ -234,7 +234,7 @@ Each instruction will include an instruction builder to facilitate its creation.
 Creates the metadata account for a `ProgrammableNonFungible` asset, initializing the mint account if needed.
 
 ```rust
-use mpl_token_metadata::instruction::builders::CreateBuilder;
+use lpl_token_metadata::instruction::builders::CreateBuilder;
 
 ...
 
@@ -286,7 +286,7 @@ There are two types of delegates on Token Metadata: `TokenDelegate` and `Metadat
 
 #### Token Delegate
 
-`TokenDelegate`s are delegates that operate at the token level – i.e., they are spl-token delegates. This allows the delegate to perform operations on the token account (burn, transfer, freeze). There can only be one token delegate at a time and they do not have an individual delegate account associated – their information is stored on the `TokenRecord` account. The token record holds information about a particular token account (PDA seeds `["metadata", program id, mint id, "token_record", token account id]`):
+`TokenDelegate`s are delegates that operate at the token level – i.e., they are safe-token  delegates. This allows the delegate to perform operations on the token account (burn, transfer, freeze). There can only be one token delegate at a time and they do not have an individual delegate account associated – their information is stored on the `TokenRecord` account. The token record holds information about a particular token account (PDA seeds `["metadata", program id, mint id, "token_record", token account id]`):
 ```rust
 pub struct TokenRecord {
     pub key: Key,
@@ -342,7 +342,7 @@ The `LockedTransfer` delegate type is a delegate that can lock and unlock a `pNF
 
 #### Metadata Delegates
 
-`MetadataDelegate`s are delegates that operate at the metadata level. These delegates are represented by `MetadataDelegateRecord` PDA (seeds `["metadata", program id, mint id, delegate role, update authority id, delegate id]`) and do not have an associated spl-token delegate. There can be multiple instances of the same delegate.
+`MetadataDelegate`s are delegates that operate at the metadata level. These delegates are represented by `MetadataDelegateRecord` PDA (seeds `["metadata", program id, mint id, delegate role, update authority id, delegate id]`) and do not have an associated safe-token  delegate. There can be multiple instances of the same delegate.
 ```rust
 pub struct MetadataDelegateRecord {
     pub key: Key,
@@ -374,7 +374,7 @@ Currently, we have three types of metadata delegates:
 
 ## 📦  JS SDK
 
-Token Metadata includes a low-level Solita-based SDK, which can be used to interact with the new API. The NPM package can be found [here](https://www.npmjs.com/package/@metaplex-foundation/mpl-token-metadata/v/2.7.0).
+Token Metadata includes a low-level Solita-based SDK, which can be used to interact with the new API. The NPM package can be found [here](https://www.npmjs.com/package/@metaplex-foundation/lpl-token-metadata/v/2.7.0).
 
 The latest release of the [Metaplex JS SDK v0.18.0](https://github.com/metaplex-foundation/js#programmable-nfts) adds support for Programmable NFTs.
 
@@ -391,14 +391,14 @@ There are **Primitive Rules** and **Composed Rules** that are created by combini
 - **Primitive Rules:** store any accounts or data needed for evaluation, and at runtime will produce a `true` or `false` output based on accounts and a well-defined `Payload` that are passed into the `validate()` function.
 - **Composed Rules:** return a `true` or `false` based on whether any or all of the primitive rules return `true`.  Composed rules can then be combined into higher-level composed rules that implement more complex boolean logic.  Because of the recursive definition of the `Rule` enum, calling `validate()` on a top-level composed rule will start at the top and validate at every level, down to the component primitive rules.
 
-More details of the Token Authorization Rules program, including examples, can be found [here](https://github.com/metaplex-foundation/mpl-token-auth-rules/blob/main/README.md).
+More details of the Token Authorization Rules program, including examples, can be found [here](https://github.com/metaplex-foundation/lpl-token-auth-rules/blob/main/README.md).
 
 ## 🎬  Local Setup for Testing
 
 The repository contains both Rust BPF and JavaScript/TypeScript. In order to setup the environment to run the tests, you will need to first clone the required repositories:
 
 * Token Metadata: `https://github.com/metaplex-foundation/metaplex-program-library.git` branch `master`
-* Token Authorization Rules: `https://github.com/metaplex-foundation/mpl-token-auth-rules.git`
+* Token Authorization Rules: `https://github.com/metaplex-foundation/lpl-token-auth-rules.git`
 * Rooster (for BPF tests): `https://github.com/metaplex-foundation/rooster`
 
 This guide will assume that these repositories were cloned into a folder `$PROJECTS`.
@@ -407,11 +407,11 @@ This guide will assume that these repositories were cloned into a folder `$PROJE
 
 To get Rust BPF tests working, you will first need to build both Token Auth Rules and Rooster programs:
 
-* In the folder `$PROJECTS/mpl-token-auth-rules/program` execute:
+* In the folder `$PROJECTS/lpl-token-auth-rules/program` execute:
   ```
   cargo build-bpf
   ```
-  Then, copy the generated `.so` file from `$PROJECTS/mpl-token-auth-rules/program/target/deploy` into `$PROJECTS/metaplex-program-library/token-metadata/target/deploy/`
+  Then, copy the generated `.so` file from `$PROJECTS/lpl-token-auth-rules/program/target/deploy` into `$PROJECTS/metaplex-program-library/token-metadata/target/deploy/`
   
 * In the folder `$PROJECTS/rooster/program` execute:
   ```
@@ -431,11 +431,11 @@ cargo test-bpf
 
 The JavaScript/TypeScript use [Amman](https://github.com/metaplex-foundation/amman) to start a local validatior. The first step required is to build the required programs:
 
-* In the folder `$PROJECTS/mpl-token-auth-rules/program` execute:
+* In the folder `$PROJECTS/lpl-token-auth-rules/program` execute:
   ```
   cargo build-bpf
   ```
-  Then, copy the generated `.so` file from `$PROJECTS/mpl-token-auth-rules/program/target/deploy` into `$PROJECTS/metaplex-program-library/test-programs/`
+  Then, copy the generated `.so` file from `$PROJECTS/lpl-token-auth-rules/program/target/deploy` into `$PROJECTS/metaplex-program-library/test-programs/`
   
 * In the folder `$PROJECTS/metaplex-program-library/` execute:
   ```

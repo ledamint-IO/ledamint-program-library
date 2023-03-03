@@ -6,7 +6,7 @@ use crate::{
 };
 use anchor_lang::{
     prelude::*,
-    solana_program::{program::invoke, system_instruction},
+    safecoin_program::{program::invoke, system_instruction},
 };
 use anchor_spl::token::accessor;
 
@@ -82,7 +82,7 @@ impl<'info> CreateMarket<'info> {
             let collection_mint = &remaining_accounts[0];
 
             if collection_mint.key != &gating_data.collection
-                || collection_mint.owner != &spl_token::id()
+                || collection_mint.owner != &safe_token::id()
             {
                 return Err(ErrorCode::WrongCollectionMintKey.into());
             }

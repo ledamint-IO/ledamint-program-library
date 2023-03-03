@@ -1,5 +1,5 @@
 use clap::{crate_description, crate_name, crate_version, App, Arg, SubCommand};
-use solana_clap_utils::input_validators::{is_url, is_valid_signer};
+use safecoin_clap_utils::input_validators::{is_url, is_valid_signer};
 
 pub const SHOW: &str = "show_hydra";
 

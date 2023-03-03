@@ -1,11 +1,11 @@
 use crate::*;
-use mpl_token_metadata::{
+use lpl_token_metadata::{
     id, instruction,
     state::{Creator, Data, PREFIX},
 };
-use solana_program::borsh::try_from_slice_unchecked;
-use solana_program_test::*;
-use solana_sdk::{
+use safecoin_program::borsh::try_from_slice_unchecked;
+use safecoin_program_test::*;
+use safecoin_sdk::{
     pubkey::Pubkey, signature::Signer, signer::keypair::Keypair, transaction::Transaction,
     transport,
 };
@@ -37,7 +37,7 @@ impl TestMetadata {
     pub async fn get_data(
         &self,
         context: &mut ProgramTestContext,
-    ) -> mpl_token_metadata::state::Metadata {
+    ) -> lpl_token_metadata::state::Metadata {
         let account = get_account(context, &self.pubkey).await;
         try_from_slice_unchecked(&account.data).unwrap()
     }
@@ -98,7 +98,7 @@ impl TestMetadata {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -123,7 +123,7 @@ impl TestMetadata {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }
@@ -161,7 +161,7 @@ impl TestMetadata {
             .banks_client
             .process_transaction_with_commitment(
                 tx,
-                solana_sdk::commitment_config::CommitmentLevel::Confirmed,
+                safecoin_sdk::commitment_config::CommitmentLevel::Confirmed,
             )
             .await
     }

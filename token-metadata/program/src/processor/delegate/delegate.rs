@@ -1,13 +1,13 @@
 use std::fmt::Display;
 
 use borsh::BorshSerialize;
-use mpl_token_auth_rules::utils::get_latest_revision;
-use mpl_utils::{assert_signer, create_or_allocate_account_raw};
-use solana_program::{
+use lpl_token_auth_rules::utils::get_latest_revision;
+use lpl_utils::{assert_signer, create_or_allocate_account_raw};
+use safecoin_program::{
     account_info::AccountInfo, entrypoint::ProgramResult, program::invoke, program_pack::Pack,
     pubkey::Pubkey, system_program, sysvar,
 };
-use spl_token::{instruction::AuthorityType as SplAuthorityType, state::Account};
+use safe_token::{instruction::AuthorityType as SplAuthorityType, state::Account};
 
 use crate::{
     assertions::{
@@ -153,7 +153,7 @@ fn create_delegate_v1(
     // ownership
 
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::id())?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::id())?;
 
     // key match
 
@@ -198,7 +198,7 @@ fn create_delegate_v1(
 }
 
 /// Creates a presistent delegate. For non-programmable assets, this is just a wrapper over
-/// spl-token 'approve' delegate.
+/// safe-token  'approve' delegate.
 ///
 /// Note that `DelegateRole::Sale` is only available for programmable assets.
 fn create_persistent_delegate_v1(
@@ -218,8 +218,8 @@ fn create_persistent_delegate_v1(
         }
     };
 
-    let spl_token_program_info = match ctx.accounts.spl_token_program_info {
-        Some(spl_token_program_info) => spl_token_program_info,
+    let safe_token_program_info = match ctx.accounts.safe_token_program_info {
+        Some(safe_token_program_info) => safe_token_program_info,
         None => {
             return Err(MetadataError::MissingSplTokenProgram.into());
         }
@@ -233,8 +233,8 @@ fn create_persistent_delegate_v1(
     // ownership
 
     assert_owned_by(ctx.accounts.metadata_info, program_id)?;
-    assert_owned_by(ctx.accounts.mint_info, &spl_token::id())?;
-    assert_owned_by(token_info, &spl_token::id())?;
+    assert_owned_by(ctx.accounts.mint_info, &safe_token::id())?;
+    assert_owned_by(token_info, &safe_token::id())?;
 
     // key match
 
@@ -243,7 +243,7 @@ fn create_persistent_delegate_v1(
         ctx.accounts.sysvar_instructions_info.key,
         &sysvar::instructions::ID,
     )?;
-    assert_keys_equal(spl_token_program_info.key, &spl_token::ID)?;
+    assert_keys_equal(safe_token_program_info.key, &safe_token::ID)?;
 
     // account relationships
 
@@ -252,7 +252,7 @@ fn create_persistent_delegate_v1(
         return Err(MetadataError::MintMismatch.into());
     }
 
-    // authority must be the owner of the token account: spl-token required the
+    // authority must be the owner of the token account: safe-token  required the
     // token owner to set a delegate
     let token = Account::unpack(&token_info.try_borrow_data()?).unwrap();
     if token.owner != *ctx.accounts.authority_info.key {
@@ -304,7 +304,7 @@ fn create_persistent_delegate_v1(
                     .authorization_rules_info
                     .ok_or(MetadataError::MissingAuthorizationRules)?;
                 assert_keys_equal(authorization_rules_info.key, &rule_set)?;
-                assert_owned_by(authorization_rules_info, &mpl_token_auth_rules::ID)?;
+                assert_owned_by(authorization_rules_info, &lpl_token_auth_rules::ID)?;
 
                 // validates auth rules program
                 let authorization_rules_program_info = ctx
@@ -313,7 +313,7 @@ fn create_persistent_delegate_v1(
                     .ok_or(MetadataError::MissingAuthorizationRulesProgram)?;
                 assert_keys_equal(
                     authorization_rules_program_info.key,
-                    &mpl_token_auth_rules::ID,
+                    &lpl_token_auth_rules::ID,
                 )?;
 
                 let auth_rules_validate_params = AuthRulesValidateParams {
@@ -375,7 +375,7 @@ fn create_persistent_delegate_v1(
                     ctx.accounts.mint_info.clone(),
                     token_info.clone(),
                     master_edition_info.clone(),
-                    spl_token_program_info.clone(),
+                    safe_token_program_info.clone(),
                 )?;
             } else {
                 return Err(MetadataError::MissingEditionAccount.into());
@@ -388,10 +388,10 @@ fn create_persistent_delegate_v1(
         }
     }
 
-    // creates the spl-token delegate
+    // creates the safe-token  delegate
     invoke(
-        &spl_token::instruction::approve(
-            spl_token_program_info.key,
+        &safe_token::instruction::approve(
+            safe_token_program_info.key,
             token_info.key,
             ctx.accounts.delegate_info.key,
             ctx.accounts.authority_info.key,
@@ -409,8 +409,8 @@ fn create_persistent_delegate_v1(
     // token can be closed by the delegate on Burn.
     if matches!(role, TokenDelegateRole::Utility) {
         invoke(
-            &spl_token::instruction::set_authority(
-                spl_token_program_info.key,
+            &safe_token::instruction::set_authority(
+                safe_token_program_info.key,
                 token_info.key,
                 Some(ctx.accounts.delegate_info.key),
                 SplAuthorityType::CloseAccount,
@@ -434,7 +434,7 @@ fn create_persistent_delegate_v1(
                 ctx.accounts.mint_info.clone(),
                 token_info.clone(),
                 master_edition_info.clone(),
-                spl_token_program_info.clone(),
+                safe_token_program_info.clone(),
             )?;
         } else {
             // sanity check: this should not happen at this point since the master

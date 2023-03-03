@@ -5,7 +5,7 @@ import {
   LOCALHOST,
   PayerTransactionHandler,
 } from '@metaplex-foundation/amman-client';
-import * as splToken from '@solana/spl-token';
+import * as splToken from '@solana/safe-token ';
 import {
   ComputeBudgetProgram,
   Connection,
@@ -66,14 +66,14 @@ import {
   CreateOrUpdateInstructionArgs,
   createCreateOrUpdateInstruction,
   PROGRAM_ID as TOKEN_AUTH_RULES_ID,
-} from '@metaplex-foundation/mpl-token-auth-rules';
+} from '@metaplex-foundation/lpl-token-auth-rules';
 import {
   ACCOUNT_SIZE,
   createInitializeAccountInstruction,
   createInitializeMintInstruction,
   MintLayout,
   TOKEN_PROGRAM_ID,
-} from '@solana/spl-token';
+} from '@solana/safe-token ';
 import { findTokenRecordPda } from '../utils/programmable';
 import { encode } from '@msgpack/msgpack';
 

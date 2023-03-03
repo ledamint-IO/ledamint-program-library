@@ -5,7 +5,7 @@ use super::*;
 use borsh::{BorshDeserialize, BorshSerialize};
 use num_traits::ToPrimitive;
 use shank::ShankAccount;
-use solana_program::{
+use safecoin_program::{
     msg,
     program_error::ProgramError,
     program_pack::{IsInitialized, Pack, Sealed},

@@ -1,7 +1,7 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 #[cfg(feature = "serde-feature")]
 use serde::{Deserialize, Serialize};
-use solana_program::{
+use safecoin_program::{
     instruction::{AccountMeta, Instruction},
     pubkey::Pubkey,
 };
@@ -77,8 +77,8 @@ pub fn approve_use_authority(
             AccountMeta::new_readonly(metadata, false),
             AccountMeta::new_readonly(mint, false),
             AccountMeta::new_readonly(burner, false),
-            AccountMeta::new_readonly(spl_token::id(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safe_token::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
         ],
         data: MetadataInstruction::ApproveUseAuthority(ApproveUseAuthorityArgs { number_of_uses })
             .try_to_vec()
@@ -121,8 +121,8 @@ pub fn revoke_use_authority(
             AccountMeta::new(owner_token_account, false),
             AccountMeta::new_readonly(mint, false),
             AccountMeta::new_readonly(metadata, false),
-            AccountMeta::new_readonly(spl_token::id(), false),
-            AccountMeta::new_readonly(solana_program::system_program::id(), false),
+            AccountMeta::new_readonly(safe_token::id(), false),
+            AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
         ],
         data: MetadataInstruction::RevokeUseAuthority
             .try_to_vec()
@@ -166,9 +166,9 @@ pub fn utilize(
         AccountMeta::new(mint, false),
         AccountMeta::new(use_authority, true),
         AccountMeta::new_readonly(owner, false),
-        AccountMeta::new_readonly(spl_token::id(), false),
-        AccountMeta::new_readonly(spl_associated_token_account::id(), false),
-        AccountMeta::new_readonly(solana_program::system_program::id(), false),
+        AccountMeta::new_readonly(safe_token::id(), false),
+        AccountMeta::new_readonly(safe_associated_token_account::id(), false),
+        AccountMeta::new_readonly(safecoin_program::system_program::id(), false),
     ];
     if let Some(use_authority_record_pda) = use_authority_record_pda {
         accounts.push(AccountMeta::new(use_authority_record_pda, false));
