@@ -6,5 +6,5 @@ mod account;
 mod assertions;
 mod misc;
 
-#[cfg(feature = "safe-token ")]
+#[cfg(feature = "safe-token")]
 pub mod token;
