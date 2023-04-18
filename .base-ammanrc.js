@@ -3,7 +3,7 @@
 const path = require('path');
 
 const localDeployDir = path.join(__dirname, 'test-programs');
-const { LOCALHOST, tmpLedgerDir } = require('@metaplex-foundation/amman');
+const { LOCALHOST, tmpLedgerDir } = require('@j0nnyboi/amman');
 
 function localDeployPath(programName) {
   return path.join(localDeployDir, `${programName}.so`);

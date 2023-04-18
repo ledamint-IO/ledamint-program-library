@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import test from 'tape';
-import { PayerTransactionHandler } from '@metaplex-foundation/amman-client';
-import * as web3 from '@solana/web3.js';
-import { Connection, Keypair, PublicKey, Transaction } from '@solana/web3.js';
+import { PayerTransactionHandler } from '@j0nnyboi/amman-client';
+import * as web3 from '@safecoin/web3.js';
+import { Connection, Keypair, PublicKey, Transaction } from '@safecoin/web3.js';
 
 import { createTokenAccount } from '../transactions';
 import { createAndSignTransaction, logDebug } from '../utils';

@@ -1,12 +1,12 @@
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
-import { PayerTransactionHandler } from '@metaplex-foundation/amman-client';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
+import { PayerTransactionHandler } from '@j0nnyboi/amman-client';
 import {
   createCreateMasterEditionV3Instruction,
   Creator,
   DataV2,
   createCreateMetadataAccountV2Instruction,
 } from '@metaplex-foundation/lpl-token-metadata';
-import { createMintToInstruction } from '@solana/safe-token ';
+import { createMintToInstruction } from '@safecoin/safe-token';
 import { strict as assert } from 'assert';
 
 import { createTokenAccount } from '../transactions/createTokenAccount';

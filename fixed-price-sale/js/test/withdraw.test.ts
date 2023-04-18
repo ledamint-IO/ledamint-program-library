@@ -1,5 +1,5 @@
 import test from 'tape';
-import { getAssociatedTokenAddress } from '@solana/safe-token ';
+import { getAssociatedTokenAddress } from '@safecoin/safe-token';
 import { findPayoutTicketAddress, findTradeHistoryAddress } from '../src/utils';
 import { closeMarket, createBuyTransaction, createWithdrawTransaction } from './transactions';
 import { killStuckProcess, logDebug, sleep } from './utils';

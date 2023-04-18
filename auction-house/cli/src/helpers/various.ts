@@ -1,14 +1,14 @@
 import {
-  LAMPORTS_PER_SOL,
+  LAMPORTS_PER_SAFE,
   AccountInfo,
   PublicKey,
   Connection,
   Keypair,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import fs from 'fs';
 import log from 'loglevel';
-import { BN, Program, web3 } from '@project-serum/anchor';
-import { Token, TOKEN_PROGRAM_ID } from '@solana/safe-token ';
+import { BN, Program, web3 } from '@j0nnyboi/anchor';
+import { Token, TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 import { StorageType } from './storage-type';
 
 import { getAtaForMint } from './accounts';
@@ -294,7 +294,7 @@ export function fromUTF8Array(data: number[]) {
   return str;
 }
 
-export function parsePrice(price: string, mantissa: number = LAMPORTS_PER_SOL) {
+export function parsePrice(price: string, mantissa: number = LAMPORTS_PER_SAFE) {
   return Math.ceil(parseFloat(price) * mantissa);
 }
 

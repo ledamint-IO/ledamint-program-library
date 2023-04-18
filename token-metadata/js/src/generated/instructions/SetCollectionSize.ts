@@ -6,7 +6,7 @@
  */
 
 import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 import { SetCollectionSizeArgs, setCollectionSizeArgsBeet } from '../types/SetCollectionSizeArgs';
 
 /**
@@ -71,7 +71,7 @@ export const setCollectionSizeInstructionDiscriminator = 34;
 export function createSetCollectionSizeInstruction(
   accounts: SetCollectionSizeInstructionAccounts,
   args: SetCollectionSizeInstructionArgs,
-  programId = new web3.PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'),
+  programId = new web3.PublicKey('WbMTNyvtk8vSMu2AmXV7mKuYrADRNw9GSkNtWKsZ7qe'),
 ) {
   const [data] = SetCollectionSizeStruct.serialize({
     instructionDiscriminator: setCollectionSizeInstructionDiscriminator,

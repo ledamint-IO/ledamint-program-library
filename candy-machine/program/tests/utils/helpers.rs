@@ -1,5 +1,5 @@
 use console::style;
-use safecoin_program::{native_token::LAMPORTS_PER_SOL, pubkey::Pubkey};
+use safecoin_program::{native_token::LAMPORTS_PER_SAFE, pubkey::Pubkey};
 use safe_associated_token_account::get_associated_token_address;
 
 use crate::utils::{FreezeInfo, TokenInfo};
@@ -33,7 +33,7 @@ pub fn find_freeze_ata(freeze_info: &FreezeInfo, token_info: &TokenInfo) -> Pubk
 }
 
 pub fn sol(amount: f64) -> u64 {
-    (amount * LAMPORTS_PER_SOL as f64) as u64
+    (amount * LAMPORTS_PER_SAFE as f64) as u64
 }
 
 pub struct CandyTestLogger {

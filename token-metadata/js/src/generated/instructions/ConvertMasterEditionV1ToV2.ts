@@ -6,7 +6,7 @@
  */
 
 import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
@@ -44,7 +44,7 @@ export const convertMasterEditionV1ToV2InstructionDiscriminator = 12;
  */
 export function createConvertMasterEditionV1ToV2Instruction(
   accounts: ConvertMasterEditionV1ToV2InstructionAccounts,
-  programId = new web3.PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'),
+  programId = new web3.PublicKey('WbMTNyvtk8vSMu2AmXV7mKuYrADRNw9GSkNtWKsZ7qe'),
 ) {
   const [data] = ConvertMasterEditionV1ToV2Struct.serialize({
     instructionDiscriminator: convertMasterEditionV1ToV2InstructionDiscriminator,

@@ -7,7 +7,7 @@ Token Metadata
 
 Token Authorization Rules
 * :crab: Rust crate: [v1.1.0](https://crates.io/crates/lpl-token-auth-rules/1.1.0)
-* :package: NPM package: [v1.1.0](https://www.npmjs.com/package/@metaplex-foundation/lpl-token-auth-rules/v/1.1.0)
+* :package: NPM package: [v1.1.0](https://www.npmjs.com/package/@leda-mint-io/lpl-token-auth-rules/v/1.1.0)
 
 ## 📄  Technical Summary
 

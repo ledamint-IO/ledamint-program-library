@@ -10,7 +10,7 @@ const generatedIdlDir = path.join(__dirname, '..', 'idl');
 const generatedSDKDir = path.join(__dirname, '..', 'src', 'generated');
 const { spawn } = require('child_process');
 // NOTE: Solita has to be yarn linked at the moment until it is published and installed here
-const { Solita } = require('@metaplex-foundation/solita');
+const { Solita } = require('@j0nnyboi/solita');
 const { writeFile } = require('fs/promises');
 
 const anchor = spawn('anchor', ['build', '--idl', generatedIdlDir], { cwd: programDir })

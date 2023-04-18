@@ -1,6 +1,6 @@
 import test from 'tape';
-import { PayerTransactionHandler } from '@metaplex-foundation/amman-client';
-import { Connection, Keypair } from '@solana/web3.js';
+import { PayerTransactionHandler } from '@j0nnyboi/amman-client';
+import { Connection, Keypair } from '@safecoin/web3.js';
 
 import {
   createCreateStoreInstruction,

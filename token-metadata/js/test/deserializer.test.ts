@@ -15,9 +15,9 @@ import {
   tokenStateBeet,
   UseMethod,
 } from '../src/lpl-token-metadata';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 
 const fixtures = path.join(__dirname, 'fixtures');
 

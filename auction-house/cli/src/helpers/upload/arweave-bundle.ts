@@ -8,7 +8,7 @@ import { signers, bundleAndSignData, createData, DataItem } from 'arbundles';
 import { ArweaveSigner, Signer } from 'arbundles/src/signing';
 import log from 'loglevel';
 import { StorageType } from '../storage-type';
-import { Keypair } from '@solana/web3.js';
+import { Keypair } from '@safecoin/web3.js';
 import { getType, getExtension } from 'mime';
 import { AssetKey } from '../../types';
 import { sleep } from '../various';

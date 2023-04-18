@@ -7,7 +7,7 @@ import {
 } from '../src/generated';
 import test from 'tape';
 import { InitTransactions, killStuckProcess } from './setup';
-import { Transaction } from '@solana/web3.js';
+import { Transaction } from '@safecoin/web3.js';
 
 killStuckProcess();
 

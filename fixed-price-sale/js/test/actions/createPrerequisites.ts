@@ -1,5 +1,5 @@
-import { Connection, Keypair } from '@solana/web3.js';
-import { Amman } from '@metaplex-foundation/amman-client';
+import { Connection, Keypair } from '@safecoin/web3.js';
+import { Amman } from '@j0nnyboi/amman-client';
 
 import { connectionURL } from '../utils';
 import { cusper } from '../../src';

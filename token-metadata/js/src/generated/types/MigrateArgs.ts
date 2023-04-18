@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 import { MigrationType, migrationTypeBeet } from './MigrationType';
 /**
  * This type is used to derive the {@link MigrateArgs} type as well as the de/serializer.

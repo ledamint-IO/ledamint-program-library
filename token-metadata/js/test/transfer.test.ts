@@ -15,7 +15,7 @@ import {
   sendAndConfirmTransaction,
   SYSVAR_INSTRUCTIONS_PUBKEY,
   Transaction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { createAndMintDefaultAsset } from './utils/digital-asset-manager';
 import {
   createAssociatedTokenAccount,
@@ -24,8 +24,8 @@ import {
   getAssociatedTokenAddress,
   getOrCreateAssociatedTokenAccount,
   TOKEN_PROGRAM_ID,
-} from '@solana/safe-token ';
-import * as splToken from '@solana/safe-token ';
+} from '@safecoin/safe-token';
+import * as splToken from '@safecoin/safe-token';
 import {
   Metadata,
   DelegateArgs,
@@ -34,7 +34,7 @@ import {
   TokenDelegateRole,
   TransferArgs,
 } from '../src/generated';
-import { PROGRAM_ID as TOKEN_AUTH_RULES_ID } from '@metaplex-foundation/lpl-token-auth-rules';
+import { PROGRAM_ID as TOKEN_AUTH_RULES_ID } from '@leda-mint-io/lpl-token-auth-rules';
 import { PROGRAM_ID as TOKEN_METADATA_ID } from '../src/generated';
 import { encode } from '@msgpack/msgpack';
 import spok from 'spok';

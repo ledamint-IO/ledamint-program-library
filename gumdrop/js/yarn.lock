@@ -48,13 +48,13 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@metaplex-foundation/beet-solana@^0.1.1":
+"@j0nnyboi/beet-safecoin@^0.1.1":
   version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/beet-solana/-/beet-solana-0.1.1.tgz#85deec5d3354ee1da868bd6bb0de5ae1ea92d209"
+  resolved "https://registry.yarnpkg.com/@j0nnyboi/beet-safecoin/-/beet-solana-0.1.1.tgz#85deec5d3354ee1da868bd6bb0de5ae1ea92d209"
   integrity sha512-QV2DbxjaJWLkMvn12OC09g+r7a6R0uNwf8msYuOUSw4cG7amXzvFb7s0bh4IxY3Rk8/0ma0PfKi/FEdC7Hi4Pg==
   dependencies:
     "@metaplex-foundation/beet" ">=0.1.0"
-    "@solana/web3.js" "^1.31.0"
+    "@safecoin/web3.js" "^1.31.0"
 
 "@metaplex-foundation/beet@>=0.1.0":
   version "0.7.1"
@@ -74,19 +74,19 @@
     bn.js "^5.2.0"
     debug "^4.3.3"
 
-"@metaplex-foundation/cusper@^0.0.2":
+"@j0nnyboi/cusper@^0.0.2":
   version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/cusper/-/cusper-0.0.2.tgz#dc2032a452d6c269e25f016aa4dd63600e2af975"
+  resolved "https://registry.yarnpkg.com/@j0nnyboi/cusper/-/cusper-0.0.2.tgz#dc2032a452d6c269e25f016aa4dd63600e2af975"
   integrity sha512-S9RulC2fFCFOQraz61bij+5YCHhSO9llJegK8c8Y6731fSi6snUSQJdCUqYS8AIgR0TKbQvdvgSyIIdbDFZbBA==
 
-"@metaplex-foundation/solita@^0.2.0":
+"@j0nnyboi/solita@^0.2.0":
   version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@metaplex-foundation/solita/-/solita-0.2.1.tgz#21fb22f98c7d989d37985c48722dc31a5722261f"
+  resolved "https://registry.yarnpkg.com/@j0nnyboi/solita/-/solita-0.2.1.tgz#21fb22f98c7d989d37985c48722dc31a5722261f"
   integrity sha512-dEC5g2/9MK9io+sglYmItjmmERkw/yKqQNEPHac5aW/QFQRdzRySggulE0UbCiuVegqwIKMEPxqOKf4/w7n86A==
   dependencies:
     "@metaplex-foundation/beet" "^0.1.0"
-    "@metaplex-foundation/beet-solana" "^0.1.1"
-    "@solana/web3.js" "^1.36.0"
+    "@j0nnyboi/beet-safecoin" "^0.1.1"
+    "@safecoin/web3.js" "^1.36.0"
     camelcase "^6.2.1"
     debug "^4.3.3"
     js-sha256 "^0.9.0"
@@ -136,7 +136,7 @@
   integrity sha512-szG4sxgJGktbuZYDg2FfNmkMi0DYQoVjN2h7ta1W1hPrwzarcFLBq9UpX1UjNXsNpT9dn+chgprtWGioUAr4/g==
   dependencies:
     "@solana/buffer-layout" "^4.0.0"
-    "@solana/web3.js" "^1.32.0"
+    "@safecoin/web3.js" "^1.32.0"
     bigint-buffer "^1.1.5"
     bignumber.js "^9.0.1"
 
@@ -147,18 +147,18 @@
   dependencies:
     buffer "~6.0.3"
 
-"@solana/safe-token @^0.3.5":
+"@safecoin/safe-token@^0.3.5":
   version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@solana/safe-token /-/safe-token -0.3.5.tgz#cabf9f92d755589420b46e457b9b10a879e755aa"
+  resolved "https://registry.yarnpkg.com/@safecoin/safe-token/-/safe-token -0.3.5.tgz#cabf9f92d755589420b46e457b9b10a879e755aa"
   integrity sha512-0bGC6n415lGjKu02gkLOIpP1wzndSP0SHwN9PefJ+wKAhmfU1rl3AV1Pa41uap2kzSCD6F9642ngNO8KXPvh/g==
   dependencies:
     "@solana/buffer-layout" "^4.0.0"
     "@solana/buffer-layout-utils" "^0.2.0"
     buffer "^6.0.3"
 
-"@solana/web3.js@^1.31.0", "@solana/web3.js@^1.32.0", "@solana/web3.js@^1.35.1", "@solana/web3.js@^1.36.0":
+"@safecoin/web3.js@^1.31.0", "@safecoin/web3.js@^1.32.0", "@safecoin/web3.js@^1.35.1", "@safecoin/web3.js@^1.36.0":
   version "1.63.1"
-  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.63.1.tgz#88a19a17f5f4aada73ad70a94044c1067cab2b4d"
+  resolved "https://registry.yarnpkg.com/@safecoin/web3.js/-/web3.js-1.63.1.tgz#88a19a17f5f4aada73ad70a94044c1067cab2b4d"
   integrity sha512-wgEdGVK5FTS2zENxbcGSvKpGZ0jDS6BUdGu8Gn6ns0CzgJkK83u4ip3THSnBPEQ5i/jrqukg998BwV1H67+qiQ==
   dependencies:
     "@babel/runtime" "^7.12.5"

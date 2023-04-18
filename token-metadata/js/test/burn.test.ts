@@ -3,7 +3,7 @@ import test from 'tape';
 import { InitTransactions, killStuckProcess } from './setup';
 import { createAndMintDefaultAsset } from './utils/digital-asset-manager';
 import { findTokenRecordPda } from './utils/programmable';
-import { getAccount, TOKEN_PROGRAM_ID } from '@solana/safe-token ';
+import { getAccount, TOKEN_PROGRAM_ID } from '@safecoin/safe-token';
 
 killStuckProcess();
 

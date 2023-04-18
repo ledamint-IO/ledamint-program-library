@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 /**
  * This type is used to derive the {@link ProgrammableConfig} type as well as the de/serializer.
  * However don't refer to it in your code but use the {@link ProgrammableConfig} type instead.

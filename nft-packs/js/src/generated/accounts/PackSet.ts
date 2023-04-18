@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 import { AccountType, accountTypeBeet } from '../types/AccountType';
 import { PackSetState, packSetStateBeet } from '../types/PackSetState';
 import { PackDistributionType, packDistributionTypeBeet } from '../types/PackDistributionType';

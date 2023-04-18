@@ -40,11 +40,11 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@metaplex-foundation/beet": "^0.7.1",
-    "@metaplex-foundation/beet-solana": "^0.4.0",
+    "@j0nnyboi/beet-safecoin": "^0.4.0",
     "@solana/buffer-layout": "^4.0.0",
-    "@solana/safe-token ": "^0.3.6",
-    "@solana/web3.js": "^1.66.2",
-    "@metaplex-foundation/cusper": "^0.0.2"
+    "@safecoin/safe-token": "^0.3.6",
+    "@safecoin/web3.js": "^1.66.2",
+    "@j0nnyboi/cusper": "^0.0.2"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
@@ -52,10 +52,10 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@metaplex-foundation/js": "^0.17.5",
-    "@metaplex-foundation/amman": "^0.12.1",
-    "@metaplex-foundation/amman-client": "^0.2.4",
+    "@j0nnyboi/amman": "^0.12.1",
+    "@j0nnyboi/amman-client": "^0.2.4",
     "@metaplex-foundation/lpl-token-metadata": "2.5.1",
-    "@metaplex-foundation/solita": "^0.19.0",
+    "@j0nnyboi/solita": "^0.19.0",
     "@types/bn.js": "^5.1.0",
     "@types/debug": "^4.1.7",
     "@types/tape": "^4.13.2",

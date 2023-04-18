@@ -5,9 +5,9 @@
  * See: https://github.com/metaplex-foundation/solita
  */
 
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 import { Key, keyBeet } from '../types/Key';
 
 /**
@@ -87,7 +87,7 @@ export class MetadataDelegateRecord implements MetadataDelegateRecordArgs {
    * @param programId - the program that owns the accounts we are filtering
    */
   static gpaBuilder(
-    programId: web3.PublicKey = new web3.PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'),
+    programId: web3.PublicKey = new web3.PublicKey('WbMTNyvtk8vSMu2AmXV7mKuYrADRNw9GSkNtWKsZ7qe'),
   ) {
     return beetSolana.GpaBuilder.fromStruct(programId, metadataDelegateRecordBeet);
   }

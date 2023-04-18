@@ -1,11 +1,11 @@
-import { Provider } from '@project-serum/anchor';
+import { Provider } from '@j0nnyboi/anchor';
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   NATIVE_MINT,
   Token,
   TOKEN_PROGRAM_ID,
-} from '@solana/safe-token ';
-import { PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
+} from '@safecoin/safe-token';
+import { PublicKey, SystemProgram, Transaction } from '@safecoin/web3.js';
 import { expect } from 'chai';
 export class TokenUtils {
   provider: Provider;

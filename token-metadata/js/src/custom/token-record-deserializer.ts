@@ -1,5 +1,5 @@
 import * as beet from '@metaplex-foundation/beet';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 import { keyBeet } from '../generated/types/Key';
 import { TokenRecord } from '../generated/accounts/TokenRecord';
 import { tokenDelegateRoleBeet, tokenStateBeet } from '../generated';

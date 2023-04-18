@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AnchorProvider, BorshAccountsCoder } from '@project-serum/anchor';
+import { AnchorProvider, BorshAccountsCoder } from '@j0nnyboi/anchor';
 import {
   ASSOCIATED_TOKEN_PROGRAM_ID,
   NATIVE_MINT,
   TOKEN_PROGRAM_ID,
-} from '@solana/safe-token ';
+} from '@safecoin/safe-token';
 import {
   AccountInfo,
   Connection,
@@ -18,7 +18,7 @@ import {
   Transaction,
   TransactionInstruction,
   TransactionSignature,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import { ProgramError } from './systemErrors';
 import {
   createProcessAddMemberNftInstruction,

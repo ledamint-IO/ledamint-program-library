@@ -6,7 +6,7 @@
  */
 
 import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 
 /**
  * @category Instructions
@@ -55,7 +55,7 @@ export const unverifyCollectionInstructionDiscriminator = 22;
  */
 export function createUnverifyCollectionInstruction(
   accounts: UnverifyCollectionInstructionAccounts,
-  programId = new web3.PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'),
+  programId = new web3.PublicKey('WbMTNyvtk8vSMu2AmXV7mKuYrADRNw9GSkNtWKsZ7qe'),
 ) {
   const [data] = UnverifyCollectionStruct.serialize({
     instructionDiscriminator: unverifyCollectionInstructionDiscriminator,

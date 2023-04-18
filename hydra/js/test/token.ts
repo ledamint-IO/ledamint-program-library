@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Connection, Keypair, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import * as splToken from '@solana/safe-token ';
+import { Connection, Keypair, LAMPORTS_PER_SAFE } from '@safecoin/web3.js';
+import * as splToken from '@safecoin/safe-token';
 import { expect, use } from 'chai';
 import ChaiAsPromised from 'chai-as-promised';
 import { Fanout, FanoutClient, FanoutMembershipVoucher, FanoutMint, MembershipModel } from '../src';
-import { LOCALHOST } from '@metaplex-foundation/amman';
+import { LOCALHOST } from '@j0nnyboi/amman';
 import { builtTokenFanout } from './utils/scenarios';
 import BN from 'bn.js';
-import { Wallet } from '@project-serum/anchor';
+import { Wallet } from '@j0nnyboi/anchor';
 
 use(ChaiAsPromised);
 
@@ -393,7 +393,7 @@ describe('fanout', async () => {
       const sent = 10;
       const beforeUnstake = await fanoutSdk.fetch<Fanout>(builtFanout.fanout, Fanout);
       await connection.requestAirdrop(builtFanout.fanoutAccountData.accountKey, sent);
-      const firstSnapshot = sent * LAMPORTS_PER_SOL;
+      const firstSnapshot = sent * LAMPORTS_PER_SAFE;
       //@ts-ignore
       const firstMemberAmount = firstSnapshot * 0.2;
       const member1 = builtFanout.members[0];

@@ -6,7 +6,7 @@
  */
 
 import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
+import * as web3 from '@safecoin/web3.js';
 import { CreateArgs, createArgsBeet } from '../types/CreateArgs';
 
 /**
@@ -78,7 +78,7 @@ export const createInstructionDiscriminator = 42;
 export function createCreateInstruction(
   accounts: CreateInstructionAccounts,
   args: CreateInstructionArgs,
-  programId = new web3.PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'),
+  programId = new web3.PublicKey('WbMTNyvtk8vSMu2AmXV7mKuYrADRNw9GSkNtWKsZ7qe'),
 ) {
   const [data] = CreateStruct.serialize({
     instructionDiscriminator: createInstructionDiscriminator,

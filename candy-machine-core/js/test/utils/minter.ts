@@ -1,6 +1,6 @@
-import { Connection, Keypair, PublicKey } from '@solana/web3.js';
+import { Connection, Keypair, PublicKey } from '@safecoin/web3.js';
 import { Test } from 'tape';
-import { PayerTransactionHandler } from '@metaplex-foundation/amman-client';
+import { PayerTransactionHandler } from '@j0nnyboi/amman-client';
 import { CandyMachine } from '../../src';
 import { BN } from 'bn.js';
 import { keypairIdentity, Metaplex } from '@metaplex-foundation/js';

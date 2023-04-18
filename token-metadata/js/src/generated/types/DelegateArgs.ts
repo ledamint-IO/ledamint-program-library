@@ -6,8 +6,8 @@
  */
 
 import * as beet from '@metaplex-foundation/beet';
-import * as web3 from '@solana/web3.js';
-import * as beetSolana from '@metaplex-foundation/beet-solana';
+import * as web3 from '@safecoin/web3.js';
+import * as beetSolana from '@j0nnyboi/beet-safecoin';
 import { AuthorizationData, authorizationDataBeet } from './AuthorizationData';
 /**
  * This type is used to derive the {@link DelegateArgs} type as well as the de/serializer.

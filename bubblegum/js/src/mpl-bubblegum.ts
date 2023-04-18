@@ -1,6 +1,6 @@
 import { PROGRAM_ID, Creator, MetadataArgs, metadataArgsBeet } from './generated';
 import { keccak_256 } from 'js-sha3';
-import { PublicKey } from '@solana/web3.js';
+import { PublicKey } from '@safecoin/web3.js';
 import BN from 'bn.js';
 
 export * from './generated';

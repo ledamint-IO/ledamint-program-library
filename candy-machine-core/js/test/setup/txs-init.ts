@@ -4,7 +4,7 @@ import {
   LoadOrGenKeypair,
   LOCALHOST,
   PayerTransactionHandler,
-} from '@metaplex-foundation/amman-client';
+} from '@j0nnyboi/amman-client';
 import {
   Connection,
   Keypair,
@@ -13,14 +13,14 @@ import {
   SYSVAR_SLOT_HASHES_PUBKEY,
   Transaction,
   TransactionInstruction,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import {
   createAssociatedTokenAccountInstruction,
   createInitializeMintInstruction,
   createMintToInstruction,
   MintLayout,
   TOKEN_PROGRAM_ID,
-} from '@solana/safe-token ';
+} from '@safecoin/safe-token';
 import { Test } from 'tape';
 import * as program from '../../src/generated';
 import { CandyMachine, CandyMachineData } from '../../src/generated';

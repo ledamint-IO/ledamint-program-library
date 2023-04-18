@@ -40,10 +40,10 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@metaplex-foundation/beet": "^0.1.0",
-    "@metaplex-foundation/beet-solana": "^0.1.1",
-    "@metaplex-foundation/cusper": "^0.0.2",
-    "@solana/safe-token ": "^0.3.5",
-    "@solana/web3.js": "^1.35.1",
+    "@j0nnyboi/beet-safecoin": "^0.1.1",
+    "@j0nnyboi/cusper": "^0.0.2",
+    "@safecoin/safe-token": "^0.3.5",
+    "@safecoin/web3.js": "^1.35.1",
     "bn.js": "^5.2.0"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "@metaplex-foundation/solita": "^0.7.0",
+    "@j0nnyboi/solita": "^0.7.0",
     "eslint": "^8.3.0",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",

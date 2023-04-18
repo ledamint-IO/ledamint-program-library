@@ -3,7 +3,7 @@ import {
   PublicKey,
   SystemProgram,
   AccountInfo,
-} from '@solana/web3.js';
+} from '@safecoin/web3.js';
 import {
   CANDY_MACHINE,
   CANDY_MACHINE_PROGRAM_ID,
@@ -23,14 +23,14 @@ import {
   A,
   CANDY_MACHINE_PROGRAM_V2_ID,
 } from './constants';
-import * as anchor from '@project-serum/anchor';
+import * as anchor from '@j0nnyboi/anchor';
 import fs from 'fs';
 import { createCandyMachineV2Account } from './instructions';
-import { web3 } from '@project-serum/anchor';
+import { web3 } from '@j0nnyboi/anchor';
 import log from 'loglevel';
-import { AccountLayout, u64 } from '@solana/safe-token ';
+import { AccountLayout, u64 } from '@safecoin/safe-token';
 import { getCluster } from './various';
-import { bs58 } from '@project-serum/anchor/dist/cjs/utils/bytes';
+import { bs58 } from '@j0nnyboi/anchor/dist/cjs/utils/bytes';
 export type AccountAndPubkey = {
   pubkey: string;
   account: AccountInfo<Buffer>;
